@@ -89,7 +89,7 @@
 
   至此，我们的第一个计数器应用就搭建完毕了
   #+DOWNLOADED: screenshot @ 2021-06-12 16:10:49
-  [[file:images/如何写一个_Flutter_应用/2021-06-12_16-10-49_screenshot.png]]
+  [[file:../images/如何写一个_Flutter_应用/2021-06-12_16-10-49_screenshot.png]]
 
 * 什么是 Scaffold 组件
   在上面的 _CounterHomePageState_ 中，还有个 _Scaffold_ 组件没有讲，这是 _Flutter_ 为我们提供的主页，
