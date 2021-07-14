@@ -2,6 +2,7 @@
 #+publishing-directory: .
 #+publishing-function: org-html-export-to-html
 #+html_head: <link rel="stylesheet" type="text/css" href="css/org.css"/>
+#+options: toc:nil
 * Configure first
 - export as markdown
 - sync in gitbook
