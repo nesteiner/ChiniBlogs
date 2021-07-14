@@ -1,0 +1,101 @@
+#+title: RecyclerView笔记
+
+* 如何使用 RecyclerView 
+#+BEGIN_SRC java
+  RecyclerView recyclerView = findViewById(R.id.recycler_view);
+  OwnAdapter adapter = new OwnAdapter(this, data);
+  LinearLayoutManager layoutmanager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+  recyclerView.setAdapter(adapter);
+  recyclerView.setLayoutManager(layoutmanager);
+#+END_SRC
+
+*RecyclerView* 的渲染需要确定：
+1. 需要渲染什么数据
+2. 怎么渲染数据
+3. 怎么对所有渲染后的 *View* 进行布局
+
+* Adapter
+[[file:./images/Adapter.png]]
+
+#+begin_src java
+  OwnAdapter adapter = new OwnAdapter(this, data);
+  recyclerView.setAdapter(adapter);
+#+end_src
+
+Adapter 就像是一个工厂，引入原料 *data* ，在内部经过加工处理后，出口给目标客户 *this*
+相当于在 *Activity* 与数据之间建立起一座桥梁
+
+** Adapter 怎么渲染数据
+*Adapter* 首先要有基础设施
+1. 粗加工流水线 *layoutInflater*
+2. 材料输入口 *data* ，在这里为 *students*
+#+begin_src java
+  LayoutInflater layoutInflater;
+  List<Student> students;
+#+end_src
+
+在 *Adapter* 数据处理工厂中，对每一个需要处理的数据都会进行如下操作：
+0. 粗加工
+1. 招工
+2. 分配工作
+
+先是对材料进行粗加工，再招募一位工人来进行细加工渲染 *onCreateViewHolder*
+再是为其指定加工方法 *onBindViewHolder*
+
+#+begin_src java
+  @NonNull
+  @Override
+  public OwnViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+      // 招工
+      View itemView = layoutInflater.inflate(R.layout.student_layout, null);
+      return new OwnViewHolder(itemView);
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull OwnViewHolder holder, int position) {
+      // 分配工作
+      Student student = students.get(position);
+      Log.d("fuck", "after here");
+      holder.text_age.setText(String.valueOf(student.age));
+      holder.text_name.setText(student.name);
+      Log.d("fuck", "finished here");
+  }
+
+#+end_src
+*** ViewHolder
+*ViewHolder* 负责对 *itemView* 进行细加工，指定加工方法定义在 *onBindViewHolder* 回调中
+*ViewHolder* 工人的招募定义在 *onCreateviewholder* 回调中，不过首先需要指定一个 *XML* 布局文件作为渲染模板，为 *ViewHolder* 提供使用,
+这样 *ViewHolder* 才能定位到布局中的 *id* 
+*** XML 布局
+#+begin_src xml
+  <LinearLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools" android:layout_height="match_parent"
+      android:padding="10dp"
+      android:orientation="vertical"
+      android:layout_width="match_parent">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+      <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "/>
+
+      <TextView android:id="@+id/sname"
+                android:text="hello"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Age: "/>
+
+      <TextView android:id="@+id/sage"
+                android:text="hello"
+                android:layout_marginLeft="13dp"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
+  </LinearLayout>
+#+end_src
+* LayoutManager
+就是对所有渲染后的 *View* 进行布局，没什么好说的，这个比较简单，直接用就行了

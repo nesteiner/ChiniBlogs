@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-06-09 三 00:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Use Typescript with Vue</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Use Typescript with Vue</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8e62cc6">Component</a></li>
+<li><a href="#orgd8699d9"><span class="todo DOING">DOING</span> 应用 <b>vue-propery-decorator</b></a>
+<ul>
+<li><a href="#org13c29d2"><span class="todo TODO">TODO</span> 问题</a></li>
+<li><a href="#orgb909c56"><span class="done DONE">DONE</span> 回顾</a>
+<ul>
+<li><a href="#org7ec147e"><span class="done DONE">DONE</span> 组件一 switcher</a></li>
+<li><a href="#org21ba958"><span class="done DONE">DONE</span> 组件二 clock</a></li>
+<li><a href="#orgf0abd22"><span class="done DONE">DONE</span> 组件四 slot 插槽</a></li>
+<li><a href="#org6d810a5"><span class="done DONE">DONE</span> 组件五 scrollbar</a></li>
+</ul>
+</li>
+<li><a href="#orgdb8693c">vue-property-decorator</a>
+<ul>
+<li><a href="#orgfcc1be5"><span class="done DONE">DONE</span> @Prop</a>
+<ul>
+<li><a href="#org8ad749f">try without @Component</a></li>
+</ul>
+</li>
+<li><a href="#orgf9f90a3">@Model</a></li>
+<li><a href="#org7d8bd85"><span class="done DONE">DONE</span> @Watch</a></li>
+<li><a href="#org8929ef7">@Provide</a></li>
+<li><a href="#orge4908d4">@Inject</a></li>
+<li><a href="#org0ad97b8">@Emit</a></li>
+<li><a href="#org73c6ff6">@Ref</a></li>
+<li><a href="#orgb8e81aa">@VModel</a></li>
+</ul>
+</li>
+<li><a href="#org38ae12d">表单组件</a></li>
+<li><a href="#orgaf378da">实验</a>
+<ul>
+<li><a href="#orge4f7f65">间距 with 拉动</a></li>
+</ul>
+</li>
+<li><a href="#org3520ee7">更高级的内容</a>
+<ul>
+<li><a href="#org4ab6735">自定义事件 Model</a></li>
+<li><a href="#org6d68bf9">component is</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org179e4ab">Vue with SCSS</a>
+<ul>
+<li><a href="#org392e171"><span class="done DONE">DONE</span> Vue inject variable in css</a></li>
+<li><a href="#org276a220">Vue inject variable in scss</a></li>
+</ul>
+</li>
+<li><a href="#orge9c48f0">Flask 项目改写</a>
+<ul>
+<li><a href="#orgf5eaf32">Watchlist</a></li>
+</ul>
+</li>
+<li><a href="#orgc7b15c7"><span class="todo DOING">DOING</span> Python 回顾</a>
+<ul>
+<li><a href="#orgf840f1a"><span class="todo DOING">DOING</span> Python 基础</a>
+<ul>
+<li><a href="#org4e14c9a"><span class="done DONE">DONE</span> 数据结构</a></li>
+<li><a href="#orgbbf336b"><span class="done DONE">DONE</span> 迭代器，生成器</a></li>
+<li><a href="#org19df1cd"><span class="done DONE">DONE</span> 模块</a></li>
+<li><a href="#org602d564"><span class="done DONE">DONE</span> 文件</a></li>
+<li><a href="#org70d3569"><span class="done WAIT">WAIT</span> OS</a></li>
+</ul>
+</li>
+<li><a href="#orgbe6de99"><span class="todo TODO">TODO</span> Python 进阶</a>
+<ul>
+<li><a href="#org598edc0">MongoDB</a></li>
+<li><a href="#org54313f9">MySQL</a></li>
+<li><a href="#orgadbc492">Regex</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org82a0a74"><span class="todo DOING">DOING</span> JSP 大作业最简 Demo</a>
+<ul>
+<li><a href="#org0c62382">Login</a></li>
+<li><a href="#orgbb262ce"><span class="done DONE">DONE</span> 请求数据操作</a></li>
+<li><a href="#org3644590">用户后台操作</a></li>
+<li><a href="#orgde237fd"><span class="todo TODO">TODO</span> 管理员后台操作</a></li>
+<li><a href="#org3b6d32f">Fake Data</a></li>
+<li><a href="#org7f38f67">登录Cookie</a></li>
+</ul>
+</li>
+<li><a href="#org9c829a7"><span class="todo TODO">TODO</span> JSP Feature</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8e62cc6" class="outline-2">
+<h2 id="org8e62cc6">Component</h2>
+<div class="outline-text-2" id="text-org8e62cc6">
+<ol class="org-ol">
+<li>switcher<br /></li>
+<li>clock<br /></li>
+<li>text<br /></li>
+<li>shining<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd8699d9" class="outline-2">
+<h2 id="orgd8699d9"><span class="todo DOING">DOING</span> 应用 <b>vue-propery-decorator</b></h2>
+<div class="outline-text-2" id="text-orgd8699d9">
+</div>
+<div id="outline-container-org13c29d2" class="outline-3">
+<h3 id="org13c29d2"><span class="todo TODO">TODO</span> 问题</h3>
+<div class="outline-text-3" id="text-org13c29d2">
+<ol class="org-ol">
+<li>通过变量控制 CSS 属性<br /></li>
+<li>一次性导入，组件与模块<br /></li>
+<li>Vue 的 prop 修改问题<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgb909c56" class="outline-3">
+<h3 id="orgb909c56"><span class="done DONE">DONE</span> 回顾</h3>
+<div class="outline-text-3" id="text-orgb909c56">
+</div>
+<div id="outline-container-org7ec147e" class="outline-4">
+<h4 id="org7ec147e"><span class="done DONE">DONE</span> 组件一 switcher</h4>
+</div>
+<div id="outline-container-org21ba958" class="outline-4">
+<h4 id="org21ba958"><span class="done DONE">DONE</span> 组件二 clock</h4>
+</div>
+
+<div id="outline-container-orgf0abd22" class="outline-4">
+<h4 id="orgf0abd22"><span class="done DONE">DONE</span> 组件四 slot 插槽</h4>
+<div class="outline-text-4" id="text-orgf0abd22">
+<p>
+&lt;slot&gt;<br />
+v-slot:name<br />
+template<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org6d810a5" class="outline-4">
+<h4 id="org6d810a5"><span class="done DONE">DONE</span> 组件五 scrollbar</h4>
+<div class="outline-text-4" id="text-org6d810a5">
+<p>
+overflow[x,y]: auto<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdb8693c" class="outline-3">
+<h3 id="orgdb8693c">vue-property-decorator</h3>
+<div class="outline-text-3" id="text-orgdb8693c">
+</div>
+<div id="outline-container-orgfcc1be5" class="outline-4">
+<h4 id="orgfcc1be5"><span class="done DONE">DONE</span> @Prop</h4>
+<div class="outline-text-4" id="text-orgfcc1be5">
+</div>
+<div id="outline-container-org8ad749f" class="outline-5">
+<h5 id="org8ad749f">try without @Component</h5>
+<div class="outline-text-5" id="text-org8ad749f">
+<p>
+it works !!!<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf9f90a3" class="outline-4">
+<h4 id="orgf9f90a3">@Model</h4>
+</div>
+<div id="outline-container-org7d8bd85" class="outline-4">
+<h4 id="org7d8bd85"><span class="done DONE">DONE</span> @Watch</h4>
+<div class="outline-text-4" id="text-org7d8bd85">
+<p>
+疑问 这玩样能用在 <b>Prop</b> 上吗？<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8929ef7" class="outline-4">
+<h4 id="org8929ef7">@Provide</h4>
+</div>
+<div id="outline-container-orge4908d4" class="outline-4">
+<h4 id="orge4908d4">@Inject</h4>
+</div>
+<div id="outline-container-org0ad97b8" class="outline-4">
+<h4 id="org0ad97b8">@Emit</h4>
+</div>
+<div id="outline-container-org73c6ff6" class="outline-4">
+<h4 id="org73c6ff6">@Ref</h4>
+</div>
+<div id="outline-container-orgb8e81aa" class="outline-4">
+<h4 id="orgb8e81aa">@VModel</h4>
+</div>
+</div>
+<div id="outline-container-org38ae12d" class="outline-3">
+<h3 id="org38ae12d">表单组件</h3>
+</div>
+
+<div id="outline-container-orgaf378da" class="outline-3">
+<h3 id="orgaf378da">实验</h3>
+<div class="outline-text-3" id="text-orgaf378da">
+</div>
+<div id="outline-container-orge4f7f65" class="outline-4">
+<h4 id="orge4f7f65">间距 with 拉动</h4>
+<div class="outline-text-4" id="text-orge4f7f65">
+<p>
+<a href="https://element-plus.gitee.io/#/zh-CN/component/space">https://element-plus.gitee.io/#/zh-CN/component/space</a><br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3520ee7" class="outline-3">
+<h3 id="org3520ee7">更高级的内容</h3>
+<div class="outline-text-3" id="text-org3520ee7">
+</div>
+<div id="outline-container-org4ab6735" class="outline-4">
+<h4 id="org4ab6735">自定义事件 Model</h4>
+</div>
+<div id="outline-container-org6d68bf9" class="outline-4">
+<h4 id="org6d68bf9">component is</h4>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org179e4ab" class="outline-2">
+<h2 id="org179e4ab">Vue with SCSS</h2>
+<div class="outline-text-2" id="text-org179e4ab">
+</div>
+<div id="outline-container-org392e171" class="outline-3">
+<h3 id="org392e171"><span class="done DONE">DONE</span> Vue inject variable in css</h3>
+<div class="outline-text-3" id="text-org392e171">
+<div class="org-src-container">
+<pre class="src src-vue">&lt;<span style="color: #a626a4;">template</span>&gt;
+  &lt;<span style="color: #a626a4;">div</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"shining"</span>&gt;
+    &lt;<span style="color: #a626a4;">h1</span>&gt;<span style="font-weight: bold; text-decoration: underline;"> Vue </span>&lt;/<span style="color: #a626a4;">h1</span>&gt;
+  &lt;/<span style="color: #a626a4;">div</span>&gt;
+&lt;/<span style="color: #a626a4;">template</span>&gt;
+
+&lt;<span style="color: #a626a4;">script</span> <span style="color: #6a1868;">lang</span>=<span style="color: #50a14f;">"ts"</span>&gt;
+ export default {
+   data() {
+     return {
+       opacity: 0
+     }
+   },
+
+   mounted() {
+     setInterval(() =&gt; {
+       this.opacity &gt;= 1 &amp;&amp; (this.opacity = 0)
+       this.opacity += 0.2
+     }, 300)
+   }
+ }
+&lt;/<span style="color: #a626a4;">script</span>&gt;
+
+&lt;<span style="color: #a626a4;">style</span> scoped&gt;
+ h1 {
+   color: black;
+   opacity: v-bind(opacity);
+ }
+&lt;/<span style="color: #a626a4;">style</span>&gt;
+
+</pre>
+</div>
+
+<p>
+<b>PROBLEM</b><br />
+用 <b>Typescript</b> 时, <b>v-bind</b> 不会更新<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org276a220" class="outline-3">
+<h3 id="org276a220">Vue inject variable in scss</h3>
+</div>
+</div>
+
+<div id="outline-container-orge9c48f0" class="outline-2">
+<h2 id="orge9c48f0">Flask 项目改写</h2>
+<div class="outline-text-2" id="text-orge9c48f0">
+</div>
+<div id="outline-container-orgf5eaf32" class="outline-3">
+<h3 id="orgf5eaf32">Watchlist</h3>
+<div class="outline-text-3" id="text-orgf5eaf32">
+<p>
+记得改进<br />
+后端也要写的样子<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc7b15c7" class="outline-2">
+<h2 id="orgc7b15c7"><span class="todo DOING">DOING</span> Python 回顾</h2>
+<div class="outline-text-2" id="text-orgc7b15c7">
+</div>
+<div id="outline-container-orgf840f1a" class="outline-3">
+<h3 id="orgf840f1a"><span class="todo DOING">DOING</span> Python 基础</h3>
+<div class="outline-text-3" id="text-orgf840f1a">
+</div>
+<div id="outline-container-org4e14c9a" class="outline-4">
+<h4 id="org4e14c9a"><span class="done DONE">DONE</span> 数据结构</h4>
+</div>
+<div id="outline-container-orgbbf336b" class="outline-4">
+<h4 id="orgbbf336b"><span class="done DONE">DONE</span> 迭代器，生成器</h4>
+</div>
+<div id="outline-container-org19df1cd" class="outline-4">
+<h4 id="org19df1cd"><span class="done DONE">DONE</span> 模块</h4>
+</div>
+<div id="outline-container-org602d564" class="outline-4">
+<h4 id="org602d564"><span class="done DONE">DONE</span> 文件</h4>
+<div class="outline-text-4" id="text-org602d564">
+<ul class="org-ul">
+<li>State "WAIT"       from              <span class="timestamp-wrapper"><span class="timestamp">[2021-05-15 六 19:24] </span></span> <br />
+put it aside<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org70d3569" class="outline-4">
+<h4 id="org70d3569"><span class="done WAIT">WAIT</span> OS</h4>
+<div class="outline-text-4" id="text-org70d3569">
+<p>
+<a href="https://docs.python.org/zh-cn/3/library/os.html#interface-to-the-scheduler">doc here</a><br />
+or there is<br />
+本模块提供了一种使用与操作系统相关的功能的便捷式途径。<br />
+如果你只是想读写一个文件，请参阅 open()，<br />
+如果你想操作文件路径，请参阅 os.path 模块，<br />
+如果你想读取通过命令行给出的所有文件中的所有行，请参阅 fileinput 模块。 为了创建临时文件和目录，请参阅 tempfile 模块，<br />
+对于高级文件和目录处理，请参阅 shutil 模块。<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe6de99" class="outline-3">
+<h3 id="orgbe6de99"><span class="todo TODO">TODO</span> Python 进阶</h3>
+<div class="outline-text-3" id="text-orgbe6de99">
+</div>
+<div id="outline-container-org598edc0" class="outline-4">
+<h4 id="org598edc0">MongoDB</h4>
+</div>
+<div id="outline-container-org54313f9" class="outline-4">
+<h4 id="org54313f9">MySQL</h4>
+</div>
+<div id="outline-container-orgadbc492" class="outline-4">
+<h4 id="orgadbc492">Regex</h4>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org82a0a74" class="outline-2">
+<h2 id="org82a0a74"><span class="todo DOING">DOING</span> JSP 大作业最简 Demo</h2>
+<div class="outline-text-2" id="text-org82a0a74">
+</div>
+<div id="outline-container-org0c62382" class="outline-3">
+<h3 id="org0c62382">Login</h3>
+</div>
+<div id="outline-container-orgbb262ce" class="outline-3">
+<h3 id="orgbb262ce"><span class="done DONE">DONE</span> 请求数据操作</h3>
+</div>
+<div id="outline-container-org3644590" class="outline-3">
+<h3 id="org3644590">用户后台操作</h3>
+</div>
+<div id="outline-container-orgde237fd" class="outline-3">
+<h3 id="orgde237fd"><span class="todo TODO">TODO</span> 管理员后台操作</h3>
+</div>
+<div id="outline-container-org3b6d32f" class="outline-3">
+<h3 id="org3b6d32f">Fake Data</h3>
+</div>
+<div id="outline-container-org7f38f67" class="outline-3">
+<h3 id="org7f38f67">登录Cookie</h3>
+</div>
+</div>
+<div id="outline-container-org9c829a7" class="outline-2">
+<h2 id="org9c829a7"><span class="todo TODO">TODO</span> JSP Feature</h2>
+<div class="outline-text-2" id="text-org9c829a7">
+<p>
+Session</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-06-09 三 00:51</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

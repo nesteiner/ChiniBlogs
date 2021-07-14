@@ -1,0 +1,10 @@
+#+title: This file is for Table of Content
+#+publishing-directory: .
+#+publishing-function: org-html-export-to-html
+
+* Configure first
+- export as markdown
+- sync in gitbook
+- [ ] 剪切板
+- [ ] quote
+- [ ] 元数据，example, quote 等

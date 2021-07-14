@@ -1,0 +1,122 @@
+#+title: Use Typescript with Vue
+#+startup: overview
+* Component
+1. switcher
+2. clock
+3. text
+4. shining
+
+* DOING 应用 *vue-propery-decorator*
+** TODO 问题
+1. 通过变量控制 CSS 属性
+2. 一次性导入，组件与模块
+3. Vue 的 prop 修改问题   
+** DONE 回顾
+*** DONE 组件一 switcher 
+*** DONE 组件二 clock
+
+*** DONE 组件四 slot 插槽
+<slot>
+v-slot:name
+template
+*** DONE 组件五 scrollbar
+overflow[x,y]: auto
+
+** vue-property-decorator
+*** DONE @Prop
+**** try without @Component
+it works !!!
+*** @Model
+*** DONE @Watch
+疑问 这玩样能用在 *Prop* 上吗？
+
+*** @Provide
+*** @Inject
+*** @Emit
+*** @Ref
+*** @VModel
+** 表单组件
+
+** 实验
+*** 间距 with 拉动
+https://element-plus.gitee.io/#/zh-CN/component/space
+
+** 更高级的内容
+*** 自定义事件 Model
+*** component is
+
+* Vue with SCSS
+** DONE Vue inject variable in css
+#+begin_src vue
+  <template>
+    <div class="shining">
+      <h1> Vue </h1>
+    </div>
+  </template>
+
+  <script lang="ts">
+   export default {
+     data() {
+       return {
+         opacity: 0
+       }
+     },
+   
+     mounted() {
+       setInterval(() => {
+         this.opacity >= 1 && (this.opacity = 0)
+         this.opacity += 0.2
+       }, 300)
+     }
+   }
+  </script>
+
+  <style scoped>
+   h1 {
+     color: black;
+     opacity: v-bind(opacity);
+   }
+  </style>
+
+#+end_src
+
+*PROBLEM*
+用 *Typescript* 时, *v-bind* 不会更新
+** Vue inject variable in scss
+
+* Flask 项目改写
+** Watchlist
+记得改进
+后端也要写的样子
+
+* DOING Python 回顾
+** DOING Python 基础
+*** DONE 数据结构
+*** DONE 迭代器，生成器
+*** DONE 模块
+*** DONE 文件
+- State "WAIT"       from              [2021-05-15 六 19:24] \\
+  put it aside
+*** WAIT OS
+[[https://docs.python.org/zh-cn/3/library/os.html#interface-to-the-scheduler][doc here]]
+or there is
+本模块提供了一种使用与操作系统相关的功能的便捷式途径。
+如果你只是想读写一个文件，请参阅 open()，
+如果你想操作文件路径，请参阅 os.path 模块，
+如果你想读取通过命令行给出的所有文件中的所有行，请参阅 fileinput 模块。 为了创建临时文件和目录，请参阅 tempfile 模块，
+对于高级文件和目录处理，请参阅 shutil 模块。
+** TODO Python 进阶
+*** MongoDB
+*** MySQL
+*** Regex
+
+
+* DOING JSP 大作业最简 Demo
+** Login
+** DONE 请求数据操作
+** 用户后台操作
+** TODO 管理员后台操作
+** Fake Data
+** 登录Cookie
+* TODO JSP Feature
+Session
