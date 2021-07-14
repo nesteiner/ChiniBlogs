@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-16 三 09:53 -->
+<!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>编译实践 源代码</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -227,17 +227,17 @@
 <li><a href="#orge8b64f5">项目结构说明</a></li>
 <li><a href="#orge10d47a">实验一 源代码</a>
 <ul>
-<li><a href="#org9df9e94">文法定义</a></li>
-<li><a href="#orgb6c70f9">EvalVisitor</a></li>
-<li><a href="#org6643b0f">Main</a></li>
+<li><a href="#orgfdf6f51">文法定义</a></li>
+<li><a href="#org30f8d61">EvalVisitor</a></li>
+<li><a href="#orgfb988f7">Main</a></li>
 <li><a href="#org144007e">lexerdemo</a></li>
 </ul>
 </li>
 <li><a href="#orgc1f5176">实验三 源代码</a>
 <ul>
-<li><a href="#orgfdf6f51">文法定义</a></li>
-<li><a href="#org30f8d61">EvalVisitor</a></li>
-<li><a href="#orgfb988f7">Main</a></li>
+<li><a href="#orgcc32f6e">文法定义</a></li>
+<li><a href="#org8f042e8">EvalVisitor</a></li>
+<li><a href="#org807dcf9">Main</a></li>
 <li><a href="#org81d67bb">Demo</a></li>
 <li><a href="#orgd1c835c">LispValue</a></li>
 <li><a href="#orgb8c86ce">ValueType</a></li>
@@ -252,7 +252,7 @@
 <h2 id="orge8b64f5">项目结构说明</h2>
 <div class="outline-text-2" id="text-orge8b64f5">
 
-<div id="org9437f86" class="figure">
+<div id="org705a449" class="figure">
 <p><img src="../images/2021-06-16_09-45-19_screenshot.png" alt="2021-06-16_09-45-19_screenshot.png" /><br />
 </p>
 </div>
@@ -267,9 +267,9 @@
 <h2 id="orge10d47a">实验一 源代码</h2>
 <div class="outline-text-2" id="text-orge10d47a">
 </div>
-<div id="outline-container-org9df9e94" class="outline-3">
-<h3 id="org9df9e94">文法定义</h3>
-<div class="outline-text-3" id="text-org9df9e94">
+<div id="outline-container-orgfdf6f51" class="outline-3">
+<h3 id="orgfdf6f51">文法定义</h3>
+<div class="outline-text-3" id="text-orgfdf6f51">
 <div class="org-src-container">
 <pre class="src src-antlr"><span style="color: #0000ff; font-weight: bold;">grammar</span> <span style="color: #8b5a00;">Lexer</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#35782;&#21035;&#21333;&#35789;,&#25972;&#25968;,&#28014;&#28857;&#25968;,&#21464;&#37327;&#12289;&#21152;&#21495;&#12289;&#20943;&#21495;&#12289;&#20056;&#21495;&#12289;&#38500;&#21495;</span>
@@ -292,10 +292,10 @@
 <span style="color: #0000ff; font-weight: bold;">NEWLINE</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'\n'</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">SPACE</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">' '</span> -&gt; <span style="color: #00008b;">skip</span><span style="color: #000000; font-weight: bold;">;</span>
 
-<span style="color: #0000ff; font-weight: bold;">WORDS</span><span style="color: #000000; font-weight: bold;">:</span> [a-zA-Z]+<span style="color: #000000; font-weight: bold;">;</span> <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Only English words, will not be conflict with varible</span>
-<span style="color: #0000ff; font-weight: bold;">INTEGER</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'-'</span>?[0-9]+<span style="color: #000000; font-weight: bold;">;</span>
-<span style="color: #0000ff; font-weight: bold;">FLOAT</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #8b5a00;">INTEGER</span> <span style="color: #50a14f;">'.'</span> [0-9]+<span style="color: #000000; font-weight: bold;">;</span>
-<span style="color: #0000ff; font-weight: bold;">VAR</span><span style="color: #000000; font-weight: bold;">:</span> [a-zA-Z]+[a-zA-Z0-9_]*<span style="color: #000000; font-weight: bold;">;</span> <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">FIXME</span><span style="color: #9ca0a4;"> &#36825;&#36793;&#30340;&#20108;&#20041;&#24615;&#20320;&#24590;&#20040;&#35299;&#20915;</span>
+<span style="color: #0000ff; font-weight: bold;">WORDS</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #4078f2;">[</span>a-zA-Z<span style="color: #4078f2;">]</span>+<span style="color: #000000; font-weight: bold;">;</span> <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Only English words, will not be conflict with varible</span>
+<span style="color: #0000ff; font-weight: bold;">INTEGER</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'-'</span>?<span style="color: #4078f2;">[</span>0-9<span style="color: #4078f2;">]</span>+<span style="color: #000000; font-weight: bold;">;</span>
+<span style="color: #0000ff; font-weight: bold;">FLOAT</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #8b5a00;">INTEGER</span> <span style="color: #50a14f;">'.'</span> <span style="color: #4078f2;">[</span>0-9<span style="color: #4078f2;">]</span>+<span style="color: #000000; font-weight: bold;">;</span>
+<span style="color: #0000ff; font-weight: bold;">VAR</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #4078f2;">[</span>a-zA-Z<span style="color: #4078f2;">]</span>+<span style="color: #4078f2;">[</span>a-zA-Z0-9_<span style="color: #4078f2;">]</span>*<span style="color: #000000; font-weight: bold;">;</span> <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">FIXME</span><span style="color: #9ca0a4;"> &#36825;&#36793;&#30340;&#20108;&#20041;&#24615;&#20320;&#24590;&#20040;&#35299;&#20915;</span>
 <span style="color: #0000ff; font-weight: bold;">ADD</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'+'</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">SUB</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'-'</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">MUL</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'*'</span><span style="color: #000000; font-weight: bold;">;</span>
@@ -304,9 +304,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgb6c70f9" class="outline-3">
-<h3 id="orgb6c70f9">EvalVisitor</h3>
-<div class="outline-text-3" id="text-orgb6c70f9">
+<div id="outline-container-org30f8d61" class="outline-3">
+<h3 id="org30f8d61">EvalVisitor</h3>
+<div class="outline-text-3" id="text-org30f8d61">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.lexer.<span style="color: #b751b6;">main</span>;
 
@@ -316,72 +316,72 @@
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">util</span>.<span style="color: #b751b6;">stream</span>.<span style="color: #986801;">Collectors</span>;
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">util</span>.<span style="color: #986801;">Optional</span>;
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">EvalVisitor</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">LexerBaseVisitor</span>&lt;<span style="color: #986801;">String</span>&gt; {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">EvalVisitor</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">LexerBaseVisitor</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">String</span><span style="color: #4078f2;">&gt;</span> <span style="color: #4078f2;">{</span>
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitEntry</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">EntryContext</span> <span style="color: #6a1868;">ctx</span>) {
-        ctx.children.stream()
-                .forEach(parseTree -&gt; {
-                    System.out.println(visit(parseTree));
-                });
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitEntry</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">EntryContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        ctx.children.stream<span style="color: #50a14f;">()</span>
+                .forEach<span style="color: #50a14f;">(</span>parseTree -&gt; <span style="color: #b751b6;">{</span>
+                    System.out.println<span style="color: #4db5bd;">(</span>visit<span style="color: #4078f2;">(</span>parseTree<span style="color: #4078f2;">)</span><span style="color: #4db5bd;">)</span>;
+                <span style="color: #b751b6;">}</span><span style="color: #50a14f;">)</span>;
 
         <span style="color: #e45649;">return</span> <span style="color: #b751b6;">null</span>;
-    }
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitPrintParagraph</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">PrintParagraphContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> ctx.unit().stream()
-                .map(unitContext -&gt; visit(unitContext) + <span style="color: #50a14f;">"\n"</span>)
-                .reduce(<span style="color: #e45649;">new</span> <span style="color: #986801;">String</span>(), (r, x) -&gt; r + x);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitPrintParagraph</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">PrintParagraphContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> ctx.unit<span style="color: #50a14f;">()</span>.stream<span style="color: #50a14f;">()</span>
+                .map<span style="color: #50a14f;">(</span>unitContext -&gt; visit<span style="color: #b751b6;">(</span>unitContext<span style="color: #b751b6;">)</span> + <span style="color: #50a14f;">"\n"</span><span style="color: #50a14f;">)</span>
+                .reduce<span style="color: #50a14f;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">String</span><span style="color: #b751b6;">()</span>, <span style="color: #b751b6;">(</span>r, x<span style="color: #b751b6;">)</span> -&gt; r + x<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitWords</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">WordsContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"words: %s"</span>, <span style="color: #b751b6;">ctx</span>.WORDS().getText());
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitWords</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">WordsContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"words: %s"</span>, <span style="color: #b751b6;">ctx</span>.WORDS<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitInteger</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">IntegerContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Integer: %s"</span>, <span style="color: #b751b6;">ctx</span>.INTEGER().getText());
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitInteger</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">IntegerContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Integer: %s"</span>, <span style="color: #b751b6;">ctx</span>.INTEGER<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitFloat</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">FloatContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Float: %s"</span>, <span style="color: #b751b6;">ctx</span>.FLOAT().getText());
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitFloat</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">FloatContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Float: %s"</span>, <span style="color: #b751b6;">ctx</span>.FLOAT<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitVar</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">VarContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Variable: %s"</span>, <span style="color: #b751b6;">ctx</span>.VAR().getText());
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitVar</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">VarContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Variable: %s"</span>, <span style="color: #b751b6;">ctx</span>.VAR<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitAdd</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">AddContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"+"</span>);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitAdd</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">AddContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"+"</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitSub</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">SubContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"-"</span>);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitSub</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">SubContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"-"</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitMul</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">MulContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"*"</span>);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitMul</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">MulContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"*"</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitDiv</span>(<span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">DivContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> String.format(<span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"/"</span>);
-    }
-}
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">visitDiv</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">LexerParser</span>.<span style="color: #986801;">DivContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Operator: %s"</span>, <span style="color: #50a14f;">"/"</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org6643b0f" class="outline-3">
-<h3 id="org6643b0f">Main</h3>
-<div class="outline-text-3" id="text-org6643b0f">
+<div id="outline-container-orgfb988f7" class="outline-3">
+<h3 id="orgfb988f7">Main</h3>
+<div class="outline-text-3" id="text-orgfb988f7">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.lexer.<span style="color: #b751b6;">main</span>;
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">io</span>.<span style="color: #986801;">FileInputStream</span>;
@@ -392,23 +392,23 @@
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">com</span>.<span style="color: #b751b6;">lexer</span>.<span style="color: #b751b6;">antlr</span>.*;
 
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Main</span> {
-    <span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">main</span>(<span style="color: #986801;">String</span>[] <span style="color: #6a1868;">args</span>) <span style="color: #e45649;">throws</span> <span style="color: #986801;">Exception</span> {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Main</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">main</span><span style="color: #a626a4;">(</span><span style="color: #986801;">String</span><span style="color: #50a14f;">[]</span> <span style="color: #6a1868;">args</span><span style="color: #a626a4;">)</span> <span style="color: #e45649;">throws</span> <span style="color: #986801;">Exception</span> <span style="color: #a626a4;">{</span>
         <span style="color: #986801;">String</span> <span style="color: #6a1868;">inputFile</span> = <span style="color: #50a14f;">"src/com/lexer/lexerdemo"</span>;
-        <span style="color: #986801;">InputStream</span> <span style="color: #6a1868;">is</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">FileInputStream</span>(inputFile);
-        <span style="color: #986801;">ANTLRInputStream</span> <span style="color: #6a1868;">input</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">ANTLRInputStream</span>(is);
+        <span style="color: #986801;">InputStream</span> <span style="color: #6a1868;">is</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">FileInputStream</span><span style="color: #50a14f;">(</span>inputFile<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ANTLRInputStream</span> <span style="color: #6a1868;">input</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">ANTLRInputStream</span><span style="color: #50a14f;">(</span>is<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">LexerLexer</span> <span style="color: #6a1868;">lexer</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LexerLexer</span>(input);
-        <span style="color: #986801;">CommonTokenStream</span> <span style="color: #6a1868;">tokens</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CommonTokenStream</span>(lexer);
+        <span style="color: #986801;">LexerLexer</span> <span style="color: #6a1868;">lexer</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LexerLexer</span><span style="color: #50a14f;">(</span>input<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">CommonTokenStream</span> <span style="color: #6a1868;">tokens</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CommonTokenStream</span><span style="color: #50a14f;">(</span>lexer<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">LexerParser</span> <span style="color: #6a1868;">parser</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LexerParser</span>(tokens);
+        <span style="color: #986801;">LexerParser</span> <span style="color: #6a1868;">parser</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LexerParser</span><span style="color: #50a14f;">(</span>tokens<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">ParseTree</span> <span style="color: #6a1868;">tree</span> = parser.entry();
-        <span style="color: #986801;">EvalVisitor</span> <span style="color: #6a1868;">eval</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">EvalVisitor</span>();
-        eval.visit(tree);
+        <span style="color: #986801;">ParseTree</span> <span style="color: #6a1868;">tree</span> = parser.entry<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">EvalVisitor</span> <span style="color: #6a1868;">eval</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">EvalVisitor</span><span style="color: #50a14f;">()</span>;
+        eval.visit<span style="color: #50a14f;">(</span>tree<span style="color: #50a14f;">)</span>;
 
-    }
-}
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -434,9 +434,9 @@ fuck you var123
 <h2 id="orgc1f5176">实验三 源代码</h2>
 <div class="outline-text-2" id="text-orgc1f5176">
 </div>
-<div id="outline-container-orgfdf6f51" class="outline-3">
-<h3 id="orgfdf6f51">文法定义</h3>
-<div class="outline-text-3" id="text-orgfdf6f51">
+<div id="outline-container-orgcc32f6e" class="outline-3">
+<h3 id="orgcc32f6e">文法定义</h3>
+<div class="outline-text-3" id="text-orgcc32f6e">
 <div class="org-src-container">
 <pre class="src src-antlr"><span style="color: #0000ff; font-weight: bold;">grammar</span> <span style="color: #8b5a00;">Calculator</span><span style="color: #000000; font-weight: bold;">;</span>
 
@@ -457,10 +457,10 @@ fuck you var123
 
 <span style="color: #0000ff; font-weight: bold;">assign</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #8b5a00;">LET</span> <span style="color: #8b5a00;">ID</span> <span style="color: #50a14f;">'='</span> <span style="color: #00008b;">expr</span><span style="color: #000000; font-weight: bold;">;</span>
 
-<span style="color: #0000ff; font-weight: bold;">ID</span><span style="color: #000000; font-weight: bold;">:</span> [a-zA-Z_]+<span style="color: #000000; font-weight: bold;">;</span>
+<span style="color: #0000ff; font-weight: bold;">ID</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #4078f2;">[</span>a-zA-Z_<span style="color: #4078f2;">]</span>+<span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">NUMBER</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'-'</span>?<span style="color: #8b5a00;">DIGITS</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">FLOAT</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #8b5a00;">NUMBER</span> <span style="color: #50a14f;">'.'</span> <span style="color: #8b5a00;">DIGITS</span><span style="color: #000000; font-weight: bold;">;</span>
-<span style="color: #0000ff; font-weight: bold;">fragment</span> <span style="color: #6a1868;">DIGITS</span>: [0-9]+<span style="color: #000000; font-weight: bold;">;</span>
+<span style="color: #0000ff; font-weight: bold;">fragment</span> <span style="color: #6a1868;">DIGITS</span>: <span style="color: #4078f2;">[</span>0-9<span style="color: #4078f2;">]</span>+<span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">MUL</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'*'</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">DIV</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'/'</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">ADD</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'+'</span><span style="color: #000000; font-weight: bold;">;</span>
@@ -468,15 +468,15 @@ fuck you var123
 
 <span style="color: #0000ff; font-weight: bold;">LET</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #986801;">'</span><span style="color: #00008b;">let</span><span style="color: #986801;">'</span><span style="color: #000000; font-weight: bold;">;</span>
 
-<span style="color: #0000ff; font-weight: bold;">WS</span><span style="color: #000000; font-weight: bold;">:</span> [\t ] -&gt; <span style="color: #00008b;">skip</span><span style="color: #000000; font-weight: bold;">;</span>
+<span style="color: #0000ff; font-weight: bold;">WS</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #4078f2;">[</span>\t <span style="color: #4078f2;">]</span> -&gt; <span style="color: #00008b;">skip</span><span style="color: #000000; font-weight: bold;">;</span>
 <span style="color: #0000ff; font-weight: bold;">NEWLINE</span><span style="color: #000000; font-weight: bold;">:</span> <span style="color: #50a14f;">'\n'</span><span style="color: #000000; font-weight: bold;">;</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org30f8d61" class="outline-3">
-<h3 id="org30f8d61">EvalVisitor</h3>
-<div class="outline-text-3" id="text-org30f8d61">
+<div id="outline-container-org8f042e8" class="outline-3">
+<h3 id="org8f042e8">EvalVisitor</h3>
+<div class="outline-text-3" id="text-org8f042e8">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.calculator.<span style="color: #b751b6;">main</span>;
 
@@ -486,115 +486,115 @@ fuck you var123
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">com</span>.<span style="color: #b751b6;">calculator</span>.<span style="color: #b751b6;">value</span>.<span style="color: #986801;">LispValue</span>;
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">com</span>.<span style="color: #b751b6;">calculator</span>.<span style="color: #b751b6;">value</span>.<span style="color: #986801;">ValueType</span>;
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">EvalVisitor</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">CalculatorBaseVisitor</span>&lt;<span style="color: #986801;">LispValue</span>&gt; {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">EvalVisitor</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">CalculatorBaseVisitor</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">LispValue</span><span style="color: #4078f2;">&gt;</span> <span style="color: #4078f2;">{</span>
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitEntry</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">EntryContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> <span style="color: #e45649;">super</span>.visitEntry(ctx);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitEntry</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">EntryContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> <span style="color: #e45649;">super</span>.visitEntry<span style="color: #50a14f;">(</span>ctx<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitPrintExpr</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">PrintExprContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">value</span> = visit(ctx.expr());
-        System.out.println(value);
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitPrintExpr</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">PrintExprContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">value</span> = visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+        System.out.println<span style="color: #50a14f;">(</span>value<span style="color: #50a14f;">)</span>;
         <span style="color: #e45649;">return</span> <span style="color: #b751b6;">null</span>;
-    }
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitBlank</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">BlankContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> <span style="color: #e45649;">super</span>.visitBlank(ctx);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitBlank</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">BlankContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> <span style="color: #e45649;">super</span>.visitBlank<span style="color: #50a14f;">(</span>ctx<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitNumber</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">NumberContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">value</span> = Integer.valueOf(<span style="color: #b751b6;">ctx</span>.NUMBER().getText());
-        <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(value);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitNumber</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">NumberContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">value</span> = Integer.valueOf<span style="color: #50a14f;">(</span><span style="color: #b751b6;">ctx</span>.NUMBER<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #50a14f;">(</span>value<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitFloat</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">FloatContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #986801;">Double</span> <span style="color: #6a1868;">value</span> = Double.valueOf(<span style="color: #b751b6;">ctx</span>.FLOAT().getText());
-        <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(value);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitFloat</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">FloatContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">Double</span> <span style="color: #6a1868;">value</span> = Double.valueOf<span style="color: #50a14f;">(</span><span style="color: #b751b6;">ctx</span>.FLOAT<span style="color: #b751b6;">()</span>.getText<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #50a14f;">(</span>value<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitMulDiv</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">MulDivContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span> = visit(ctx.expr(0));
-        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span> = visit(ctx.expr(1));
-        <span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span> = ctx.op.getType();
-        <span style="color: #e45649;">return</span> evalOp(op, left, right);
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitMulDiv</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">MulDivContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span> = visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">(</span>0<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span> = visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">(</span>1<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span> = ctx.op.getType<span style="color: #50a14f;">()</span>;
+        <span style="color: #e45649;">return</span> evalOp<span style="color: #50a14f;">(</span>op, left, right<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitAddSub</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">AddSubContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span> = visit(ctx.expr(0));
-        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span> = visit(ctx.expr(1));
-        <span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span> = ctx.op.getType();
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitAddSub</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">AddSubContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span> = visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">(</span>0<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span> = visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">(</span>1<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span> = ctx.op.getType<span style="color: #50a14f;">()</span>;
 
-        <span style="color: #e45649;">return</span> evalOp(op, left, right);
-    }
+        <span style="color: #e45649;">return</span> evalOp<span style="color: #50a14f;">(</span>op, left, right<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitParens</span>(<span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">ParensContext</span> <span style="color: #6a1868;">ctx</span>) {
-        <span style="color: #e45649;">return</span> visit(ctx.expr());
-    }
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">visitParens</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">CalculatorParser</span>.<span style="color: #986801;">ParensContext</span> <span style="color: #6a1868;">ctx</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> visit<span style="color: #50a14f;">(</span>ctx.expr<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalOp</span>(<span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span>) {
-        <span style="color: #e45649;">if</span>(left.valueType == <span style="color: #b751b6;">ValueType</span>.LVAL_ERR) {
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalOp</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">if</span><span style="color: #50a14f;">(</span>left.valueType == <span style="color: #b751b6;">ValueType</span>.LVAL_ERR<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
             <span style="color: #e45649;">return</span> left;
-        }
+        <span style="color: #50a14f;">}</span>
 
-        <span style="color: #e45649;">if</span>(right.valueType == <span style="color: #b751b6;">ValueType</span>.LVAL_ERR) {
+        <span style="color: #e45649;">if</span><span style="color: #50a14f;">(</span>right.valueType == <span style="color: #b751b6;">ValueType</span>.LVAL_ERR<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
             <span style="color: #e45649;">return</span> right;
-        }
+        <span style="color: #50a14f;">}</span>
 
-        <span style="color: #e45649;">if</span>(left.valueType != right.valueType) {
-            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_CONFLICT_TYPE);
-        }
+        <span style="color: #e45649;">if</span><span style="color: #50a14f;">(</span>left.valueType != right.valueType<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_CONFLICT_TYPE<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
 
-        <span style="color: #e45649;">return</span> evalSameType(op, left, right);
-    }
+        <span style="color: #e45649;">return</span> evalSameType<span style="color: #50a14f;">(</span>op, left, right<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalSameType</span>(<span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span>) {
-        <span style="color: #e45649;">switch</span> (left.valueType) {
-        <span style="color: #e45649;">case</span> LVAL_FLT: <span style="color: #e45649;">return</span> evalFloat(op, left.fltValue, right.fltValue);
-        <span style="color: #e45649;">case</span> LVAL_INT: <span style="color: #e45649;">return</span> evalInteger(op, left.intValue, right.intValue);
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalSameType</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">LispValue</span> <span style="color: #6a1868;">right</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">switch</span> <span style="color: #50a14f;">(</span>left.valueType<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+        <span style="color: #e45649;">case</span> LVAL_FLT: <span style="color: #e45649;">return</span> evalFloat<span style="color: #b751b6;">(</span>op, left.fltValue, right.fltValue<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> LVAL_INT: <span style="color: #e45649;">return</span> evalInteger<span style="color: #b751b6;">(</span>op, left.intValue, right.intValue<span style="color: #b751b6;">)</span>;
         <span style="color: #e45649;">default</span>:
-            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_NO_METHOD_FOR_TYPE);
-        }
-    }
+            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_NO_METHOD_FOR_TYPE<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalInteger</span>(<span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">right</span>) {
-        <span style="color: #e45649;">switch</span> (op) {
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.ADD: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left + right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.SUB: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left - right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.MUL: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left * right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.DIV: <span style="color: #e45649;">return</span> (right == 0 ? <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_DIV_BY_ZERO) : <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left / right));
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalInteger</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">right</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">switch</span> <span style="color: #50a14f;">(</span>op<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.ADD: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left + right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.SUB: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left - right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.MUL: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left * right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.DIV: <span style="color: #e45649;">return</span> <span style="color: #b751b6;">(</span>right == 0 ? <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #4db5bd;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_DIV_BY_ZERO<span style="color: #4db5bd;">)</span> : <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #4db5bd;">(</span>left / right<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
         <span style="color: #e45649;">default</span>:
-            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_NO_MATCHED_METHOD);
-        }
+            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_NO_MATCHED_METHOD<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
 
-    }
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalFloat</span>(<span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">Double</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Double</span> <span style="color: #6a1868;">right</span>) {
-        <span style="color: #e45649;">switch</span> (op) {
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.ADD: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left + right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.SUB: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left - right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.MUL: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left * right);
-        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.DIV: <span style="color: #e45649;">return</span> (right == 0 ? <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_DIV_BY_ZERO) : <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(left / right));
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">LispValue</span> <span style="color: #a626a4;">evalFloat</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">op</span>, <span style="color: #986801;">Double</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Double</span> <span style="color: #6a1868;">right</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">switch</span> <span style="color: #50a14f;">(</span>op<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.ADD: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left + right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.SUB: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left - right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.MUL: <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span>left * right<span style="color: #b751b6;">)</span>;
+        <span style="color: #e45649;">case</span> <span style="color: #b751b6;">CalculatorParser</span>.DIV: <span style="color: #e45649;">return</span> <span style="color: #b751b6;">(</span>right == 0 ? <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #4db5bd;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_DIV_BY_ZERO<span style="color: #4db5bd;">)</span> : <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #4db5bd;">(</span>left / right<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
         <span style="color: #e45649;">default</span>:
-            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span>(<span style="color: #b751b6;">ErrorType</span>.LERR_NO_MATCHED_METHOD);
-        }
+            <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">LispValue</span><span style="color: #b751b6;">(</span><span style="color: #b751b6;">ErrorType</span>.LERR_NO_MATCHED_METHOD<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
 
-    }
-}
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb988f7" class="outline-3">
-<h3 id="orgfb988f7">Main</h3>
-<div class="outline-text-3" id="text-orgfb988f7">
+<div id="outline-container-org807dcf9" class="outline-3">
+<h3 id="org807dcf9">Main</h3>
+<div class="outline-text-3" id="text-org807dcf9">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.calculator.<span style="color: #b751b6;">main</span>;
 <span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">io</span>.<span style="color: #986801;">FileInputStream</span>;
@@ -607,23 +607,23 @@ fuck you var123
 
 
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Main</span> {
-    <span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">main</span>(<span style="color: #986801;">String</span>[] <span style="color: #6a1868;">args</span>) <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span> {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Main</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">main</span><span style="color: #a626a4;">(</span><span style="color: #986801;">String</span><span style="color: #50a14f;">[]</span> <span style="color: #6a1868;">args</span><span style="color: #a626a4;">)</span> <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span> <span style="color: #a626a4;">{</span>
         <span style="color: #986801;">String</span> <span style="color: #6a1868;">inputFile</span> = <span style="color: #50a14f;">"src/com/calculator/demo"</span>;
-        <span style="color: #986801;">InputStream</span> <span style="color: #6a1868;">is</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">FileInputStream</span>(inputFile);
-        <span style="color: #986801;">ANTLRInputStream</span> <span style="color: #6a1868;">input</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">ANTLRInputStream</span>(is);
+        <span style="color: #986801;">InputStream</span> <span style="color: #6a1868;">is</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">FileInputStream</span><span style="color: #50a14f;">(</span>inputFile<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ANTLRInputStream</span> <span style="color: #6a1868;">input</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">ANTLRInputStream</span><span style="color: #50a14f;">(</span>is<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">CalculatorLexer</span> <span style="color: #6a1868;">lexer</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CalculatorLexer</span>(input);
-        <span style="color: #986801;">CommonTokenStream</span> <span style="color: #6a1868;">tokens</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CommonTokenStream</span>(lexer);
+        <span style="color: #986801;">CalculatorLexer</span> <span style="color: #6a1868;">lexer</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CalculatorLexer</span><span style="color: #50a14f;">(</span>input<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">CommonTokenStream</span> <span style="color: #6a1868;">tokens</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CommonTokenStream</span><span style="color: #50a14f;">(</span>lexer<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">CalculatorParser</span> <span style="color: #6a1868;">parser</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CalculatorParser</span>(tokens);
+        <span style="color: #986801;">CalculatorParser</span> <span style="color: #6a1868;">parser</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CalculatorParser</span><span style="color: #50a14f;">(</span>tokens<span style="color: #50a14f;">)</span>;
 
-        <span style="color: #986801;">ParseTree</span> <span style="color: #6a1868;">tree</span> = parser.entry();
-        <span style="color: #986801;">EvalVisitor</span> <span style="color: #6a1868;">eval</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">EvalVisitor</span>();
-        eval.visit(tree);
+        <span style="color: #986801;">ParseTree</span> <span style="color: #6a1868;">tree</span> = parser.entry<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">EvalVisitor</span> <span style="color: #6a1868;">eval</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">EvalVisitor</span><span style="color: #50a14f;">()</span>;
+        eval.visit<span style="color: #50a14f;">(</span>tree<span style="color: #50a14f;">)</span>;
 
-    }
-}
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -654,40 +654,40 @@ fuck you var123
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.calculator.<span style="color: #b751b6;">value</span>;
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">LispValue</span> {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">LispValue</span> <span style="color: #4078f2;">{</span>
     <span style="color: #e45649;">public</span> <span style="color: #986801;">ValueType</span> <span style="color: #6a1868;">valueType</span>;
     <span style="color: #e45649;">public</span> <span style="color: #986801;">ErrorType</span> <span style="color: #6a1868;">errorType</span>;
 
     <span style="color: #e45649;">public</span> <span style="color: #986801;">Integer</span> <span style="color: #6a1868;">intValue</span>;
     <span style="color: #e45649;">public</span> <span style="color: #986801;">Double</span> <span style="color: #6a1868;">fltValue</span>;
 
-    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span>(<span style="color: #986801;">Integer</span> <span style="color: #6a1868;">intValue</span>) {
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Integer</span> <span style="color: #6a1868;">intValue</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
         valueType = <span style="color: #b751b6;">ValueType</span>.LVAL_INT;
         <span style="color: #e45649;">this</span>.intValue = intValue;
-    }
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span>(<span style="color: #986801;">Double</span> <span style="color: #6a1868;">fltValue</span>) {
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Double</span> <span style="color: #6a1868;">fltValue</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
         valueType = <span style="color: #b751b6;">ValueType</span>.LVAL_FLT;
         <span style="color: #e45649;">this</span>.fltValue = fltValue;
-    }
+    <span style="color: #a626a4;">}</span>
 
-    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span>(<span style="color: #986801;">ErrorType</span> <span style="color: #6a1868;">errorType</span>) {
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">LispValue</span><span style="color: #a626a4;">(</span><span style="color: #986801;">ErrorType</span> <span style="color: #6a1868;">errorType</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
         valueType = <span style="color: #b751b6;">ValueType</span>.LVAL_ERR;
         <span style="color: #e45649;">this</span>.errorType = errorType;
-    }
+    <span style="color: #a626a4;">}</span>
 
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">toString</span>() {
-        <span style="color: #e45649;">switch</span> (valueType) {
-        <span style="color: #e45649;">case</span> LVAL_ERR: <span style="color: #e45649;">return</span> errorType.toString();
-        <span style="color: #e45649;">case</span> LVAL_FLT: <span style="color: #e45649;">return</span> fltValue.toString();
-        <span style="color: #e45649;">case</span> LVAL_INT: <span style="color: #e45649;">return</span> intValue.toString();
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">toString</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">switch</span> <span style="color: #50a14f;">(</span>valueType<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+        <span style="color: #e45649;">case</span> LVAL_ERR: <span style="color: #e45649;">return</span> errorType.toString<span style="color: #b751b6;">()</span>;
+        <span style="color: #e45649;">case</span> LVAL_FLT: <span style="color: #e45649;">return</span> fltValue.toString<span style="color: #b751b6;">()</span>;
+        <span style="color: #e45649;">case</span> LVAL_INT: <span style="color: #e45649;">return</span> intValue.toString<span style="color: #b751b6;">()</span>;
         <span style="color: #e45649;">default</span>:
             <span style="color: #e45649;">return</span> <span style="color: #50a14f;">"fuck, error occusin"</span>;
-        }
-    }
+        <span style="color: #50a14f;">}</span>
+    <span style="color: #a626a4;">}</span>
 
-}
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -699,11 +699,11 @@ fuck you var123
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.calculator.<span style="color: #b751b6;">value</span>;
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">enum</span> <span style="color: #986801;">ValueType</span> {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">enum</span> <span style="color: #986801;">ValueType</span> <span style="color: #4078f2;">{</span>
     <span style="color: #6a1868;">LVAL_INT</span>,
     <span style="color: #6a1868;">LVAL_FLT</span>,
     <span style="color: #6a1868;">LVAL_ERR</span>,
-}
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -715,14 +715,14 @@ fuck you var123
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">package</span> com.calculator.<span style="color: #b751b6;">value</span>;
 
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">enum</span> <span style="color: #986801;">ErrorType</span> {
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">enum</span> <span style="color: #986801;">ErrorType</span> <span style="color: #4078f2;">{</span>
     <span style="color: #6a1868;">LERR_DIV_BY_ZERO</span>,
     <span style="color: #6a1868;">LERR_NO_SUCH_VAR</span>,
     <span style="color: #6a1868;">LERR_REDEFINE_VAR</span>,
     <span style="color: #6a1868;">LERR_CONFLICT_TYPE</span>,
     <span style="color: #6a1868;">LERR_NO_MATCHED_METHOD</span>,
     <span style="color: #6a1868;">LERR_NO_METHOD_FOR_TYPE</span>,
-}
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -732,7 +732,7 @@ fuck you var123
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-06-16 三 09:53</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

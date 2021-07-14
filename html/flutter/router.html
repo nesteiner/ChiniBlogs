@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-07-15 四 00:10 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flutter 中的Router</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Flutter 中的Router</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3390d13">用你的应用来演示 路由用法</a>
+<ul>
+<li><a href="#org57789c1">1. 匿名路由跳转</a></li>
+<li><a href="#org99922bd">2. 命名路由跳转</a></li>
+</ul>
+</li>
+<li><a href="#orgea6d106">与 HTML 类比</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3390d13" class="outline-2">
+<h2 id="org3390d13">用你的应用来演示 路由用法</h2>
+<div class="outline-text-2" id="text-org3390d13">
+<p>
+在这个演示里定义两个界面，HomePage 与 NextPage ，并从 HomePage 传递参数到 NextPage 中<br />
+接下来演示匿名路由和命名路由的情况<br />
+</p>
+
+<p>
+这是 <b>HomePage</b><br />
+</p>
+
+<div id="org98c35b5" class="figure">
+<p><img src="../images/用你的应用来演示_路由用法/2021-06-13_14-36-32_screenshot.png" alt="2021-06-13_14-36-32_screenshot.png" /><br />
+</p>
+</div>
+
+<p>
+点击文字按钮后，跳转到 NextPage<br />
+</p>
+
+
+<div id="org1bbe1ab" class="figure">
+<p><img src="../images/用你的应用来演示_路由用法/2021-06-13_14-37-33_screenshot.png" alt="2021-06-13_14-37-33_screenshot.png" /><br />
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org57789c1" class="outline-3">
+<h3 id="org57789c1">1. 匿名路由跳转</h3>
+<div class="outline-text-3" id="text-org57789c1">
+<p>
+首先是 HomePage<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">HomePage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #50a14f;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      <span style="color: #e45649;">return</span> <span style="color: #b751b6;">()</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #986801;">Navigator</span>.push<span style="color: #4db5bd;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #4078f2;">(</span>builder: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">builder</span><span style="color: #a626a4;">)</span> =&gt; <span style="color: #986801;">NextPage</span><span style="color: #a626a4;">(</span>message: message<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span><span style="color: #4db5bd;">)</span>;
+      <span style="color: #b751b6;">}</span>;
+    <span style="color: #50a14f;">}</span>;
+
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
+      child: <span style="color: #986801;">Column</span><span style="color: #b751b6;">(</span>
+  mainAxisAlignment: <span style="color: #986801;">MainAxisAlignment</span>.center,
+  crossAxisAlignment: <span style="color: #986801;">CrossAxisAlignment</span>.center,
+  children: <span style="color: #4db5bd;">[</span>
+    <span style="color: #986801;">TextButton</span><span style="color: #4078f2;">(</span>onPressed: fnpress<span style="color: #a626a4;">(</span><span style="color: #50a14f;">'Hello World'</span><span style="color: #a626a4;">)</span>, child: <span style="color: #986801;">Text</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'goto the next page with status 1'</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>,
+    <span style="color: #986801;">TextButton</span><span style="color: #4078f2;">(</span>onPressed: fnpress<span style="color: #a626a4;">(</span><span style="color: #50a14f;">'Fuck You'</span><span style="color: #a626a4;">)</span>, child: <span style="color: #986801;">Text</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'goto the next page with status 2'</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+  <span style="color: #4db5bd;">]</span>,
+      <span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+      appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'Home Page'</span><span style="color: #4db5bd;">)</span>,<span style="color: #b751b6;">)</span>,
+      body: buildBody<span style="color: #b751b6;">(</span>context<span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+<p>
+在跳转时通过构造函数来传递参数，其中 NextPage 为<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">NextPage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span>;
+  <span style="color: #986801;">NextPage</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.message<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>: <span style="color: #e45649;">super</span><span style="color: #a626a4;">()</span>;
+
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
+      child: <span style="color: #986801;">Text</span><span style="color: #b751b6;">(</span><span style="color: #50a14f;">'the message from HomePage is'</span> + message, style: <span style="color: #986801;">TextStyle</span><span style="color: #4db5bd;">(</span>color: <span style="color: #986801;">Colors</span>.red, fontSize: <span style="color: #b751b6;">40</span><span style="color: #4db5bd;">)</span>,<span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+      appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'Next Page'</span>,<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>,
+      body: buildBody<span style="color: #b751b6;">(</span>context<span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org99922bd" class="outline-3">
+<h3 id="org99922bd">2. 命名路由跳转</h3>
+<div class="outline-text-3" id="text-org99922bd">
+<p>
+命名路由需要在入口程序 App 中注册路由表，<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
+      title: <span style="color: #50a14f;">'Flutter Router Demo'</span>,
+      home: <span style="color: #986801;">HomePage</span><span style="color: #b751b6;">()</span>,
+      routes: <span style="color: #b751b6;">{</span>
+  <span style="color: #50a14f;">"Home"</span>: <span style="color: #4db5bd;">(</span><span style="color: #6a1868;">ctx</span><span style="color: #4db5bd;">)</span> =&gt; <span style="color: #986801;">HomePage</span><span style="color: #4db5bd;">()</span>,
+  <span style="color: #50a14f;">"Next"</span>: <span style="color: #4db5bd;">(</span><span style="color: #6a1868;">ctx</span><span style="color: #4db5bd;">)</span> =&gt; <span style="color: #986801;">NextPage</span><span style="color: #4db5bd;">()</span>,
+      <span style="color: #b751b6;">}</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+<p>
+在 HomePage 中跳转与传递参数方式已经改变<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #9ca0a4;">// in HomePage class, </span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #a626a4;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+      <span style="color: #e45649;">return</span> <span style="color: #50a14f;">()</span> <span style="color: #50a14f;">{</span>
+  <span style="color: #986801;">Navigator</span>.pushNamed<span style="color: #b751b6;">(</span>context, <span style="color: #50a14f;">"Next"</span>, arguments: message<span style="color: #b751b6;">)</span>;
+      <span style="color: #50a14f;">}</span>;
+    <span style="color: #a626a4;">}</span>;
+  <span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+<p>
+参数的传递不通过构造方法， NextPage 接收参数的方式变为了<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649;">var</span> <span style="color: #6a1868;">message</span> = <span style="color: #986801;">ModalRoute</span>.of<span style="color: #a626a4;">(</span>context<span style="color: #a626a4;">)</span>!.settings.arguments <span style="color: #a626a4;">as</span> <span style="color: #986801;">String</span>;
+
+  <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #a626a4;">(</span>
+    child: <span style="color: #986801;">Text</span><span style="color: #50a14f;">(</span><span style="color: #50a14f;">'the message from HomePage is '</span> + message, style: <span style="color: #986801;">TextStyle</span><span style="color: #b751b6;">(</span>color: <span style="color: #986801;">Colors</span>.red, fontSize: <span style="color: #b751b6;">40</span><span style="color: #b751b6;">)</span>,<span style="color: #50a14f;">)</span>,
+  <span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgea6d106" class="outline-2">
+<h2 id="orgea6d106">与 HTML 类比</h2>
+<div class="outline-text-2" id="text-orgea6d106">
+<p>
+类比 html 中的路由跳转，路由是从一个页面地址跳转到另一个页面地址，而不变的对象是浏览器的标签页<br />
+在 这个程序 中，页面地址可以看作 Scaffold ，而标签页看作 MaterialApp<br />
+接下来是如何跳转的问题，在 html 中使用 &lt;a&gt; 标签跳转，flutter 则是 <span class="underline">Navigator.push(context, MaterialPageRoute)</span><br />
+还有就是跳转时如何传递参数，html 可以通过添加查询参数，<br />
+flutter 则有两种情况，在非命名的路由中，只需修改 MaterialPageRoute 的 builder 方法，传递数据至组件的构造方法中即可<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">Navigator</span>.push<span style="color: #4078f2;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #a626a4;">(</span>builder: <span style="color: #50a14f;">(</span><span style="color: #6a1868;">ctx</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+  <span style="color: #e45649;">return</span> <span style="color: #986801;">NextPage</span><span style="color: #b751b6;">(</span>
+    data: <span style="color: #50a14f;">"Home Page Data"</span>,
+  <span style="color: #b751b6;">)</span>;
+<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+
+<p>
+而在命名路由中，可以通过专门的参数 argument 来传递<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">Navigator</span>.pushNamed<span style="color: #4078f2;">(</span>context, <span style="color: #50a14f;">"NextPage"</span>, arguments: <span style="color: #50a14f;">"&#20256;&#20540;"</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+
+<p>
+到目标路由后，通过<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">ModalRoute</span>.of<span style="color: #4078f2;">(</span>context<span style="color: #4078f2;">)</span>!.settings.arguments <span style="color: #a626a4;">as</span> <span style="color: #50a14f;">'type you want'</span>;
+</pre>
+</div>
+<p>
+来接收参数，同时要注意 <b>null safety</b></p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

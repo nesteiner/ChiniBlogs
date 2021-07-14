@@ -6,7 +6,7 @@
 <!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>数据库原理笔记</title>
+<title>Boost 测试记录</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Steiner" />
 <style type="text/css">
@@ -219,99 +219,234 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">数据库原理笔记</h1>
+<h1 class="title">Boost 测试记录</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbc1764e">group by</a></li>
-<li><a href="#orgecc6a56">join</a></li>
+<li><a href="#orga2b1f43">链接函数库</a>
+<ul>
+<li><a href="#orga99f5a5">通用标志 CFLAGS</a></li>
+<li><a href="#org993d30f">链接动态函数库</a>
+<ul>
+<li><a href="#org51fc2a6">创建动态函数库</a></li>
+<li><a href="#org1d0bdb4">链接程序</a></li>
+<li><a href="#orgf06a37c">运行测试</a></li>
+<li><a href="#org9ac68f6">改进</a></li>
+</ul>
+</li>
+<li><a href="#org0c1d1c0">链接静态函数库</a>
+<ul>
+<li><a href="#orgb6ab2cd">创建静态函数库</a></li>
+<li><a href="#orga16279e">运行测试</a></li>
+<li><a href="#org18a4490">注意</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org682f5b5">如何解决依赖地狱</a></li>
+<li><a href="#orged787fe">FIXME 依赖管理</a>
+<ul>
+<li><a href="#org3a48e21">指定链接路径</a></li>
+<li><a href="#org41e7db6">链接静态函数库</a></li>
+<li><a href="#org27088f2">autogen 的使用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga2b1f43" class="outline-2">
+<h2 id="orga2b1f43">链接函数库</h2>
+<div class="outline-text-2" id="text-orga2b1f43">
+<p>
+链接函数库需要为 gcc 添加一定的选项，其中有<br />
+</p>
+<ol class="org-ol">
+<li>-I 添加头文件的地址<br /></li>
+<li>-L 添加链接库的地址<br /></li>
+<li>-l 指定要链接的库<br /></li>
+</ol>
+</div>
+
+<div id="outline-container-orga99f5a5" class="outline-3">
+<h3 id="orga99f5a5">通用标志 CFLAGS</h3>
+<div class="outline-text-3" id="text-orga99f5a5">
+<p>
+使用上述选项，将 CFLAGS 设置为<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #6a1868;">CFLAGS</span>=-I . -L .
+</pre>
+</div>
+<p>
+表示<br />
+</p>
+<ul class="org-ul">
+<li>编译器查找标准库的头文件地址时，先在 -I 的选项 <b>.</b> 中查找头文件<br /></li>
+<li>编译器链接程序时，先在 -L 的选项 <b>.</b> 中查找库文件<br /></li>
+</ul>
+
+<p>
+千万别忘了指定要链接的函数库 <code>-l max</code><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org993d30f" class="outline-3">
+<h3 id="org993d30f">链接动态函数库</h3>
+<div class="outline-text-3" id="text-org993d30f">
+</div>
+<div id="outline-container-org51fc2a6" class="outline-4">
+<h4 id="org51fc2a6">创建动态函数库</h4>
+<div class="outline-text-4" id="text-org51fc2a6">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">libmax.so</span>: max.h max.c
+        gcc max.c -fPIC -shared -o libmax.so $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
+</pre>
+</div>
+<p>
+其中<br />
+</p>
+<ul class="org-ul">
+<li><b>-fPIC</b> 代表生成与位置无关的代码， <b>Position Indepence Code</b><br /></li>
+<li><b>-shared</b> 表示生成动态函数库<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1d0bdb4" class="outline-4">
+<h4 id="org1d0bdb4">链接程序</h4>
+<div class="outline-text-4" id="text-org1d0bdb4">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">a.out</span>: test.c libmax.so
+        gcc test.c -L . -l max $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf06a37c" class="outline-4">
+<h4 id="orgf06a37c">运行测试</h4>
+<div class="outline-text-4" id="text-orgf06a37c">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">run</span>: a.out
+        ./a.out
+</pre>
+</div>
+
+<p>
+产生错误<br />
+#+begin<sub>quote</sub><br />
+error while loading shared libraries: libmyhello.so: cannot open shared object file: No such file or directory<br />
+#+end+quote<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org9ac68f6" class="outline-4">
+<h4 id="org9ac68f6">改进</h4>
+<div class="outline-text-4" id="text-org9ac68f6">
+<p>
+虽然在编译时指定了库的路径，但没有在运行时指定库的路径<br />
+有两种方法可以解决上述错误<br />
+</p>
+<ol class="org-ol">
+<li><p>
+添加动态库的加载路径<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">run</span>: a.out
+        export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH \
+        &amp;&amp; ./a.out
+
+</pre>
+</div></li>
+
+<li><p>
+使用 -Wl, rpath 选项<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">a.out</span>: test.c libmax.so
+        gcc test.c $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span> -Wl,-rpath=<span style="color: #50a14f;">'.'</span> -l max
+<span style="color: #4078f2;">run</span>: a.out
+        ./a.out
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org0c1d1c0" class="outline-3">
+<h3 id="org0c1d1c0">链接静态函数库</h3>
+<div class="outline-text-3" id="text-org0c1d1c0">
+</div>
+<div id="outline-container-orgb6ab2cd" class="outline-4">
+<h4 id="orgb6ab2cd">创建静态函数库</h4>
+<div class="outline-text-4" id="text-orgb6ab2cd">
+<p>
+创建静态函数库需要用到 ar 程序，函数库的后缀名 .a 代表 <b>archive</b> ，打包的意思?<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga16279e" class="outline-4">
+<h4 id="orga16279e">运行测试</h4>
+<div class="outline-text-4" id="text-orga16279e">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #4078f2;">a.out</span>: test.c static-max
+        gcc test.c -L . -l max $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
+<span style="color: #4078f2;">static-run</span>: a.out
+        ./a.out
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org18a4490" class="outline-4">
+<h4 id="org18a4490">注意</h4>
+<div class="outline-text-4" id="text-org18a4490">
+<p>
+链接时，编译器优先匹配 <b>libmax.so</b> 文件，再是 <b>libmax.a</b> ，先要删除 <b>libmax.so</b> 才能让测试正确通过<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org682f5b5" class="outline-2">
+<h2 id="org682f5b5">如何解决依赖地狱</h2>
+<div class="outline-text-2" id="text-org682f5b5">
+<p>
+当我因为软件版本的冲突原因，而不能安装一些软件时，我陷入了依赖地狱<br />
+这是因为我们使用的是全局环境下的库，我们可以参考 Python, Vue 的解决方法，单独创建一个环境提供依赖<br />
+在 Makefile 中，寻找依赖的根据是环境变量 <b>PATH</b> ，这个时候我们在 Makefile 文件中指定 <b>PATH</b> 变量，<br />
+再次 build ，依赖问题是否能被解决呢<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orged787fe" class="outline-2">
+<h2 id="orged787fe">FIXME 依赖管理</h2>
+<div class="outline-text-2" id="text-orged787fe">
+</div>
+<div id="outline-container-org3a48e21" class="outline-3">
+<h3 id="org3a48e21">指定链接路径</h3>
+<div class="outline-text-3" id="text-org3a48e21">
+<p>
+try it<br />
+</p>
+<ul class="org-ul">
+<li>download the source<br /></li>
+<li>build it but don't install<br /></li>
+<li>speciafiy the path to libwine:i386<br /></li>
+<li>build the wine<br /></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbc1764e" class="outline-2">
-<h2 id="orgbc1764e">group by</h2>
-<div class="outline-text-2" id="text-orgbc1764e">
-<p>
-`group by` 表示把数据表按照某个字段集中在一起，让我们来看一个例子<br />
-假设有表格`table`<br />
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-right">id</td>
-<td class="org-left">name</td>
-<td class="org-left">class</td>
-</tr>
-
-<tr>
-<td class="org-right">:&#x2013;:</td>
-<td class="org-left">:&#x2013;:</td>
-<td class="org-left">:&#x2013;:</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">hello</td>
-<td class="org-left">A</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">world</td>
-<td class="org-left">B</td>
-</tr>
-
-<tr>
-<td class="org-right">3</td>
-<td class="org-left">fuck</td>
-<td class="org-left">A</td>
-</tr>
-
-<tr>
-<td class="org-right">4</td>
-<td class="org-left">you</td>
-<td class="org-left">A</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>
-我们输入<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-sql"><span style="color: #e45649;">select</span>  
-        <span style="color: #e45649;">class</span>
-<span style="color: #e45649;">from</span>
-        <span style="color: #e45649;">table</span>
-        <span style="color: #e45649;">group</span> <span style="color: #e45649;">by</span> <span style="color: #e45649;">class</span>;
-</pre>
+<div id="outline-container-org41e7db6" class="outline-3">
+<h3 id="org41e7db6">链接静态函数库</h3>
 </div>
-<p>
-产生的结果是<br />
-</p>
-
-<p>
-但是其他的字段到哪里去了？<br />
-我们可以这样看待经过`group by`之后的`table`<br />
-</p>
+<div id="outline-container-org27088f2" class="outline-3">
+<h3 id="org27088f2">autogen 的使用</h3>
 </div>
-</div>
-
-
-<div id="outline-container-orgecc6a56" class="outline-2">
-<h2 id="orgecc6a56">join</h2>
 </div>
 </div>
 <div id="postamble" class="status">

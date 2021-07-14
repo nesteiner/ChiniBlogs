@@ -6,7 +6,7 @@
 <!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>数据库原理笔记</title>
+<title>Flutter 中 provider 的使用</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Steiner" />
 <style type="text/css">
@@ -219,99 +219,18 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">数据库原理笔记</h1>
+<h1 class="title">Flutter 中 provider 的使用</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbc1764e">group by</a></li>
-<li><a href="#orgecc6a56">join</a></li>
+<li><a href="#orgce1ed74">Counter with Provider</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbc1764e" class="outline-2">
-<h2 id="orgbc1764e">group by</h2>
-<div class="outline-text-2" id="text-orgbc1764e">
-<p>
-`group by` 表示把数据表按照某个字段集中在一起，让我们来看一个例子<br />
-假设有表格`table`<br />
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-right">id</td>
-<td class="org-left">name</td>
-<td class="org-left">class</td>
-</tr>
-
-<tr>
-<td class="org-right">:&#x2013;:</td>
-<td class="org-left">:&#x2013;:</td>
-<td class="org-left">:&#x2013;:</td>
-</tr>
-
-<tr>
-<td class="org-right">1</td>
-<td class="org-left">hello</td>
-<td class="org-left">A</td>
-</tr>
-
-<tr>
-<td class="org-right">2</td>
-<td class="org-left">world</td>
-<td class="org-left">B</td>
-</tr>
-
-<tr>
-<td class="org-right">3</td>
-<td class="org-left">fuck</td>
-<td class="org-left">A</td>
-</tr>
-
-<tr>
-<td class="org-right">4</td>
-<td class="org-left">you</td>
-<td class="org-left">A</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>
-我们输入<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-sql"><span style="color: #e45649;">select</span>  
-        <span style="color: #e45649;">class</span>
-<span style="color: #e45649;">from</span>
-        <span style="color: #e45649;">table</span>
-        <span style="color: #e45649;">group</span> <span style="color: #e45649;">by</span> <span style="color: #e45649;">class</span>;
-</pre>
-</div>
-<p>
-产生的结果是<br />
-</p>
-
-<p>
-但是其他的字段到哪里去了？<br />
-我们可以这样看待经过`group by`之后的`table`<br />
-</p>
-</div>
-</div>
-
-
-<div id="outline-container-orgecc6a56" class="outline-2">
-<h2 id="orgecc6a56">join</h2>
+<div id="outline-container-orgce1ed74" class="outline-2">
+<h2 id="orgce1ed74">Counter with Provider</h2>
 </div>
 </div>
 <div id="postamble" class="status">

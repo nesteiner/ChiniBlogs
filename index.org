@@ -1,7 +1,7 @@
 #+title: This file is for Table of Content
 #+publishing-directory: .
 #+publishing-function: org-html-export-to-html
-#+html_head: <link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+#+html_head: <link rel="stylesheet" type="text/css" href="css/org.css"/>
 * Configure first
 - export as markdown
 - sync in gitbook
@@ -9,12 +9,17 @@
 - [ ] quote
 - [ ] 元数据，example, quote 等
 - [X] export this file to index.html
+- [ ] download the css style to local
 
 * Table of Content
+** Boost Plan
+[[file:./html/boost-test/record.html][Record]]
 ** Compiler
 [[file:./html/compiler/labwork.html][编译原理实践期末作业]]
 ** Flutter
-[[file:./html/counter.html][计数器]]
+[[file:./html/flutter/counter.html][计数器]]
+[[file:./html/flutter/provider.html][Provider]]
+[[file:./html/flutter/router.html][Router]]
 ** misc
 [[file:./html/android-work.html][安卓大作业报告]]
 [[file:./html/database.html][数据库学习笔记]]

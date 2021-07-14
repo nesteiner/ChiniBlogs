@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-09 三 00:51 -->
+<!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>计算真值表</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -245,14 +245,14 @@
 本来想用 <b>lisp</b> 程序来写，他的写法是<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-scheme">(function arg1 arg2 ...)
+<pre class="src src-scheme"><span style="color: #4078f2;">(</span>function arg1 arg2 ...<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 <p>
 S表达式不需要考虑优先级顺序，写起来比较简单<br />
 但是在这里有太多运算符，写成 <b>lisp</b> 很不方便<br />
 </p>
-<pre class="example" id="org0011ba4">
+<pre class="example" id="org24dc87e">
 p∧￢(q→p
 (p ↔ q) → r
 p → (p ∨ ￢q ∨ r)
@@ -263,7 +263,7 @@ p → (p ∨ ￢q ∨ r)
 首先将运算符作为一个函数定义(以下例子这样写是因为 <b>+</b> 在程序中是特殊符号，需要加一个 <b>:</b> 前缀来标识， <b>Julia</b> 语言的一个 <b>feature</b>)<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">function</span> <span style="color: #a626a4;">Base</span>.:+(arg1<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">SomeType</span>, arg2<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">SomeType</span>)
+<pre class="src src-julia"><span style="color: #e45649;">function</span> <span style="color: #a626a4;">Base</span>.:+<span style="color: #4078f2;">(</span>arg1<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">SomeType</span>, arg2<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">SomeType</span><span style="color: #4078f2;">)</span>
   <span style="color: #e45649;">return</span> arg1 * arg2
 <span style="color: #e45649;">end</span>
 </pre>
@@ -279,7 +279,7 @@ p → (p ∨ ￢q ∨ r)
 解析为<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">Base:+(arg1, arg2)
+<pre class="src src-julia">Base:+<span style="color: #4078f2;">(</span>arg1, arg2<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 
@@ -307,7 +307,7 @@ p → (p ∨ ￢q ∨ r)
 这里给出一个演示的例子<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">print(TruthTable(<span style="color: #50a14f;">"(p &#8596; q) &#8594; r"</span>, [<span style="color: #4078f2; font-weight: bold;">:p</span>, <span style="color: #4078f2; font-weight: bold;">:q</span>, <span style="color: #4078f2; font-weight: bold;">:r</span>], (p, q, r) -&gt; (p &#8596; q) &#8594; r))
+<pre class="src src-julia">print<span style="color: #4078f2;">(</span>TruthTable<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"(p &#8596; q) &#8594; r"</span>, <span style="color: #50a14f;">[</span><span style="color: #4078f2; font-weight: bold;">:p</span>, <span style="color: #4078f2; font-weight: bold;">:q</span>, <span style="color: #4078f2; font-weight: bold;">:r</span><span style="color: #50a14f;">]</span>, <span style="color: #50a14f;">(</span>p, q, r<span style="color: #50a14f;">)</span> -&gt; <span style="color: #50a14f;">(</span>p &#8596; q<span style="color: #50a14f;">)</span> &#8594; r<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 
@@ -325,14 +325,14 @@ p → (p ∨ ￢q ∨ r)
 <h3 id="orgc79842e">运算符定义</h3>
 <div class="outline-text-3" id="text-orgc79842e">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #a626a4;">&#172;</span>(p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>) = !p <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">negative</span>
-&#8743;(p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>) = p &amp;&amp; q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">conjunction, use \wedge</span>
-&#8744;(p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>) = p || q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">disjunction, use \vee</span>
-&#8594;(p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>) = <span style="color: #e45649;">begin</span> <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">implication, use \rightarrow</span>
-  !(p == <span style="color: #b751b6;">true</span> &amp;&amp; q == <span style="color: #b751b6;">false</span>)
+<pre class="src src-julia"><span style="color: #a626a4;">&#172;</span><span style="color: #4078f2;">(</span>p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span><span style="color: #4078f2;">)</span> = !p <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">negative</span>
+&#8743;<span style="color: #4078f2;">(</span>p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span><span style="color: #4078f2;">)</span> = p &amp;&amp; q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">conjunction, use \wedge</span>
+&#8744;<span style="color: #4078f2;">(</span>p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span><span style="color: #4078f2;">)</span> = p || q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">disjunction, use \vee</span>
+&#8594;<span style="color: #4078f2;">(</span>p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649;">begin</span> <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">implication, use \rightarrow</span>
+  !<span style="color: #4078f2;">(</span>p == <span style="color: #b751b6;">true</span> &amp;&amp; q == <span style="color: #b751b6;">false</span><span style="color: #4078f2;">)</span>
 <span style="color: #e45649;">end</span>
 
-&#8596;(p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>) = p == q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">equivalence, use \leftrightarrow</span>
+&#8596;<span style="color: #4078f2;">(</span>p<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span>, q<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Bool</span><span style="color: #4078f2;">)</span> = p == q <span style="color: #9ca0a4;">#</span><span style="color: #9ca0a4;">equivalence, use \leftrightarrow</span>
 </pre>
 </div>
 <p>
@@ -346,7 +346,7 @@ p → (p ∨ ￢q ∨ r)
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #e45649;">struct</span> <span style="color: #986801;">TruthTable</span>
   caption<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">String</span>
-  params<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Vector</span>{<span style="color: #986801;">Symbol</span>}
+  params<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Vector</span><span style="color: #4078f2;">{</span><span style="color: #986801;">Symbol</span><span style="color: #4078f2;">}</span>
   target<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Function</span>
 <span style="color: #e45649;">end</span>
 </pre>
@@ -373,20 +373,20 @@ p → (p ∨ ￢q ∨ r)
 </p>
 
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">function</span> Base.<span style="color: #a626a4;">print</span>(truthTable<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">TruthTable</span>)
-  table = DataFrames.DataFrame()
-  len = length(truthTable.params)
+<pre class="src src-julia"><span style="color: #e45649;">function</span> Base.<span style="color: #a626a4;">print</span><span style="color: #4078f2;">(</span>truthTable<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">TruthTable</span><span style="color: #4078f2;">)</span>
+  table = DataFrames.DataFrame<span style="color: #4078f2;">()</span>
+  len = length<span style="color: #4078f2;">(</span>truthTable.params<span style="color: #4078f2;">)</span>
   rows = 2 ^ len
-  logicTable = reshape(collect(Iterators.product(repeat([[<span style="color: #b751b6;">true</span>, <span style="color: #b751b6;">false</span>]], len)...)), rows)
+  logicTable = reshape<span style="color: #4078f2;">(</span>collect<span style="color: #a626a4;">(</span>Iterators.product<span style="color: #50a14f;">(</span>repeat<span style="color: #b751b6;">(</span><span style="color: #4db5bd;">[</span><span style="color: #4078f2;">[</span><span style="color: #b751b6;">true</span>, <span style="color: #b751b6;">false</span><span style="color: #4078f2;">]</span><span style="color: #4db5bd;">]</span>, len<span style="color: #b751b6;">)</span>...<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>, rows<span style="color: #4078f2;">)</span>
 
-  <span style="color: #e45649;">for</span> (symbol, index) <span style="color: #e45649;">in</span> Iterators.zip(truthTable.params, Iterators.countfrom(1, 1))
-    table[!, symbol] = map(nums -&gt; nums[index], logicTable)
+  <span style="color: #e45649;">for</span> <span style="color: #4078f2;">(</span>symbol, index<span style="color: #4078f2;">)</span> <span style="color: #e45649;">in</span> Iterators.zip<span style="color: #4078f2;">(</span>truthTable.params, Iterators.countfrom<span style="color: #a626a4;">(</span>1, 1<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+    table<span style="color: #4078f2;">[</span>!, symbol<span style="color: #4078f2;">]</span> = map<span style="color: #4078f2;">(</span>nums -&gt; nums<span style="color: #a626a4;">[</span>index<span style="color: #a626a4;">]</span>, logicTable<span style="color: #4078f2;">)</span>
   <span style="color: #e45649;">end</span>
 
-  results = map(nums -&gt; truthTable.target(nums...), logicTable)
-  table[!, truthTable.caption] = results
+  results = map<span style="color: #4078f2;">(</span>nums -&gt; truthTable.target<span style="color: #a626a4;">(</span>nums...<span style="color: #a626a4;">)</span>, logicTable<span style="color: #4078f2;">)</span>
+  table<span style="color: #4078f2;">[</span>!, truthTable.caption<span style="color: #4078f2;">]</span> = results
 
-  println(table)
+  println<span style="color: #4078f2;">(</span>table<span style="color: #4078f2;">)</span>
 <span style="color: #e45649;">end</span>
 </pre>
 </div>
@@ -398,7 +398,7 @@ p → (p ∨ ￢q ∨ r)
 <h2 id="org8653e1d">效果展示</h2>
 <div class="outline-text-2" id="text-org8653e1d">
 
-<div id="orgac1de0b" class="figure">
+<div id="org1ed80fb" class="figure">
 <p><img src="images/shortcut1.png" alt="shortcut1.png" /><br />
 </p>
 </div>
@@ -407,7 +407,7 @@ p → (p ∨ ￢q ∨ r)
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-06-09 三 00:51</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

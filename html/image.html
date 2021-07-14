@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-09 三 00:51 -->
+<!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>离散数学实践任务2</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -290,7 +290,7 @@
 <p>
 这次用了一张 <b>330 x 300</b> 的图片来做实验，没办法，电脑里都是涩图<br />
 <img src="./images/img_sd002.png" alt="img_sd002.png" /><br />
-顺带说一下，这张是背景透明的 <span class="underline"><span class="underline">png</span></span> 图片，单独用文件浏览器打开时背景是黑色<br />
+顺带说一下，这张是背景透的明 <span class="underline"><span class="underline">png</span></span> 图片，单独用文件浏览器打开时背景是黑色<br />
 </p>
 </div>
 </div>
@@ -300,18 +300,18 @@
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #e45649;">using</span> Images, FileIO, ImageView
 
-fullcolor = RGB(1,1,1)
+fullcolor = RGB<span style="color: #4078f2;">(</span>1,1,1<span style="color: #4078f2;">)</span>
 
-<span style="color: #a626a4;">imageConvert</span>(image<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Matrix</span>{RGB{N0f8}}, r) = <span style="color: #e45649;">begin</span>
-  <span style="color: #a626a4;">f</span>(x) = x ^ r
-  <span style="color: #a626a4;">convertfn</span>(pixel) = typeof(pixel)(f(red(pixel)), f(green(pixel)), f(blue(pixel)))
+<span style="color: #a626a4;">imageConvert</span><span style="color: #4078f2;">(</span>image<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Matrix</span><span style="color: #a626a4;">{</span>RGB<span style="color: #50a14f;">{</span>N0f8<span style="color: #50a14f;">}</span><span style="color: #a626a4;">}</span>, r<span style="color: #4078f2;">)</span> = <span style="color: #e45649;">begin</span>
+  <span style="color: #a626a4;">f</span><span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x ^ r
+  <span style="color: #a626a4;">convertfn</span><span style="color: #4078f2;">(</span>pixel<span style="color: #4078f2;">)</span> = typeof<span style="color: #4078f2;">(</span>pixel<span style="color: #4078f2;">)(</span>f<span style="color: #a626a4;">(</span>red<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>, f<span style="color: #a626a4;">(</span>green<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>, f<span style="color: #a626a4;">(</span>blue<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 
-  map(convertfn, image)
+  map<span style="color: #4078f2;">(</span>convertfn, image<span style="color: #4078f2;">)</span>
 <span style="color: #e45649;">end</span>
 
-image = RGB.(load(<span style="color: #50a14f;">"/home/steiner/&#22270;&#29255;/img_sd002.png"</span>))
-r = [0.1, 0.4, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.5, 5.0, 10.0]
-imshow(mosaicview(map(_r -&gt; imageConvert(image, _r), r), ncol=length(r)))
+image = RGB.<span style="color: #4078f2;">(</span>load<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"/home/steiner/&#22270;&#29255;/img_sd002.png"</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+r = <span style="color: #4078f2;">[</span>0.1, 0.4, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.5, 5.0, 10.0<span style="color: #4078f2;">]</span>
+imshow<span style="color: #4078f2;">(</span>mosaicview<span style="color: #a626a4;">(</span>map<span style="color: #50a14f;">(</span>_r -&gt; imageConvert<span style="color: #b751b6;">(</span>image, _r<span style="color: #b751b6;">)</span>, r<span style="color: #50a14f;">)</span>, ncol=length<span style="color: #50a14f;">(</span>r<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 </div>
@@ -348,7 +348,7 @@ imshow(mosaicview(map(_r -&gt; imageConvert(image, _r), r), ncol=length(r)))
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-06-09 三 00:51</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
