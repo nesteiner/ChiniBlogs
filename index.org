@@ -8,4 +8,17 @@
 - [ ] 剪切板
 - [ ] quote
 - [ ] 元数据，example, quote 等
-- [ ] export this file to index.html
+- [X] export this file to index.html
+
+* Table of Content
+** Compiler
+[[file:./html/compiler/labwork.html][编译原理实践期末作业]]
+** Flutter
+[[file:./html/counter.html][计数器]]
+** misc
+[[file:./html/android-work.html][安卓大作业报告]]
+[[file:./html/database.html][数据库学习笔记]]
+[[file:./html/image.html][离散数学实践1，图像底色]]
+[[file:./html/jsp-bigwork.html][JSP大作业报告]]
+[[file:./html/parse-logic.html][真值表程序]]
+[[file:./html/recycler-view.html][Android Recycler View]]

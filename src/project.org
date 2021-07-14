@@ -1,8 +1,0 @@
-#+title: this project is Table of Content 
-* 数据库原理
-[[file:./database.org][goto the doc]]
-** having :query:database:
-** group by :query:database:
-** join :query:database:
-
-* TODO 整理你的内容，发布一下网页
