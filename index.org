@@ -1,7 +1,7 @@
 #+title: This file is for Table of Content
 #+publishing-directory: .
 #+publishing-function: org-html-export-to-html
-
+#+html_head: <link rel=\"stylesheet\" type=\"text/css\" href=\"http://gongzhitaao.org/orgcss/org.css\"/>
 * Configure first
 - export as markdown
 - sync in gitbook
