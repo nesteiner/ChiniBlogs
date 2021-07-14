@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-09 三 00:51 -->
+<!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>JSP大作业文档</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -224,10 +224,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org506ce91">项目介绍</a>
+<li><a href="#org5a3d768">程序需求分析</a>
 <ul>
-<li><a href="#org05e03a6">程序入口</a></li>
-<li><a href="#org771f151">设计需求</a>
+<li><a href="#orgbac0a9d">用户需求</a></li>
+<li><a href="#org2ca41a4">功能需求设计</a>
 <ul>
 <li><a href="#org07ec379">前端需要:</a></li>
 <li><a href="#org6e61803">后端需要:</a></li>
@@ -235,19 +235,52 @@
 </li>
 </ul>
 </li>
-<li><a href="#org8b4a358">前端设计</a>
+<li><a href="#org3f6564c">程序设计</a>
 <ul>
-<li><a href="#orgf92b681">View 设计</a>
+<li><a href="#org3682f22">工作原理</a>
 <ul>
-<li><a href="#orgc4d5998">Home.vue</a></li>
-<li><a href="#org3690c32">Login.vue</a></li>
-<li><a href="#orgf085b34">User.vue</a></li>
-<li><a href="#orgea373ca">Post.vue</a></li>
-<li><a href="#org73beb6c">Logout.vue</a></li>
-<li><a href="#org817c098">index.ts</a></li>
+<li><a href="#orgb835df6">系统架构</a></li>
+<li><a href="#org6aa5210">系统工作原理</a></li>
 </ul>
 </li>
-<li><a href="#org44f97ed">错误处理</a>
+<li><a href="#orgc417f1d">总体设计</a>
+<ul>
+<li><a href="#org8c1681f">功能模块</a>
+<ul>
+<li><a href="#orgc1dcc03">前端模块</a></li>
+<li><a href="#org70a012a">后端设计</a></li>
+</ul>
+</li>
+<li><a href="#orge882cbb">系统流程</a></li>
+<li><a href="#orgc8a7b27">代码逻辑</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga08f636">数据模型</a>
+<ul>
+<li><a href="#org2c6ca41">概念结构设计 E-R 图</a></li>
+<li><a href="#orge8314bf">逻辑结构设计 关系表</a>
+<ul>
+<li><a href="#org691b6a0">User</a></li>
+<li><a href="#org0131189">Post</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org218d6ef">系统实现</a>
+<ul>
+<li><a href="#orgf9bb283">数据库的连接</a></li>
+<li><a href="#orgce1438a">前后端的交互处理</a>
+<ul>
+<li><a href="#orgebae35e">后端的JSON数据处理</a>
+<ul>
+<li><a href="#org421b475">接收前端 JSON 数据</a></li>
+<li><a href="#orgdd03fdc">发送后端模型的JSON数据格式</a></li>
+</ul>
+</li>
+<li><a href="#org82abd05">后端错误查看</a></li>
+<li><a href="#org3f11e8c">前端错误处理</a>
 <ul>
 <li><a href="#org0f91640">Cookie 设置</a></li>
 <li><a href="#org422f175">跨域问题</a></li>
@@ -255,21 +288,16 @@
 </li>
 </ul>
 </li>
-<li><a href="#org70a012a">后端设计</a>
-<ul>
-<li><a href="#org0d48c65">保持会话状态</a></li>
-<li><a href="#org537ca69">接收 <b>JSON</b> 数据</a></li>
-<li><a href="#org378d84f">用户登录验证</a></li>
-<li><a href="#orgd7de7a9">错误处理</a></li>
 </ul>
 </li>
+<li><a href="#org29d4d4d">总结</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org506ce91" class="outline-2">
-<h2 id="org506ce91">项目介绍</h2>
-<div class="outline-text-2" id="text-org506ce91">
+<div id="outline-container-org5a3d768" class="outline-2">
+<h2 id="org5a3d768">程序需求分析</h2>
+<div class="outline-text-2" id="text-org5a3d768">
 <p>
 这次的选题是第二题，笔记分享系统<br />
 一个用户登录后可以在他的主页查看到他自己的文章 <b>Post</b> ，并且只要用户不登出网站，不论他点击那个子网站，服务器必须保存他的登录信息，免得重新登录一遍<br />
@@ -278,9 +306,9 @@
 </p>
 </div>
 
-<div id="outline-container-org05e03a6" class="outline-3">
-<h3 id="org05e03a6">程序入口</h3>
-<div class="outline-text-3" id="text-org05e03a6">
+<div id="outline-container-orgbac0a9d" class="outline-3">
+<h3 id="orgbac0a9d">用户需求</h3>
+<div class="outline-text-3" id="text-orgbac0a9d">
 <p>
 假设用户首先访问的入口网站是 <b>localhost:8081</b> ， 这个时候，<br />
 </p>
@@ -317,9 +345,9 @@
 
 
 
-<div id="outline-container-org771f151" class="outline-3">
-<h3 id="org771f151">设计需求</h3>
-<div class="outline-text-3" id="text-org771f151">
+<div id="outline-container-org2ca41a4" class="outline-3">
+<h3 id="org2ca41a4">功能需求设计</h3>
+<div class="outline-text-3" id="text-org2ca41a4">
 <p>
 至此，前后端设计的需求已经明确<br />
 </p>
@@ -347,78 +375,59 @@
 </div>
 </div>
 
-<div id="outline-container-org8b4a358" class="outline-2">
-<h2 id="org8b4a358">前端设计</h2>
-<div class="outline-text-2" id="text-org8b4a358">
+<div id="outline-container-org3f6564c" class="outline-2">
+<h2 id="org3f6564c">程序设计</h2>
+<div class="outline-text-2" id="text-org3f6564c">
 </div>
-<div id="outline-container-orgf92b681" class="outline-3">
-<h3 id="orgf92b681">View 设计</h3>
-<div class="outline-text-3" id="text-orgf92b681">
+<div id="outline-container-org3682f22" class="outline-3">
+<h3 id="org3682f22">工作原理</h3>
+<div class="outline-text-3" id="text-org3682f22">
+</div>
+<div id="outline-container-orgb835df6" class="outline-4">
+<h4 id="orgb835df6">系统架构</h4>
+<div class="outline-text-4" id="text-orgb835df6">
+<p>
+这里使用前后端分离的做法，前端使用 Vue 框架，后端使用 Servlet + MySQL<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org6aa5210" class="outline-4">
+<h4 id="org6aa5210">系统工作原理</h4>
+<div class="outline-text-4" id="text-org6aa5210">
+<p>
+其中用户交互的内容，网页页面全部交给前端实现，后端负责会话保存和数据库处理<br />
+另外注意前后端之间的交互需要处理 CORS 跨域请求，数据格式采用 JSON<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc417f1d" class="outline-3">
+<h3 id="orgc417f1d">总体设计</h3>
+<div class="outline-text-3" id="text-orgc417f1d">
+</div>
+<div id="outline-container-org8c1681f" class="outline-4">
+<h4 id="org8c1681f">功能模块</h4>
+<div class="outline-text-4" id="text-org8c1681f">
+</div>
+<div id="outline-container-orgc1dcc03" class="outline-5">
+<h5 id="orgc1dcc03">前端模块</h5>
+<div class="outline-text-5" id="text-orgc1dcc03">
 <p>
 这里为每个不同的路由设置不同的 <b>View</b><br />
 需要注意的是在用户界面 <b>User</b> 中显示的是文章 <b>Post</b> 的入口，他是一个超链接，会跳转到 <b>Post.vue</b> 显示内容<br />
 另外，将路由的根目录绑定到 <span class="underline"><span class="underline">Home.vue</span></span> 组件<br />
 </p>
 </div>
-<div id="outline-container-orgc4d5998" class="outline-4">
-<h4 id="orgc4d5998">Home.vue</h4>
-<div class="outline-text-4" id="text-orgc4d5998">
+<ul class="org-ul">
+<li><a id="orgc4d5998"></a>Home.vue<br />
+<div class="outline-text-6" id="text-orgc4d5998">
 <p>
 <span class="underline"><span class="underline">Home.vue</span></span> 基本不显示什么内容，他就像是一个中转站，会根据后端传递的 <b>curuser</b> 跳转到不同的路由<br />
 </p>
-<div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #e45649;">import</span> { Options, Vue } <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'vue-class-component'</span>;
-<span style="color: #e45649;">import</span> HelloWorld <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'@/components/HelloWorld.vue'</span>; <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">@ is an alias to /src</span>
-<span style="color: #e45649;">import</span> axios <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'axios'</span>
-
-<span style="color: #a626a4;">@Options</span>({
-    components: {
-        HelloWorld,
-    },
-})
-<span style="color: #e45649;">export</span> <span style="color: #e45649;">default</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Home</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">Vue</span> {
-    <span style="color: #a626a4;">mounted</span>(): <span style="color: #e45649;">void</span> {
-        <span style="color: #e45649;">let</span> <span style="color: #6a1868;">url</span> = <span style="color: #50a14f;">'http://localhost:8080/bluelog/session/curuser'</span>
-
-        axios.<span style="color: #e45649;">get</span>(url, {withCredentials: <span style="color: #b751b6;">true</span>})
-            .<span style="color: #a626a4;">then</span>(response <span style="color: #e45649;">=&gt;</span> {
-                <span style="color: #9ca0a4;">// </span><span style="color: #1E90FF;">STUB</span><span style="color: #9ca0a4;"> Problem here data.data</span>
-                <span style="color: #e45649;">let</span> <span style="color: #6a1868;">isadmin</span> = response.data.isadmin
-                <span style="color: #e45649;">let</span> <span style="color: #6a1868;">curuser</span> = response.data.curuser
-
-
-                <span style="color: #e45649;">if</span>(curuser == <span style="color: #b751b6;">null</span>) {
-                    <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                        path: <span style="color: #50a14f;">'/login'</span>
-                    })
-
-                    <span style="color: #e45649;">return</span>;
-                } 
-
-                <span style="color: #e45649;">if</span>(isadmin == <span style="color: #b751b6;">true</span>) {
-                    <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                        <span style="color: #9ca0a4;">// </span><span style="color: #1E90FF;">STUB</span>
-                        name: <span style="color: #50a14f;">'admin'</span>
-                    })
-                } <span style="color: #e45649;">else</span> {
-                    <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                        name: <span style="color: #50a14f;">'user'</span>,
-                    })
-                }
-            })
-            .<span style="color: #e45649;">catch</span>(error <span style="color: #e45649;">=&gt;</span> {
-                <span style="color: #a626a4;">alert</span>(error)
-            })
-    }
-}
-
-</pre>
 </div>
-</div>
-</div>
-<div id="outline-container-org3690c32" class="outline-4">
-<h4 id="org3690c32">Login.vue</h4>
-<div class="outline-text-4" id="text-org3690c32">
+</li>
+<li><a id="org3690c32"></a>Login.vue<br />
+<div class="outline-text-6" id="text-org3690c32">
 <p>
 <span class="underline"><span class="underline">Login.vue</span></span> 提供一个登录界面<br />
 </p>
@@ -426,332 +435,695 @@
 <p>
 <img src="images/前端设计/2021-06-06_22-11-36_screenshot.png" alt="2021-06-06_22-11-36_screenshot.png" /><br />
 不仅要设计表单的结构，还要负责传递登录信息给后端<br />
-</p>
-
-<p>
-<b>结构 &lt;template&gt;</b><br />
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #a626a4;">template</span>&gt;
-  &lt;<span style="color: #a626a4;">div</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"login-view"</span>&gt;
-    &lt;<span style="color: #a626a4;">label</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"username"</span>&gt; username
-      &lt;<span style="color: #a626a4;">input</span> <span style="color: #6a1868;">type</span>=<span style="color: #50a14f;">"text"</span> <span style="color: #6a1868;">placeholder</span>=<span style="color: #50a14f;">"input username"</span> <span style="color: #6a1868;">v-model</span>=<span style="color: #50a14f;">"username"</span>&gt;
-    &lt;/<span style="color: #a626a4;">label</span>&gt;
-
-    &lt;<span style="color: #a626a4;">label</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"password"</span>&gt; password
-      &lt;<span style="color: #a626a4;">input</span> <span style="color: #6a1868;">type</span>=<span style="color: #50a14f;">"password"</span> <span style="color: #6a1868;">v-model</span>=<span style="color: #50a14f;">"password"</span>&gt;
-    &lt;/<span style="color: #a626a4;">label</span>&gt;
-
-    &lt;<span style="color: #a626a4;">div</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"radio-group"</span>&gt;
-      &lt;<span style="color: #a626a4;">label</span>&gt;
-        &lt;<span style="color: #a626a4;">input</span> <span style="color: #6a1868;">type</span>=<span style="color: #50a14f;">"radio"</span> <span style="color: #6a1868;">value</span>=<span style="color: #50a14f;">"user"</span> <span style="color: #6a1868;">v-model</span>=<span style="color: #50a14f;">"usertype"</span>&gt;
-        user
-      &lt;/<span style="color: #a626a4;">label</span>&gt;
-
-      &lt;<span style="color: #a626a4;">label</span>&gt;
-        &lt;<span style="color: #a626a4;">input</span> <span style="color: #6a1868;">type</span>=<span style="color: #50a14f;">"radio"</span> <span style="color: #6a1868;">value</span>=<span style="color: #50a14f;">"admin"</span> <span style="color: #6a1868;">v-model</span>=<span style="color: #50a14f;">"usertype"</span>&gt;
-        admin
-      &lt;/<span style="color: #a626a4;">label</span>&gt;
-    &lt;/<span style="color: #a626a4;">div</span>&gt;
-
-    &lt;<span style="color: #a626a4;">button</span> @click=<span style="color: #50a14f;">"submit"</span>&gt;&#30331;&#24405;&lt;/<span style="color: #a626a4;">button</span>&gt;
-  &lt;/<span style="color: #a626a4;">div</span>&gt;
-&lt;/<span style="color: #a626a4;">template</span>&gt;
-
-</pre>
-</div>
-
-<p>
-<b>行为 &lt;script&gt;</b><br />
 验证登录所需要的数据都在后端，前端只负责将密码加密后，传递到后端<br />
 </p>
-<div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #e45649;">import</span> {Vue} <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'vue-property-decorator'</span>
-<span style="color: #e45649;">import</span> axios <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'axios'</span>
-<span style="color: #e45649;">import</span> {Md5} <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'ts-md5'</span>
-
-<span style="color: #e45649;">export</span> <span style="color: #e45649;">default</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">LoginView</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">Vue</span> {
-    usertype = <span style="color: #50a14f;">'user'</span>
-    username = <span style="color: #50a14f;">''</span>
-    password = <span style="color: #50a14f;">''</span>
-
-    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">submit</span>(): <span style="color: #e45649;">void</span> {
-        <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">let url = 'http://localhost:8080/login'</span>
-        <span style="color: #e45649;">let</span> <span style="color: #6a1868;">url</span> = <span style="color: #50a14f;">'http://localhost:8080/bluelog/login'</span>
-        axios.<span style="color: #a626a4;">post</span>(url, {
-            username: <span style="color: #e45649;">this</span>.username,
-            passhash: <span style="color: #986801;">Md5</span>.<span style="color: #a626a4;">hashStr</span>(<span style="color: #e45649;">this</span>.password),
-            usertype: <span style="color: #e45649;">this</span>.usertype
-        }, {
-            withCredentials: <span style="color: #b751b6;">true</span>
-        }).<span style="color: #a626a4;">then</span>(response <span style="color: #e45649;">=&gt;</span> {
-            <span style="color: #e45649;">this</span>.<span style="color: #a626a4;">$emit</span>(<span style="color: #50a14f;">'login'</span>, <span style="color: #e45649;">this</span>.username)
-            <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">UserView &#37325;&#23450;&#21521; &#19982; AdminView &#37325;&#23450;&#21521;</span>
-            <span style="color: #e45649;">if</span>(<span style="color: #e45649;">this</span>.usertype == <span style="color: #50a14f;">'admin'</span>) {
-                <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                    name: <span style="color: #50a14f;">'admin'</span>
-                })
-            } <span style="color: #e45649;">else</span> {
-                <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                    name: <span style="color: #50a14f;">'user'</span>,
-                    params: {
-                        username: <span style="color: #e45649;">this</span>.username
-                    }
-                })
-            }
-        }).<span style="color: #e45649;">catch</span>(errorResponse <span style="color: #e45649;">=&gt;</span> {
-            <span style="color: #a626a4;">alert</span>(errorResponse.response.data.error)
-            <span style="color: #986801;">console</span>.<span style="color: #a626a4;">log</span>(errorResponse.response.data)
-            <span style="color: #e45649;">this</span>.password = <span style="color: #50a14f;">''</span>
-        })
-    }
-}
-
-</pre>
 </div>
-</div>
-</div>
+</li>
 
-
-<div id="outline-container-orgf085b34" class="outline-4">
-<h4 id="orgf085b34">User.vue</h4>
-<div class="outline-text-4" id="text-orgf085b34">
+<li><a id="orgf085b34"></a>User.vue<br />
+<div class="outline-text-6" id="text-orgf085b34">
 <p>
 <span class="underline"><span class="underline">User.vue</span></span> 代表当前登录用户的主页，显示其所有文章的入口 <b>post-entry</b><br />
 </p>
 
 <p>
-<b>Post</b> 模型的结构为<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #e45649;">interface</span> <span style="color: #986801;">postItem</span> {
-    postid: <span style="color: #e45649;">number</span>,
-    title: <span style="color: #e45649;">string</span>,
-    author: <span style="color: #e45649;">string</span>,
-    content: <span style="color: #e45649;">string</span>,
-}
-
-</pre>
-</div>
-
-<p>
-由此 <span class="underline"><span class="underline">User.vue</span></span> 的骨架为<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #a626a4;">template</span>&gt;
-  &lt;<span style="color: #a626a4;">div</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"user-view"</span>&gt;
-    &lt;<span style="color: #a626a4;">template</span> <span style="color: #6a1868;">v-for</span>=<span style="color: #50a14f;">"post in posts"</span> :key=<span style="color: #50a14f;">"post.postid"</span>&gt;
-      &lt;<span style="color: #a626a4;">post-entry</span>
-        :postid=<span style="color: #50a14f;">"post.postid"</span>
-        :title=<span style="color: #50a14f;">"post.title"</span>
-        :author=<span style="color: #50a14f;">"post.author"</span>
-        :content=<span style="color: #50a14f;">"post.content"</span>/&gt;
-
-    &lt;/<span style="color: #a626a4;">template</span>&gt;
-  &lt;/<span style="color: #a626a4;">div</span>&gt;
-&lt;/<span style="color: #a626a4;">template</span>&gt;
-</pre>
-</div>
-
-<p>
-其中 <span class="underline"><span class="underline">post-entry</span></span> 为一个组件<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-typescript">&lt;template&gt;
-  &lt;div <span style="color: #e45649;">class</span>=<span style="color: #50a14f;">"post-entry"</span> <span style="color: #a626a4;">@click</span>=<span style="color: #50a14f;">"handler"</span>&gt;
-    {{ title }}
-    {{ content }}
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script lang=<span style="color: #50a14f;">"ts"</span>&gt;
- <span style="color: #e45649;">import</span> {Vue, Prop} <span style="color: #e45649;">from</span> <span style="color: #50a14f;">'vue-property-decorator'</span>
-
- <span style="color: #e45649;">export</span> <span style="color: #e45649;">default</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">PostEntry</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">Vue</span> {
-   <span style="color: #a626a4;">@Prop</span>()
-   postid !: <span style="color: #e45649;">number</span>
-
-   <span style="color: #a626a4;">@Prop</span>()
-   title !: <span style="color: #e45649;">string</span>
-
-   <span style="color: #a626a4;">@Prop</span>()
-   author !: <span style="color: #e45649;">string</span>
-
-   <span style="color: #a626a4;">@Prop</span>()
-   content !: <span style="color: #e45649;">string</span>
-
-   <span style="color: #e45649;">public</span> <span style="color: #a626a4;">handler</span>(): <span style="color: #e45649;">void</span> {
-     <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-       name: <span style="color: #50a14f;">'post'</span>,
-       params: {
-         postid: <span style="color: #e45649;">this</span>.postid,
-         title: <span style="color: #e45649;">this</span>.title,
-         author: <span style="color: #e45649;">this</span>.author,
-         content: <span style="color: #e45649;">this</span>.content,
-       }
-     })
-   }
- }
-&lt;/script&gt;
-
-&lt;style scoped&gt;
- div.post-entry {
-   border: 1px solid black;
-   cursor: pointer;
- }
-&lt;/style&gt;
-</pre>
-</div>
-<p>
 点击跳转时会将自身的参数作为路由参数传递至 <span class="underline"><span class="underline">Post.vue</span></span><br />
 </p>
 </div>
-</div>
-<div id="outline-container-orgea373ca" class="outline-4">
-<h4 id="orgea373ca">Post.vue</h4>
-<div class="outline-text-4" id="text-orgea373ca">
+</li>
+<li><a id="orgea373ca"></a>Post.vue<br />
+<div class="outline-text-6" id="text-orgea373ca">
 <p>
 <span class="underline"><span class="underline">Post.vue</span></span> 接收 <span class="underline"><span class="underline">post-entry</span></span> 提供的路由参数，并将其渲染<br />
 </p>
-<div class="org-src-container">
-<pre class="src src-html">&lt;<span style="color: #a626a4;">template</span>&gt;
-  &lt;<span style="color: #a626a4;">div</span> <span style="color: #6a1868;">class</span>=<span style="color: #50a14f;">"post-view"</span>&gt;
-    {{ postid }} &lt;<span style="color: #a626a4;">br</span>&gt;
-    {{ title }} &lt;<span style="color: #a626a4;">br</span>&gt;
-    {{ author }} &lt;<span style="color: #a626a4;">br</span>&gt;
-    {{ content }} &lt;<span style="color: #a626a4;">br</span>&gt;
-  &lt;/<span style="color: #a626a4;">div</span>&gt;
-&lt;/<span style="color: #a626a4;">template</span>&gt;
-</pre>
 </div>
+</li>
 
-<p>
-<span class="underline"><span class="underline">post-entry</span></span> 传递的参数在挂载时被载入<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #a626a4;">mounted</span>(): <span style="color: #e45649;">void</span> {
-    <span style="color: #e45649;">let</span> <span style="color: #6a1868;">params</span> = <span style="color: #e45649;">this</span>.$route.params
-    <span style="color: #e45649;">this</span>.postid = <span style="color: #a626a4;">parseInt</span>(params.postid <span style="color: #e45649;">as</span> <span style="color: #e45649;">string</span>)
-    <span style="color: #e45649;">this</span>.title = params.title <span style="color: #e45649;">as</span> <span style="color: #e45649;">string</span>
-    <span style="color: #e45649;">this</span>.author = params.author <span style="color: #e45649;">as</span> <span style="color: #e45649;">string</span>
-    <span style="color: #e45649;">this</span>.content = params.content <span style="color: #e45649;">as</span> <span style="color: #e45649;">string</span>
-}
-
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org73beb6c" class="outline-4">
-<h4 id="org73beb6c">Logout.vue</h4>
-<div class="outline-text-4" id="text-org73beb6c">
+<li><a id="org73beb6c"></a>Logout.vue<br />
+<div class="outline-text-6" id="text-org73beb6c">
 <p>
 <span class="underline"><span class="underline">Logout.vue</span></span> 内容为空，负责向服务端请求登出操作，然后会重定向到 <span class="underline"><span class="underline">Home.vue</span></span><br />
 </p>
-<div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #e45649;">export</span> <span style="color: #e45649;">default</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">LogoutView</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">Vue</span> {
-    <span style="color: #a626a4;">mounted</span>(): <span style="color: #e45649;">void</span> {
-        <span style="color: #e45649;">this</span>.<span style="color: #a626a4;">$emit</span>(<span style="color: #50a14f;">'logout'</span>) <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#36825;&#20010;&#21487;&#20197;&#20808;&#19981;&#31649;</span>
-        <span style="color: #e45649;">let</span> <span style="color: #6a1868;">url</span> = <span style="color: #50a14f;">'http://localhost:8080/bluelog/logout'</span>
-
-        axios.<span style="color: #e45649;">get</span>(url, {
-            withCredentials: <span style="color: #b751b6;">true</span>
-        }).<span style="color: #a626a4;">then</span>(response <span style="color: #e45649;">=&gt;</span> {
-            <span style="color: #e45649;">this</span>.$router.<span style="color: #a626a4;">push</span>({
-                path: <span style="color: #50a14f;">'/'</span>,
-            })
-
-        }).<span style="color: #e45649;">catch</span>(error <span style="color: #e45649;">=&gt;</span> {
-            <span style="color: #a626a4;">alert</span>(error)
-        })
-    }
-}
-
-</pre>
 </div>
-</div>
-</div>
-<div id="outline-container-org817c098" class="outline-4">
-<h4 id="org817c098">index.ts</h4>
-<div class="outline-text-4" id="text-org817c098">
+</li>
+
+<li><a id="org817c098"></a>index.ts<br />
+<div class="outline-text-6" id="text-org817c098">
 <p>
 这是路由表的定义，在 <b>src/router/index.ts</b> 内，这里只给出路径与组件的映射<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-typescript"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">routes</span>: <span style="color: #986801;">Array</span>&lt;<span style="color: #986801;">RouteRecordRaw</span>&gt; = [
-    {
+<pre class="src src-typescript"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">routes</span>: <span style="color: #986801;">Array</span>&lt;<span style="color: #986801;">RouteRecordRaw</span>&gt; = <span style="color: #4078f2;">[</span>
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/'</span>,
         name: <span style="color: #50a14f;">'Home'</span>,
         component: <span style="color: #986801;">Home</span>
-    },
+    <span style="color: #a626a4;">}</span>,
 
-    {
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/post'</span>,
         name: <span style="color: #50a14f;">'post'</span>,
         component: <span style="color: #986801;">Post</span>
-    },
+    <span style="color: #a626a4;">}</span>,
 
-    {
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/user'</span>,
         name: <span style="color: #50a14f;">'user'</span>,
         component: <span style="color: #986801;">User</span>,
-    },
+    <span style="color: #a626a4;">}</span>,
 
-    {
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/admin'</span>,
         name: <span style="color: #50a14f;">'admin'</span>,
         component: <span style="color: #986801;">Admin</span>,
-    },
+    <span style="color: #a626a4;">}</span>,
 
-    {
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/login'</span>,
         name: <span style="color: #50a14f;">'login'</span>,
         component: <span style="color: #986801;">Login</span>,
-    },
-    {
+    <span style="color: #a626a4;">}</span>,
+    <span style="color: #a626a4;">{</span>
         path: <span style="color: #50a14f;">'/logout'</span>,
         name: <span style="color: #50a14f;">'Logout'</span>,
         component: <span style="color: #986801;">Logout</span>
-    },
-]
+    <span style="color: #a626a4;">}</span>,
+<span style="color: #4078f2;">]</span>
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+
+<div id="outline-container-org70a012a" class="outline-5">
+<h5 id="org70a012a">后端设计</h5>
+<div class="outline-text-5" id="text-org70a012a">
+<p>
+后端的重点是如何保持会话状态，如何处理前端传递的 <b>JSON</b> 数据传递，以及如何处理用户登录验证<br />
+另外，我的程序不是通过打包运行的，我无法在控制台看到错误，调试很麻烦，错误处理也应该算一个<br />
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="org0d48c65"></a>保持会话状态<br />
+<div class="outline-text-6" id="text-org0d48c65">
+<p>
+<b>Session</b> 可以看作存储在服务器上的 <b>Cookie</b> ，也就是说，服务器上所有运行的 <span class="underline"><span class="underline">Servlet</span></span> 类都能看见他，调用他<br />
+前端访问同一源的网站， <b>Session</b> 都是一样的<br />
+那么，我们在 <b>Session</b> 中设置 <b>当前用户</b> 为 <span class="underline"><span class="underline">curuser</span></span> ，设置 <b>当前用户类型</b> 为 <span class="underline"><span class="underline">usertype</span></span> ，<br />
+后端验证登录后，将 <b>Session</b> 的上述属性设置，那么其他 <span class="underline"><span class="underline">Servlet</span></span> 可以读取 <b>Session</b> 来获取当前用户信息， <span class="underline"><span class="underline">Logout</span></span> 可以请求删除 <span class="underline"><span class="underline">curuser</span></span> 属性来实现登出效果<br />
+那么保持会话状态的原理就已经确定了<br />
+</p>
+</div>
+</li>
+
+<li><a id="org537ca69"></a>接收 <b>JSON</b> 数据<br />
+<div class="outline-text-6" id="text-org537ca69">
+<p>
+<b>JSON</b> 数据无法从 <b>request.getParamaters</b> 得到，因为他不是用过表单发送的。<br />
+在 <span class="underline"><span class="underline">utils</span></span> 目录下，我定义了一个 <b>InputStream2String</b> 包，内有 <b>transform</b> 方法负责获取 <b>String</b> ，接着通过这个 <b>String</b> 构造 <b>JSONObject</b> 即可<br />
+在 <span class="underline"><span class="underline">Login.java</span></span> 下看看这是如何使用的<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">String</span> <span style="color: #6a1868;">jsonData</span> = transform<span style="color: #4078f2;">(</span>request.getInputStream<span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">JSONObject</span> <span style="color: #6a1868;">jsonObject</span> = JSONObject.parseObject<span style="color: #4078f2;">(</span>jsonData<span style="color: #4078f2;">)</span>;
+
+<span style="color: #986801;">String</span> <span style="color: #6a1868;">username</span> = jsonObject.getString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"username"</span><span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">String</span> <span style="color: #6a1868;">usertype</span> = jsonObject.getString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"usertype"</span><span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span> = jsonObject.getString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"passhash"</span><span style="color: #4078f2;">)</span>;
+
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org378d84f"></a>用户登录验证<br />
+<div class="outline-text-6" id="text-org378d84f">
+<p>
+还是在 <span class="underline"><span class="underline">Login</span></span> 中，查询数据表 <b>User</b> ，查看是否有符合以下条件的用户<br />
+</p>
+<ol class="org-ol">
+<li>_<sub>name</sub>__ 为 <span class="underline"><span class="underline">username</span></span><br /></li>
+<li>_<sub>isadmin</sub>__ 为 <span class="underline"><span class="underline">usertype.equals("admin")</span></span><br /></li>
+<li>_<sub>passhash</sub>__ 为 <span class="underline"><span class="underline">passhash</span></span><br /></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-java">User.queryWithPasshash<span style="color: #4078f2;">(</span><span style="color: #986801;">username</span>, usertype.equals<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"admin"</span><span style="color: #a626a4;">)</span>, <span style="color: #986801;">passhash</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+
+<p>
+如果有，那就是验证成功了，否则就是失败，没有这个用户或者登录密码错误<br />
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orge882cbb" class="outline-4">
+<h4 id="orge882cbb">系统流程</h4>
+<div class="outline-text-4" id="text-orge882cbb">
+<p>
+流程在用户需求那里已经给过，这里不再赘述<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgc8a7b27" class="outline-4">
+<h4 id="orgc8a7b27">代码逻辑</h4>
+<div class="outline-text-4" id="text-orgc8a7b27">
+<p>
+同上<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga08f636" class="outline-2">
+<h2 id="orga08f636">数据模型</h2>
+<div class="outline-text-2" id="text-orga08f636">
+<p>
+使用数据表 <b>User</b> 与 <b>Post</b> 存储用户信息和用户的文章信息<br />
+</p>
+</div>
+<div id="outline-container-org2c6ca41" class="outline-3">
+<h3 id="org2c6ca41">概念结构设计 E-R 图</h3>
+<div class="outline-text-3" id="text-org2c6ca41">
+<p>
+也就两张表的事，直接看关系表就行了<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orge8314bf" class="outline-3">
+<h3 id="orge8314bf">逻辑结构设计 关系表</h3>
+<div class="outline-text-3" id="text-orge8314bf">
+</div>
+<div id="outline-container-org691b6a0" class="outline-4">
+<h4 id="org691b6a0">User</h4>
+<div class="outline-text-4" id="text-org691b6a0">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">名称</th>
+<th scope="col" class="org-left">类型</th>
+<th scope="col" class="org-left">可否为空</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">postid</td>
+<td class="org-left">int(11)</td>
+<td class="org-left">No</td>
+<td class="org-left">主键</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">title</td>
+<td class="org-left">varchar(20)</td>
+<td class="org-left">YES</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">author</td>
+<td class="org-left">varchar(20)</td>
+<td class="org-left">YES</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">content</td>
+<td class="org-left">varchar(100)</td>
+<td class="org-left">YES</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0131189" class="outline-4">
+<h4 id="org0131189">Post</h4>
+<div class="outline-text-4" id="text-org0131189">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">名称</th>
+<th scope="col" class="org-left">类型</th>
+<th scope="col" class="org-left">可否为空</th>
+<th scope="col" class="org-left">说明</th>
+<th scope="col" class="org-left">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">userid</td>
+<td class="org-left">int(11)</td>
+<td class="org-left">NO</td>
+<td class="org-left">主键</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">name</td>
+<td class="org-left">varchar(20)</td>
+<td class="org-left">YES</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">passhash</td>
+<td class="org-left">varchar(128)</td>
+<td class="org-left">YES</td>
+<td class="org-left">密码的MD5哈希值</td>
+<td class="org-left">NULL</td>
+</tr>
+
+<tr>
+<td class="org-left">isadmin</td>
+<td class="org-left">tinyint(1)</td>
+<td class="org-left">YES</td>
+<td class="org-left">是否为管理员</td>
+<td class="org-left">NULL</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org218d6ef" class="outline-2">
+<h2 id="org218d6ef">系统实现</h2>
+<div class="outline-text-2" id="text-org218d6ef">
+</div>
+<div id="outline-container-orgf9bb283" class="outline-3">
+<h3 id="orgf9bb283">数据库的连接</h3>
+<div class="outline-text-3" id="text-orgf9bb283">
+<p>
+这里没有直接调用任何数据库代码，而是将其封装在类的静态方法中<br />
+首先是 User 模型类有两个静态方法， queryWithPasshash 和 queryIfNotAdmin<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">Result</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">queryWithPasshash</span><span style="color: #4078f2;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">name</span>, <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">isadmin</span>, <span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span><span style="color: #4078f2;">){</span>
+    <span style="color: #986801;">Connection</span> <span style="color: #6a1868;">conn</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">Statement</span> <span style="color: #6a1868;">stmt</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">users</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinkedList</span><span style="color: #a626a4;">&lt;&gt;()</span>;
+    <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">User</span><span style="color: #50a14f;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;&gt;(</span><span style="color: #b751b6;">null</span>, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
+
+    <span style="color: #e45649;">try</span> <span style="color: #a626a4;">{</span>
+        Class.forName<span style="color: #50a14f;">(</span>JDBC_DRIVER<span style="color: #50a14f;">)</span>;
+        conn = DriverManager.getConnection<span style="color: #50a14f;">(</span>DB_URL, connInfo<span style="color: #50a14f;">)</span>;
+        <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> &#25191;&#34892;&#26597;&#35810;</span>
+        stmt = conn.createStatement<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">String</span> <span style="color: #6a1868;">querySQL</span> = String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"select * from %s where name = '%s' and passhash = '%s' and isadmin = %s"</span>, USER_TABLE, name, passhash, isadmin<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ResultSet</span> <span style="color: #6a1868;">resultSet</span> = stmt.executeQuery<span style="color: #50a14f;">(</span>querySQL<span style="color: #50a14f;">)</span>;
+
+        <span style="color: #e45649;">while</span> <span style="color: #50a14f;">(</span>resultSet.next<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            <span style="color: #986801;">int</span> <span style="color: #6a1868;">userid</span> = resultSet.getInt<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"userid"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_name</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"name"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_passhash</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"passhash"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">_isadmin</span>  = resultSet.getBoolean<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"isadmin"</span><span style="color: #b751b6;">)</span>;
+            users.add<span style="color: #b751b6;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">User</span><span style="color: #4db5bd;">(</span>userid, _name, _isadmin, _passhash<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+
+        resultSet.close<span style="color: #50a14f;">()</span>;
+        stmt.close<span style="color: #50a14f;">()</span>;
+        conn.close<span style="color: #50a14f;">()</span>;
+
+        result.left = users;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">SQLException</span> <span style="color: #6a1868;">sqlException</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = sqlException;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">Exception</span> <span style="color: #6a1868;">exception</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = exception;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">finally</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> result;
+    <span style="color: #a626a4;">}</span>
+
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">Result</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">queryIfNotAdmin</span><span style="color: #4078f2;">()</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">Connection</span> <span style="color: #6a1868;">conn</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">Statement</span> <span style="color: #6a1868;">stmt</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">users</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinkedList</span><span style="color: #a626a4;">&lt;&gt;()</span>;
+    <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">User</span><span style="color: #50a14f;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;&gt;(</span><span style="color: #b751b6;">null</span>, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
+
+    <span style="color: #e45649;">try</span> <span style="color: #a626a4;">{</span>
+        Class.forName<span style="color: #50a14f;">(</span>JDBC_DRIVER<span style="color: #50a14f;">)</span>;
+        conn = DriverManager.getConnection<span style="color: #50a14f;">(</span>DB_URL, connInfo<span style="color: #50a14f;">)</span>;
+        <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> &#25191;&#34892;&#26597;&#35810;</span>
+        stmt = conn.createStatement<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">String</span> <span style="color: #6a1868;">querySQL</span> = String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"select * from %s where isadmin = %s"</span>, USER_TABLE, <span style="color: #b751b6;">false</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ResultSet</span> <span style="color: #6a1868;">resultSet</span> = stmt.executeQuery<span style="color: #50a14f;">(</span>querySQL<span style="color: #50a14f;">)</span>;
+
+        <span style="color: #e45649;">while</span> <span style="color: #50a14f;">(</span>resultSet.next<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            <span style="color: #986801;">int</span> <span style="color: #6a1868;">userid</span> = resultSet.getInt<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"userid"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_name</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"name"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">_isadmin</span>  = resultSet.getBoolean<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"isadmin"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_passhash</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"passhash"</span><span style="color: #b751b6;">)</span>;
+            users.add<span style="color: #b751b6;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">User</span><span style="color: #4db5bd;">(</span>userid, _name, _isadmin, _passhash<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+
+        resultSet.close<span style="color: #50a14f;">()</span>;
+        stmt.close<span style="color: #50a14f;">()</span>;
+        conn.close<span style="color: #50a14f;">()</span>;
+
+        result.left = users;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">SQLException</span> <span style="color: #6a1868;">sqlException</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = sqlException;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">Exception</span> <span style="color: #6a1868;">exception</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = exception;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">finally</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> result;
+    <span style="color: #a626a4;">}</span>
+
+<span style="color: #4078f2;">}</span>
+
+
+
+</pre>
+</div>
+
+<p>
+类似的，在 Post 模型类中， 有 queryWithAuthor 静态方法<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">Result</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">Post</span><span style="color: #a626a4;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">queryWithAuthor</span><span style="color: #4078f2;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">author</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">Connection</span> <span style="color: #6a1868;">conn</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">Statement</span> <span style="color: #6a1868;">stmt</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">Post</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">posts</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinkedList</span><span style="color: #a626a4;">&lt;&gt;()</span>;
+    <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">Post</span><span style="color: #50a14f;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;&gt;(</span><span style="color: #b751b6;">null</span>, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
+
+    <span style="color: #e45649;">try</span> <span style="color: #a626a4;">{</span>
+        Class.forName<span style="color: #50a14f;">(</span>JDBC_DRIVER<span style="color: #50a14f;">)</span>;
+        conn = DriverManager.getConnection<span style="color: #50a14f;">(</span>DB_URL, connInfo<span style="color: #50a14f;">)</span>;
+        <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> &#25191;&#34892;&#26597;&#35810;</span>
+        stmt = conn.createStatement<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">String</span> <span style="color: #6a1868;">querySQL</span> = String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"select * from %s where author = \'%s\'"</span>, POST_TABLE, author<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ResultSet</span> <span style="color: #6a1868;">resultSet</span> = stmt.executeQuery<span style="color: #50a14f;">(</span>querySQL<span style="color: #50a14f;">)</span>;
+
+        <span style="color: #e45649;">while</span> <span style="color: #50a14f;">(</span>resultSet.next<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            <span style="color: #986801;">int</span> <span style="color: #6a1868;">postid</span> = resultSet.getInt<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"postid"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_title</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"title"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_author</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"author"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_content</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"content"</span><span style="color: #b751b6;">)</span>;
+            posts.add<span style="color: #b751b6;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">Post</span><span style="color: #4db5bd;">(</span>postid, _title, _author, _content<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+
+        resultSet.close<span style="color: #50a14f;">()</span>;
+        stmt.close<span style="color: #50a14f;">()</span>;
+        conn.close<span style="color: #50a14f;">()</span>;
+
+        result.left = posts;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">SQLException</span> <span style="color: #6a1868;">sqlException</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        sqlException.printStackTrace<span style="color: #50a14f;">()</span>;
+        result.right = sqlException;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">Exception</span> <span style="color: #6a1868;">exception</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        exception.printStackTrace<span style="color: #50a14f;">()</span>;
+        result.right = exception;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">finally</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> result;
+    <span style="color: #a626a4;">}</span>
+
+
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce1438a" class="outline-3">
+<h3 id="orgce1438a">前后端的交互处理</h3>
+<div class="outline-text-3" id="text-orgce1438a">
+</div>
+<div id="outline-container-orgebae35e" class="outline-4">
+<h4 id="orgebae35e">后端的JSON数据处理</h4>
+<div class="outline-text-4" id="text-orgebae35e">
+<p>
+这里使用了 fastjson 这个库，详细内容去看菜鸟教程<br />
+</p>
+</div>
+<div id="outline-container-org421b475" class="outline-5">
+<h5 id="org421b475">接收前端 JSON 数据</h5>
+<div class="outline-text-5" id="text-org421b475">
+<p>
+在 request 对象的方法中， getParamaters 函数只是用来获取表单数据的，对 JSON 数据格式不使用，这个时候需要读取其输入流对象<br />
+在 utils 包中，定义转换方法<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">package</span> com.backend.<span style="color: #b751b6;">utils</span>;
+
+<span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">io</span>.<span style="color: #986801;">IOException</span>;
+<span style="color: #e45649;">import</span> <span style="color: #b751b6;">java</span>.<span style="color: #b751b6;">io</span>.<span style="color: #986801;">InputStream</span>;
+
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">inputStream2String</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">transform</span><span style="color: #a626a4;">(</span><span style="color: #986801;">InputStream</span> <span style="color: #6a1868;">inputStream</span><span style="color: #a626a4;">)</span> <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">StringBuffer</span> <span style="color: #6a1868;">buffer</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">StringBuffer</span><span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">byte</span> <span style="color: #50a14f;">[]</span> <span style="color: #6a1868;">bytes</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">byte</span><span style="color: #50a14f;">[</span>4096<span style="color: #50a14f;">]</span>;
+        <span style="color: #986801;">int</span> <span style="color: #6a1868;">result</span> = inputStream.read<span style="color: #50a14f;">(</span>bytes<span style="color: #50a14f;">)</span>;
+        <span style="color: #e45649;">while</span><span style="color: #50a14f;">(</span>result != -1<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            buffer.append<span style="color: #b751b6;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">String</span><span style="color: #4db5bd;">(</span>bytes, 0, result<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
+            result = inputStream.read<span style="color: #b751b6;">(</span>bytes<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+
+        <span style="color: #e45649;">return</span> buffer.toString<span style="color: #50a14f;">()</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<p>
+想要获取 JSON 对应的键值对，需要先将输入流中的数据转化为 JSONObject 对象，再从中读取数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">String</span> <span style="color: #6a1868;">jsonData</span> = transform<span style="color: #4078f2;">(</span>request.getInputStream<span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">JSONObject</span> <span style="color: #6a1868;">jsonObject</span> = JSONObject.parseObject<span style="color: #4078f2;">(</span>jsonData<span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">String</span> <span style="color: #6a1868;">username</span> = jsonObject.getString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"username"</span><span style="color: #4078f2;">)</span>;
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd03fdc" class="outline-5">
+<h5 id="orgdd03fdc">发送后端模型的JSON数据格式</h5>
+<div class="outline-text-5" id="text-orgdd03fdc">
+<p>
+想要将一个类转化为 JSON 数据，fastjson 为我们提供了一种方法，首先在类的定义中，把类定义为 JavaBean 对象，再将需要 JSON 化的成员变量加上标注<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">User</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #b751b6;">@JSONField</span><span style="color: #a626a4;">(</span>name = <span style="color: #50a14f;">"userid"</span><span style="color: #a626a4;">)</span>
+    <span style="color: #986801;">int</span> <span style="color: #6a1868;">userid</span>;
+    <span style="color: #b751b6;">@JSONField</span><span style="color: #a626a4;">(</span>name = <span style="color: #50a14f;">"name"</span><span style="color: #a626a4;">)</span>
+    <span style="color: #986801;">String</span> <span style="color: #6a1868;">name</span>;
+    <span style="color: #b751b6;">@JSONField</span><span style="color: #a626a4;">(</span>name = <span style="color: #50a14f;">"isadmin"</span><span style="color: #a626a4;">)</span>
+    <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">isadmin</span>;
+    <span style="color: #b751b6;">@JSONField</span><span style="color: #a626a4;">(</span>name = <span style="color: #50a14f;">"passhash"</span><span style="color: #a626a4;">)</span>
+    <span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span>;
+
+    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">ignore setter and getter</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+
+<p>
+可以通过调用<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java">JSONObject.toString<span style="color: #4078f2;">(</span><span style="color: #986801;">object</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+<p>
+获取其JSON格式化的数据，在对应的视图层中，我们对这个对象列表进行转换，并发送<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">protected</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">doPost</span><span style="color: #4078f2;">(</span><span style="color: #986801;">HttpServletRequest</span> <span style="color: #6a1868;">request</span>, <span style="color: #986801;">HttpServletResponse</span> <span style="color: #6a1868;">response</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span>, <span style="color: #986801;">ServletException</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">PrintWriter</span> <span style="color: #6a1868;">writer</span> = response.getWriter<span style="color: #a626a4;">()</span>;
+
+    <span style="color: #986801;">String</span> <span style="color: #6a1868;">jsonData</span> = transform<span style="color: #a626a4;">(</span>request.getInputStream<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">JSONObject</span> <span style="color: #6a1868;">jsonObject</span> = JSONObject.parseObject<span style="color: #a626a4;">(</span>jsonData<span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">String</span> <span style="color: #6a1868;">username</span> = jsonObject.getString<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"username"</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> query from table `Post`, which author == username, return it as posts: List&lt;Post&gt;</span>
+    <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">Post</span><span style="color: #50a14f;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">queryResult</span> = Post.queryWithAuthor<span style="color: #a626a4;">(</span>username<span style="color: #a626a4;">)</span>;
+
+    <span style="color: #986801;">JSONObject</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">JSONObject</span><span style="color: #a626a4;">()</span>;
+    <span style="color: #e45649;">if</span><span style="color: #a626a4;">(</span>queryResult.isOk<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.put<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"status"</span>, <span style="color: #50a14f;">"get post success"</span><span style="color: #50a14f;">)</span>;
+        result.put<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"posts"</span>, queryResult.left<span style="color: #50a14f;">)</span>;
+        result.put<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"username"</span>, username == <span style="color: #b751b6;">null</span> ? <span style="color: #50a14f;">"null"</span> : username<span style="color: #50a14f;">)</span>;
+
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">else</span> <span style="color: #e45649;">if</span><span style="color: #a626a4;">(</span>queryResult.isErr<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        response.setStatus<span style="color: #50a14f;">(</span>400<span style="color: #50a14f;">)</span>;
+        result.put<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"status"</span>, <span style="color: #50a14f;">"error occusin"</span><span style="color: #50a14f;">)</span>;
+        result.put<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"error"</span>, queryResult.right.getMessage<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+
+    writer.write<span style="color: #a626a4;">(</span>result.toString<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org44f97ed" class="outline-3">
-<h3 id="org44f97ed">错误处理</h3>
-<div class="outline-text-3" id="text-org44f97ed">
+<div id="outline-container-org82abd05" class="outline-4">
+<h4 id="org82abd05">后端错误查看</h4>
+<div class="outline-text-4" id="text-org82abd05">
+<p>
+参考 <b>Rust</b> 的 <b>Result</b> 错误类型设计，自己搞了一个简易的 <b>Result</b> 类<br />
+该类有两个属性， <span class="underline"><span class="underline">left</span></span> 与 <span class="underline"><span class="underline">right</span></span> ，两个属性不能同时为空，也不能同时都有值<br />
+ <span class="underline"><span class="underline">left</span></span> 表示正确结果， <span class="underline"><span class="underline">right</span></span> 表示错误结果<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Result</span> <span style="color: #4078f2;">&lt;</span><span style="color: #986801;">Ok</span>, <span style="color: #986801;">Err</span><span style="color: #4078f2;">&gt;</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">Ok</span> <span style="color: #6a1868;">left</span>;
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">Err</span> <span style="color: #6a1868;">right</span>;
+
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">Result</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Ok</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Err</span> <span style="color: #6a1868;">right</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">this</span>.left = left;
+        <span style="color: #e45649;">this</span>.right = right;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">boolean</span> <span style="color: #a626a4;">isOk</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> left != <span style="color: #b751b6;">null</span> &amp;&amp; right == <span style="color: #b751b6;">null</span>;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">boolean</span> <span style="color: #a626a4;">isErr</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> left == <span style="color: #b751b6;">null</span> &amp;&amp; right != <span style="color: #b751b6;">null</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
 </div>
-<div id="outline-container-org0f91640" class="outline-4">
-<h4 id="org0f91640">Cookie 设置</h4>
-<div class="outline-text-4" id="text-org0f91640">
+
+<p>
+这样以后就可以通过 <b>isOk</b> 和 <b>isErr</b> 来判断是否发生错误，来看看具体使用，在 <b>User</b> 的静态查询方法中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">Result</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">queryWithPasshash</span><span style="color: #4078f2;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">name</span>, <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">isadmin</span>, <span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span><span style="color: #4078f2;">){</span>
+    <span style="color: #986801;">Connection</span> <span style="color: #6a1868;">conn</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">Statement</span> <span style="color: #6a1868;">stmt</span> = <span style="color: #b751b6;">null</span>;
+    <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">User</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">users</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinkedList</span><span style="color: #a626a4;">&lt;&gt;()</span>;
+    <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">User</span><span style="color: #50a14f;">&gt;</span>, <span style="color: #986801;">Exception</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Result</span><span style="color: #a626a4;">&lt;&gt;(</span><span style="color: #b751b6;">null</span>, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
+
+    <span style="color: #e45649;">try</span> <span style="color: #a626a4;">{</span>
+        Class.forName<span style="color: #50a14f;">(</span>JDBC_DRIVER<span style="color: #50a14f;">)</span>;
+        conn = DriverManager.getConnection<span style="color: #50a14f;">(</span>DB_URL, connInfo<span style="color: #50a14f;">)</span>;
+        <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> &#25191;&#34892;&#26597;&#35810;</span>
+        stmt = conn.createStatement<span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">String</span> <span style="color: #6a1868;">querySQL</span> = String.format<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"select * from %s where name = '%s' and passhash = '%s' and isadmin = %s"</span>, USER_TABLE, name, passhash, isadmin<span style="color: #50a14f;">)</span>;
+        <span style="color: #986801;">ResultSet</span> <span style="color: #6a1868;">resultSet</span> = stmt.executeQuery<span style="color: #50a14f;">(</span>querySQL<span style="color: #50a14f;">)</span>;
+
+        <span style="color: #e45649;">while</span> <span style="color: #50a14f;">(</span>resultSet.next<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+            <span style="color: #986801;">int</span> <span style="color: #6a1868;">userid</span> = resultSet.getInt<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"userid"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_name</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"name"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_passhash</span> = resultSet.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"passhash"</span><span style="color: #b751b6;">)</span>;
+            <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">_isadmin</span>  = resultSet.getBoolean<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"isadmin"</span><span style="color: #b751b6;">)</span>;
+            users.add<span style="color: #b751b6;">(</span><span style="color: #e45649;">new</span> <span style="color: #986801;">User</span><span style="color: #4db5bd;">(</span>userid, _name, _isadmin, _passhash<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span>
+
+        resultSet.close<span style="color: #50a14f;">()</span>;
+        stmt.close<span style="color: #50a14f;">()</span>;
+        conn.close<span style="color: #50a14f;">()</span>;
+
+        result.left = users;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">SQLException</span> <span style="color: #6a1868;">sqlException</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = sqlException;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">catch</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">Exception</span> <span style="color: #6a1868;">exception</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        result.right = exception;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">finally</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> result;
+    <span style="color: #a626a4;">}</span>
+
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<p>
+虽然有 <b>try-catch</b> 代码处理错误，但是错误信息打印不出来，只好通过 <b>Result</b> 类型来传递，上面的调用程序调用的时候就可以通过 <b>Result</b> 来查看运行情况<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3f11e8c" class="outline-4">
+<h4 id="org3f11e8c">前端错误处理</h4>
+<div class="outline-text-4" id="text-org3f11e8c">
+<p>
+前后端交互必然要解决 CORS 跨域问题， Cookie 传递的问题<br />
+</p>
+</div>
+<div id="outline-container-org0f91640" class="outline-5">
+<h5 id="org0f91640">Cookie 设置</h5>
+<div class="outline-text-5" id="text-org0f91640">
 <p>
 如果要在后端使用 <b>Session</b> ，前端传递参数到后端时，得带上自己的 <b>Cookie</b> ，不然每次访问，后端都会生成一个新的 <b>Session</b><br />
 无法保持状态<br />
 具体解决方法是，在 <b>axios</b> 的请求参数中，加上<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-javascript">axios.get(url, {
+<pre class="src src-javascript">axios.get<span style="color: #4078f2;">(</span>url, <span style="color: #a626a4;">{</span>
     withCredentials: <span style="color: #b751b6;">true</span>
-})
+<span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-javascript">axios.post(url, {
+<pre class="src src-javascript">axios.post<span style="color: #4078f2;">(</span>url, <span style="color: #a626a4;">{</span>
     post-params ...
-}, {
+<span style="color: #a626a4;">}</span>, <span style="color: #a626a4;">{</span>
     withCredentials: <span style="color: #b751b6;">true</span>
-})
+<span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org422f175" class="outline-4">
-<h4 id="org422f175">跨域问题</h4>
-<div class="outline-text-4" id="text-org422f175">
+<div id="outline-container-org422f175" class="outline-5">
+<h5 id="org422f175">跨域问题</h5>
+<div class="outline-text-5" id="text-org422f175">
 <p>
 传递 <b>Cookie</b> 还不能让服务器正常运行，前端的请求会被同源策略拦下，后端需要为前端的 <b>Origin</b> 域提供一个口子<br />
 在后端注册一个 <b>CORSFilter</b> :<br />
@@ -768,181 +1140,54 @@
 顺便设置下 <span class="underline"><span class="underline">Response</span></span> 的内容<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #b751b6;">@WebFilter</span>(filterName = <span style="color: #50a14f;">"CORSFilter"</span>, urlPatterns = <span style="color: #50a14f;">"/*"</span>)
-<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">CORSFilter</span> <span style="color: #e45649;">implements</span> <span style="color: #986801;">Filter</span> {
+<pre class="src src-java"><span style="color: #b751b6;">@WebFilter</span><span style="color: #4078f2;">(</span>filterName = <span style="color: #50a14f;">"CORSFilter"</span>, urlPatterns = <span style="color: #50a14f;">"/*"</span><span style="color: #4078f2;">)</span>
+<span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">CORSFilter</span> <span style="color: #e45649;">implements</span> <span style="color: #986801;">Filter</span> <span style="color: #4078f2;">{</span>
     <span style="color: #b751b6;">@Override</span>
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">doFilter</span>(<span style="color: #986801;">ServletRequest</span> <span style="color: #6a1868;">servletRequest</span>, <span style="color: #986801;">ServletResponse</span> <span style="color: #6a1868;">servletResponse</span>, <span style="color: #986801;">FilterChain</span> <span style="color: #6a1868;">chain</span>)
-        <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span>, <span style="color: #986801;">ServletException</span> {
-        <span style="color: #986801;">HttpServletRequest</span> <span style="color: #6a1868;">request</span> = (<span style="color: #986801;">HttpServletRequest</span>) servletRequest;
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">doFilter</span><span style="color: #a626a4;">(</span><span style="color: #986801;">ServletRequest</span> <span style="color: #6a1868;">servletRequest</span>, <span style="color: #986801;">ServletResponse</span> <span style="color: #6a1868;">servletResponse</span>, <span style="color: #986801;">FilterChain</span> <span style="color: #6a1868;">chain</span><span style="color: #a626a4;">)</span>
+        <span style="color: #e45649;">throws</span> <span style="color: #986801;">IOException</span>, <span style="color: #986801;">ServletException</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">HttpServletRequest</span> <span style="color: #6a1868;">request</span> = <span style="color: #50a14f;">(</span><span style="color: #986801;">HttpServletRequest</span><span style="color: #50a14f;">)</span> servletRequest;
 
         <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Authorize (allow) all domains to consume the content</span>
-        <span style="color: #986801;">HttpServletResponse</span> <span style="color: #6a1868;">response</span> = (<span style="color: #986801;">HttpServletResponse</span>) servletResponse;
-        response.setHeader(<span style="color: #50a14f;">"Access-Control-Allow-Origin"</span>, <span style="color: #50a14f;">"http://localhost:8081"</span>);
-        response.setHeader(<span style="color: #50a14f;">"Access-Control-Allow-Methods"</span>,<span style="color: #50a14f;">"GET, OPTIONS, HEAD, PUT, POST"</span>);
-        response.setHeader(<span style="color: #50a14f;">"Access-Control-Allow-Credentials"</span>,<span style="color: #50a14f;">"true"</span>);
-        response.setHeader(<span style="color: #50a14f;">"Access-Control-Allow-Headers"</span>, <span style="color: #50a14f;">"Content-Type"</span>);
-        response.setCharacterEncoding(<span style="color: #50a14f;">"UTF-8"</span>);
-        response.setContentType(<span style="color: #50a14f;">"application/json; charset=utf-8"</span>);
+        <span style="color: #986801;">HttpServletResponse</span> <span style="color: #6a1868;">response</span> = <span style="color: #50a14f;">(</span><span style="color: #986801;">HttpServletResponse</span><span style="color: #50a14f;">)</span> servletResponse;
+        response.setHeader<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Access-Control-Allow-Origin"</span>, <span style="color: #50a14f;">"http://localhost:8081"</span><span style="color: #50a14f;">)</span>;
+        response.setHeader<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Access-Control-Allow-Methods"</span>,<span style="color: #50a14f;">"GET, OPTIONS, HEAD, PUT, POST"</span><span style="color: #50a14f;">)</span>;
+        response.setHeader<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Access-Control-Allow-Credentials"</span>,<span style="color: #50a14f;">"true"</span><span style="color: #50a14f;">)</span>;
+        response.setHeader<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"Access-Control-Allow-Headers"</span>, <span style="color: #50a14f;">"Content-Type"</span><span style="color: #50a14f;">)</span>;
+        response.setCharacterEncoding<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"UTF-8"</span><span style="color: #50a14f;">)</span>;
+        response.setContentType<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"application/json; charset=utf-8"</span><span style="color: #50a14f;">)</span>;
 
         <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">pass the request along the filter chain</span>
-        chain.doFilter(request, response);
-    }
+        chain.doFilter<span style="color: #50a14f;">(</span>request, response<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
 
-}
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org70a012a" class="outline-2">
-<h2 id="org70a012a">后端设计</h2>
-<div class="outline-text-2" id="text-org70a012a">
-<p>
-后端的重点是如何保持会话状态，如何处理前端传递的 <b>JSON</b> 数据传递，以及如何处理用户登录验证<br />
-另外，我的程序不是通过打包运行的，我无法在控制台看到错误，调试很麻烦，错误处理也应该算一个<br />
-</p>
-</div>
-<div id="outline-container-org0d48c65" class="outline-3">
-<h3 id="org0d48c65">保持会话状态</h3>
-<div class="outline-text-3" id="text-org0d48c65">
-<p>
-<b>Session</b> 可以看作存储在服务器上的 <b>Cookie</b> ，也就是说，服务器上所有运行的 <span class="underline"><span class="underline">Servlet</span></span> 类都能看见他，调用他<br />
-前端访问同一源的网站， <b>Session</b> 都是一样的<br />
-那么，我们在 <b>Session</b> 中设置 <b>当前用户</b> 为 <span class="underline"><span class="underline">curuser</span></span> ，设置 <b>当前用户类型</b> 为 <span class="underline"><span class="underline">usertype</span></span> ，<br />
-后端验证登录后，将 <b>Session</b> 的上述属性设置，那么其他 <span class="underline"><span class="underline">Servlet</span></span> 可以读取 <b>Session</b> 来获取当前用户信息， <span class="underline"><span class="underline">Logout</span></span> 可以请求删除 <span class="underline"><span class="underline">curuser</span></span> 属性来实现登出效果<br />
-那么保持会话状态的原理就已经确定了<br />
-</p>
-</div>
-</div>
-
-<div id="outline-container-org537ca69" class="outline-3">
-<h3 id="org537ca69">接收 <b>JSON</b> 数据</h3>
-<div class="outline-text-3" id="text-org537ca69">
-<p>
-<b>JSON</b> 数据无法从 <b>request.getParamaters</b> 得到，因为他不是用过表单发送的。<br />
-在 <span class="underline"><span class="underline">utils</span></span> 目录下，我定义了一个 <b>InputStream2String</b> 包，内有 <b>transform</b> 方法负责获取 <b>String</b> ，接着通过这个 <b>String</b> 构造 <b>JSONObject</b> 即可<br />
-在 <span class="underline"><span class="underline">Login.java</span></span> 下看看这是如何使用的<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">String</span> <span style="color: #6a1868;">jsonData</span> = transform(request.getInputStream());
-<span style="color: #986801;">JSONObject</span> <span style="color: #6a1868;">jsonObject</span> = JSONObject.parseObject(jsonData);
-
-<span style="color: #986801;">String</span> <span style="color: #6a1868;">username</span> = jsonObject.getString(<span style="color: #50a14f;">"username"</span>);
-<span style="color: #986801;">String</span> <span style="color: #6a1868;">usertype</span> = jsonObject.getString(<span style="color: #50a14f;">"usertype"</span>);
-<span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span> = jsonObject.getString(<span style="color: #50a14f;">"passhash"</span>);
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 
-<div id="outline-container-org378d84f" class="outline-3">
-<h3 id="org378d84f">用户登录验证</h3>
-<div class="outline-text-3" id="text-org378d84f">
-<p>
-还是在 <span class="underline"><span class="underline">Login</span></span> 中，查询数据表 <b>User</b> ，查看是否有符合以下条件的用户<br />
+
+
+
+
+<div id="outline-container-org29d4d4d" class="outline-2">
+<h2 id="org29d4d4d">总结</h2>
+<div class="outline-text-2" id="text-org29d4d4d">
+
+<div id="org4ad76f2" class="figure">
+<p><img src="images/总结/2021-06-27_20-00-18_screenshot.png" alt="2021-06-27_20-00-18_screenshot.png" /><br />
 </p>
-<ol class="org-ol">
-<li>_<sub>name</sub>__ 为 <span class="underline"><span class="underline">username</span></span><br /></li>
-<li>_<sub>isadmin</sub>__ 为 <span class="underline"><span class="underline">usertype.equals("admin")</span></span><br /></li>
-<li>_<sub>passhash</sub>__ 为 <span class="underline"><span class="underline">passhash</span></span><br /></li>
-</ol>
-
-<div class="org-src-container">
-<pre class="src src-java">User.queryWithPasshash(<span style="color: #986801;">username</span>, usertype.equals(<span style="color: #50a14f;">"admin"</span>), <span style="color: #986801;">passhash</span>);
-</pre>
-</div>
-
-<p>
-如果有，那就是验证成功了，否则就是失败，没有这个用户或者登录密码错误<br />
-</p>
-</div>
-</div>
-<div id="outline-container-orgd7de7a9" class="outline-3">
-<h3 id="orgd7de7a9">错误处理</h3>
-<div class="outline-text-3" id="text-orgd7de7a9">
-<p>
-参考 <b>Rust</b> 的 <b>Result</b> 错误类型设计，自己搞了一个简易的 <b>Result</b> 类<br />
-该类有两个属性， <span class="underline"><span class="underline">left</span></span> 与 <span class="underline"><span class="underline">right</span></span> ，两个属性不能同时为空，也不能同时都有值<br />
- <span class="underline"><span class="underline">left</span></span> 表示正确结果， <span class="underline"><span class="underline">right</span></span> 表示错误结果<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">Result</span> &lt;<span style="color: #986801;">Ok</span>, <span style="color: #986801;">Err</span>&gt; {
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">Ok</span> <span style="color: #6a1868;">left</span>;
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">Err</span> <span style="color: #6a1868;">right</span>;
-
-    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">Result</span>(<span style="color: #986801;">Ok</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">Err</span> <span style="color: #6a1868;">right</span>) {
-        <span style="color: #e45649;">this</span>.left = left;
-        <span style="color: #e45649;">this</span>.right = right;
-    }
-
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">boolean</span> <span style="color: #a626a4;">isOk</span>() {
-        <span style="color: #e45649;">return</span> left != <span style="color: #b751b6;">null</span> &amp;&amp; right == <span style="color: #b751b6;">null</span>;
-    }
-
-    <span style="color: #e45649;">public</span> <span style="color: #986801;">boolean</span> <span style="color: #a626a4;">isErr</span>() {
-        <span style="color: #e45649;">return</span> left == <span style="color: #b751b6;">null</span> &amp;&amp; right != <span style="color: #b751b6;">null</span>;
-    }
-}
-</pre>
-</div>
-
-<p>
-这样以后就可以通过 <b>isOk</b> 和 <b>isErr</b> 来判断是否发生错误，来看看具体使用，在 <b>User</b> 的静态查询方法中<br />
-</p>
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">static</span> <span style="color: #986801;">Result</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">User</span>&gt;, <span style="color: #986801;">Exception</span>&gt; <span style="color: #a626a4;">queryWithPasshash</span>(<span style="color: #986801;">String</span> <span style="color: #6a1868;">name</span>, <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">isadmin</span>, <span style="color: #986801;">String</span> <span style="color: #6a1868;">passhash</span>){
-    <span style="color: #986801;">Connection</span> <span style="color: #6a1868;">conn</span> = <span style="color: #b751b6;">null</span>;
-    <span style="color: #986801;">Statement</span> <span style="color: #6a1868;">stmt</span> = <span style="color: #b751b6;">null</span>;
-    <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">User</span>&gt; <span style="color: #6a1868;">users</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinkedList</span>&lt;&gt;();
-    <span style="color: #986801;">Result</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">User</span>&gt;, <span style="color: #986801;">Exception</span>&gt; <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Result</span>&lt;&gt;(<span style="color: #b751b6;">null</span>, <span style="color: #b751b6;">null</span>);
-
-    <span style="color: #e45649;">try</span> {
-        Class.forName(JDBC_DRIVER);
-        conn = DriverManager.getConnection(DB_URL, connInfo);
-        <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> &#25191;&#34892;&#26597;&#35810;</span>
-        stmt = conn.createStatement();
-        <span style="color: #986801;">String</span> <span style="color: #6a1868;">querySQL</span> = String.format(<span style="color: #50a14f;">"select * from %s where name = '%s' and passhash = '%s' and isadmin = %s"</span>, USER_TABLE, name, passhash, isadmin);
-        <span style="color: #986801;">ResultSet</span> <span style="color: #6a1868;">resultSet</span> = stmt.executeQuery(querySQL);
-
-        <span style="color: #e45649;">while</span> (resultSet.next()) {
-            <span style="color: #986801;">int</span> <span style="color: #6a1868;">userid</span> = resultSet.getInt(<span style="color: #50a14f;">"userid"</span>);
-            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_name</span> = resultSet.getString(<span style="color: #50a14f;">"name"</span>);
-            <span style="color: #986801;">String</span> <span style="color: #6a1868;">_passhash</span> = resultSet.getString(<span style="color: #50a14f;">"passhash"</span>);
-            <span style="color: #986801;">boolean</span> <span style="color: #6a1868;">_isadmin</span>  = resultSet.getBoolean(<span style="color: #50a14f;">"isadmin"</span>);
-            users.add(<span style="color: #e45649;">new</span> <span style="color: #986801;">User</span>(userid, _name, _isadmin, _passhash));
-        }
-
-        resultSet.close();
-        stmt.close();
-        conn.close();
-
-        result.left = users;
-    } <span style="color: #e45649;">catch</span> (<span style="color: #986801;">SQLException</span> <span style="color: #6a1868;">sqlException</span>) {
-        result.right = sqlException;
-    } <span style="color: #e45649;">catch</span> (<span style="color: #986801;">Exception</span> <span style="color: #6a1868;">exception</span>) {
-        result.right = exception;
-    } <span style="color: #e45649;">finally</span> {
-        <span style="color: #e45649;">return</span> result;
-    }
-
-}
-
-</pre>
-</div>
-
-<p>
-虽然有 <b>try-catch</b> 代码处理错误，但是错误信息打印不出来，只好通过 <b>Result</b> 类型来传递，上面的调用程序调用的时候就可以通过 <b>Result</b> 来查看运行情况</p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-06-09 三 00:51</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

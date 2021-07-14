@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-06-09 三 00:51 -->
+<!-- 2021-07-15 四 00:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>RecyclerView笔记</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="http://gongzhitaao.org/orgcss/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -244,11 +244,11 @@
 <h2 id="orgca61236">如何使用 RecyclerView</h2>
 <div class="outline-text-2" id="text-orgca61236">
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">RecyclerView</span> <span style="color: #6a1868;">recyclerView</span> = findViewById(R.id.recycler_view);
-<span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnAdapter</span>(<span style="color: #e45649;">this</span>, data);
-<span style="color: #986801;">LinearLayoutManager</span> <span style="color: #6a1868;">layoutmanager</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinearLayoutManager</span>(<span style="color: #e45649;">this</span>, <span style="color: #b751b6;">LinearLayoutManager</span>.VERTICAL, <span style="color: #b751b6;">false</span>);
-recyclerView.setAdapter(adapter);
-recyclerView.setLayoutManager(layoutmanager);
+<pre class="src src-java"><span style="color: #986801;">RecyclerView</span> <span style="color: #6a1868;">recyclerView</span> = findViewById<span style="color: #4078f2;">(</span>R.id.recycler_view<span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnAdapter</span><span style="color: #4078f2;">(</span><span style="color: #e45649;">this</span>, data<span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">LinearLayoutManager</span> <span style="color: #6a1868;">layoutmanager</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">LinearLayoutManager</span><span style="color: #4078f2;">(</span><span style="color: #e45649;">this</span>, <span style="color: #b751b6;">LinearLayoutManager</span>.VERTICAL, <span style="color: #b751b6;">false</span><span style="color: #4078f2;">)</span>;
+recyclerView.setAdapter<span style="color: #4078f2;">(</span>adapter<span style="color: #4078f2;">)</span>;
+recyclerView.setLayoutManager<span style="color: #4078f2;">(</span>layoutmanager<span style="color: #4078f2;">)</span>;
 </pre>
 </div>
 
@@ -267,14 +267,14 @@ recyclerView.setLayoutManager(layoutmanager);
 <h2 id="orga49ce5c">Adapter</h2>
 <div class="outline-text-2" id="text-orga49ce5c">
 
-<div id="org2d53ffb" class="figure">
+<div id="orgba11bbe" class="figure">
 <p><img src="./images/Adapter.png" alt="Adapter.png" /><br />
 </p>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnAdapter</span>(<span style="color: #e45649;">this</span>, data);
-recyclerView.setAdapter(adapter);
+<pre class="src src-java"><span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnAdapter</span><span style="color: #4078f2;">(</span><span style="color: #e45649;">this</span>, data<span style="color: #4078f2;">)</span>;
+recyclerView.setAdapter<span style="color: #4078f2;">(</span>adapter<span style="color: #4078f2;">)</span>;
 </pre>
 </div>
 
@@ -296,7 +296,7 @@ Adapter 就像是一个工厂，引入原料 <b>data</b> ，在内部经过加�
 </ol>
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #986801;">LayoutInflater</span> <span style="color: #6a1868;">layoutInflater</span>;
-<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Student</span>&gt; <span style="color: #6a1868;">students</span>;
+<span style="color: #986801;">List</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">Student</span><span style="color: #4078f2;">&gt;</span> <span style="color: #6a1868;">students</span>;
 </pre>
 </div>
 
@@ -317,21 +317,21 @@ Adapter 就像是一个工厂，引入原料 <b>data</b> ，在内部经过加�
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #b751b6;">@NonNull</span>
 <span style="color: #b751b6;">@Override</span>
-<span style="color: #e45649;">public</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #a626a4;">onCreateViewHolder</span>(<span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">parent</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">viewType</span>) {
+<span style="color: #e45649;">public</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #a626a4;">onCreateViewHolder</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">parent</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">viewType</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#25307;&#24037;</span>
-    <span style="color: #986801;">View</span> <span style="color: #6a1868;">itemView</span> = layoutInflater.inflate(R.layout.student_layout, <span style="color: #b751b6;">null</span>);
-    <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnViewHolder</span>(itemView);
-}
+    <span style="color: #986801;">View</span> <span style="color: #6a1868;">itemView</span> = layoutInflater.inflate<span style="color: #a626a4;">(</span>R.layout.student_layout, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">OwnViewHolder</span><span style="color: #a626a4;">(</span>itemView<span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
 
 <span style="color: #b751b6;">@Override</span>
-<span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onBindViewHolder</span>(<span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #6a1868;">holder</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">position</span>) {
+<span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onBindViewHolder</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #6a1868;">holder</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">position</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#20998;&#37197;&#24037;&#20316;</span>
-    <span style="color: #986801;">Student</span> <span style="color: #6a1868;">student</span> = students.get(position);
-    Log.d(<span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"after here"</span>);
-    holder.text_age.setText(String.valueOf(student.age));
-    holder.text_name.setText(student.name);
-    Log.d(<span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"finished here"</span>);
-}
+    <span style="color: #986801;">Student</span> <span style="color: #6a1868;">student</span> = students.get<span style="color: #a626a4;">(</span>position<span style="color: #a626a4;">)</span>;
+    Log.d<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"after here"</span><span style="color: #a626a4;">)</span>;
+    holder.text_age.setText<span style="color: #a626a4;">(</span>String.valueOf<span style="color: #50a14f;">(</span>student.age<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>;
+    holder.text_name.setText<span style="color: #a626a4;">(</span>student.name<span style="color: #a626a4;">)</span>;
+    Log.d<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"finished here"</span><span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
@@ -395,7 +395,7 @@ Adapter 就像是一个工厂，引入原料 <b>data</b> ，在内部经过加�
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-06-09 三 00:51</p>
+<p class="date">Created: 2021-07-15 四 00:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
