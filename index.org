@@ -5,19 +5,18 @@
 
 * Table of Content
 ** Boost Plan
-[[file:./html/record.html][Record]]
+- [[file:./html/record.html][Record]]
 ** Compiler
-[[file:./html/labwork.html][编译原理实践期末作业]]
+- [[file:./html/labwork.html][编译原理实践期末作业]]
 ** Flutter
-[[file:./html/counter.html][计数器]]
-
-[[file:./html/provider.html][Provider]]
-[[file:./html/router.html][Router]]
+- [[file:./html/counter.html][计数器]]
+- [[file:./html/provider.html][Provider]]
+- [[file:./html/router.html][Router]]
 ** misc
-[[file:./html/android-work.html][安卓大作业报告]]
-[[file:./html/database.html][数据库学习笔记]]
-[[file:./html/image.html][离散数学实践1，图像底色]]
-[[file:./html/jsp-bigwork.html][JSP大作业报告]]
-[[file:./html/parse-logic.html][真值表程序]]
-[[file:./html/recycler-view.html][Android Recycler View]]
+- [[file:./html/android-work.html][安卓大作业报告]]  
+- [[file:./html/database.html][数据库学习笔记]]
+- [[file:./html/parse-logic.html][离散实践1，真值表程序]]
+- [[file:./html/image.html][离散实践2，修改图片颜色]]
+- [[file:./html/jsp-bigwork.html][JSP大作业报告]]
+- [[file:./html/recycler-view.html][Android Recycler View]]
 
