@@ -41,7 +41,7 @@
 
 
 #+DOWNLOADED: screenshot @ 2021-06-16 08:57:26
-[[file:../../src/images/实验一_词法分析程序/2021-06-16_08-57-26_screenshot.png]]
+[[file:./images/实验一_词法分析程序/2021-06-16_08-57-26_screenshot.png]]
 
 ** 语法解析
 语法解析最重要的部分是 _EvalVisitor_ ，他负责对表达式求值， _Main_ 做的无非是调用
@@ -150,7 +150,7 @@
 运行之后
 
 #+DOWNLOADED: screenshot @ 2021-06-16 08:33:47
-[[file:../../src/images/实验一_词法分析程序/2021-06-16_08-33-47_screenshot.png]]
+[[file:./images/实验一_词法分析程序/2021-06-16_08-33-47_screenshot.png]]
 哟系，成功了
 
 * 实验三 基于 antlr 的语法分析器
@@ -264,7 +264,7 @@ _ErrorType_ 为
 5. 本来在解析变量符号，不过还没修好程序，这里 *ID* 词法先不管
 
    #+DOWNLOADED: screenshot @ 2021-06-16 08:55:49
-   [[file:../../src/images/实验三_基于_antlr_的语法分析器/2021-06-16_08-55-49_screenshot.png]]
+   [[file:./images/实验三_基于_antlr_的语法分析器/2021-06-16_08-55-49_screenshot.png]]
 
 ** 语法解析
 同上，重写解析标签的方法
@@ -413,7 +413,7 @@ _ErrorType_ 为
 运行之后，
 
 #+DOWNLOADED: screenshot @ 2021-06-16 09:07:44
-[[file:../../src/images/实验三_基于_antlr_的语法分析器/2021-06-16_09-07-44_screenshot.png]]
+[[file:./images/实验三_基于_antlr_的语法分析器/2021-06-16_09-07-44_screenshot.png]]
 哟系，成功了
 
 * 心得体会
@@ -421,6 +421,6 @@ _ErrorType_ 为
 我自由啦
 
 #+DOWNLOADED: screenshot @ 2021-06-16 09:12:23
-[[file:../../src/images/心得体会/2021-06-16_09-12-23_screenshot.png]]
+[[file:./images/心得体会/2021-06-16_09-12-23_screenshot.png]]
 
  
