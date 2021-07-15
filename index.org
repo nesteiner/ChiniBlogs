@@ -1,27 +1,19 @@
 #+title: This file is for Table of Content
-#+publishing-directory: .
+#+export_file_name: index.html
 #+publishing-function: org-html-export-to-html
 #+html_head: <link rel="stylesheet" type="text/css" href="css/org.css"/>
 #+options: toc:nil
-* Configure first
-- export as markdown
-- sync in gitbook
-- [ ] 剪切板
-- [ ] quote
-- [ ] 元数据，example, quote 等
-- [X] export this file to index.html
-- [ ] download the css style to local
 
 * Table of Content
 ** Boost Plan
-[[file:./html/boost-test/record.html][Record]]
+[[file:./html/record.html][Record]]
 ** Compiler
-[[file:./html/compiler/labwork.html][编译原理实践期末作业]]
+[[file:./html/labwork.html][编译原理实践期末作业]]
 ** Flutter
-[[file:./html/flutter/counter.html][计数器]]
+[[file:./html/counter.html][计数器]]
 
-[[file:./html/flutter/provider.html][Provider]]
-[[file:./html/flutter/router.html][Router]]
+[[file:./html/provider.html][Provider]]
+[[file:./html/router.html][Router]]
 ** misc
 [[file:./html/android-work.html][安卓大作业报告]]
 [[file:./html/database.html][数据库学习笔记]]
@@ -29,3 +21,4 @@
 [[file:./html/jsp-bigwork.html][JSP大作业报告]]
 [[file:./html/parse-logic.html][真值表程序]]
 [[file:./html/recycler-view.html][Android Recycler View]]
+
