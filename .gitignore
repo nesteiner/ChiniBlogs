@@ -1,4 +1,5 @@
 *.doc
 *.docx
-*.org
+project.org
+index.org
 test/
