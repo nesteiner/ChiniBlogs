@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-08-19 四 00:42 -->
+<!-- 2021-08-19 四 00:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Titanic 生存预测，使用Logistic分类</title>
@@ -365,7 +365,7 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org0c8a642" class="figure">
+<div id="org3c15a85" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-32-57_screenshot.png" alt="2021-08-19_00-32-57_screenshot.png" /><br />
 </p>
 </div>
@@ -385,7 +385,7 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org9a48581" class="figure">
+<div id="org01f3efd" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-33-10_screenshot.png" alt="2021-08-19_00-33-10_screenshot.png" /><br />
 </p>
 </div>
@@ -577,7 +577,7 @@ output_data = MLJ.transform<span style="color: #4078f2;">(</span>transformMachin
 </div>
 
 
-<div id="org89f5a04" class="figure">
+<div id="orga5a124a" class="figure">
 <p><img src="./images/数据处理/2021-08-18_17-01-01_screenshot.png" alt="2021-08-18_17-01-01_screenshot.png" /><br />
 </p>
 </div>
@@ -607,6 +607,13 @@ output_sample = MLJ.transform<span style="color: #4078f2;">(</span>transformSamp
 
 <div id="outline-container-org3f13c9e" class="outline-3">
 <h3 id="org3f13c9e"><span class="todo TODO">TODO</span> 数据相关性</h3>
+<div class="outline-text-3" id="text-org3f13c9e">
+<p>
+其实还可以看看各个字段间的相关性，画个热力图就行了，问了以下 Slack 的人，发现在 StatsPlots 中已经有函数 corrplot<br />
+<a href="https://github.com/JuliaPlots/StatsPlots.jl#corrplot-and-cornerplot">相关文档在这</a><br />
+但是吧这个图像好像不是热力图，我还是先放着吧<br />
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-orga5b996a" class="outline-2">
@@ -741,7 +748,7 @@ evaluate!<span style="color: #4078f2;">(</span>best_mach,
 </p>
 
 
-<div id="org3a836b0" class="figure">
+<div id="orgacc5bf6" class="figure">
 <p><img src="images/模型训练/2021-08-19_00-42-26_screenshot.png" alt="2021-08-19_00-42-26_screenshot.png" /><br />
 </p>
 </div>
@@ -826,7 +833,7 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 
 
 
-<div id="org4c8e1db" class="figure">
+<div id="org9b9c1a9" class="figure">
 <p><img src="images/投入使用/2021-08-19_00-42-46_screenshot.png" alt="2021-08-19_00-42-46_screenshot.png" /><br />
 </p>
 </div>
@@ -836,7 +843,7 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-08-19 四 00:42</p>
+<p class="date">Created: 2021-08-19 四 00:55</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

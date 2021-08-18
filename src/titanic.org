@@ -190,6 +190,9 @@ f(x) = log(x + 1)
 #+end_src
 
 ** TODO 数据相关性
+其实还可以看看各个字段间的相关性，画个热力图就行了，问了以下 Slack 的人，发现在 StatsPlots 中已经有函数 corrplot
+[[https://github.com/JuliaPlots/StatsPlots.jl#corrplot-and-cornerplot][相关文档在这]]
+但是吧这个图像好像不是热力图，我还是先放着吧
 * 模型训练
 ** 引入模型
 这是个分类问题，我打算使用 LogisticClassifier ，其他分类器也可以
