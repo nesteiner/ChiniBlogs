@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-08-19 四 00:55 -->
+<!-- 2021-08-19 四 00:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Titanic 生存预测，使用Logistic分类</title>
@@ -220,6 +220,52 @@
 <body>
 <div id="content">
 <h1 class="title">Titanic 生存预测，使用Logistic分类</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6fb9a33">项目介绍</a></li>
+<li><a href="#orgeecd974">数据探索</a>
+<ul>
+<li><a href="#org9292ad9">字段含义</a></li>
+<li><a href="#orgadedd31">字段科学类型</a></li>
+<li><a href="#org22edbe2">描述数据</a></li>
+</ul>
+</li>
+<li><a href="#org6c970dc">数据处理</a>
+<ul>
+<li><a href="#org3fbf480">对 train.csv 的数据处理策略</a>
+<ul>
+<li><a href="#org579167a">填充缺失值</a></li>
+<li><a href="#orge1af180">生成新的特征</a></li>
+<li><a href="#org81e34b9">对 Embarked 进行 OneHot 编码</a></li>
+<li><a href="#org01bc029">丢弃不用的特征</a></li>
+</ul>
+</li>
+<li><a href="#orgf117f5f">对 test.csv 的数据处理策略</a></li>
+<li><a href="#orgeb345fe">数据处理模型</a></li>
+<li><a href="#org3f13c9e"><span class="todo TODO">TODO</span> 数据相关性</a></li>
+</ul>
+</li>
+<li><a href="#orga5b996a">模型训练</a>
+<ul>
+<li><a href="#org563bb7c">引入模型</a></li>
+<li><a href="#org8e8d772">拆解数据</a></li>
+<li><a href="#org6585722">模型训练与调试</a></li>
+</ul>
+</li>
+<li><a href="#org5a87961">投入使用</a>
+<ul>
+<li><a href="#orgf177248">加载数据</a></li>
+<li><a href="#orgdd19784">处理数据</a></li>
+<li><a href="#orga0d4b07">生成预测结果</a></li>
+<li><a href="#orgbef6557">上传数据</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
 <div id="outline-container-org6fb9a33" class="outline-2">
 <h2 id="org6fb9a33">项目介绍</h2>
 <div class="outline-text-2" id="text-org6fb9a33">
@@ -365,7 +411,7 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org3c15a85" class="figure">
+<div id="org34ac940" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-32-57_screenshot.png" alt="2021-08-19_00-32-57_screenshot.png" /><br />
 </p>
 </div>
@@ -385,7 +431,7 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org01f3efd" class="figure">
+<div id="org9369cb6" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-33-10_screenshot.png" alt="2021-08-19_00-33-10_screenshot.png" /><br />
 </p>
 </div>
@@ -577,7 +623,7 @@ output_data = MLJ.transform<span style="color: #4078f2;">(</span>transformMachin
 </div>
 
 
-<div id="orga5a124a" class="figure">
+<div id="org1c82dfa" class="figure">
 <p><img src="./images/数据处理/2021-08-18_17-01-01_screenshot.png" alt="2021-08-18_17-01-01_screenshot.png" /><br />
 </p>
 </div>
@@ -748,7 +794,7 @@ evaluate!<span style="color: #4078f2;">(</span>best_mach,
 </p>
 
 
-<div id="orgacc5bf6" class="figure">
+<div id="org2983296" class="figure">
 <p><img src="images/模型训练/2021-08-19_00-42-26_screenshot.png" alt="2021-08-19_00-42-26_screenshot.png" /><br />
 </p>
 </div>
@@ -833,7 +879,7 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 
 
 
-<div id="org9b9c1a9" class="figure">
+<div id="org4be0e51" class="figure">
 <p><img src="images/投入使用/2021-08-19_00-42-46_screenshot.png" alt="2021-08-19_00-42-46_screenshot.png" /><br />
 </p>
 </div>
@@ -843,7 +889,7 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-08-19 四 00:55</p>
+<p class="date">Created: 2021-08-19 四 00:56</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

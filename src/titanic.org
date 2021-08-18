@@ -1,5 +1,5 @@
 #+title: Titanic 生存预测，使用Logistic分类
-#+options: toc:nil
+
 * 项目介绍
 最近终于去学习 Julia 了，重温了下没做完的 Titanic 项目，打算做完
 那就先导入必要的库吧
