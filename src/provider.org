@@ -19,7 +19,6 @@ DOM
 #+end_src
 
 子组件想使用其中的值，得通过 Consumer 组件或者 context.read<ExposedType>
-
 #+begin_src dart
   Consumer(
     create: (context, ExposedType expose, child) {
