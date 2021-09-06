@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-16 五 00:45 -->
+<!-- 2021-09-01 三 23:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Flutter 中 provider 的使用</title>
@@ -224,18 +224,97 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#org30e6aa4">Provider 的引入</a></li>
+<li><a href="#orge357c8f">Provider 与 StatefulWidget</a></li>
 <li><a href="#org224743d">Counter with Provider</a></li>
+<li><a href="#org0768b3a">总结</a></li>
 </ul>
 </div>
 </div>
 
+<div id="outline-container-org30e6aa4" class="outline-2">
+<h2 id="org30e6aa4">Provider 的引入</h2>
+<div class="outline-text-2" id="text-org30e6aa4">
+<p>
+Provider 解决的是组件之间传递数据的问题<br />
+在 Vue 中，父组件通过 props 传递数据给子组件，子组件通过 $emit 通知父组件，然后 Vue 重新渲染<br />
+DOM<br />
+在 Vue 中，也可以使用 provider 和 inject 传递数据，不过不能很好的处理响应性<br />
+</p>
+
+<p>
+与 Vue 相同的是，Flutter 的 Provider 的引入解决了数据传递中嵌套组件过多的问题，若在当前节点没有找到 Provider 组件，<br />
+则会通过上下文寻找 Provider ，直至找到<br />
+</p>
+
+<p>
+不过想使用 Provider，父组件得暴露出一个对象用以交互， <b><b>而这个对象得继承自 ChangeNotifier</b></b><br />
+以 ChangeNotifierProvider为例<br />
+</p>
+
+<p>
+子组件想使用其中的值，得通过 Consumer 组件或者 context.read&lt;ExposedType&gt;<br />
+</p>
+
+<p>
+<b><b>注意</b></b><br />
+</p>
+<ol class="org-ol">
+<li>除了 context.read 外，还有 context.watch<br /></li>
+<li>context.watch 会监听 Provider 的变化，调用后会更改页面的渲染，<br /></li>
+<li>context.read 不会监听 Provider 的变化，调用后不会更改页面的渲染，所以不要用在 Widget 的 build 方法中<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge357c8f" class="outline-2">
+<h2 id="orge357c8f">Provider 与 StatefulWidget</h2>
+<div class="outline-text-2" id="text-orge357c8f">
+<p>
+Provider 与 StatefulWidget 类似，都是把组件和状态分离开来，<br />
+其中 Statefulwidget 使用的是 State 类型来 build 组件，通过 setState 来通知变化<br />
+而 Provider 渲染的是其 child 组件，暴露出的组件通过调用 notifyListener 来通知变化，这个时候 Flutter 会丢弃<br />
+修改过的组件，直接换新的<br />
+</p>
+</div>
+</div>
 <div id="outline-container-org224743d" class="outline-2">
 <h2 id="org224743d">Counter with Provider</h2>
+<div class="outline-text-2" id="text-org224743d">
+<p>
+首先是拥有 Provider 的父组件 App<br />
+</p>
+
+<p>
+接着是暴露出的对象 CounterState<br />
+</p>
+
+<p>
+再是使用 Provider 的子组件 Counter<br />
+</p>
+
+<p>
+不过我还是更推荐用 Consumer ，简洁明了<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0768b3a" class="outline-2">
+<h2 id="org0768b3a">总结</h2>
+<div class="outline-text-2" id="text-org0768b3a">
+<p>
+总的来说，使用 Provider 需要注意几点<br />
+</p>
+<ol class="org-ol">
+<li>提供暴露的接口<br /></li>
+<li>状态的更改在接口内部<br /></li>
+<li>状态的更改需要通知 Provider<br /></li>
+</ol>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-07-16 五 00:45</p>
+<p class="date">Created: 2021-09-01 三 23:14</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
