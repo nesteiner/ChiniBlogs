@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-18 六 14:44 -->
+<!-- 2021-09-18 六 23:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在 Flutter 中使用数据库</title>
@@ -236,6 +236,7 @@
 <li><a href="#orgf4fade0">1.3.4. 数据库定义 database.dart</a></li>
 <li><a href="#orgd5621c6">1.3.5. 代码生成</a></li>
 <li><a href="#org5b1bbc0">1.3.6. 创建数据库 main.dart</a></li>
+<li><a href="#orgf55135a">1.3.7. <span class="todo TODO">TODO</span> 疑问</a></li>
 </ul>
 </li>
 </ul>
@@ -514,10 +515,13 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 <span style="color: #b751b6;">@entity</span>
 <span style="color: #e45649;">class</span> <span style="color: #986801;">Task</span> <span style="color: #4078f2;">{</span>
   <span style="color: #b751b6;">@PrimaryKey</span><span style="color: #a626a4;">(</span>autoGenerate: <span style="color: #b751b6;">true</span><span style="color: #a626a4;">)</span>
-  <span style="color: #e45649;">final</span> <span style="color: #986801;">int</span>? id;
+  <span style="color: #986801;">int</span>? id;
   <span style="color: #e45649;">final</span> <span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span>;
 
-  <span style="color: #986801;">Task</span><span style="color: #a626a4;">(</span><span style="color: #e45649;">this</span>.id, <span style="color: #e45649;">this</span>.message<span style="color: #a626a4;">)</span>;
+  <span style="color: #986801;">Task</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span>
+      <span style="color: #e45649;">this</span>.id,
+      <span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.message,
+  <span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>
 
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">bool</span> <span style="color: #a626a4;">operator</span> <span style="color: #a626a4;">==</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Object</span> <span style="color: #6a1868;">other</span><span style="color: #a626a4;">)</span> =&gt;
@@ -549,6 +553,11 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 <li><b>bool operator ==</b> 重载<br /></li>
 <li><b>int get hashCode</b> 重载<br /></li>
 </ul>
+
+<p>
+其中 <b>@PrimaryKey(autoGenerate = true)</b> 表示这个主键是自增序列，<br />
+在构造函数中，主键 id 被定义为可以为空，这样不用传入 id, floor 会自动帮我们补上，按照自增顺序定义 id<br />
+</p>
 </div>
 </div>
 
@@ -601,9 +610,18 @@ task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
 <li><b>@update</b> 通过此函数来更新数据<br /></li>
 <li><b>@delete</b> 通过此函数来删除数据<br /></li>
 </ul>
-</div>
-</div>
 
+<p>
+其中，插入相同主键的数据，可能会产生冲突，从而程序崩溃<br />
+默认的冲突解决方法是 abort ，也可以自己定义方法为 relpace<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #b751b6;">@Insert</span><span style="color: #4078f2;">(</span>onConflict: <span style="color: #986801;">OnConflictStrategy</span>.replace<span style="color: #4078f2;">)</span>
+<span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; insert_one<span style="color: #4078f2;">(</span><span style="color: #986801;">Task</span> <span style="color: #6a1868;">task</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+</div>
+</div>
 <div id="outline-container-orgf4fade0" class="outline-4">
 <h4 id="orgf4fade0"><span class="section-number-4">1.3.4</span> 数据库定义 database.dart</h4>
 <div class="outline-text-4" id="text-1-3-4">
@@ -643,6 +661,19 @@ flutter pub run build_runner build
 会生成 'database.g.dart' 文件<br />
 接下来的数据库操作就会通过这个文件<br />
 </p>
+
+<p>
+<b>注意</b><br />
+在 <code>database.dart</code> 中需要这样导入 <code>sqflite</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a626a4;">import</span> <span style="color: #50a14f;">'package:sqflite/sqflite.dart'</span> <span style="color: #a626a4;">as</span> sqflite;
+</pre>
+</div>
+
+<p>
+因为 <code>build_runner</code> 生成的文件中有 <code>sqflite.Database</code> 等类声明<br />
+</p>
 </div>
 </div>
 <div id="outline-container-org5b1bbc0" class="outline-4">
@@ -673,12 +704,23 @@ WidgetsFlutterBinding.ensureInitialized()
 </p>
 </div>
 </div>
+
+
+
+<div id="outline-container-orgf55135a" class="outline-4">
+<h4 id="orgf55135a"><span class="section-number-4">1.3.7</span> <span class="todo TODO">TODO</span> 疑问</h4>
+<div class="outline-text-4" id="text-1-3-7">
+<p>
+如何在构建数据库时使其为空<br />
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-09-18 六 14:44</p>
+<p class="date">Created: 2021-09-18 六 23:52</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
