@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-01 三 23:14 -->
+<!-- 2021-09-18 六 11:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Flutter 中 provider 的使用</title>
@@ -224,17 +224,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org30e6aa4">Provider 的引入</a></li>
-<li><a href="#orge357c8f">Provider 与 StatefulWidget</a></li>
-<li><a href="#org224743d">Counter with Provider</a></li>
-<li><a href="#org0768b3a">总结</a></li>
+<li><a href="#org8572fdf">1. Provider 的引入</a></li>
+<li><a href="#org3903ec7">2. Provider 与 StatefulWidget</a></li>
+<li><a href="#org559445d">3. Counter with Provider</a></li>
+<li><a href="#org4ecfc00">4. 总结</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org30e6aa4" class="outline-2">
-<h2 id="org30e6aa4">Provider 的引入</h2>
-<div class="outline-text-2" id="text-org30e6aa4">
+<div id="outline-container-org8572fdf" class="outline-2">
+<h2 id="org8572fdf"><span class="section-number-2">1</span> Provider 的引入</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 Provider 解决的是组件之间传递数据的问题<br />
 在 Vue 中，父组件通过 props 传递数据给子组件，子组件通过 $emit 通知父组件，然后 Vue 重新渲染<br />
@@ -251,10 +251,30 @@ DOM<br />
 不过想使用 Provider，父组件得暴露出一个对象用以交互， <b><b>而这个对象得继承自 ChangeNotifier</b></b><br />
 以 ChangeNotifierProvider为例<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">ChangeNotifierProvider</span><span style="color: #4078f2;">(</span>
+  builder: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> =&gt; <span style="color: #986801;">ExposedObject</span>,
+  child: ...
+<span style="color: #4078f2;">)</span>
+</pre>
+</div>
 
 <p>
 子组件想使用其中的值，得通过 Consumer 组件或者 context.read&lt;ExposedType&gt;<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">Consumer</span><span style="color: #4078f2;">(</span>
+  create: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">context</span>, <span style="color: #986801;">ExposedType</span> <span style="color: #6a1868;">expose</span>, <span style="color: #6a1868;">child</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// call expose</span>
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">var</span> <span style="color: #6a1868;">expose</span> = context.read&lt;<span style="color: #986801;">ExposedType</span>&gt;<span style="color: #4078f2;">()</span>;
+</pre>
+</div>
 
 <p>
 <b><b>注意</b></b><br />
@@ -266,9 +286,9 @@ DOM<br />
 </ol>
 </div>
 </div>
-<div id="outline-container-orge357c8f" class="outline-2">
-<h2 id="orge357c8f">Provider 与 StatefulWidget</h2>
-<div class="outline-text-2" id="text-orge357c8f">
+<div id="outline-container-org3903ec7" class="outline-2">
+<h2 id="org3903ec7"><span class="section-number-2">2</span> Provider 与 StatefulWidget</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Provider 与 StatefulWidget 类似，都是把组件和状态分离开来，<br />
 其中 Statefulwidget 使用的是 State 类型来 build 组件，通过 setState 来通知变化<br />
@@ -277,30 +297,103 @@ Provider 与 StatefulWidget 类似，都是把组件和状态分离开来，<br 
 </p>
 </div>
 </div>
-<div id="outline-container-org224743d" class="outline-2">
-<h2 id="org224743d">Counter with Provider</h2>
-<div class="outline-text-2" id="text-org224743d">
+<div id="outline-container-org559445d" class="outline-2">
+<h2 id="org559445d"><span class="section-number-2">3</span> Counter with Provider</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 首先是拥有 Provider 的父组件 App<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
+      title: <span style="color: #50a14f;">'Counter with Provider'</span>,
+      home: <span style="color: #986801;">Scaffold</span><span style="color: #b751b6;">(</span>
+  appBar: <span style="color: #986801;">AppBar</span><span style="color: #4db5bd;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">'Counter with Provider'</span><span style="color: #4078f2;">)</span>,<span style="color: #4db5bd;">)</span>,
+  body: <span style="color: #986801;">ChangeNotifierProvider</span><span style="color: #4db5bd;">(</span>
+    create: <span style="color: #4078f2;">(</span><span style="color: #6a1868;">_</span><span style="color: #4078f2;">)</span> =&gt; <span style="color: #986801;">CounterState</span><span style="color: #4078f2;">()</span>,
+    child: <span style="color: #986801;">Counter</span><span style="color: #4078f2;">()</span>,
+  <span style="color: #4db5bd;">)</span>,
+      <span style="color: #b751b6;">)</span>
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
 
 <p>
 接着是暴露出的对象 CounterState<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">CounterState</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">ChangeNotifier</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">count</span> = <span style="color: #b751b6;">0</span>;
+
+  <span style="color: #986801;">void</span> <span style="color: #a626a4;">increment</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+    count += <span style="color: #b751b6;">1</span>;
+    notifyListeners<span style="color: #50a14f;">()</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
 
 <p>
 再是使用 Provider 的子组件 Counter<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">Counter</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Column</span><span style="color: #50a14f;">(</span>
+      children: <span style="color: #b751b6;">[</span>
+  <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'You have pushed button many times: '</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span>context.watch&lt;<span style="color: #986801;">CounterState</span>&gt;<span style="color: #4078f2;">()</span>.count.toString<span style="color: #4078f2;">()</span>, style: <span style="color: #986801;">TextStyle</span><span style="color: #4078f2;">(</span>fontSize: <span style="color: #b751b6;">16</span><span style="color: #4078f2;">)</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">FlatButton</span><span style="color: #4db5bd;">(</span>
+    child: <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">'click me'</span><span style="color: #4078f2;">)</span>,
+    onPressed: <span style="color: #4078f2;">()</span> <span style="color: #4078f2;">{</span>
+      <span style="color: #e45649;">var</span> <span style="color: #6a1868;">state</span> = context.read&lt;<span style="color: #986801;">CounterState</span>&gt;<span style="color: #a626a4;">()</span>;
+      state.increment<span style="color: #a626a4;">()</span>;
+    <span style="color: #4078f2;">}</span>,
+  <span style="color: #4db5bd;">)</span>,
+      <span style="color: #b751b6;">]</span>
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
 
 <p>
 不过我还是更推荐用 Consumer ，简洁明了<br />
 </p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #b751b6;">@override</span>
+<span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649;">return</span> <span style="color: #986801;">Consumer</span><span style="color: #a626a4;">(</span>
+    builder: <span style="color: #50a14f;">(</span><span style="color: #6a1868;">context</span>, <span style="color: #986801;">CounterState</span> <span style="color: #6a1868;">state</span>, <span style="color: #6a1868;">child</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      <span style="color: #e45649;">return</span> <span style="color: #986801;">Column</span><span style="color: #b751b6;">(</span>
+  children: <span style="color: #4db5bd;">[</span>
+    <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">'You have pushed button many times: '</span><span style="color: #4078f2;">)</span>,
+    <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span>state.count.toString<span style="color: #a626a4;">()</span>, style: <span style="color: #986801;">TextStyle</span><span style="color: #a626a4;">(</span>fontSize: <span style="color: #b751b6;">16</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>,
+    <span style="color: #986801;">FlatButton</span><span style="color: #4078f2;">(</span>
+      child: <span style="color: #986801;">Text</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'Click me'</span><span style="color: #a626a4;">)</span>,
+      onPressed: <span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+        state.increment<span style="color: #50a14f;">()</span>;
+      <span style="color: #a626a4;">}</span>
+    <span style="color: #4078f2;">)</span>
+  <span style="color: #4db5bd;">]</span>
+      <span style="color: #b751b6;">)</span>
+    <span style="color: #50a14f;">}</span>
+  <span style="color: #a626a4;">)</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-org0768b3a" class="outline-2">
-<h2 id="org0768b3a">总结</h2>
-<div class="outline-text-2" id="text-org0768b3a">
+<div id="outline-container-org4ecfc00" class="outline-2">
+<h2 id="org4ecfc00"><span class="section-number-2">4</span> 总结</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 总的来说，使用 Provider 需要注意几点<br />
 </p>
@@ -314,7 +407,7 @@ Provider 与 StatefulWidget 类似，都是把组件和状态分离开来，<br 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-09-01 三 23:14</p>
+<p class="date">Created: 2021-09-18 六 11:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

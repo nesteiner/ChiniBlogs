@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-09-18 六 14:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>在 Flutter 中使用数据库</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">在 Flutter 中使用数据库</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org63d4358">1. 在 Flutter 中使用数据库</a>
+<ul>
+<li><a href="#orge15d757">1.1. 介绍</a></li>
+<li><a href="#orgebad7cd">1.2. 组件中使用数据库</a></li>
+<li><a href="#org8dd7152">1.3. 使用 ORM 框架</a>
+<ul>
+<li><a href="#orge5c0ea5">1.3.1. 准备工作</a></li>
+<li><a href="#orgd9c1ce6">1.3.2. 实体类的定义 task.dart</a></li>
+<li><a href="#org4fb25e3">1.3.3. DAO 的定义 task<sub>dao.dart</sub></a></li>
+<li><a href="#orgf4fade0">1.3.4. 数据库定义 database.dart</a></li>
+<li><a href="#orgd5621c6">1.3.5. 代码生成</a></li>
+<li><a href="#org5b1bbc0">1.3.6. 创建数据库 main.dart</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org63d4358" class="outline-2">
+<h2 id="org63d4358"><span class="section-number-2">1</span> 在 Flutter 中使用数据库</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orge15d757" class="outline-3">
+<h3 id="orge15d757"><span class="section-number-3">1.1</span> 介绍</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+以 sqlite 为例，flutter 在使用数据库时需要引入 sqflite 依赖<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-yaml"><span style="color: #6a1868;">dependencies</span>:
+  <span style="color: #6a1868;">flutter</span>:
+    <span style="color: #6a1868;">sdk</span>: flutter
+
+  <span style="color: #6a1868;">sqflite</span>:
+</pre>
+</div>
+<p>
+导入 'package:sqflite/sqflite.dart' 与 'package:sqflite/sql.dart' 后，可以在 openDatabase 中的 onCreate 参数中设置初始化<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart">openDatabase<span style="color: #4078f2;">(</span>
+  <span style="color: #50a14f;">'file:///home/steiner/workspace/playground/todolist/todolist.db'</span>,
+  onCreate: <span style="color: #a626a4;">(</span>database, version<span style="color: #a626a4;">)</span> <span style="color: #e45649;">async</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">await</span> database.execute<span style="color: #50a14f;">(</span>
+      <span style="color: #50a14f;">'create table if not exists TaskList('</span>
+      <span style="color: #50a14f;">'id integer primary key autoincrement,'</span>
+      <span style="color: #50a14f;">'name text not null'</span>
+      <span style="color: #50a14f;">');'</span>
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>,
+
+  version: <span style="color: #b751b6;">1</span>
+<span style="color: #4078f2;">)</span>;
+
+
+</pre>
+</div>
+
+<p>
+其余数据库操作参考 <a href="https://flutter.cn/docs/cookbook/persistence/sqlite">中文文档</a><br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgebad7cd" class="outline-3">
+<h3 id="orgebad7cd"><span class="section-number-3">1.2</span> 组件中使用数据库</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+由于在 Dart 中数据库的操作是异步的，返回值是 Future 类型，对 Future 使用 await 需要在异步函数中进行，<br />
+各个组件的 build 方法又是同步的，无法使用 Future<br />
+不过 flutter 提供了 FutureBuilder 组件，为其提供 futurue 选项来构造组件<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">FutureBuilder</span><span style="color: #4078f2;">(</span><span style="color: #a626a4;">{</span>
+  <span style="color: #e45649;">this</span>.future,
+  <span style="color: #e45649;">this</span>.initialData,
+  <span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.builder,
+<span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+<p>
+这里我们只需要用 future 与 builder 就好了<br />
+其中<br />
+</p>
+<ul class="org-ul">
+<li>future：FutureBuilder依赖的Future，通常是一个异步耗时任务。<br /></li>
+<li>initialData：初始数据，用户设置默认数据。<br /></li>
+<li>builder：Widget构建器；该构建器会在Future执行的不同阶段被多次调用，构建器签名如下：<br />
+Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
+</ul>
+
+<p>
+组件由 builder 返回，所有数据的获取通过 snapshot.data ，由于是异步操作，可能会有错误结果， <span class="underline">需要多次调用 future</span><br />
+此时可以通过 snapshot 的一些属性来判断状态<br />
+</p>
+<ul class="org-ul">
+<li>snapshot.hasError<br /></li>
+<li>snapshot.hasData<br /></li>
+</ul>
+<p>
+要查看错误信息，调用 snapshot.error<br />
+</p>
+
+
+<p>
+来看一个例子<br />
+</p>
+<ul class="org-ul">
+<li><p>
+定义一个异步函数，返回数据库对象的 Future 类型<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">Database</span>&gt; <span style="color: #a626a4;">loadDataBase</span><span style="color: #4078f2;">()</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">WidgetsFlutterBinding</span>.ensureInitialized<span style="color: #a626a4;">()</span>;
+  <span style="color: #e45649;">return</span> openDatabase<span style="color: #a626a4;">(</span>
+    <span style="color: #50a14f;">'file:///home/steiner/workspace/playground/todolist/todolist.db'</span>,
+    onCreate: <span style="color: #50a14f;">(</span>database, version<span style="color: #50a14f;">)</span> <span style="color: #e45649;">async</span> <span style="color: #50a14f;">{</span>
+      <span style="color: #e45649;">await</span> database.execute<span style="color: #b751b6;">(</span>
+  <span style="color: #50a14f;">'create table if not exists TaskList('</span>
+      <span style="color: #50a14f;">'id integer primary key autoincrement,'</span>
+      <span style="color: #50a14f;">'name text not null'</span>
+      <span style="color: #50a14f;">');'</span>
+      <span style="color: #b751b6;">)</span>;
+
+      <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">TaskList</span>&gt; <span style="color: #6a1868;">listOfTaskList</span> = <span style="color: #b751b6;">[</span>
+  <span style="color: #986801;">TaskList</span><span style="color: #4db5bd;">(</span>name: <span style="color: #50a14f;">'Hello'</span>, id: <span style="color: #b751b6;">0</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">TaskList</span><span style="color: #4db5bd;">(</span>name: <span style="color: #50a14f;">'World'</span>, id: <span style="color: #b751b6;">0</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">TaskList</span><span style="color: #4db5bd;">(</span>name: <span style="color: #50a14f;">'Fuck'</span>, id: <span style="color: #b751b6;">0</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">TaskList</span><span style="color: #4db5bd;">(</span>name: <span style="color: #50a14f;">'You'</span>, id: <span style="color: #b751b6;">0</span><span style="color: #4db5bd;">)</span>,
+      <span style="color: #b751b6;">]</span>;
+
+      listOfTaskList.forEach<span style="color: #b751b6;">(</span><span style="color: #4db5bd;">(</span>tasklist<span style="color: #4db5bd;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4db5bd;">{</span>
+  <span style="color: #e45649;">await</span> database.rawInsert<span style="color: #4078f2;">(</span>
+    <span style="color: #50a14f;">'insert into </span><span style="color: #6a1868;">${TaskList.TABLE}</span><span style="color: #50a14f;">'</span>
+        <span style="color: #50a14f;">'(name)'</span>
+        <span style="color: #50a14f;">'values(?);'</span>,
+    <span style="color: #a626a4;">[</span>tasklist.name<span style="color: #a626a4;">]</span>
+  <span style="color: #4078f2;">)</span>;
+      <span style="color: #4db5bd;">}</span><span style="color: #b751b6;">)</span>;
+
+      <span style="color: #e45649;">await</span> database.execute<span style="color: #b751b6;">(</span>
+  <span style="color: #50a14f;">'create table </span><span style="color: #6a1868;">${Task.TABLE}</span><span style="color: #50a14f;"> ('</span>
+      <span style="color: #50a14f;">'id integer primary key autoincrement,'</span>
+      <span style="color: #50a14f;">'name text,'</span>
+      <span style="color: #50a14f;">'listid integer,'</span>
+      <span style="color: #50a14f;">'isdone boolean,'</span>
+      <span style="color: #50a14f;">'foreign key(listid) references </span><span style="color: #6a1868;">${TaskList.TABLE}</span><span style="color: #50a14f;"> (id)'</span>
+      <span style="color: #50a14f;">');'</span>
+      <span style="color: #b751b6;">)</span>;
+
+      <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt; <span style="color: #6a1868;">listOfTask</span> = <span style="color: #b751b6;">[</span>
+  <span style="color: #986801;">Task</span><span style="color: #4db5bd;">(</span>id: <span style="color: #b751b6;">0</span>, name: <span style="color: #50a14f;">"task1"</span>, isdone: <span style="color: #b751b6;">false</span>, listid: <span style="color: #b751b6;">1</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">Task</span><span style="color: #4db5bd;">(</span>id: <span style="color: #b751b6;">0</span>, name: <span style="color: #50a14f;">"task2"</span>, isdone: <span style="color: #b751b6;">false</span>, listid: <span style="color: #b751b6;">1</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">Task</span><span style="color: #4db5bd;">(</span>id: <span style="color: #b751b6;">0</span>, name: <span style="color: #50a14f;">"task3"</span>, isdone: <span style="color: #b751b6;">false</span>, listid: <span style="color: #b751b6;">1</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">Task</span><span style="color: #4db5bd;">(</span>id: <span style="color: #b751b6;">0</span>, name: <span style="color: #50a14f;">"task4"</span>, isdone: <span style="color: #b751b6;">false</span>, listid: <span style="color: #b751b6;">2</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #986801;">Task</span><span style="color: #4db5bd;">(</span>id: <span style="color: #b751b6;">0</span>, name: <span style="color: #50a14f;">"task5"</span>, isdone: <span style="color: #b751b6;">false</span>, listid: <span style="color: #b751b6;">2</span><span style="color: #4db5bd;">)</span>,
+      <span style="color: #b751b6;">]</span>;
+
+      listOfTask.forEach<span style="color: #b751b6;">(</span><span style="color: #4db5bd;">(</span>task<span style="color: #4db5bd;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4db5bd;">{</span>
+  <span style="color: #e45649;">await</span> database.rawInsert<span style="color: #4078f2;">(</span>
+    <span style="color: #50a14f;">'insert into </span><span style="color: #6a1868;">${Task.TABLE}</span><span style="color: #50a14f;">'</span>
+        <span style="color: #50a14f;">'(name, isdone, listid)'</span>
+        <span style="color: #50a14f;">'values(?, ?, ?);'</span>,
+    <span style="color: #a626a4;">[</span>task.name, task.isdone, task.listid<span style="color: #a626a4;">]</span>
+  <span style="color: #4078f2;">)</span>;
+      <span style="color: #4db5bd;">}</span><span style="color: #b751b6;">)</span>;
+    <span style="color: #50a14f;">}</span>,
+
+    version: <span style="color: #b751b6;">1</span>
+  <span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div></li>
+
+<li>在 HomePage 组件中定义异步函数 loadTaskList，返回 List&lt;TaskList&gt; 类型<br /></li>
+<li>使用 FutureBuilder ，传入 future<br /></li>
+<li>在 builder 中返回组件<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">HomePage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">TaskList</span>&gt;&gt; <span style="color: #a626a4;">loadTaskList</span><span style="color: #a626a4;">()</span> <span style="color: #e45649;">async</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">final</span> <span style="color: #6a1868;">database</span> = <span style="color: #e45649;">await</span> loadDataBase<span style="color: #50a14f;">()</span>;
+    <span style="color: #e45649;">final</span> <span style="color: #6a1868;">maps</span> =  <span style="color: #e45649;">await</span> database.query<span style="color: #50a14f;">(</span><span style="color: #986801;">TaskList</span>.<span style="color: #b751b6;">TABLE</span><span style="color: #50a14f;">)</span>;
+
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">List</span>.generate<span style="color: #50a14f;">(</span>maps.length, <span style="color: #b751b6;">(</span><span style="color: #6a1868;">index</span><span style="color: #b751b6;">)</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #986801;">Map</span>&lt;<span style="color: #986801;">String</span>, <span style="color: #a626a4;">dynamic</span>&gt; <span style="color: #6a1868;">record</span> = maps<span style="color: #4db5bd;">[</span>index<span style="color: #4db5bd;">]</span>;
+  <span style="color: #e45649;">return</span> <span style="color: #986801;">TaskList</span><span style="color: #4db5bd;">(</span>name: record<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'name'</span><span style="color: #4078f2;">]</span>, id: record<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'id'</span><span style="color: #4078f2;">]</span><span style="color: #4db5bd;">)</span>;
+    <span style="color: #b751b6;">}</span><span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+      appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'HomePage'</span><span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>,
+      body: <span style="color: #986801;">FutureBuilder</span><span style="color: #b751b6;">(</span>
+  future: loadTaskList<span style="color: #4db5bd;">()</span>,
+  builder: <span style="color: #4db5bd;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span>, <span style="color: #986801;">AsyncSnapshot</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">TaskList</span>&gt;&gt; <span style="color: #6a1868;">snapshot</span><span style="color: #4db5bd;">)</span> <span style="color: #4db5bd;">{</span>
+    <span style="color: #e45649;">if</span><span style="color: #4078f2;">(</span>snapshot.<span style="color: #6a1868;">hasError</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+      <span style="color: #e45649;">return</span> <span style="color: #986801;">Text</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">"fuck, error: </span><span style="color: #6a1868;">${snapshot.error}</span><span style="color: #50a14f;">"</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #4078f2;">}</span> <span style="color: #e45649;">else</span> <span style="color: #e45649;">if</span><span style="color: #4078f2;">(</span>snapshot.<span style="color: #6a1868;">hasData</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+      <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">TaskList</span>&gt; <span style="color: #6a1868;">listOfTaskList</span> = snapshot.data!;
+      <span style="color: #e45649;">return</span> <span style="color: #986801;">Column</span><span style="color: #a626a4;">(</span>
+        children: listOfTaskList.map<span style="color: #50a14f;">(</span><span style="color: #b751b6;">(</span><span style="color: #6a1868;">tasklist</span><span style="color: #b751b6;">)</span> =&gt; buildTaskList<span style="color: #b751b6;">(</span>context, tasklist<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>.toList<span style="color: #50a14f;">()</span>,
+      <span style="color: #a626a4;">)</span>;
+    <span style="color: #4078f2;">}</span> <span style="color: #e45649;">else</span> <span style="color: #4078f2;">{</span>
+      <span style="color: #e45649;">return</span> <span style="color: #986801;">Text</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">"there is no data now"</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #4078f2;">}</span>
+  <span style="color: #4db5bd;">}</span>,
+      <span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildTaskList</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span>, <span style="color: #986801;">TaskList</span> <span style="color: #6a1868;">tasklist</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">OutlineButton</span><span style="color: #50a14f;">(</span>
+      onPressed: <span style="color: #b751b6;">()</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #986801;">Navigator</span>.push<span style="color: #4db5bd;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #4078f2;">(</span>
+      builder: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> =&gt; <span style="color: #986801;">TaskPage</span><span style="color: #a626a4;">(</span>tasklist: tasklist<span style="color: #a626a4;">)</span>
+  <span style="color: #4078f2;">)</span><span style="color: #4db5bd;">)</span>;
+      <span style="color: #b751b6;">}</span>,
+
+      child: <span style="color: #986801;">Row</span><span style="color: #b751b6;">(</span>
+  mainAxisAlignment: <span style="color: #986801;">MainAxisAlignment</span>.spaceBetween,
+  children: <span style="color: #4db5bd;">[</span>
+    <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span>tasklist.name<span style="color: #4078f2;">)</span>,
+    <span style="color: #986801;">Text</span><span style="color: #4078f2;">(</span>tasklist.id.toString<span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>,
+  <span style="color: #4db5bd;">]</span>,
+      <span style="color: #b751b6;">)</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8dd7152" class="outline-3">
+<h3 id="org8dd7152"><span class="section-number-3">1.3</span> 使用 ORM 框架</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+在一个测试的目录下，有以下文件<br />
+</p>
+<ul class="org-ul">
+<li>database.dart<br /></li>
+<li>database.g.dart<br /></li>
+<li>main.dart<br /></li>
+<li>task.dart<br /></li>
+<li><code>task_dao.dart</code><br /></li>
+</ul>
+</div>
+<div id="outline-container-orge5c0ea5" class="outline-4">
+<h4 id="orge5c0ea5"><span class="section-number-4">1.3.1</span> 准备工作</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+在 pubspec.yaml 中需要导入几个依赖<br />
+</p>
+<ul class="org-ul">
+<li>floor<br /></li>
+<li><code>builder_runner</code><br /></li>
+<li><code>floor_generator</code><br /></li>
+</ul>
+
+<p>
+其中最重要的是 floor<sub>generator</sub> ，没有他后面的代码生成不会成功<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgd9c1ce6" class="outline-4">
+<h4 id="orgd9c1ce6"><span class="section-number-4">1.3.2</span> 实体类的定义 task.dart</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+需要为实体类重载两个方法<br />
+</p>
+<ul class="org-ul">
+<li>operator ==<br /></li>
+<li>get hashCode<br /></li>
+</ul>
+<p>
+另外 toString() 可选<br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a626a4;">import</span> <span style="color: #50a14f;">'package:floor/floor.dart'</span>;
+
+<span style="color: #b751b6;">@entity</span>
+<span style="color: #e45649;">class</span> <span style="color: #986801;">Task</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #b751b6;">@PrimaryKey</span><span style="color: #a626a4;">(</span>autoGenerate: <span style="color: #b751b6;">true</span><span style="color: #a626a4;">)</span>
+  <span style="color: #e45649;">final</span> <span style="color: #986801;">int</span>? id;
+  <span style="color: #e45649;">final</span> <span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span>;
+
+  <span style="color: #986801;">Task</span><span style="color: #a626a4;">(</span><span style="color: #e45649;">this</span>.id, <span style="color: #e45649;">this</span>.message<span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">bool</span> <span style="color: #a626a4;">operator</span> <span style="color: #a626a4;">==</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Object</span> <span style="color: #6a1868;">other</span><span style="color: #a626a4;">)</span> =&gt;
+  identical<span style="color: #a626a4;">(</span><span style="color: #e45649;">this</span>, other<span style="color: #a626a4;">)</span> ||
+  other <span style="color: #e45649;">is</span> <span style="color: #986801;">Task</span> &amp;&amp;
+  runtimeType == other.runtimeType &amp;&amp;
+  id == other.id &amp;&amp;
+  message == other.message;
+
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">int</span> <span style="color: #a626a4;">get</span> <span style="color: #6a1868;">hashCode</span> =&gt; id.hashCode ^ message.hashCode;
+
+  <span style="color: #b751b6;">@override</span>
+  <span style="color: #986801;">String</span> <span style="color: #a626a4;">toString</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement toString</span>
+    <span style="color: #e45649;">return</span> <span style="color: #50a14f;">'Task{id: </span><span style="color: #6a1868;">$id</span><span style="color: #50a14f;">, message: </span><span style="color: #6a1868;">$message</span><span style="color: #50a14f;">}'</span>;
+  <span style="color: #a626a4;">}</span>
+
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+
+<p>
+在代码中有<br />
+</p>
+<ul class="org-ul">
+<li><b>@entity</b> 声明这个类是实体类<br /></li>
+<li><b>@PrimaryKey</b> 声明主键<br /></li>
+<li><b>bool operator ==</b> 重载<br /></li>
+<li><b>int get hashCode</b> 重载<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4fb25e3" class="outline-4">
+<h4 id="org4fb25e3"><span class="section-number-4">1.3.3</span> DAO 的定义 task<sub>dao.dart</sub></h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #b751b6;">@dao</span>
+<span style="color: #a626a4;">abstract</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">TaskDao</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #b751b6;">@Query</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'select * from task where id = :id'</span><span style="color: #a626a4;">)</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">Task</span>?&gt; findTaskById<span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">id</span><span style="color: #a626a4;">)</span> ;
+
+  <span style="color: #b751b6;">@Query</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'select * from task'</span><span style="color: #a626a4;">)</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt;&gt; <span style="color: #a626a4;">findAllTask</span><span style="color: #a626a4;">()</span>;
+
+  <span style="color: #b751b6;">@Query</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">'select * from task'</span><span style="color: #a626a4;">)</span>
+  <span style="color: #986801;">Stream</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt;&gt; <span style="color: #a626a4;">findAllTasksAsStream</span><span style="color: #a626a4;">()</span>;
+
+  <span style="color: #b751b6;">@insert</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insertTask</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Task</span> <span style="color: #6a1868;">task</span><span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@insert</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insertTasks</span><span style="color: #a626a4;">(</span><span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt; <span style="color: #6a1868;">tasks</span><span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@update</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">updateTask</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Task</span> <span style="color: #6a1868;">task</span><span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@update</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">updateTasks</span><span style="color: #a626a4;">(</span><span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt; <span style="color: #6a1868;">tasks</span><span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@delete</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">deleteTask</span><span style="color: #a626a4;">(</span><span style="color: #986801;">Task</span> <span style="color: #6a1868;">task</span><span style="color: #a626a4;">)</span>;
+
+  <span style="color: #b751b6;">@delete</span>
+  <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">deleteTasks</span><span style="color: #a626a4;">(</span><span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt; <span style="color: #6a1868;">tasks</span><span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+<p>
+在代码中，有<br />
+</p>
+<ul class="org-ul">
+<li><b>abstract class</b> 抽象类<br /></li>
+<li><b>@dao</b> 声明类是一个 Data Access Object<br /></li>
+<li><b>@Query</b> 通过此函数来查询，传入查询语句表示函数的行为<br /></li>
+<li><b>@insert</b> 通过此函数来插入数据<br /></li>
+<li><b>@update</b> 通过此函数来更新数据<br /></li>
+<li><b>@delete</b> 通过此函数来删除数据<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf4fade0" class="outline-4">
+<h4 id="orgf4fade0"><span class="section-number-4">1.3.4</span> 数据库定义 database.dart</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+在文件中，<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a626a4;">part</span> <span style="color: #50a14f;">'database.g.dart'</span>;
+
+<span style="color: #b751b6;">@Database</span><span style="color: #4078f2;">(</span>version: <span style="color: #b751b6;">1</span>, entities: <span style="color: #a626a4;">[</span><span style="color: #986801;">Task</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #a626a4;">abstract</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">FlutterDataBase</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">FloorDatabase</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">TaskDao</span> <span style="color: #a626a4;">get</span> <span style="color: #6a1868;">taskDao</span>;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><b>part</b> 表示 'database.g.dart` 是该文件/模块的一部分？<br /></li>
+<li><b>FlutterDataBase</b> 是抽象类，继承自 FloorDatabase<br /></li>
+<li><b>FlutterDataBase</b> 中定义了一个 getter<br /></li>
+<li><b>@Database</b> 这个类看作一个数据库<br /></li>
+<li>其中 entities 表示访问的数据表，通过重载 get ，返回 DAO 对象来访问数据表<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd5621c6" class="outline-4">
+<h4 id="orgd5621c6"><span class="section-number-4">1.3.5</span> 代码生成</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+在 database.dart 所在目录下，输入<br />
+</p>
+<pre class="example">
+flutter pub run build_runner build
+</pre>
+
+<p>
+会生成 'database.g.dart' 文件<br />
+接下来的数据库操作就会通过这个文件<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org5b1bbc0" class="outline-4">
+<h4 id="org5b1bbc0"><span class="section-number-4">1.3.6</span> 创建数据库 main.dart</h4>
+<div class="outline-text-4" id="text-1-3-6">
+<p>
+在异步的主函数中，首先确认初始化<br />
+</p>
+<pre class="example">
+WidgetsFlutterBinding.ensureInitialized()
+</pre>
+
+<p>
+再通过 'database.g.dart' 中的 <code>$FloorFlutterDatabase</code> 来创建数据库，再获取 DAO 对象<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #e45649;">final</span> <span style="color: #6a1868;">database</span> = <span style="color: #e45649;">await</span> <span style="color: #986801;">$FloorFlutterDataBase</span>
+.databaseBuilder<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'file://./flutter_database.db'</span><span style="color: #4078f2;">)</span>
+.build<span style="color: #4078f2;">()</span>;
+
+<span style="color: #e45649;">final</span> <span style="color: #6a1868;">dao</span> = database.taskDao;
+</pre>
+</div>
+
+<p>
+<b>注意</b><br />
+可以在 'databaseBuilder' 中传入数据库地址<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-09-18 六 14:39</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

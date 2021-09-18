@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-01 三 19:19 -->
+<!-- 2021-09-17 五 21:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Flutter Counter</title>
@@ -193,7 +193,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -224,17 +223,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org447f14b">如何写一个 Flutter 应用</a></li>
-<li><a href="#orgcfbf8d8">什么是 Scaffold 组件</a></li>
-<li><a href="#orgbecbc06">如何布局多个组件</a></li>
-<li><a href="#orgd05ab64">如何修饰样式</a></li>
-<li><a href="#org979171f">对比 html 语法</a></li>
+<li><a href="#orgb9c5e19">1. 如何写一个 Flutter 应用</a></li>
+<li><a href="#org2abaee5">2. 什么是 Scaffold 组件</a></li>
+<li><a href="#orgaf33d4f">3. 如何布局多个组件</a></li>
+<li><a href="#orgf243fad">4. 如何修饰样式</a></li>
+<li><a href="#orgb3a0732">5. 对比 html 语法</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org447f14b" class="outline-2">
-<h2 id="org447f14b">如何写一个 Flutter 应用</h2>
-<div class="outline-text-2" id="text-org447f14b">
+<div id="outline-container-orgb9c5e19" class="outline-2">
+<h2 id="orgb9c5e19"><span class="section-number-2">1</span> 如何写一个 Flutter 应用</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 我们从一个计数器讲起， 首先建立 <b>Counter</b> 类<br />
 </p>
@@ -340,16 +339,16 @@
 至此，我们的第一个计数器应用就搭建完毕了<br />
 </p>
 
-<div id="orgb98029f" class="figure">
+<div id="org0dd66f1" class="figure">
 <p><img src="images/如何写一个_Flutter_应用/2021-06-12_16-10-49_screenshot.png" alt="2021-06-12_16-10-49_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgcfbf8d8" class="outline-2">
-<h2 id="orgcfbf8d8">什么是 Scaffold 组件</h2>
-<div class="outline-text-2" id="text-orgcfbf8d8">
+<div id="outline-container-org2abaee5" class="outline-2">
+<h2 id="org2abaee5"><span class="section-number-2">2</span> 什么是 Scaffold 组件</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 在上面的 <span class="underline">CounterHomePageState</span> 中，还有个 <span class="underline">Scaffold</span> 组件没有讲，这是 <span class="underline">Flutter</span> 为我们提供的主页，<br />
 官网的描述：Material Design布局结构的基本实现， 类提供了用于显示drawer、snackbar和底部sheet的API。<br />
@@ -357,9 +356,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgbecbc06" class="outline-2">
-<h2 id="orgbecbc06">如何布局多个组件</h2>
-<div class="outline-text-2" id="text-orgbecbc06">
+<div id="outline-container-orgaf33d4f" class="outline-2">
+<h2 id="orgaf33d4f"><span class="section-number-2">3</span> 如何布局多个组件</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 <span class="underline">Scaffold</span> 的 <span class="underline">body</span> 只能传递一个组件，想把一堆东西塞进去，可以使用 <span class="underline">Flutter</span> 提供的 <b>布局组件</b> 该类组件都有一个 <span class="underline">children</span> 属性，表示一个 <span class="underline">Widget</span> 数组<br />
 在上面的例子中， <span class="underline">Column</span> 就是一个布局组件，按竖直方向布局组件，并赋值 <span class="underline">mainAxisalignment</span> 为 <span class="underline">center</span> 表示主轴方向垂直对齐<br />
@@ -390,9 +389,9 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd05ab64" class="outline-2">
-<h2 id="orgd05ab64">如何修饰样式</h2>
-<div class="outline-text-2" id="text-orgd05ab64">
+<div id="outline-container-orgf243fad" class="outline-2">
+<h2 id="orgf243fad"><span class="section-number-2">4</span> 如何修饰样式</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 像 <span class="underline">css</span> 样式一样， <span class="underline">flutter</span> 中样式也可以继承，如果要更改，用 <span class="underline">Theme</span> 组件包装一下就可以了<br />
 其中 <span class="underline">Theme</span> 组件<br />
@@ -407,9 +406,9 @@
 </div>
 </div>
 
-<div id="outline-container-org979171f" class="outline-2">
-<h2 id="org979171f">对比 html 语法</h2>
-<div class="outline-text-2" id="text-org979171f">
+<div id="outline-container-orgb3a0732" class="outline-2">
+<h2 id="orgb3a0732"><span class="section-number-2">5</span> 对比 html 语法</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 对比 html 的标签语法，比如<br />
 </p>
@@ -443,7 +442,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-09-01 三 19:19</p>
+<p class="date">Created: 2021-09-17 五 21:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

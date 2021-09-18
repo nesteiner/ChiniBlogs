@@ -28,7 +28,7 @@ DOM
 #+end_src
 
 #+begin_src dart
-  var expose = context.read<ExposedType>()
+  var expose = context.read<ExposedType>();
 #+end_src
 
 **注意**
