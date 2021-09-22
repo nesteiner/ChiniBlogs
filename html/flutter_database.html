@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-18 六 23:52 -->
+<!-- 2021-09-22 三 08:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在 Flutter 中使用数据库</title>
@@ -231,14 +231,14 @@
 <li><a href="#org8dd7152">1.3. 使用 ORM 框架</a>
 <ul>
 <li><a href="#orge5c0ea5">1.3.1. 准备工作</a></li>
-<li><a href="#orgd9c1ce6">1.3.2. 实体类的定义 task.dart</a></li>
+<li><a href="#orgb14450e">1.3.2. 实体类的定义 <code>task.dart</code></a></li>
 <li><a href="#org6400a61">1.3.3. DAO 的定义 <code>task_dao.dart</code></a></li>
-<li><a href="#orgf4fade0">1.3.4. 数据库定义 database.dart</a></li>
+<li><a href="#org2d6febb">1.3.4. 数据库定义 <code>database.dart</code></a></li>
 <li><a href="#orgd5621c6">1.3.5. 代码生成</a></li>
-<li><a href="#org5b1bbc0">1.3.6. 创建数据库 main.dart</a></li>
-<li><a href="#orgf55135a">1.3.7. <span class="todo TODO">TODO</span> 疑问</a></li>
+<li><a href="#orgf8bddc0">1.3.6. 创建数据库 <code>main.dart</code></a></li>
 </ul>
 </li>
+<li><a href="#org5fc3020">1.4. 在数据库更新时刷新组件</a></li>
 </ul>
 </li>
 </ul>
@@ -264,7 +264,7 @@
 </pre>
 </div>
 <p>
-导入 'package:sqflite/sqflite.dart' 与 'package:sqflite/sql.dart' 后，可以在 openDatabase 中的 onCreate 参数中设置初始化<br />
+导入 <code>package:sqflite/sqflite.dart</code> 与 <code>package:sqflite/sql.dart</code> 后，可以在 openDatabase 中的 onCreate 参数中设置初始化<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-dart">openDatabase<span style="color: #4078f2;">(</span>
@@ -295,9 +295,9 @@
 <h3 id="orgebad7cd"><span class="section-number-3">1.2</span> 组件中使用数据库</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-由于在 Dart 中数据库的操作是异步的，返回值是 Future 类型，对 Future 使用 await 需要在异步函数中进行，<br />
-各个组件的 build 方法又是同步的，无法使用 Future<br />
-不过 flutter 提供了 FutureBuilder 组件，为其提供 futurue 选项来构造组件<br />
+由于在 <code>Dart</code> 中数据库的操作是异步的，返回值是 <code>Future</code> 类型，对 <code>Future</code> 使用 <code>await</code> 需要在异步函数中进行，<br />
+各个组件的 <code>build</code> 方法又是同步的，无法使用 <code>Future</code><br />
+不过 <code>flutter</code> 提供了 <code>FutureBuilder</code> 组件，为其提供 <code>futurue</code> 选项来构造组件<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #986801;">FutureBuilder</span><span style="color: #4078f2;">(</span><span style="color: #a626a4;">{</span>
@@ -308,26 +308,26 @@
 </pre>
 </div>
 <p>
-这里我们只需要用 future 与 builder 就好了<br />
+这里我们只需要用 <code>future</code> 与 <code>builder</code> 就好了<br />
 其中<br />
 </p>
 <ul class="org-ul">
-<li>future：FutureBuilder依赖的Future，通常是一个异步耗时任务。<br /></li>
-<li>initialData：初始数据，用户设置默认数据。<br /></li>
-<li>builder：Widget构建器；该构建器会在Future执行的不同阶段被多次调用，构建器签名如下：<br />
-Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
+<li><code>future</code> : <code>FutureBuilder</code> 依赖的 <code>Future</code> ，通常是一个异步耗时任务。<br /></li>
+<li><code>initialData</code> : 初始数据，用户设置默认数据。<br /></li>
+<li><code>builder</code> : <code>Widget</code> 构建器; 该构建器会在 <code>Future</code> 执行的不同阶段被多次调用，构建器签名如下:<br />
+<code>Function (BuildContext context, AsyncSnapshot snapshot)</code><br /></li>
 </ul>
 
 <p>
-组件由 builder 返回，所有数据的获取通过 snapshot.data ，由于是异步操作，可能会有错误结果， <span class="underline">需要多次调用 future</span><br />
-此时可以通过 snapshot 的一些属性来判断状态<br />
+组件由 <code>builder</code> 返回，所有数据的获取通过 <code>snapshot.data</code> ，由于是异步操作，可能会有错误结果， <span class="underline">需要多次调用 future</span><br />
+此时可以通过 <code>snapshot</code> 的一些属性来判断状态<br />
 </p>
 <ul class="org-ul">
-<li>snapshot.hasError<br /></li>
-<li>snapshot.hasData<br /></li>
+<li><code>snapshot.hasError</code><br /></li>
+<li><code>snapshot.hasData</code><br /></li>
 </ul>
 <p>
-要查看错误信息，调用 snapshot.error<br />
+要查看错误信息，调用 <code>snapshot.error</code><br />
 </p>
 
 
@@ -401,9 +401,9 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 </pre>
 </div></li>
 
-<li>在 HomePage 组件中定义异步函数 loadTaskList，返回 List&lt;TaskList&gt; 类型<br /></li>
-<li>使用 FutureBuilder ，传入 future<br /></li>
-<li>在 builder 中返回组件<br /></li>
+<li>在 <code>HomePage</code> 组件中定义异步函数 <code>loadTaskList</code> ，返回 <code>List&lt;TaskList&gt;</code> 类型<br /></li>
+<li>使用 <code>FutureBuilder</code> ，传入 <code>future</code><br /></li>
+<li>在 <code>builder</code> 中返回组件<br /></li>
 </ul>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">HomePage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
@@ -471,10 +471,10 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 在一个测试的目录下，有以下文件<br />
 </p>
 <ul class="org-ul">
-<li>database.dart<br /></li>
-<li>database.g.dart<br /></li>
-<li>main.dart<br /></li>
-<li>task.dart<br /></li>
+<li><code>database.dart</code><br /></li>
+<li><code>database.g.dart</code><br /></li>
+<li><code>main.dart</code><br /></li>
+<li><code>task.dart</code><br /></li>
 <li><code>task_dao.dart</code><br /></li>
 </ul>
 </div>
@@ -482,31 +482,31 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 <h4 id="orge5c0ea5"><span class="section-number-4">1.3.1</span> 准备工作</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
-在 pubspec.yaml 中需要导入几个依赖<br />
+在 <code>pubspec.yaml</code> 中需要导入几个依赖<br />
 </p>
 <ul class="org-ul">
-<li>floor<br /></li>
+<li><code>floor</code><br /></li>
 <li><code>builder_runner</code><br /></li>
 <li><code>floor_generator</code><br /></li>
 </ul>
 
 <p>
-其中最重要的是 floor<sub>generator</sub> ，没有他后面的代码生成不会成功<br />
+其中最重要的是 <code>floor_generator</code> ，没有他后面的代码生成不会成功<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgd9c1ce6" class="outline-4">
-<h4 id="orgd9c1ce6"><span class="section-number-4">1.3.2</span> 实体类的定义 task.dart</h4>
+<div id="outline-container-orgb14450e" class="outline-4">
+<h4 id="orgb14450e"><span class="section-number-4">1.3.2</span> 实体类的定义 <code>task.dart</code></h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 需要为实体类重载两个方法<br />
 </p>
 <ul class="org-ul">
-<li>operator ==<br /></li>
-<li>get hashCode<br /></li>
+<li><code>operator ==</code><br /></li>
+<li><code>get hashCode</code><br /></li>
 </ul>
 <p>
-另外 toString() 可选<br />
+另外 <code>toString()</code> 可选<br />
 </p>
 
 <div class="org-src-container">
@@ -548,15 +548,15 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 在代码中有<br />
 </p>
 <ul class="org-ul">
-<li><b>@entity</b> 声明这个类是实体类<br /></li>
-<li><b>@PrimaryKey</b> 声明主键<br /></li>
-<li><b>bool operator ==</b> 重载<br /></li>
-<li><b>int get hashCode</b> 重载<br /></li>
+<li><code>@entity</code> 声明这个类是实体类<br /></li>
+<li><code>@PrimaryKey</code> 声明主键<br /></li>
+<li><code>bool operator ==</code> 重载<br /></li>
+<li><code>int get hashCode</code> 重载<br /></li>
 </ul>
 
 <p>
-其中 <b>@PrimaryKey(autoGenerate = true)</b> 表示这个主键是自增序列，<br />
-在构造函数中，主键 id 被定义为可以为空，这样不用传入 id, floor 会自动帮我们补上，按照自增顺序定义 id<br />
+其中 <code>@PrimaryKey(autoGenerate = true)</code> 表示这个主键是自增序列，<br />
+在构造函数中，主键 <code>id</code> 被定义为可以为空，这样不用传入 <code>id</code> , <code>floor</code> 会自动帮我们补上，按照自增顺序定义 <code>id</code><br />
 </p>
 </div>
 </div>
@@ -565,7 +565,7 @@ Function (BuildContext context, AsyncSnapshot snapshot)<br /></li>
 <h4 id="org6400a61"><span class="section-number-4">1.3.3</span> DAO 的定义 <code>task_dao.dart</code></h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
-task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
+<code>task_dao</code> 可以看作对表 <code>Task</code> 的操作接口<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #b751b6;">@dao</span>
@@ -603,17 +603,17 @@ task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
 在代码中，有<br />
 </p>
 <ul class="org-ul">
-<li><b>abstract class</b> 抽象类<br /></li>
-<li><b>@dao</b> 声明类是一个 Data Access Object<br /></li>
-<li><b>@Query</b> 通过此函数来查询，传入查询语句表示函数的行为<br /></li>
-<li><b>@insert</b> 通过此函数来插入数据<br /></li>
-<li><b>@update</b> 通过此函数来更新数据<br /></li>
-<li><b>@delete</b> 通过此函数来删除数据<br /></li>
+<li><code>abstract class</code> 抽象类<br /></li>
+<li><code>@dao</code> 声明类是一个 Data Access Object<br /></li>
+<li><code>@Query</code> 通过此函数来查询，传入查询语句表示函数的行为<br /></li>
+<li><code>@insert</code> 通过此函数来插入数据<br /></li>
+<li><code>@update</code> 通过此函数来更新数据<br /></li>
+<li><code>@delete</code> 通过此函数来删除数据<br /></li>
 </ul>
 
 <p>
 其中，插入相同主键的数据，可能会产生冲突，从而程序崩溃<br />
-默认的冲突解决方法是 abort ，也可以自己定义方法为 relpace<br />
+默认的冲突解决方法是 <code>abort</code> ，也可以自己定义方法为 <code>relpace</code><br />
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #b751b6;">@Insert</span><span style="color: #4078f2;">(</span>onConflict: <span style="color: #986801;">OnConflictStrategy</span>.replace<span style="color: #4078f2;">)</span>
@@ -622,8 +622,8 @@ task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgf4fade0" class="outline-4">
-<h4 id="orgf4fade0"><span class="section-number-4">1.3.4</span> 数据库定义 database.dart</h4>
+<div id="outline-container-org2d6febb" class="outline-4">
+<h4 id="org2d6febb"><span class="section-number-4">1.3.4</span> 数据库定义 <code>database.dart</code></h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 在文件中，<br />
@@ -639,11 +639,11 @@ task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
 </div>
 
 <ul class="org-ul">
-<li><b>part</b> 表示 'database.g.dart` 是该文件/模块的一部分？<br /></li>
-<li><b>FlutterDataBase</b> 是抽象类，继承自 FloorDatabase<br /></li>
-<li><b>FlutterDataBase</b> 中定义了一个 getter<br /></li>
-<li><b>@Database</b> 这个类看作一个数据库<br /></li>
-<li>其中 entities 表示访问的数据表，通过重载 get ，返回 DAO 对象来访问数据表<br /></li>
+<li><code>part</code> 表示 <code>database.g.dart</code> 是该文件/模块的一部分？<br /></li>
+<li><code>FlutterDataBase</code> 是抽象类，继承自 <code>FloorDatabase</code><br /></li>
+<li><code>FlutterDataBase</code> 中定义了一个 <code>getter</code><br /></li>
+<li><code>@Database</code> 这个类看作一个数据库<br /></li>
+<li>其中 <code>entities</code> 表示访问的数据表，通过重载 <code>get</code> ，返回 <code>DAO</code> 对象来访问数据表<br /></li>
 </ul>
 </div>
 </div>
@@ -651,14 +651,9 @@ task<sub>dao</sub> 可以看作对表 Task 的操作接口<br />
 <h4 id="orgd5621c6"><span class="section-number-4">1.3.5</span> 代码生成</h4>
 <div class="outline-text-4" id="text-1-3-5">
 <p>
-在 database.dart 所在目录下，输入<br />
-</p>
-<pre class="example">
-flutter pub run build_runner build
-</pre>
-
-<p>
-会生成 'database.g.dart' 文件<br />
+在 <code>database.dart</code> 所在目录下，输入<br />
+<code>flutter pub run build_runner build</code><br />
+会生成 <code>database.g.dart</code> 文件<br />
 接下来的数据库操作就会通过这个文件<br />
 </p>
 
@@ -676,18 +671,13 @@ flutter pub run build_runner build
 </p>
 </div>
 </div>
-<div id="outline-container-org5b1bbc0" class="outline-4">
-<h4 id="org5b1bbc0"><span class="section-number-4">1.3.6</span> 创建数据库 main.dart</h4>
+<div id="outline-container-orgf8bddc0" class="outline-4">
+<h4 id="orgf8bddc0"><span class="section-number-4">1.3.6</span> 创建数据库 <code>main.dart</code></h4>
 <div class="outline-text-4" id="text-1-3-6">
 <p>
 在异步的主函数中，首先确认初始化<br />
-</p>
-<pre class="example">
-WidgetsFlutterBinding.ensureInitialized()
-</pre>
-
-<p>
-再通过 'database.g.dart' 中的 <code>$FloorFlutterDatabase</code> 来创建数据库，再获取 DAO 对象<br />
+<code>WidgetsFlutterBinding.ensureInitialized()</code><br />
+再通过 <code>database.g.dart</code> 中的 <code>$FloorFlutterDatabase</code> 来创建数据库，再获取 <code>DAO</code> 对象<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #e45649;">final</span> <span style="color: #6a1868;">database</span> = <span style="color: #e45649;">await</span> <span style="color: #986801;">$FloorFlutterDataBase</span>
@@ -700,27 +690,72 @@ WidgetsFlutterBinding.ensureInitialized()
 
 <p>
 <b>注意</b><br />
-可以在 'databaseBuilder' 中传入数据库地址<br />
+可以在 <code>databaseBuilder</code> 中传入数据库地址<br />
 </p>
 </div>
 </div>
+</div>
 
 
 
-<div id="outline-container-orgf55135a" class="outline-4">
-<h4 id="orgf55135a"><span class="section-number-4">1.3.7</span> <span class="todo TODO">TODO</span> 疑问</h4>
-<div class="outline-text-4" id="text-1-3-7">
+
+<div id="outline-container-org5fc3020" class="outline-3">
+<h3 id="org5fc3020"><span class="section-number-3">1.4</span> 在数据库更新时刷新组件</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
-如何在构建数据库时使其为空<br />
+使用 <code>FutureBuilder</code> 构造组件只能用一次 <code>future</code> ，这样的话组件不会感知到数据库的更新<br />
+为了解决这个问题，我们将获取数据库数据的结果定义为 <code>Stream</code> ，再用 <code>StreamBuilder</code> 来构造<br />
 </p>
+
+<p>
+首先，是重新定义一个数据库的查询方法，在 <code>task_dao.dart</code> 中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #b751b6;">@Query</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">'select * from task'</span><span style="color: #4078f2;">)</span>
+<span style="color: #986801;">Stream</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt;&gt; findAllTasksAsStream<span style="color: #4078f2;">()</span>;
+</pre>
 </div>
+
+<p>
+之后，重新生成代码<br />
+<code>flutter pub run build_runner build</code><br />
+</p>
+
+<p>
+再是 <code>StreamBuilder</code> 传入 <code>stream</code> 与 <code>builder</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #986801;">StreamBuilder</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Task</span>&gt;&gt;<span style="color: #4078f2;">(</span>
+  stream: dao.findAllTasksAsStream<span style="color: #a626a4;">()</span>,
+  builder: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">_</span>, <span style="color: #6a1868;">snapshot</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649;">if</span> <span style="color: #50a14f;">(</span>!snapshot.hasData<span style="color: #50a14f;">)</span> <span style="color: #e45649;">return</span> <span style="color: #986801;">Container</span><span style="color: #50a14f;">()</span>;
+
+    <span style="color: #e45649;">final</span> <span style="color: #6a1868;">tasks</span> = snapshot.requireData;
+
+    <span style="color: #e45649;">return</span> <span style="color: #986801;">ListView</span>.builder<span style="color: #50a14f;">(</span>
+      itemCount: tasks.length,
+      itemBuilder: <span style="color: #b751b6;">(</span><span style="color: #6a1868;">_</span>, <span style="color: #6a1868;">index</span><span style="color: #b751b6;">)</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #e45649;">return</span> <span style="color: #986801;">TaskListCell</span><span style="color: #4db5bd;">(</span>
+    task: tasks<span style="color: #4078f2;">[</span>index<span style="color: #4078f2;">]</span>,
+    dao: dao,
+  <span style="color: #4db5bd;">)</span>;
+      <span style="color: #b751b6;">}</span>,
+    <span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>,
+<span style="color: #4078f2;">)</span>,
+</pre>
+</div>
+
+<p>
+<b>疑问</b><br />
+<code>snapshot.requireData</code> 能否使用 <code>snapshot.data!</code> 来替代 ?</p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-09-18 六 23:52</p>
+<p class="date">Created: 2021-09-22 三 08:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
