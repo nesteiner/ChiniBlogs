@@ -1,5 +1,5 @@
 #+title: 学校作业记录
-#+options: toc:nil section-number:nil
+#+options: section-number:nil
 * School Work Record
 ** 数据结构实践作业
 [[file:practise][goto project]]
