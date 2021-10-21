@@ -105,3 +105,245 @@
 
 #+end_src
 
+** 10.1 综合课程设计题目
+这次实践选了三个简单的A级题目，要是没把以前的仓库删了，C级题目就能写了
+*** A1 Josephus 环问题 
+**** 题目描述
+判决 =length= 个犯人的死刑，让犯人站成一个圈，从 =start= 开始暑期，每数到 =distance= 个犯人，就拉出来处决
+然后再从下一个开始数 =distance= 个，数到的人再处决，知道剩下最后一个犯人予以赦免
+**** 分析
+1. =josephus= 环的问题我用循环链表来解决，由于标准库里没有这个数据结构，这里我手动调整下迭代器的位置就够了
+2. 这个程序有终止条件，当 *犯人数量* 为 1 时停止
+**** 函数说明
+=int josephus(int length, int start, int distance)=
+传入犯人的数量 =length= ，从第 =start= 开始，间隔为 =distance=
+函数返回存活的犯人编号
+**** 完整代码
+#+begin_src c++
+  int josephus(int length, int start, int distance) {
+    list<int> prisoners;
+
+    for (int i = 1; i <= length; i += 1) {
+      prisoners.push_back(i);
+    }
+
+    list<int>::iterator it = next(prisoners.begin(), start - 1);
+    while (true) {
+      if (prisoners.size() == 1) {
+        break;
+      }
+
+      // list<int>::iterator target = next(it, distance - 1);
+      list<int>::iterator target = it;
+      for (int i = 2; i <= distance; i += 1) {
+        target = next(target);
+        if (target == prisoners.end()) {
+          target = prisoners.begin();
+        }
+      }
+
+      it = next(target);
+      prisoners.erase(target);
+
+      if (it == prisoners.end()) {
+        it = prisoners.begin();
+      }
+    }
+
+    return prisoners.front());
+  }
+
+#+end_src
+
+**** 测试案例
+#+begin_src c++
+  int main() {
+    cout << "josephus(3, 2, 3)" << '\t' << josephus(3, 2, 3) << endl;
+    cout << "josephus(4, 2, 3)" << '\t' << josephus(4, 2, 3) << endl;
+    cout << "josephus(5, 2, 3)" << '\t' << josephus(5, 2, 3) << endl;
+    cout << "josephus(6, 2, 3)" << '\t' << josephus(6, 2, 3) << endl;
+    cout << "josephus(7, 2, 3)" << '\t' << josephus(7, 2, 3) << endl;
+    cout << "josephus(8, 2, 3)" << '\t' << josephus(8, 2, 3) << endl;
+    cout << "josephus(9, 2, 3)" << '\t' << josephus(9, 2, 3) << endl;
+    cout << "josephus(10, 2, 3)" << '\t' << josephus(10, 2, 3) << endl;
+
+    return 0;
+  }
+
+#+end_src
+
+已经手动运行过，没有发生段错误或数组越界的异常
+**** 时间复杂度
+*** A2 合并线性表
+**** 题目描述
+求两个集合的 =union= 操作，分别用顺序存储结构和链式存储结构实现
+**** 分析
+1. 有两个链表 =A= , =B=
+2. 创建链表 =C= 为 =A= 的备份，再从 =B= 中提取不属于 =A= 的元素， 然后插入到 =C=
+**** 函数说明
+=list<int> union_list(list<int> & left, list<int> & right)=
+传入链表 =left= 与 =right= ，返回一个链表
+
+=vector<int> union_vector(vector<int> & left, vector<int> & right)=
+传入数组 =left= 与 =right= ，返回一个数组
+**** 完整代码
+首先是合并链表
+#+begin_src c++
+  list<int> union_list(list<int> & left, list<int> & right) {
+    list<int> result = left;
+    for (int value : right) {
+      auto it = find(result.begin(), result.end(), value);
+      if (it == result.end()) {
+        result.push_back(value);
+      }
+    }
+
+    return result;
+  }
+
+#+end_src
+
+接下来合并数组是类似的
+#+begin_src c++
+  vector<int> union_vector(vector<int> & left, vector<int> & right) {
+    vector<int> result = left;
+    for (int value : right) {
+      auto it = find(result.begin(), result.end(), value);
+        if (it == result.end()) {
+          result.push_back(value);
+        }
+      }
+
+    return result;
+  }
+#+end_src
+**** 测试案例
+#+begin_src c++
+  int main() {
+    vector<int> nums = {16, 2, 27, 29};
+    vector<int> left = nums;
+    vector<int> right = nums;
+
+    for(int value: union_vector(left, right)) {
+      cout << value << endl;
+    }
+    return 0;
+  }
+
+#+end_src
+**** 时间复杂度
+设链表 =left= 的长度为 =M=
+设链表 =right= 的长度为 =N=
+时间复杂度为 =O(M*N)=
+*** A3 合并两个有序链表
+**** 问题描述
+=left= 和 =right= 是两个有序表，将他们合并成一个有序表
+**** 分析
+1. 这个程序要参考归并排序，还是很简单的
+2. 这里链表和数组的访问操作有些不同，需要注意
+3. 链表的访问需要使用迭代器，需要对迭代器调用 =next= 跳转到下一个位置
+4. 数组的访问可以通过索引，能够实现随机访问
+5. 这里我一个手滑把归并写出来了，应该没事
+**** 函数说明
+1. 首先是顶层函数 =merge_sort=
+   =void merge_sort(list<int> &nums, compare comp = less)=
+   #+begin_src c++
+     void merge_sort(list<int> &nums, compare comp = less) {
+       vector<int> temp(nums.size());
+       int left = firstindex(nums);
+       int right = lastindex(nums);
+
+       _merge_sort(nums, left, right, temp, comp);
+     }
+
+   #+end_src
+2. 顶级函数需要 =_merge_sort= 来帮助完成排序 
+   =void _merge_sort(list<int> &nums, int left, int right, vector<int> &temp, compare comp)=
+   #+begin_src c++
+     void _merge_sort(list<int> &nums, int left, int right, vector<int> &temp,
+                      compare comp) {
+       if (left < right) {
+         int middle = (left + right) / 2;
+         _merge_sort(nums, left, middle, temp, comp);
+         _merge_sort(nums, middle + 1, right, temp, comp);
+         _merge_sorted(nums , left, middle, right, temp, comp);
+       }
+     }
+
+   #+end_src
+3. =_merge_sort= 需要 =_merge_sorted= 来帮助排序，这个才是最主要的
+   =void _merge_sorted(list<int> &nums, int left, int middle, int right, vector<int> &temp, compare comp)=
+   
+**** 完整代码
+#+begin_src c++
+  void _merge_sorted(list<int> &nums, int left, int middle, int right,
+                     vector<int> &temp, compare comp) {
+    int _left = left;
+    int _right = middle + 1;
+    int index = 0;
+    auto it = nums.begin();
+
+    while (_left <= middle && _right <= right) {
+      auto left_value = *(next(it, _left));
+      auto right_value = *(next(it, _right));
+
+      // STUB
+      cout << "left_value is " << left_value << endl
+           << "right value is " << right_value << endl;
+      if (comp(left_value, right_value)) {
+        temp[index] = left_value;
+        index += 1;
+        _left += 1;
+      } else {
+        temp[index] = right_value;
+        index += 1;
+        _right += 1;
+      }
+    }
+
+    while (_left <= middle) {
+      auto left_value = *(next(it, _left));
+      temp[index] = left_value;
+      index += 1;
+      _left += 1;
+    }
+
+    while (_right <= right) {
+      auto right_value = *(next(it, _right));
+      temp[index] = right_value;
+      index += 1;
+      _right += 1;
+    }
+
+    index = 0;
+    while (left <= right) {
+      auto position = next(it, left);
+      *(position) = temp[index];
+
+      left += 1;
+      index += 1;
+    }
+  }
+
+#+end_src
+还是别看代码了，写的有点乱，挑几个重要的说
+1. 与数组的访问 =nums[index]= 不同，链表的访问需要先获取头节点的迭代器 =iter= ，然后调用 =next(iter, index)= 跳转到目标位置，最后解引用获取值
+2. 与数组的修改 =nums[index] = 1= 不同，链表的修改可以通过 =*iter = value= 来实现，类似于修改指针指向的值
+**** 测试案例
+#+begin_src c++
+  int main() {
+    list<int> nums = {3, 38, 44, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48, 2};
+    merge_sort(nums);
+
+    for(int num: nums) {
+      cout << num << '\t';
+    }
+
+    cout << endl;
+    return 0;
+  }
+
+#+end_src
+**** 时间复杂度
+- 当使用长度为 =n= 的数组时，时间复杂度为 =O(nlogn)=
+- 当使用长度为 =n= 的链表时，时间复杂度为 =O(n^2logn)=
