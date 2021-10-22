@@ -1,5 +1,4 @@
 #+title: 学校作业记录
-#+options: section-number:nil
 * School Work Record
 ** 数据结构实践作业
 [[file:practise][goto project]]
@@ -116,8 +115,9 @@
 2. 这个程序有终止条件，当 *犯人数量* 为 1 时停止
 **** 函数说明
 =int josephus(int length, int start, int distance)=
-传入犯人的数量 =length= ，从第 =start= 开始，间隔为 =distance=
-函数返回存活的犯人编号
+- 传入犯人的数量 =length= ，从第 =start= 开始，间隔为 =distance=
+- 数到第 =distance= 个犯人时,将当前迭代器删除
+- 函数返回存活的犯人编号
 **** 完整代码
 #+begin_src c++
   int josephus(int length, int start, int distance) {
@@ -156,6 +156,7 @@
 #+end_src
 
 **** 测试案例
+- 测试代码
 #+begin_src c++
   int main() {
     cout << "josephus(3, 2, 3)" << '\t' << josephus(3, 2, 3) << endl;
@@ -172,8 +173,21 @@
 
 #+end_src
 
-已经手动运行过，没有发生段错误或数组越界的异常
+- 运行结果
+#+begin_src c++
+  josephus(3, 2, 3)	3
+  josephus(4, 2, 3)	2
+  josephus(5, 2, 3)	5
+  josephus(6, 2, 3)	2
+  josephus(7, 2, 3)	5
+  josephus(8, 2, 3)	8
+  josephus(9, 2, 3)	2
+  josephus(10, 2, 3)	5
+
+#+end_src
 **** 时间复杂度
+=O(n)=
+
 *** A2 合并线性表
 **** 题目描述
 求两个集合的 =union= 操作，分别用顺序存储结构和链式存储结构实现
@@ -181,13 +195,15 @@
 1. 有两个链表 =A= , =B=
 2. 创建链表 =C= 为 =A= 的备份，再从 =B= 中提取不属于 =A= 的元素， 然后插入到 =C=
 **** 函数说明
-=list<int> union_list(list<int> & left, list<int> & right)=
-传入链表 =left= 与 =right= ，返回一个链表
+1. =list<int> union_list(list<int> & left, list<int> & right)=
+  - 传入链表 =left= 与 =right=
+  - 返回一个链表
 
-=vector<int> union_vector(vector<int> & left, vector<int> & right)=
-传入数组 =left= 与 =right= ，返回一个数组
+2. =vector<int> union_vector(vector<int> & left, vector<int> & right)=
+  - 传入数组 =left= 与 =right=
+  - 返回一个数组
 **** 完整代码
-首先是合并链表
+- 首先是合并链表
 #+begin_src c++
   list<int> union_list(list<int> & left, list<int> & right) {
     list<int> result = left;
@@ -203,21 +219,22 @@
 
 #+end_src
 
-接下来合并数组是类似的
+- 接下来合并数组是类似的
 #+begin_src c++
   vector<int> union_vector(vector<int> & left, vector<int> & right) {
     vector<int> result = left;
     for (int value : right) {
       auto it = find(result.begin(), result.end(), value);
-        if (it == result.end()) {
-          result.push_back(value);
-        }
+      if (it == result.end()) {
+        result.push_back(value);
       }
+    }
 
     return result;
   }
 #+end_src
 **** 测试案例
+- 测试代码
 #+begin_src c++
   int main() {
     vector<int> nums = {16, 2, 27, 29};
@@ -231,6 +248,14 @@
   }
 
 #+end_src
+
+- 运行结果
+#+begin_src sh
+16
+2
+27
+29
+#+end_src
 **** 时间复杂度
 设链表 =left= 的长度为 =M=
 设链表 =right= 的长度为 =N=
@@ -243,7 +268,7 @@
 2. 这里链表和数组的访问操作有些不同，需要注意
 3. 链表的访问需要使用迭代器，需要对迭代器调用 =next= 跳转到下一个位置
 4. 数组的访问可以通过索引，能够实现随机访问
-5. 这里我一个手滑把归并写出来了，应该没事
+5. *这里我一个手滑把归并写出来了，应该没事*
 **** 函数说明
 1. 首先是顶层函数 =merge_sort=
    =void merge_sort(list<int> &nums, compare comp = less)=
@@ -287,9 +312,6 @@
       auto left_value = *(next(it, _left));
       auto right_value = *(next(it, _right));
 
-      // STUB
-      cout << "left_value is " << left_value << endl
-           << "right value is " << right_value << endl;
       if (comp(left_value, right_value)) {
         temp[index] = left_value;
         index += 1;
@@ -330,6 +352,7 @@
 1. 与数组的访问 =nums[index]= 不同，链表的访问需要先获取头节点的迭代器 =iter= ，然后调用 =next(iter, index)= 跳转到目标位置，最后解引用获取值
 2. 与数组的修改 =nums[index] = 1= 不同，链表的修改可以通过 =*iter = value= 来实现，类似于修改指针指向的值
 **** 测试案例
+- 测试代码
 #+begin_src c++
   int main() {
     list<int> nums = {3, 38, 44, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48, 2};
@@ -343,6 +366,11 @@
     return 0;
   }
 
+#+end_src
+
+- 运行结果
+#+begin_src sh
+2	2	3	4	15	19	26	27	36	38	44	46	47	48	50	
 #+end_src
 **** 时间复杂度
 - 当使用长度为 =n= 的数组时，时间复杂度为 =O(nlogn)=
