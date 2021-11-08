@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-09 二 00:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>数据结构实验报告</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">数据结构实验报告</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgca434c9">综合课程设计题目</a>
+<ul>
+<li><a href="#org32c2faa">10.1.1 线性表</a>
+<ul>
+<li><a href="#orgb888110">A1 Josephus 环问题</a>
+<ul>
+<li><a href="#org7465d18">题目描述</a></li>
+<li><a href="#org35931d1">分析</a></li>
+<li><a href="#orge8babe7">函数说明</a></li>
+<li><a href="#org0472a77">完整代码</a></li>
+<li><a href="#orge8fe1b7">测试案例</a></li>
+<li><a href="#org602a89b">时间复杂度</a></li>
+</ul>
+</li>
+<li><a href="#org0fcb08d">A2 合并线性表</a>
+<ul>
+<li><a href="#org09b4f28">题目描述</a></li>
+<li><a href="#org82f5772">分析</a></li>
+<li><a href="#org2e4e044">函数说明</a></li>
+<li><a href="#org60711ae">完整代码</a></li>
+<li><a href="#org054612d">测试案例</a></li>
+<li><a href="#org3a476d1">时间复杂度</a></li>
+</ul>
+</li>
+<li><a href="#org239e938">A3 合并两个有序链表</a>
+<ul>
+<li><a href="#org4fe437d">问题描述</a></li>
+<li><a href="#orgb11f20a">分析</a></li>
+<li><a href="#orgd67a67b">函数说明</a></li>
+<li><a href="#org174d94d">完整代码</a></li>
+<li><a href="#orgab67be4">测试案例</a></li>
+<li><a href="#org4f03c2d">时间复杂度</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7a91fe2">10.1.2 栈与队列</a>
+<ul>
+<li><a href="#org9cc4c91">A1 数制转换问题</a>
+<ul>
+<li><a href="#org74ad0f4">题目描述</a></li>
+<li><a href="#orgdbbefbe">题目分析</a>
+<ul>
+<li><a href="#org69bcfc8">定义函数</a></li>
+<li><a href="#org1cc48b2">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#org00b20dd">完整代码</a></li>
+<li><a href="#org01f593b">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#org9dd344e">A2 回文判断</a>
+<ul>
+<li><a href="#org3511f35">题目描述</a></li>
+<li><a href="#orgbe50e60">题目分析</a>
+<ul>
+<li><a href="#org4d9da57">函数定义</a></li>
+<li><a href="#org8bbdc0d">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#org14858a1">完整代码</a></li>
+<li><a href="#org09efc06">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#orge4a1fff">A4 破解藏头诗</a>
+<ul>
+<li><a href="#org86a04f6">题目描述</a></li>
+<li><a href="#orgfab2451">题目分析</a>
+<ul>
+<li><a href="#org7507fe2">函数定义</a></li>
+<li><a href="#org2cf9fe7">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#org402ec69">完整代码</a></li>
+<li><a href="#org83bfed6">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#org3b47752">A5 括号匹配的检验</a>
+<ul>
+<li><a href="#orgccfcd80">题目描述</a></li>
+<li><a href="#org9b8b77a">题目分析</a>
+<ul>
+<li><a href="#org41a06f1">函数定义</a></li>
+<li><a href="#orgf53e097">测试案例</a></li>
+</ul>
+</li>
+<li><a href="#orga635802">完整代码</a></li>
+<li><a href="#org8617828">测试案例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgca434c9" class="outline-2">
+<h2 id="orgca434c9">综合课程设计题目</h2>
+<div class="outline-text-2" id="text-orgca434c9">
+</div>
+<div id="outline-container-org32c2faa" class="outline-3">
+<h3 id="org32c2faa">10.1.1 线性表</h3>
+<div class="outline-text-3" id="text-org32c2faa">
+<p>
+这次实践选了三个简单的A级题目，要是没把以前的仓库删了，C级题目就能写了<br />
+</p>
+</div>
+<div id="outline-container-orgb888110" class="outline-4">
+<h4 id="orgb888110">A1 Josephus 环问题</h4>
+<div class="outline-text-4" id="text-orgb888110">
+</div>
+<div id="outline-container-org7465d18" class="outline-5">
+<h5 id="org7465d18">题目描述</h5>
+<div class="outline-text-5" id="text-org7465d18">
+<p>
+判决 <code>length</code> 个犯人的死刑，让犯人站成一个圈，从 <code>start</code> 开始暑期，每数到 <code>distance</code> 个犯人，就拉出来处决<br />
+然后再从下一个开始数 <code>distance</code> 个，数到的人再处决，知道剩下最后一个犯人予以赦免<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org35931d1" class="outline-5">
+<h5 id="org35931d1">分析</h5>
+<div class="outline-text-5" id="text-org35931d1">
+<ol class="org-ol">
+<li><code>josephus</code> 环的问题我用循环链表来解决，由于标准库里没有这个数据结构，这里我手动调整下迭代器的位置就够了<br /></li>
+<li>这个程序有终止条件，当 <b>犯人数量</b> 为 1 时停止<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge8babe7" class="outline-5">
+<h5 id="orge8babe7">函数说明</h5>
+<div class="outline-text-5" id="text-orge8babe7">
+<p>
+<code>int josephus(int length, int start, int distance)</code><br />
+</p>
+<ul class="org-ul">
+<li>传入犯人的数量 <code>length</code> ，从第 <code>start</code> 开始，间隔为 <code>distance</code><br /></li>
+<li>数到第 <code>distance</code> 个犯人时,将当前迭代器删除<br /></li>
+<li>函数返回存活的犯人编号<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0472a77" class="outline-5">
+<h5 id="org0472a77">完整代码</h5>
+<div class="outline-text-5" id="text-org0472a77">
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">int</span> <span style="color: #a626a4;">josephus</span><span style="color: #4078f2;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">length</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">start</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">distance</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">prisoners</span>;
+
+  <span style="color: #e45649; font-weight: bold;">for</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">i</span> = 1; i &lt;= length; i += 1<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    prisoners.push_back<span style="color: #50a14f;">(</span>i<span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #b751b6;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span>::<span style="color: #986801;">iterator</span> <span style="color: #6a1868;">it</span> = next<span style="color: #a626a4;">(</span>prisoners.begin<span style="color: #50a14f;">()</span>, start - 1<span style="color: #a626a4;">)</span>;
+  <span style="color: #e45649; font-weight: bold;">while</span> <span style="color: #a626a4;">(</span><span style="color: #b751b6;">true</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #50a14f;">(</span>prisoners.size<span style="color: #b751b6;">()</span> == 1<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      <span style="color: #e45649; font-weight: bold;">break</span>;
+    <span style="color: #50a14f;">}</span>
+
+    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">list&lt;int&gt;::iterator target = next(it, distance - 1);</span>
+    <span style="color: #b751b6;">list</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">int</span><span style="color: #50a14f;">&gt;</span>::<span style="color: #986801;">iterator</span> <span style="color: #6a1868;">target</span> = it;
+    <span style="color: #e45649; font-weight: bold;">for</span> <span style="color: #50a14f;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">i</span> = 2; i &lt;= distance; i += 1<span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      target = next<span style="color: #b751b6;">(</span>target<span style="color: #b751b6;">)</span>;
+      <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #b751b6;">(</span>target == prisoners.end<span style="color: #4db5bd;">()</span><span style="color: #b751b6;">)</span> <span style="color: #b751b6;">{</span>
+        target = prisoners.begin<span style="color: #4db5bd;">()</span>;
+      <span style="color: #b751b6;">}</span>
+    <span style="color: #50a14f;">}</span>
+
+    it = next<span style="color: #50a14f;">(</span>target<span style="color: #50a14f;">)</span>;
+    prisoners.erase<span style="color: #50a14f;">(</span>target<span style="color: #50a14f;">)</span>;
+
+    <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #50a14f;">(</span>it == prisoners.end<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      it = prisoners.begin<span style="color: #b751b6;">()</span>;
+    <span style="color: #50a14f;">}</span>
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #e45649; font-weight: bold;">return</span> prisoners.front<span style="color: #a626a4;">()</span><span style="color: #e45649; font-weight: bold;">)</span>;
+<span style="color: #e45649; font-weight: bold;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge8fe1b7" class="outline-5">
+<h5 id="orge8fe1b7">测试案例</h5>
+<div class="outline-text-5" id="text-orge8fe1b7">
+<ul class="org-ul">
+<li>测试代码<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">int</span> <span style="color: #a626a4;">main</span><span style="color: #4078f2;">()</span> <span style="color: #4078f2;">{</span>
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(3, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>3, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(4, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>4, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(5, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>5, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(6, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>6, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(7, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>7, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(8, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>8, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(9, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>9, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+  cout &lt;&lt; <span style="color: #50a14f;">"josephus(10, 2, 3)"</span> &lt;&lt; <span style="color: #50a14f;">'\t'</span> &lt;&lt; josephus<span style="color: #a626a4;">(</span>10, 2, 3<span style="color: #a626a4;">)</span> &lt;&lt; endl;
+
+  <span style="color: #e45649; font-weight: bold;">return</span> 0;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>运行结果<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++">josephus<span style="color: #4078f2;">(</span>3, 2, 3<span style="color: #4078f2;">)</span>       3
+josephus<span style="color: #4078f2;">(</span>4, 2, 3<span style="color: #4078f2;">)</span>       2
+josephus<span style="color: #4078f2;">(</span>5, 2, 3<span style="color: #4078f2;">)</span>       5
+josephus<span style="color: #4078f2;">(</span>6, 2, 3<span style="color: #4078f2;">)</span>       2
+josephus<span style="color: #4078f2;">(</span>7, 2, 3<span style="color: #4078f2;">)</span>       5
+josephus<span style="color: #4078f2;">(</span>8, 2, 3<span style="color: #4078f2;">)</span>       8
+josephus<span style="color: #4078f2;">(</span>9, 2, 3<span style="color: #4078f2;">)</span>       2
+josephus<span style="color: #4078f2;">(</span>10, 2, 3<span style="color: #4078f2;">)</span>      5
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org602a89b" class="outline-5">
+<h5 id="org602a89b">时间复杂度</h5>
+<div class="outline-text-5" id="text-org602a89b">
+<p>
+<code>O(n)</code><br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0fcb08d" class="outline-4">
+<h4 id="org0fcb08d">A2 合并线性表</h4>
+<div class="outline-text-4" id="text-org0fcb08d">
+</div>
+<div id="outline-container-org09b4f28" class="outline-5">
+<h5 id="org09b4f28">题目描述</h5>
+<div class="outline-text-5" id="text-org09b4f28">
+<p>
+求两个集合的 <code>union</code> 操作，分别用顺序存储结构和链式存储结构实现<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org82f5772" class="outline-5">
+<h5 id="org82f5772">分析</h5>
+<div class="outline-text-5" id="text-org82f5772">
+<ol class="org-ol">
+<li>有两个链表 <code>A</code> , <code>B</code><br /></li>
+<li>创建链表 <code>C</code> 为 <code>A</code> 的备份，再从 <code>B</code> 中提取不属于 <code>A</code> 的元素， 然后插入到 <code>C</code><br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org2e4e044" class="outline-5">
+<h5 id="org2e4e044">函数说明</h5>
+<div class="outline-text-5" id="text-org2e4e044">
+<ol class="org-ol">
+<li><code>list&lt;int&gt; union_list(list&lt;int&gt; &amp; left, list&lt;int&gt; &amp; right)</code><br />
+<ul class="org-ul">
+<li>传入链表 <code>left</code> 与 <code>right</code><br /></li>
+<li>返回一个链表<br /></li>
+</ul></li>
+
+<li><code>vector&lt;int&gt; union_vector(vector&lt;int&gt; &amp; left, vector&lt;int&gt; &amp; right)</code><br />
+<ul class="org-ul">
+<li>传入数组 <code>left</code> 与 <code>right</code><br /></li>
+<li>返回一个数组<br /></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org60711ae" class="outline-5">
+<h5 id="org60711ae">完整代码</h5>
+<div class="outline-text-5" id="text-org60711ae">
+<ul class="org-ul">
+<li>首先是合并链表<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">list</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">int</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">union_list</span><span style="color: #4078f2;">(</span><span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp; <span style="color: #6a1868;">left</span>, <span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp; <span style="color: #6a1868;">right</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = left;
+  <span style="color: #e45649; font-weight: bold;">for</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">value</span> : right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">it</span> = find<span style="color: #50a14f;">(</span>result.begin<span style="color: #b751b6;">()</span>, result.end<span style="color: #b751b6;">()</span>, value<span style="color: #50a14f;">)</span>;
+    <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #50a14f;">(</span>it == result.end<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      result.push_back<span style="color: #b751b6;">(</span>value<span style="color: #b751b6;">)</span>;
+    <span style="color: #50a14f;">}</span>
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #e45649; font-weight: bold;">return</span> result;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>接下来合并数组是类似的<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">vector</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">int</span><span style="color: #4078f2;">&gt;</span> <span style="color: #a626a4;">union_vector</span><span style="color: #4078f2;">(</span><span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp; <span style="color: #6a1868;">left</span>, <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp; <span style="color: #6a1868;">right</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">result</span> = left;
+  <span style="color: #e45649; font-weight: bold;">for</span> <span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">value</span> : right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">it</span> = find<span style="color: #50a14f;">(</span>result.begin<span style="color: #b751b6;">()</span>, result.end<span style="color: #b751b6;">()</span>, value<span style="color: #50a14f;">)</span>;
+    <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #50a14f;">(</span>it == result.end<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      result.push_back<span style="color: #b751b6;">(</span>value<span style="color: #b751b6;">)</span>;
+    <span style="color: #50a14f;">}</span>
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #e45649; font-weight: bold;">return</span> result;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org054612d" class="outline-5">
+<h5 id="org054612d">测试案例</h5>
+<div class="outline-text-5" id="text-org054612d">
+<ul class="org-ul">
+<li>测试代码<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">int</span> <span style="color: #a626a4;">main</span><span style="color: #4078f2;">()</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">nums</span> = <span style="color: #a626a4;">{</span>16, 2, 27, 29<span style="color: #a626a4;">}</span>;
+  <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">left</span> = nums;
+  <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">right</span> = nums;
+
+  <span style="color: #e45649; font-weight: bold;">for</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">value</span>: union_vector<span style="color: #50a14f;">(</span>left, right<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    cout &lt;&lt; value &lt;&lt; endl;
+  <span style="color: #a626a4;">}</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> 0;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>运行结果<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">16
+2
+27
+29
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a476d1" class="outline-5">
+<h5 id="org3a476d1">时间复杂度</h5>
+<div class="outline-text-5" id="text-org3a476d1">
+<p>
+设链表 <code>left</code> 的长度为 <code>M</code><br />
+设链表 <code>right</code> 的长度为 <code>N</code><br />
+时间复杂度为 <code>O(M*N)</code><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org239e938" class="outline-4">
+<h4 id="org239e938">A3 合并两个有序链表</h4>
+<div class="outline-text-4" id="text-org239e938">
+</div>
+<div id="outline-container-org4fe437d" class="outline-5">
+<h5 id="org4fe437d">问题描述</h5>
+<div class="outline-text-5" id="text-org4fe437d">
+<p>
+<code>left</code> 和 <code>right</code> 是两个有序表，将他们合并成一个有序表<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgb11f20a" class="outline-5">
+<h5 id="orgb11f20a">分析</h5>
+<div class="outline-text-5" id="text-orgb11f20a">
+<ol class="org-ol">
+<li>这个程序要参考归并排序，还是很简单的<br /></li>
+<li>这里链表和数组的访问操作有些不同，需要注意<br /></li>
+<li>链表的访问需要使用迭代器，需要对迭代器调用 <code>next</code> 跳转到下一个位置<br /></li>
+<li>数组的访问可以通过索引，能够实现随机访问<br /></li>
+<li><b>这里我一个手滑把归并写出来了，应该没事</b><br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgd67a67b" class="outline-5">
+<h5 id="orgd67a67b">函数说明</h5>
+<div class="outline-text-5" id="text-orgd67a67b">
+<ol class="org-ol">
+<li><p>
+首先是顶层函数 <code>merge_sort</code><br />
+<code>void merge_sort(list&lt;int&gt; &amp;nums, compare comp = less)</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">void</span> <span style="color: #a626a4;">merge_sort</span><span style="color: #4078f2;">(</span><span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp;<span style="color: #6a1868;">nums</span>, <span style="color: #986801;">compare</span> <span style="color: #6a1868;">comp</span> = less<span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">temp</span><span style="color: #a626a4;">(</span>nums.size<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span>;
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">left</span> = firstindex<span style="color: #a626a4;">(</span>nums<span style="color: #a626a4;">)</span>;
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">right</span> = lastindex<span style="color: #a626a4;">(</span>nums<span style="color: #a626a4;">)</span>;
+
+  _merge_sort<span style="color: #a626a4;">(</span>nums, left, right, temp, comp<span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div></li>
+<li><p>
+顶级函数需要 <code>_merge_sort</code> 来帮助完成排序<br />
+<code>void _merge_sort(list&lt;int&gt; &amp;nums, int left, int right, vector&lt;int&gt; &amp;temp, compare comp)</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">void</span> <span style="color: #a626a4;">_merge_sort</span><span style="color: #4078f2;">(</span><span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp;<span style="color: #6a1868;">nums</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">right</span>, <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp;<span style="color: #6a1868;">temp</span>,
+                 <span style="color: #986801;">compare</span> <span style="color: #6a1868;">comp</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #a626a4;">(</span>left &lt; right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #986801;">int</span> <span style="color: #6a1868;">middle</span> = <span style="color: #50a14f;">(</span>left + right<span style="color: #50a14f;">)</span> / 2;
+    _merge_sort<span style="color: #50a14f;">(</span>nums, left, middle, temp, comp<span style="color: #50a14f;">)</span>;
+    _merge_sort<span style="color: #50a14f;">(</span>nums, middle + 1, right, temp, comp<span style="color: #50a14f;">)</span>;
+    _merge_sorted<span style="color: #50a14f;">(</span>nums , left, middle, right, temp, comp<span style="color: #50a14f;">)</span>;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div></li>
+<li><code>_merge_sort</code> 需要 <code>_merge_sorted</code> 来帮助排序，这个才是最主要的<br />
+<code>void _merge_sorted(list&lt;int&gt; &amp;nums, int left, int middle, int right, vector&lt;int&gt; &amp;temp, compare comp)</code><br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org174d94d" class="outline-5">
+<h5 id="org174d94d">完整代码</h5>
+<div class="outline-text-5" id="text-org174d94d">
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">void</span> <span style="color: #a626a4;">_merge_sorted</span><span style="color: #4078f2;">(</span><span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp;<span style="color: #6a1868;">nums</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">left</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">middle</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">right</span>,
+                   <span style="color: #986801;">vector</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> &amp;<span style="color: #6a1868;">temp</span>, <span style="color: #986801;">compare</span> <span style="color: #6a1868;">comp</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">_left</span> = left;
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">_right</span> = middle + 1;
+  <span style="color: #986801;">int</span> <span style="color: #6a1868;">index</span> = 0;
+  <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">it</span> = nums.begin<span style="color: #a626a4;">()</span>;
+
+  <span style="color: #e45649; font-weight: bold;">while</span> <span style="color: #a626a4;">(</span>_left &lt;= middle &amp;&amp; _right &lt;= right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">left_value</span> = *<span style="color: #50a14f;">(</span>next<span style="color: #b751b6;">(</span>it, _left<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">right_value</span> = *<span style="color: #50a14f;">(</span>next<span style="color: #b751b6;">(</span>it, _right<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+
+    <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #50a14f;">(</span>comp<span style="color: #b751b6;">(</span>left_value, right_value<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      temp<span style="color: #b751b6;">[</span>index<span style="color: #b751b6;">]</span> = left_value;
+      index += 1;
+      _left += 1;
+    <span style="color: #50a14f;">}</span> <span style="color: #e45649; font-weight: bold;">else</span> <span style="color: #50a14f;">{</span>
+      temp<span style="color: #b751b6;">[</span>index<span style="color: #b751b6;">]</span> = right_value;
+      index += 1;
+      _right += 1;
+    <span style="color: #50a14f;">}</span>
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #e45649; font-weight: bold;">while</span> <span style="color: #a626a4;">(</span>_left &lt;= middle<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">left_value</span> = *<span style="color: #50a14f;">(</span>next<span style="color: #b751b6;">(</span>it, _left<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+    temp<span style="color: #50a14f;">[</span>index<span style="color: #50a14f;">]</span> = left_value;
+    index += 1;
+    _left += 1;
+  <span style="color: #a626a4;">}</span>
+
+  <span style="color: #e45649; font-weight: bold;">while</span> <span style="color: #a626a4;">(</span>_right &lt;= right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">right_value</span> = *<span style="color: #50a14f;">(</span>next<span style="color: #b751b6;">(</span>it, _right<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+    temp<span style="color: #50a14f;">[</span>index<span style="color: #50a14f;">]</span> = right_value;
+    index += 1;
+    _right += 1;
+  <span style="color: #a626a4;">}</span>
+
+  index = 0;
+  <span style="color: #e45649; font-weight: bold;">while</span> <span style="color: #a626a4;">(</span>left &lt;= right<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    <span style="color: #e45649; font-weight: bold;">auto</span> <span style="color: #6a1868;">position</span> = next<span style="color: #50a14f;">(</span>it, left<span style="color: #50a14f;">)</span>;
+    *<span style="color: #50a14f;">(</span>position<span style="color: #50a14f;">)</span> = temp<span style="color: #50a14f;">[</span>index<span style="color: #50a14f;">]</span>;
+
+    left += 1;
+    index += 1;
+  <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+<p>
+还是别看代码了，写的有点乱，挑几个重要的说<br />
+</p>
+<ol class="org-ol">
+<li>与数组的访问 <code>nums[index]</code> 不同，链表的访问需要先获取头节点的迭代器 <code>iter</code> ，然后调用 <code>next(iter, index)</code> 跳转到目标位置，最后解引用获取值<br /></li>
+<li>与数组的修改 <code>nums[index] = 1</code> 不同，链表的修改可以通过 <code>*iter = value</code> 来实现，类似于修改指针指向的值<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgab67be4" class="outline-5">
+<h5 id="orgab67be4">测试案例</h5>
+<div class="outline-text-5" id="text-orgab67be4">
+<ul class="org-ul">
+<li>测试代码<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #986801;">int</span> <span style="color: #a626a4;">main</span><span style="color: #4078f2;">()</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">list</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">int</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">nums</span> = <span style="color: #a626a4;">{</span>3, 38, 44, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48, 2<span style="color: #a626a4;">}</span>;
+  merge_sort<span style="color: #a626a4;">(</span>nums<span style="color: #a626a4;">)</span>;
+
+  <span style="color: #e45649; font-weight: bold;">for</span><span style="color: #a626a4;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">num</span>: nums<span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+    cout &lt;&lt; num &lt;&lt; <span style="color: #50a14f;">'\t'</span>;
+  <span style="color: #a626a4;">}</span>
+
+  cout &lt;&lt; endl;
+  <span style="color: #e45649; font-weight: bold;">return</span> 0;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>运行结果<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">2       2       3       4       15      19      26      27      36      38      44      46      47      48      50      
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4f03c2d" class="outline-5">
+<h5 id="org4f03c2d">时间复杂度</h5>
+<div class="outline-text-5" id="text-org4f03c2d">
+<ul class="org-ul">
+<li>当使用长度为 <code>n</code> 的数组时，时间复杂度为 <code>O(nlogn)</code><br /></li>
+<li>当使用长度为 <code>n</code> 的链表时，时间复杂度为 <code>O(n^2logn)</code><br /></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7a91fe2" class="outline-3">
+<h3 id="org7a91fe2">10.1.2 栈与队列</h3>
+<div class="outline-text-3" id="text-org7a91fe2">
+</div>
+<div id="outline-container-org9cc4c91" class="outline-4">
+<h4 id="org9cc4c91">A1 数制转换问题</h4>
+<div class="outline-text-4" id="text-org9cc4c91">
+</div>
+<div id="outline-container-org74ad0f4" class="outline-5">
+<h5 id="org74ad0f4">题目描述</h5>
+<div class="outline-text-5" id="text-org74ad0f4">
+<p>
+对于任意一个非负的十进制整数，打印出与其等值的八进制数<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgdbbefbe" class="outline-5">
+<h5 id="orgdbbefbe">题目分析</h5>
+<div class="outline-text-5" id="text-orgdbbefbe">
+<p>
+这里我懒得从键盘输入，直接输入数字，然后返回表示八进制的字符串<br />
+</p>
+</div>
+
+<div id="outline-container-org69bcfc8" class="outline-6">
+<h6 id="org69bcfc8">定义函数</h6>
+<div class="outline-text-6" id="text-org69bcfc8">
+<p>
+<code>transformBase(number::Int)</code><br />
+</p>
+<ul class="org-ul">
+<li>输入一个整数<br /></li>
+<li>输出一个字符串，表示其八进制数<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1cc48b2" class="outline-6">
+<h6 id="org1cc48b2">测试案例</h6>
+<div class="outline-text-6" id="text-org1cc48b2">
+<ul class="org-ul">
+<li><code>transformBase(1348) =</code> "2504"=<br /></li>
+<li><code>transformBase(1234) =</code> "2322"=<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org00b20dd" class="outline-5">
+<h5 id="org00b20dd">完整代码</h5>
+<div class="outline-text-5" id="text-org00b20dd">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">function</span> <span style="color: #a626a4;">transformBase</span><span style="color: #4078f2;">(</span>number<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Int</span><span style="color: #4078f2;">)</span>
+  base = 8
+  stack = createStack<span style="color: #4078f2;">(</span><span style="color: #986801;">Int</span><span style="color: #4078f2;">)</span>
+
+  N = number
+  div_N = <span style="color: #986801;">Int</span><span style="color: #4078f2;">(</span>floor<span style="color: #a626a4;">(</span>N / base<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+  mod_N = N % base
+  push!<span style="color: #4078f2;">(</span>stack, mod_N<span style="color: #4078f2;">)</span>
+
+  <span style="color: #e45649; font-weight: bold;">while</span> div_N != 0
+    N = div_N
+    div_N = <span style="color: #986801;">Int</span><span style="color: #4078f2;">(</span>floor<span style="color: #a626a4;">(</span>N / base<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+    mod_N = N % base
+    push!<span style="color: #4078f2;">(</span>stack, mod_N<span style="color: #4078f2;">)</span>
+  <span style="color: #e45649; font-weight: bold;">end</span>
+
+  <span style="color: #e45649; font-weight: bold;">return</span> reduce<span style="color: #4078f2;">(</span>string, stack; init=<span style="color: #50a14f;">""</span><span style="color: #4078f2;">)</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org01f593b" class="outline-5">
+<h5 id="org01f593b">测试案例</h5>
+<div class="outline-text-5" id="text-org01f593b">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@test</span> transformBase<span style="color: #4078f2;">(</span>1348<span style="color: #4078f2;">)</span> == <span style="color: #50a14f;">"2504"</span>
+<span style="color: #4078f2; font-weight: bold;">@test</span> transformBase<span style="color: #4078f2;">(</span>1234<span style="color: #4078f2;">)</span> == <span style="color: #50a14f;">"2322"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9dd344e" class="outline-4">
+<h4 id="org9dd344e">A2 回文判断</h4>
+<div class="outline-text-4" id="text-org9dd344e">
+</div>
+<div id="outline-container-org3511f35" class="outline-5">
+<h5 id="org3511f35">题目描述</h5>
+<div class="outline-text-5" id="text-org3511f35">
+<p>
+判断一个字符串是否为回文串，即是否左右对称<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgbe50e60" class="outline-5">
+<h5 id="orgbe50e60">题目分析</h5>
+<div class="outline-text-5" id="text-orgbe50e60">
+<p>
+这个好像反转一下，然后与原字符串中的字符逐个对比就好了<br />
+</p>
+</div>
+<div id="outline-container-org4d9da57" class="outline-6">
+<h6 id="org4d9da57">函数定义</h6>
+<div class="outline-text-6" id="text-org4d9da57">
+<p>
+<code>isPalindromic(str::String)</code><br />
+</p>
+<ul class="org-ul">
+<li>输入一个字符串<br /></li>
+<li>输出一个 <code>bool</code> 类型，判断字符串是否为回文<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8bbdc0d" class="outline-6">
+<h6 id="org8bbdc0d">测试案例</h6>
+<div class="outline-text-6" id="text-org8bbdc0d">
+<ul class="org-ul">
+<li><code>isPalindromic("helleh") =</code> true=<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org14858a1" class="outline-5">
+<h5 id="org14858a1">完整代码</h5>
+<div class="outline-text-5" id="text-org14858a1">
+<p>
+这东西，一个函数式代码就搞定了<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">function</span> <span style="color: #a626a4;">isPalindromic</span><span style="color: #4078f2;">(</span>str<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">String</span><span style="color: #4078f2;">)</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> map<span style="color: #4078f2;">(</span>==, str, reverse<span style="color: #a626a4;">(</span>str<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span> |&gt;
+    nums -&gt; all<span style="color: #4078f2;">(</span>isequal<span style="color: #a626a4;">(</span>1<span style="color: #a626a4;">)</span>, nums<span style="color: #4078f2;">)</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
+</pre>
+</div>
+
+<p>
+我用 <code>Clojure</code> 再写一遍，更清晰一点<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #4078f2;">(</span><span style="color: #e45649; font-weight: bold;">defn</span> <span style="color: #a626a4;">palindromic?</span> <span style="color: #a626a4;">[</span>string<span style="color: #a626a4;">]</span>
+  <span style="color: #a626a4;">(</span>every <span style="color: #50a14f;">(</span><span style="color: #e45649; font-weight: bold;">fn</span> <span style="color: #b751b6;">[</span>x<span style="color: #b751b6;">]</span> 
+           <span style="color: #b751b6;">(</span>= x 1<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>
+         <span style="color: #50a14f;">(</span>map = string <span style="color: #b751b6;">(</span>reverse string<span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org09efc06" class="outline-5">
+<h5 id="org09efc06">测试案例</h5>
+<div class="outline-text-5" id="text-org09efc06">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@test</span> isPalindromic<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"helleh"</span><span style="color: #4078f2;">)</span> == <span style="color: #b751b6;">true</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge4a1fff" class="outline-4">
+<h4 id="orge4a1fff">A4 破解藏头诗</h4>
+<div class="outline-text-4" id="text-orge4a1fff">
+</div>
+<div id="outline-container-org86a04f6" class="outline-5">
+<h5 id="org86a04f6">题目描述</h5>
+<div class="outline-text-5" id="text-org86a04f6">
+<p>
+输入一首藏头诗，一共四句，每句一行<br />
+输出每句的第一个汉字连接在一起的字符串<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgfab2451" class="outline-5">
+<h5 id="orgfab2451">题目分析</h5>
+<div class="outline-text-5" id="text-orgfab2451">
+<p>
+这里需要队列吗，可能我的解决方式不一样吧，我还是不喜欢从终端输入字符串<br />
+同样也可以用函数式来写<br />
+</p>
+</div>
+<div id="outline-container-org7507fe2" class="outline-6">
+<h6 id="org7507fe2">函数定义</h6>
+<div class="outline-text-6" id="text-org7507fe2">
+<p>
+<code>headPoem(sentences::Vararg{String})</code><br />
+其中 <code>Vararg</code> 指的是可变参数，<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org2cf9fe7" class="outline-6">
+<h6 id="org2cf9fe7">测试案例</h6>
+<div class="outline-text-6" id="text-org2cf9fe7">
+<div class="org-src-container">
+<pre class="src src-julia">headPoem<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"&#25105;"</span>,
+         <span style="color: #50a14f;">"&#26368;&#36817;"</span>,
+         <span style="color: #50a14f;">"&#29233;&#19978;&#20102;"</span>,
+         <span style="color: #50a14f;">"&#20320;&#30340;&#38394;&#23494;"</span><span style="color: #4078f2;">)</span> == <span style="color: #50a14f;">"&#25105;&#26368;&#29233;&#20320;"</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org402ec69" class="outline-5">
+<h5 id="org402ec69">完整代码</h5>
+<div class="outline-text-5" id="text-org402ec69">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #a626a4;">headPoem</span><span style="color: #4078f2;">(</span>sentences<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Vararg</span><span style="color: #a626a4;">{</span><span style="color: #986801;">String</span><span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span> =  map<span style="color: #4078f2;">(</span>first, sentences<span style="color: #4078f2;">)</span> |&gt; chs -&gt; reduce<span style="color: #4078f2;">(</span>string, chs; init=<span style="color: #50a14f;">""</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+这里我用函数式的 <code>Clojure</code> 再写一遍吧<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #4078f2;">(</span><span style="color: #e45649; font-weight: bold;">defn</span> <span style="color: #a626a4;">head-poem</span> <span style="color: #a626a4;">[</span>&amp; sentences<span style="color: #a626a4;">]</span>
+  <span style="color: #a626a4;">(</span>reduce str <span style="color: #50a14f;">""</span> 
+          <span style="color: #50a14f;">(</span>map first sentences<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org83bfed6" class="outline-5">
+<h5 id="org83bfed6">测试案例</h5>
+<div class="outline-text-5" id="text-org83bfed6">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@test</span> headPoem<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"&#25105;"</span>,
+               <span style="color: #50a14f;">"&#26368;&#36817;"</span>,
+               <span style="color: #50a14f;">"&#29233;&#19978;&#20102;"</span>,
+               <span style="color: #50a14f;">"&#20320;&#30340;&#38394;&#23494;"</span><span style="color: #4078f2;">)</span> == <span style="color: #50a14f;">"&#25105;&#26368;&#29233;&#20320;"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3b47752" class="outline-4">
+<h4 id="org3b47752">A5 括号匹配的检验</h4>
+<div class="outline-text-4" id="text-org3b47752">
+</div>
+<div id="outline-container-orgccfcd80" class="outline-5">
+<h5 id="orgccfcd80">题目描述</h5>
+<div class="outline-text-5" id="text-orgccfcd80">
+<p>
+输入圆括号和方括号的任意序列，输出 <b>匹配</b> 或 <b>此串括号匹配不合法</b><br />
+</p>
+</div>
+</div>
+<div id="outline-container-org9b8b77a" class="outline-5">
+<h5 id="org9b8b77a">题目分析</h5>
+<div class="outline-text-5" id="text-org9b8b77a">
+<p>
+这个其实挺简单<br />
+将左括号，左中括号一类的符号归为 <b>left</b> 类，将对应的符号归为 <b>right</b> 类<br />
+遍历每一个符号<br />
+</p>
+<ul class="org-ul">
+<li>每碰到 <code>left</code> 类符号，就把符号放到一个栈里<br /></li>
+<li>每碰到 <code>right</code> 类符号，取栈顶 <code>top</code><br />
+<ul class="org-ul">
+<li>若 <code>right</code> 与 <code>top</code> 字符相对应，如 <code>(</code> 与 <code>)</code> ， <code>[</code> 与 <code>]</code> ，则出栈，进行下一次遍历<br /></li>
+<li>若 <code>right</code> 与 <code>top</code> 字符不匹配，肯定不匹配，推出遍历<br /></li>
+</ul></li>
+<li>遍历结束后, <b>return</b> 栈是否为空栈<br /></li>
+<li>注意，遍历前先把第一个符号入栈，否则无法处理 <code>"]"</code> 这种开头是 <b>right</b> 类符号的情况<br /></li>
+</ul>
+</div>
+<div id="outline-container-org41a06f1" class="outline-6">
+<h6 id="org41a06f1">函数定义</h6>
+<div class="outline-text-6" id="text-org41a06f1">
+<p>
+<code>matchPatterns(code::String)</code><br />
+</p>
+<ul class="org-ul">
+<li>输入字符串序列，只有圆括号和方括号<br /></li>
+<li>输出括号是否匹配<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf53e097" class="outline-6">
+<h6 id="orgf53e097">测试案例</h6>
+<div class="outline-text-6" id="text-orgf53e097">
+<ul class="org-ul">
+<li><code>matchPatterns("([])()") =</code> true=<br /></li>
+<li><code>matchPatterns("]") =</code> false=<br /></li>
+<li><code>matchPatterns("]()") =</code> false=<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orga635802" class="outline-5">
+<h5 id="orga635802">完整代码</h5>
+<div class="outline-text-5" id="text-orga635802">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">function</span> <span style="color: #a626a4;">matchPatterns</span><span style="color: #4078f2;">(</span>code<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">String</span><span style="color: #4078f2;">)</span>
+  stack = createStack<span style="color: #4078f2;">(</span><span style="color: #986801;">Char</span><span style="color: #4078f2;">)</span>
+  <span style="color: #a626a4;">isleft</span><span style="color: #4078f2;">(</span>ch<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Char</span><span style="color: #4078f2;">)</span> = ch == <span style="color: #50a14f;">'['</span> || ch == <span style="color: #50a14f;">'('</span>
+  <span style="color: #a626a4;">isright</span><span style="color: #4078f2;">(</span>ch<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Char</span><span style="color: #4078f2;">)</span> = ch == <span style="color: #50a14f;">']'</span> || ch == <span style="color: #50a14f;">')'</span>
+  <span style="color: #a626a4;">ismatch</span><span style="color: #4078f2;">(</span>left<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Char</span>, right<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Char</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649; font-weight: bold;">begin</span>
+    left == <span style="color: #50a14f;">'['</span> &amp;&amp; right == <span style="color: #50a14f;">']'</span> || 
+      left == <span style="color: #50a14f;">'('</span> &amp;&amp; right == <span style="color: #50a14f;">')'</span>
+  <span style="color: #e45649; font-weight: bold;">end</span>
+
+  push!<span style="color: #4078f2;">(</span>stack, first<span style="color: #a626a4;">(</span>code<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+
+  <span style="color: #e45649; font-weight: bold;">for</span> ch <span style="color: #e45649; font-weight: bold;">in</span> code<span style="color: #4078f2;">[</span>2:<span style="color: #e45649; font-weight: bold;">end</span><span style="color: #4078f2;">]</span>
+    <span style="color: #e45649; font-weight: bold;">if</span> isleft<span style="color: #4078f2;">(</span>ch<span style="color: #4078f2;">)</span>
+      push!<span style="color: #4078f2;">(</span>stack, ch<span style="color: #4078f2;">)</span>
+    <span style="color: #e45649; font-weight: bold;">else</span>
+      <span style="color: #e45649; font-weight: bold;">if</span> ismatch<span style="color: #4078f2;">(</span>first<span style="color: #a626a4;">(</span>stack<span style="color: #a626a4;">)</span>, ch<span style="color: #4078f2;">)</span>
+        pop!<span style="color: #4078f2;">(</span>stack<span style="color: #4078f2;">)</span>
+      <span style="color: #e45649; font-weight: bold;">else</span>
+        <span style="color: #e45649; font-weight: bold;">break</span>
+      <span style="color: #e45649; font-weight: bold;">end</span>
+    <span style="color: #e45649; font-weight: bold;">end</span>
+  <span style="color: #e45649; font-weight: bold;">end</span>
+
+  <span style="color: #e45649; font-weight: bold;">return</span> isempty<span style="color: #4078f2;">(</span>stack<span style="color: #4078f2;">)</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8617828" class="outline-5">
+<h5 id="org8617828">测试案例</h5>
+<div class="outline-text-5" id="text-org8617828">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@test</span> matchPatterns<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"([])()"</span><span style="color: #4078f2;">)</span> == <span style="color: #b751b6;">true</span>
+<span style="color: #4078f2; font-weight: bold;">@test</span> matchPatterns<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"]"</span><span style="color: #4078f2;">)</span> == <span style="color: #b751b6;">false</span>
+<span style="color: #4078f2; font-weight: bold;">@test</span> matchPatterns<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"]()"</span><span style="color: #4078f2;">)</span> == <span style="color: #b751b6;">false</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-11-09 二 00:39</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

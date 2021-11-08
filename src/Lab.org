@@ -1,110 +1,6 @@
 #+title: 学校作业记录
-* School Work Record
-** 数据结构实践作业
-[[file:practise][goto project]]
-*** DONE 问题1
-对中等规模、大规模的图书摆放，你有什么更好的建议？
-以书名作为索引，使用二叉平衡树进行存储，比如红黑树
-使用平衡树存储
-- 插入的时间复杂度为 =O(logN)=
-- 删除的时间复杂度为 =O(logN)=
-- 查找的时间复杂度为 =O(logN)=
-
-*** TODO 问题2
-用几种算法实现上面的题目，计算每种算法的基本操作的执行次数，分析该算法的时间复杂度，说明算法与时间复杂度的关系。
-
-*** DONE 问题3
-完成选择法排序算法设计与实现，并分析算法最好情况、最差情况和平均情况的时间复杂度。
-- 最好情况下，时间复杂度为 =O(n)=
-- 最差情况下，时间复杂度为 =O(n^2)=
-- 平均情况下，时间复杂度为 =O(n^2)=
-
-#+begin_src c++
-  void swap(int & a, int & b) {
-    if(a != b) {
-      a ^= b;
-      b ^= a;
-      a ^= b;
-    }
-  }
-
-  int findmin(vector<int> & nums, int start, int end) {
-    int _min = start;
-    for(int index = start + 1; index <= end; index += 1) {
-      if(nums[_min] > nums[index]) {
-        _min = index;
-      } else {
-        continue;
-      }
-    }
-
-    return _min;
-  }
-
-
-
-  int firstindex(vector<int> & nums) {
-    return 0;
-  }
-
-  int lastindex(vector<int> & nums) {
-    return nums.size() - 1;
-  }
-
-  void select_sort(vector<int> & nums) {
-    int start = firstindex(nums);
-    int end = lastindex(nums);
-
-    for(int index = start; index <= end; index += 1) {
-      int _min = findmin(nums, index, end);
-      swap(nums[index], nums[_min]);
-    }
-  }
-
-  int main()
-  {
-    vector<int> nums = {3, 38, 44, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
-    select_sort(nums);
-
-    for(int & data: nums) {
-      cout << data << ' ';
-    }
-
-    cout << endl;
-    return 0;
-  }
-
-#+end_src
-
-*** DONE 问题5
-对于一维数组 =A[0..n-1] (n>1)= ，设计在时间和空间方面尽可量有效率的算法，
-将A中的序列循环左移 =p(0<p<n)= 个位置，
-即将 =A= 中的数据从 =(A0, A1, ......, An-1)=
-转变成 =(Ap,Ap+1,......,An-1,A0,A1,......,Ap-1=
-要求用几种算法（尽可能多）实现上述题目。并分析每种算法的时间和空间复杂度。
-- 时间复杂度为 =O(n)=
-- 空间复杂度为 =O(n)=
-
-#+begin_src c++
-  vector<int> shiftleft(vector<int> &nums, int p) {
-    int n = nums.size() - 1;
-    assert(p > 0 && p < n);
-
-    vector<int> result;
-    for (int index = p; index <= n - 1; index += 1) {
-      result.push_back(nums[index]);
-    }
-
-    for (int index = 0; index <= p - 1; index += 1) {
-      result.push_back(nums[index]);
-    }
-
-    return result;
-  }
-
-#+end_src
-
-** 10.1 综合课程设计题目
+* 综合课程设计题目
+** 10.1.1 线性表
 这次实践选了三个简单的A级题目，要是没把以前的仓库删了，C级题目就能写了
 *** A1 Josephus 环问题 
 **** 题目描述
@@ -196,12 +92,12 @@
 2. 创建链表 =C= 为 =A= 的备份，再从 =B= 中提取不属于 =A= 的元素， 然后插入到 =C=
 **** 函数说明
 1. =list<int> union_list(list<int> & left, list<int> & right)=
-  - 传入链表 =left= 与 =right=
-  - 返回一个链表
+   - 传入链表 =left= 与 =right=
+   - 返回一个链表
 
 2. =vector<int> union_vector(vector<int> & left, vector<int> & right)=
-  - 传入数组 =left= 与 =right=
-  - 返回一个数组
+   - 传入数组 =left= 与 =right=
+   - 返回一个数组
 **** 完整代码
 - 首先是合并链表
 #+begin_src c++
@@ -251,10 +147,10 @@
 
 - 运行结果
 #+begin_src sh
-16
-2
-27
-29
+  16
+  2
+  27
+  29
 #+end_src
 **** 时间复杂度
 设链表 =left= 的长度为 =M=
@@ -340,7 +236,7 @@
     index = 0;
     while (left <= right) {
       auto position = next(it, left);
-      *(position) = temp[index];
+      ,*(position) = temp[index];
 
       left += 1;
       index += 1;
@@ -370,8 +266,174 @@
 
 - 运行结果
 #+begin_src sh
-2	2	3	4	15	19	26	27	36	38	44	46	47	48	50	
+  2	2	3	4	15	19	26	27	36	38	44	46	47	48	50	
 #+end_src
 **** 时间复杂度
 - 当使用长度为 =n= 的数组时，时间复杂度为 =O(nlogn)=
 - 当使用长度为 =n= 的链表时，时间复杂度为 =O(n^2logn)=
+
+** 10.1.2 栈与队列
+*** A1 数制转换问题
+**** 题目描述
+对于任意一个非负的十进制整数，打印出与其等值的八进制数
+**** 题目分析
+这里我懒得从键盘输入，直接输入数字，然后返回表示八进制的字符串
+
+***** 定义函数
+=transformBase(number::Int)=
+- 输入一个整数
+- 输出一个字符串，表示其八进制数
+***** 测试案例
+- =transformBase(1348) == "2504"=
+- =transformBase(1234) == "2322"=
+**** 完整代码
+#+begin_src julia
+  function transformBase(number::Int)
+    base = 8
+    stack = createStack(Int)
+
+    N = number
+    div_N = Int(floor(N / base))
+    mod_N = N % base
+    push!(stack, mod_N)
+  
+    while div_N != 0
+      N = div_N
+      div_N = Int(floor(N / base))
+      mod_N = N % base
+      push!(stack, mod_N)
+    end
+
+    return reduce(string, stack; init="")
+  end
+#+end_src
+
+**** 测试案例
+#+begin_src julia
+  @test transformBase(1348) == "2504"
+  @test transformBase(1234) == "2322"
+#+end_src
+
+*** A2 回文判断
+**** 题目描述
+判断一个字符串是否为回文串，即是否左右对称
+**** 题目分析
+这个好像反转一下，然后与原字符串中的字符逐个对比就好了
+***** 函数定义
+=isPalindromic(str::String)=
+- 输入一个字符串
+- 输出一个 =bool= 类型，判断字符串是否为回文
+***** 测试案例
+- =isPalindromic("helleh") == true=
+**** 完整代码
+这东西，一个函数式代码就搞定了
+#+begin_src julia
+  function isPalindromic(str::String)
+    return map(==, str, reverse(str)) |>
+      nums -> all(isequal(1), nums)
+  end
+#+end_src
+
+我用 =Clojure= 再写一遍，更清晰一点
+#+begin_src clojure
+  (defn palindromic? [string]
+    (every (fn [x] 
+             (= x 1))
+           (map = string (reverse string))))
+#+end_src
+**** 测试案例
+#+begin_src julia
+  @test isPalindromic("helleh") == true
+#+end_src
+*** A4 破解藏头诗
+**** 题目描述
+输入一首藏头诗，一共四句，每句一行
+输出每句的第一个汉字连接在一起的字符串
+**** 题目分析
+这里需要队列吗，可能我的解决方式不一样吧，我还是不喜欢从终端输入字符串
+同样也可以用函数式来写
+***** 函数定义
+=headPoem(sentences::Vararg{String})=
+其中 =Vararg= 指的是可变参数，
+***** 测试案例
+#+begin_src julia
+  headPoem("我",
+           "最近",
+           "爱上了",
+           "你的闺密") == "我最爱你"
+
+#+end_src
+**** 完整代码
+#+begin_src julia
+  headPoem(sentences::Vararg{String}) =  map(first, sentences) |> chs -> reduce(string, chs; init="")
+#+end_src
+
+这里我用函数式的 =Clojure= 再写一遍吧
+#+begin_src clojure
+  (defn head-poem [& sentences]
+    (reduce str "" 
+            (map first sentences)))
+#+end_src
+**** 测试案例
+#+begin_src julia
+  @test headPoem("我",
+                 "最近",
+                 "爱上了",
+                 "你的闺密") == "我最爱你"
+#+end_src
+*** A5 括号匹配的检验
+**** 题目描述
+输入圆括号和方括号的任意序列，输出 *匹配* 或 *此串括号匹配不合法*
+**** 题目分析
+这个其实挺简单
+将左括号，左中括号一类的符号归为 *left* 类，将对应的符号归为 *right* 类
+遍历每一个符号
+- 每碰到 =left= 类符号，就把符号放到一个栈里
+- 每碰到 =right= 类符号，取栈顶 =top=
+  - 若 =right= 与 =top= 字符相对应，如 =(= 与 =)= ， =[= 与 =]= ，则出栈，进行下一次遍历
+  - 若 =right= 与 =top= 字符不匹配，肯定不匹配，推出遍历
+- 遍历结束后, *return* 栈是否为空栈
+- 注意，遍历前先把第一个符号入栈，否则无法处理 ="]"= 这种开头是 *right* 类符号的情况    
+***** 函数定义
+=matchPatterns(code::String)=
+- 输入字符串序列，只有圆括号和方括号
+- 输出括号是否匹配
+***** 测试案例
+- =matchPatterns("([])()") == true=
+- =matchPatterns("]") == false=
+- =matchPatterns("]()") == false=
+**** 完整代码
+#+begin_src julia
+  function matchPatterns(code::String)
+    stack = createStack(Char)
+    isleft(ch::Char) = ch == '[' || ch == '('
+    isright(ch::Char) = ch == ']' || ch == ')'
+    ismatch(left::Char, right::Char) = begin
+      left == '[' && right == ']' || 
+        left == '(' && right == ')'
+    end
+  
+    push!(stack, first(code))
+  
+    for ch in code[2:end]
+      if isleft(ch)
+        push!(stack, ch)
+      else
+        if ismatch(first(stack), ch)
+          pop!(stack)
+        else
+          break
+        end
+      end
+    end
+  
+    return isempty(stack)
+  end
+
+#+end_src
+**** 测试案例
+#+begin_src julia
+  @test matchPatterns("([])()") == true
+  @test matchPatterns("]") == false
+  @test matchPatterns("]()") == false
+#+end_src
