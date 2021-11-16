@@ -437,3 +437,112 @@
   @test matchPatterns("]") == false
   @test matchPatterns("]()") == false
 #+end_src
+
+** 10.1.3 二叉树与树
+- 我已提前实现了二叉树的遍历方法
+- 题目过于简单，就不用分析了吧
+*** 1. 二叉树各节点数值的平均值
+**** 函数说明
+=average(tree::BinarySearchTree)=
+- 输入一个二叉树
+- 返回各节点数值的平均值
+**** 测试案例
+#+begin_src julia
+  @test average(tree) == reduce(+, collect(tree)) / length(tree)
+#+end_src
+**** 完整代码
+#+begin_src julia
+  function average(tree::BinarySearchTree)
+    len = length(tree)
+    sum = reduce(+, collect(tree))
+    return sum / len
+  end
+#+end_src
+*** 2. 交换每个节点的左右节点
+**** 函数说明
+#+begin_src julia
+  swapnode!(tree::BinarySearchTree)
+#+end_src
+
+- 输入一个二叉树
+- 将其中每个节点的左右节点交换
+- 没有返回值
+**** 测试案例
+#+begin_src julia
+  @testset "practise 2" begin
+    swapnode!(tree)
+    @info "after swap the tree is " tree
+  end
+#+end_src
+
+由于代码中向 =tree= 插入的数据都是随机的，测试结果不好展示
+其实我懒得展示
+**** 完整代码
+#+begin_src julia
+  function swapnode!(tree::BinarySearchTree)
+    swap(node::BinaryNode) = begin
+      temp = left(node)
+      node.left = node.right
+      node.right = temp
+    end
+
+    for treenode in bfsiterate(tree)
+      swap(treenode)
+    end
+  end
+#+end_src
+
+程序从 =bfsiterate= 返回的迭代器中取出节点 =treenode=
+*** 3. 验证 二叉树性质3
+**** 函数说明
+=verify(tree::BinarySearchTree)=
+- 输入一个二叉树
+- 输出 =true= 或者 =false= 
+**** 测试案例
+#+begin_src julia
+  @test verify(tree) == true
+#+end_src
+**** 完整代码
+#+begin_src julia
+  function verify(tree::BinarySearchTree)
+    queue = createQueue(AbstractBinaryNode)
+    push!(queue, tree.root)
+  
+    n0 = n2 = 0
+  
+    for treenode in bfsiterate(tree)
+      # here process the node
+      if isleaf(treenode)
+        n0 += 1
+      elseif !isnil(left(treenode)) && !isnil(right(treenode))
+        n2 += 1
+      end
+    end
+  
+    return n0 == n2 + 1
+  end
+#+end_src
+*** 4. 中序遍历，后序遍历
+**** 函数说明
+**** 测试案例
+**** 完整代码
+*** 5. 判断两个二叉树相等
+**** 函数说明
+**** 测试案例
+**** 完整代码
+*** 6. 判断 是否完全二叉树
+**** 函数说明
+**** 测试案例
+**** 完整代码
+*** 7. 后序遍历中第一个返回的节点
+**** 函数说明
+**** 测试案例
+**** 完整代码
+*** 8. 非递归实现 先序遍历，中序遍历，后序遍历
+**** 函数说明
+**** 测试案例
+**** 完整代码
+*** 9. 查看节点所在层次
+**** 函数说明
+**** 测试案例
+**** 完整代码
