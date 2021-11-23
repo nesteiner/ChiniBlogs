@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-09-07 二 00:27 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MLJ中 线性模型 在回归预测中的简单使用</title>
@@ -246,17 +246,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcc1df63">开始之前</a></li>
-<li><a href="#orgd3fd328">数据准备</a></li>
-<li><a href="#org03fb1c6">模型介绍</a></li>
-<li><a href="#orgba98731">添加特征</a></li>
-<li><a href="#org9a13cae">最后说明</a></li>
+<li><a href="#org1679075">开始之前</a></li>
+<li><a href="#org21841e0">数据准备</a></li>
+<li><a href="#orgb03b640">模型介绍</a></li>
+<li><a href="#org90451d2">添加特征</a></li>
+<li><a href="#org2ad6fd1">最后说明</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcc1df63" class="outline-2">
-<h2 id="orgcc1df63">开始之前</h2>
-<div class="outline-text-2" id="text-orgcc1df63">
+<div id="outline-container-org1679075" class="outline-2">
+<h2 id="org1679075">开始之前</h2>
+<div class="outline-text-2" id="text-org1679075">
 <p>
 我想向大家介绍一下一些线性模型的用法，以及他们对数据的拟合程度<br />
 在我开始学习 MLJ 时，我对他们的拟合能力有所怀疑，经常遇到欠拟合的情况，经过一次简单的测试后，才慢慢了解如何使用模型，处理特征<br />
@@ -264,9 +264,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-orgd3fd328" class="outline-2">
-<h2 id="orgd3fd328">数据准备</h2>
-<div class="outline-text-2" id="text-orgd3fd328">
+<div id="outline-container-org21841e0" class="outline-2">
+<h2 id="org21841e0">数据准备</h2>
+<div class="outline-text-2" id="text-org21841e0">
 <p>
 我们模拟对函数 f(x) = x<sup>2</sup> + 2x 的拟合，在理想的预测结果 standardy 上加上一点噪音，形成训练用测试结果 coly<br />
 接下来依次定义<br />
@@ -296,16 +296,16 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, coly, label=<span style="col
 
 
 
-<div id="orgfe96e30" class="figure">
+<div id="orgc2d5b27" class="figure">
 <p><img src="images/数据准备/2021-09-07_00-01-42_screenshot.png" alt="2021-09-07_00-01-42_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org03fb1c6" class="outline-2">
-<h2 id="org03fb1c6">模型介绍</h2>
-<div class="outline-text-2" id="text-org03fb1c6">
+<div id="outline-container-orgb03b640" class="outline-2">
+<h2 id="orgb03b640">模型介绍</h2>
+<div class="outline-text-2" id="text-orgb03b640">
 <p>
 拟合数据我们使用 Ridge 回归，他在损失函数上添加了 L2 正则化<br />
 </p>
@@ -345,7 +345,7 @@ Ridge regression model with objective function<br />
 接下来模型训练，直接调优得到最优模型，得到输出结果<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">using</span> MLJLinearModels, StableRNGs
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">using</span> MLJLinearModels, StableRNGs
 rng = StableRNG<span style="color: #4078f2;">(</span>1234<span style="color: #4078f2;">)</span>
 
 ridge = RidgeRegressor<span style="color: #4078f2;">()</span>
@@ -382,22 +382,22 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="
 
 
 
-<div id="orgf96242d" class="figure">
+<div id="org5a016ca" class="figure">
 <p><img src="images/模型介绍/2021-09-07_00-02-54_screenshot.png" alt="2021-09-07_00-02-54_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgba98731" class="outline-2">
-<h2 id="orgba98731">添加特征</h2>
-<div class="outline-text-2" id="text-orgba98731">
+<div id="outline-container-org90451d2" class="outline-2">
+<h2 id="org90451d2">添加特征</h2>
+<div class="outline-text-2" id="text-org90451d2">
 <p>
 应对欠拟合的情况我们可以通过添加特征来解决<br />
 回到上面的问题，由于 f(x) = x<sup>2</sup> + 2x ，提供的数据中只有 x1=x 一个特征，我们尝试再添加一个特征 x2=x<sup>2</sup><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">let</span> g<span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x^2
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">let</span> g<span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x^2
   colx.x2 = g.<span style="color: #4078f2;">(</span>colx.x1<span style="color: #4078f2;">)</span>
   self_tuning_machine = machine<span style="color: #4078f2;">(</span>self_tuning_model, colx, coly<span style="color: #4078f2;">)</span>
   fit!<span style="color: #4078f2;">(</span>self_tuning_machine<span style="color: #4078f2;">)</span>
@@ -408,14 +408,14 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="
 
   plot<span style="color: #4078f2;">(</span>colx.x1, standardy, label=<span style="color: #50a14f;">"standardy"</span>, color=<span style="color: #4078f2; font-weight: bold;">:blue</span><span style="color: #4078f2;">)</span>
   plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="color: #50a14f;">"output"</span>, color=<span style="color: #4078f2; font-weight: bold;">:red</span><span style="color: #4078f2;">)</span> |&gt; display
-<span style="color: #e45649;">end</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
 
 </pre>
 </div>
 
 
 
-<div id="org9a11d11" class="figure">
+<div id="org13ed8c7" class="figure">
 <p><img src="images/添加特征/2021-09-07_00-03-32_screenshot.png" alt="2021-09-07_00-03-32_screenshot.png" /><br />
 </p>
 </div>
@@ -425,7 +425,7 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="
 那我们再添加一个特征 x3=x<sup>3</sup><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">let</span> g<span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x^3
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">let</span> g<span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x^3
   colx.x3 = g.<span style="color: #4078f2;">(</span>colx.x1<span style="color: #4078f2;">)</span>
   self_tuning_machine = machine<span style="color: #4078f2;">(</span>self_tuning_model, colx, coly<span style="color: #4078f2;">)</span>
   fit!<span style="color: #4078f2;">(</span>self_tuning_machine<span style="color: #4078f2;">)</span>
@@ -436,23 +436,23 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="
 
   plot<span style="color: #4078f2;">(</span>colx.x1, standardy, color=<span style="color: #4078f2; font-weight: bold;">:blue</span>, label=<span style="color: #50a14f;">"standard"</span><span style="color: #4078f2;">)</span>
   plot!<span style="color: #4078f2;">(</span>colx.x1, outputY, color=<span style="color: #4078f2; font-weight: bold;">:red</span>, label=<span style="color: #50a14f;">"ouputy"</span><span style="color: #4078f2;">)</span> |&gt; display
-<span style="color: #e45649;">end</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
 
 </pre>
 </div>
 
 
 
-<div id="org9d7889c" class="figure">
+<div id="org9ec7183" class="figure">
 <p><img src="images/添加特征/2021-09-07_00-04-17_screenshot.png" alt="2021-09-07_00-04-17_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9a13cae" class="outline-2">
-<h2 id="org9a13cae">最后说明</h2>
-<div class="outline-text-2" id="text-org9a13cae">
+<div id="outline-container-org2ad6fd1" class="outline-2">
+<h2 id="org2ad6fd1">最后说明</h2>
+<div class="outline-text-2" id="text-org2ad6fd1">
 <p>
 这次测试没有使用训练集和测试集，相当简陋，只是作为实验</p>
 </div>
@@ -460,7 +460,7 @@ plot!<span style="color: #4078f2;">(</span>colx.x1, outputy, label=<span style="
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-09-07 二 00:27</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

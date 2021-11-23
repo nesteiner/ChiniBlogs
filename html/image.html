@@ -1,128 +1,356 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Steiner" />
-  <title>离散数学实践任务2</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
+<!-- 2021-11-23 二 19:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>离散数学实践任务2</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<header id="title-block-header">
+<div id="content">
 <h1 class="title">离散数学实践任务2</h1>
-<p class="author">Steiner</p>
-</header>
-<h1 id="说明">说明</h1>
-<p>这个实验在 <strong>Linux</strong> 系统中，找不到 <span class="underline"><span class="underline">&lt;graphics.h&gt;</span></span> 和 <span class="underline"><span class="underline">&lt;conio.h&gt;</span></span> 这两个标准库，又去 Google 了一番，一顿操作后，还是没用 最后，只能先用 <strong>Julia</strong> 垫着了。 什么？ <strong>Python</strong> ？ 我都不知道找谁去问</p>
-<h1 id="程序">程序</h1>
-<h2 id="目标">目标</h2>
-<ol>
-<li>利用幂函数 <span class="underline"><span class="underline">f(x)=x<sup>r</sup></span></span> 对自己拍摄的数字图像R</li>
-<li>f(x)是每个像素R</li>
-<li>x是变换前某像素某个通道的值</li>
-<li>f(x)是变换后对应像素相应通道的值</li>
-<li>编程并观察当r=0.1\0.4\0.6\0.8\1.0\1.2\1.5\1.8\2.0\2.5\5.0\10.0等值时幂函数对数字图像的处理效果</li>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8312755">说明</a></li>
+<li><a href="#org9e0c622">程序</a>
+<ul>
+<li><a href="#org8e42bd9">目标</a></li>
+<li><a href="#org00e8b8a">材料</a></li>
+<li><a href="#orgb374bec">代码</a></li>
+<li><a href="#org6eeb881">一些补充</a></li>
+</ul>
+</li>
+<li><a href="#orgb4b8eb5">输出结果</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8312755" class="outline-2">
+<h2 id="org8312755">说明</h2>
+<div class="outline-text-2" id="text-org8312755">
+<p>
+这个实验在 <b>Linux</b> 系统中，找不到 <span class="underline"><span class="underline">&lt;graphics.h&gt;</span></span> 和 <span class="underline"><span class="underline">&lt;conio.h&gt;</span></span> 这两个标准库，又去 Google 了一番，一顿操作后，还是没用<br />
+最后，只能先用 <b>Julia</b> 垫着了。 什么？ <b>Python</b> ？ 我都不知道找谁去问<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org9e0c622" class="outline-2">
+<h2 id="org9e0c622">程序</h2>
+<div class="outline-text-2" id="text-org9e0c622">
+</div>
+<div id="outline-container-org8e42bd9" class="outline-3">
+<h3 id="org8e42bd9">目标</h3>
+<div class="outline-text-3" id="text-org8e42bd9">
+<ol class="org-ol">
+<li>利用幂函数 <span class="underline"><span class="underline">f(x)=x<sup>r</sup></span></span> 对自己拍摄的数字图像R\G\B通道的像素值进行变换<br /></li>
+<li>f(x)是每个像素R\G\B通道的变换函数<br /></li>
+<li>x是变换前某像素某个通道的值<br /></li>
+<li>f(x)是变换后对应像素相应通道的值<br /></li>
+<li>编程并观察当r=0.1\0.4\0.6\0.8\1.0\1.2\1.5\1.8\2.0\2.5\5.0\10.0等值时幂函数对数字图像的处理效果<br /></li>
 </ol>
-<h2 id="材料">材料</h2>
-<p>这次用了一张 <strong>330 x 300</strong> 的图片来做实验，没办法，电脑里都是涩图 <img src="./images/img_sd002.png" /> 顺带说一下，这张是背景透的明 <span class="underline"><span class="underline">png</span></span> 图片，单独用文件浏览器打开时背景是黑色</p>
-<h2 id="代码">代码</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb1-1" title="1">using Images, FileIO, ImageView</a>
-<a class="sourceLine" id="cb1-2" title="2"></a>
-<a class="sourceLine" id="cb1-3" title="3">fullcolor = RGB(<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"></a>
-<a class="sourceLine" id="cb1-5" title="5">imageConvert(image::<span class="dt">Matrix</span>{RGB{N0f8}}, r) = <span class="kw">begin</span></a>
-<a class="sourceLine" id="cb1-6" title="6">  f(x) = x ^ r</a>
-<a class="sourceLine" id="cb1-7" title="7">  convertfn(pixel) = typeof(pixel)(f(red(pixel)), f(green(pixel)), f(blue(pixel)))</a>
-<a class="sourceLine" id="cb1-8" title="8"></a>
-<a class="sourceLine" id="cb1-9" title="9">  map(convertfn, image)</a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="kw">end</span></a>
-<a class="sourceLine" id="cb1-11" title="11"></a>
-<a class="sourceLine" id="cb1-12" title="12">image = RGB.(load(<span class="st">&quot;/home/steiner/图片/img_sd002.png&quot;</span>))</a>
-<a class="sourceLine" id="cb1-13" title="13">r = [<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>, <span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>, <span class="fl">5.0</span>, <span class="fl">10.0</span>]</a>
-<a class="sourceLine" id="cb1-14" title="14">imshow(mosaicview(map(_r -&gt; imageConvert(image, _r), r), ncol=length(r)))</a></code></pre></div>
-<h2 id="一些补充">一些补充</h2>
-<ol>
-<li>在 <strong><a href="https://juliaimages.org/stable/">Julia Image</a></strong> 这个库中，可以把一张图片看作一个元素类型为 <strong>RGB</strong> 的矩阵</li>
-<li>接下来的操作只需要操作矩阵（二维数组） 元素即可，对应的代码在 <strong>imageConvert</strong> 中</li>
-<li>其中 <strong>red, green, blue</strong> 三个函数分别取出像素点的 <strong>R, G, B</strong> 的值</li>
-<li>将 <strong>RGB</strong> 矩阵重新显示为图片，可以调用 <span class="underline"><span class="underline">imshow</span></span> 函数</li>
-<li><span class="underline">mosaicview</span> 这个函数是我去 <strong>Slack</strong> 上问的，要是不设后面的 <span class="underline"><span class="underline">ncol</span></span> 参数，展示的图片会变得很长，竖着的</li>
+</div>
+</div>
+<div id="outline-container-org00e8b8a" class="outline-3">
+<h3 id="org00e8b8a">材料</h3>
+<div class="outline-text-3" id="text-org00e8b8a">
+<p>
+这次用了一张 <b>330 x 300</b> 的图片来做实验，没办法，电脑里都是涩图<br />
+<img src="./images/img_sd002.png" alt="img_sd002.png" /><br />
+顺带说一下，这张是背景透的明 <span class="underline"><span class="underline">png</span></span> 图片，单独用文件浏览器打开时背景是黑色<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgb374bec" class="outline-3">
+<h3 id="orgb374bec">代码</h3>
+<div class="outline-text-3" id="text-orgb374bec">
+<div class="org-src-container">
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">using</span> Images, FileIO, ImageView
+
+fullcolor = RGB<span style="color: #4078f2;">(</span>1,1,1<span style="color: #4078f2;">)</span>
+
+<span style="color: #a626a4;">imageConvert</span><span style="color: #4078f2;">(</span>image<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">Matrix</span><span style="color: #a626a4;">{</span>RGB<span style="color: #50a14f;">{</span>N0f8<span style="color: #50a14f;">}</span><span style="color: #a626a4;">}</span>, r<span style="color: #4078f2;">)</span> = <span style="color: #e45649; font-weight: bold;">begin</span>
+  <span style="color: #a626a4;">f</span><span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = x ^ r
+  <span style="color: #a626a4;">convertfn</span><span style="color: #4078f2;">(</span>pixel<span style="color: #4078f2;">)</span> = typeof<span style="color: #4078f2;">(</span>pixel<span style="color: #4078f2;">)(</span>f<span style="color: #a626a4;">(</span>red<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>, f<span style="color: #a626a4;">(</span>green<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>, f<span style="color: #a626a4;">(</span>blue<span style="color: #50a14f;">(</span>pixel<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+
+  map<span style="color: #4078f2;">(</span>convertfn, image<span style="color: #4078f2;">)</span>
+<span style="color: #e45649; font-weight: bold;">end</span>
+
+image = RGB.<span style="color: #4078f2;">(</span>load<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"/home/steiner/&#22270;&#29255;/img_sd002.png"</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+r = <span style="color: #4078f2;">[</span>0.1, 0.4, 0.6, 0.8, 1.0, 1.2, 1.5, 1.8, 2.0, 2.5, 5.0, 10.0<span style="color: #4078f2;">]</span>
+imshow<span style="color: #4078f2;">(</span>mosaicview<span style="color: #a626a4;">(</span>map<span style="color: #50a14f;">(</span>_r -&gt; imageConvert<span style="color: #b751b6;">(</span>image, _r<span style="color: #b751b6;">)</span>, r<span style="color: #50a14f;">)</span>, ncol=length<span style="color: #50a14f;">(</span>r<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6eeb881" class="outline-3">
+<h3 id="org6eeb881">一些补充</h3>
+<div class="outline-text-3" id="text-org6eeb881">
+<ol class="org-ol">
+<li>在 <b><a href="https://juliaimages.org/stable/">Julia Image</a></b> 这个库中，可以把一张图片看作一个元素类型为 <b>RGB</b> 的矩阵<br /></li>
+<li>接下来的操作只需要操作矩阵（二维数组） 元素即可，对应的代码在 <b>imageConvert</b> 中<br /></li>
+<li>其中 <b>red, green, blue</b> 三个函数分别取出像素点的 <b>R, G, B</b> 的值<br /></li>
+<li>将 <b>RGB</b> 矩阵重新显示为图片，可以调用 <span class="underline"><span class="underline">imshow</span></span> 函数<br /></li>
+<li><span class="underline">mosaicview</span> 这个函数是我去 <b>Slack</b> 上问的，要是不设后面的 <span class="underline"><span class="underline">ncol</span></span> 参数，展示的图片会变得很长，竖着的<br /></li>
 </ol>
-<h1 id="输出结果">输出结果</h1>
-<p><img src="./images/shortcut2.png" /> 由此可以看出</p>
-<ol>
-<li>在 <span class="underline"><span class="underline">r</span></span> 取 1 时对图像没有影响</li>
-<li>在 <span class="underline"><span class="underline">r</span></span> 取小于 1 时，图像会越来越亮</li>
-<li>在 <span class="underline"><span class="underline">r</span></span> 取大于 1 时，图像会越来越暗</li>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb4b8eb5" class="outline-2">
+<h2 id="orgb4b8eb5">输出结果</h2>
+<div class="outline-text-2" id="text-orgb4b8eb5">
+<p>
+<img src="./images/shortcut2.png" alt="shortcut2.png" /><br />
+由此可以看出<br />
+</p>
+<ol class="org-ol">
+<li>在 <span class="underline"><span class="underline">r</span></span> 取 1 时对图像没有影响<br /></li>
+<li>在 <span class="underline"><span class="underline">r</span></span> 取小于 1 时，图像会越来越亮<br /></li>
+<li>在 <span class="underline"><span class="underline">r</span></span> 取大于 1 时，图像会越来越暗<br /></li>
 </ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-16 五 00:45 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Boost 测试记录</title>
@@ -224,40 +224,40 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org252d084">链接函数库</a>
+<li><a href="#org3a01b81">链接函数库</a>
 <ul>
-<li><a href="#orgc0bd78c">通用标志 CFLAGS</a></li>
-<li><a href="#orgdd61a00">链接动态函数库</a>
+<li><a href="#orgf272f0b">通用标志 CFLAGS</a></li>
+<li><a href="#org9ecac94">链接动态函数库</a>
 <ul>
-<li><a href="#orgffc7414">创建动态函数库</a></li>
-<li><a href="#orgc0d604d">链接程序</a></li>
-<li><a href="#org41e8648">运行测试</a></li>
-<li><a href="#org6bd6405">改进</a></li>
+<li><a href="#orge42e731">创建动态函数库</a></li>
+<li><a href="#org86a5fe3">链接程序</a></li>
+<li><a href="#orgcb8c9bf">运行测试</a></li>
+<li><a href="#orgc457945">改进</a></li>
 </ul>
 </li>
-<li><a href="#org357609b">链接静态函数库</a>
+<li><a href="#org17e5eab">链接静态函数库</a>
 <ul>
-<li><a href="#org15167e2">创建静态函数库</a></li>
-<li><a href="#org8ceb38c">运行测试</a></li>
-<li><a href="#orgc1de4ac">注意</a></li>
+<li><a href="#org7dfe2d2">创建静态函数库</a></li>
+<li><a href="#org32e3536">运行测试</a></li>
+<li><a href="#org0d5e844">注意</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org321666f">如何解决依赖地狱</a></li>
-<li><a href="#org868fa6d">FIXME 依赖管理</a>
+<li><a href="#orgb05b7a9">如何解决依赖地狱</a></li>
+<li><a href="#org4bbed4f">FIXME 依赖管理</a>
 <ul>
-<li><a href="#org979239f">指定链接路径</a></li>
-<li><a href="#org4c7ec75">链接静态函数库</a></li>
-<li><a href="#org7c76964">autogen 的使用</a></li>
+<li><a href="#org3865e2f">指定链接路径</a></li>
+<li><a href="#orgde2313f">链接静态函数库</a></li>
+<li><a href="#org53a566e">autogen 的使用</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org252d084" class="outline-2">
-<h2 id="org252d084">链接函数库</h2>
-<div class="outline-text-2" id="text-org252d084">
+<div id="outline-container-org3a01b81" class="outline-2">
+<h2 id="org3a01b81">链接函数库</h2>
+<div class="outline-text-2" id="text-org3a01b81">
 <p>
 链接函数库需要为 gcc 添加一定的选项，其中有<br />
 </p>
@@ -268,9 +268,9 @@
 </ol>
 </div>
 
-<div id="outline-container-orgc0bd78c" class="outline-3">
-<h3 id="orgc0bd78c">通用标志 CFLAGS</h3>
-<div class="outline-text-3" id="text-orgc0bd78c">
+<div id="outline-container-orgf272f0b" class="outline-3">
+<h3 id="orgf272f0b">通用标志 CFLAGS</h3>
+<div class="outline-text-3" id="text-orgf272f0b">
 <p>
 使用上述选项，将 CFLAGS 设置为<br />
 </p>
@@ -292,13 +292,13 @@
 </div>
 </div>
 
-<div id="outline-container-orgdd61a00" class="outline-3">
-<h3 id="orgdd61a00">链接动态函数库</h3>
-<div class="outline-text-3" id="text-orgdd61a00">
+<div id="outline-container-org9ecac94" class="outline-3">
+<h3 id="org9ecac94">链接动态函数库</h3>
+<div class="outline-text-3" id="text-org9ecac94">
 </div>
-<div id="outline-container-orgffc7414" class="outline-4">
-<h4 id="orgffc7414">创建动态函数库</h4>
-<div class="outline-text-4" id="text-orgffc7414">
+<div id="outline-container-orge42e731" class="outline-4">
+<h4 id="orge42e731">创建动态函数库</h4>
+<div class="outline-text-4" id="text-orge42e731">
 <div class="org-src-container">
 <pre class="src src-makefile"><span style="color: #4078f2;">libmax.so</span>: max.h max.c
         gcc max.c -fPIC -shared -o libmax.so $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
@@ -313,9 +313,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc0d604d" class="outline-4">
-<h4 id="orgc0d604d">链接程序</h4>
-<div class="outline-text-4" id="text-orgc0d604d">
+<div id="outline-container-org86a5fe3" class="outline-4">
+<h4 id="org86a5fe3">链接程序</h4>
+<div class="outline-text-4" id="text-org86a5fe3">
 <div class="org-src-container">
 <pre class="src src-makefile"><span style="color: #4078f2;">a.out</span>: test.c libmax.so
         gcc test.c -L . -l max $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
@@ -323,9 +323,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org41e8648" class="outline-4">
-<h4 id="org41e8648">运行测试</h4>
-<div class="outline-text-4" id="text-org41e8648">
+<div id="outline-container-orgcb8c9bf" class="outline-4">
+<h4 id="orgcb8c9bf">运行测试</h4>
+<div class="outline-text-4" id="text-orgcb8c9bf">
 <div class="org-src-container">
 <pre class="src src-makefile"><span style="color: #4078f2;">run</span>: a.out
         ./a.out
@@ -340,9 +340,9 @@ error while loading shared libraries: libmyhello.so: cannot open shared object f
 </p>
 </div>
 </div>
-<div id="outline-container-org6bd6405" class="outline-4">
-<h4 id="org6bd6405">改进</h4>
-<div class="outline-text-4" id="text-org6bd6405">
+<div id="outline-container-orgc457945" class="outline-4">
+<h4 id="orgc457945">改进</h4>
+<div class="outline-text-4" id="text-orgc457945">
 <p>
 虽然在编译时指定了库的路径，但没有在运行时指定库的路径<br />
 有两种方法可以解决上述错误<br />
@@ -373,22 +373,22 @@ error while loading shared libraries: libmyhello.so: cannot open shared object f
 </div>
 </div>
 </div>
-<div id="outline-container-org357609b" class="outline-3">
-<h3 id="org357609b">链接静态函数库</h3>
-<div class="outline-text-3" id="text-org357609b">
+<div id="outline-container-org17e5eab" class="outline-3">
+<h3 id="org17e5eab">链接静态函数库</h3>
+<div class="outline-text-3" id="text-org17e5eab">
 </div>
-<div id="outline-container-org15167e2" class="outline-4">
-<h4 id="org15167e2">创建静态函数库</h4>
-<div class="outline-text-4" id="text-org15167e2">
+<div id="outline-container-org7dfe2d2" class="outline-4">
+<h4 id="org7dfe2d2">创建静态函数库</h4>
+<div class="outline-text-4" id="text-org7dfe2d2">
 <p>
 创建静态函数库需要用到 ar 程序，函数库的后缀名 .a 代表 <b>archive</b> ，打包的意思?<br />
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8ceb38c" class="outline-4">
-<h4 id="org8ceb38c">运行测试</h4>
-<div class="outline-text-4" id="text-org8ceb38c">
+<div id="outline-container-org32e3536" class="outline-4">
+<h4 id="org32e3536">运行测试</h4>
+<div class="outline-text-4" id="text-org32e3536">
 <div class="org-src-container">
 <pre class="src src-makefile"><span style="color: #4078f2;">a.out</span>: test.c static-max
         gcc test.c -L . -l max $<span style="color: #4078f2;">{</span><span style="color: #6a1868;">CFLAGS</span><span style="color: #4078f2;">}</span>
@@ -398,9 +398,9 @@ error while loading shared libraries: libmyhello.so: cannot open shared object f
 </div>
 </div>
 </div>
-<div id="outline-container-orgc1de4ac" class="outline-4">
-<h4 id="orgc1de4ac">注意</h4>
-<div class="outline-text-4" id="text-orgc1de4ac">
+<div id="outline-container-org0d5e844" class="outline-4">
+<h4 id="org0d5e844">注意</h4>
+<div class="outline-text-4" id="text-org0d5e844">
 <p>
 链接时，编译器优先匹配 <b>libmax.so</b> 文件，再是 <b>libmax.a</b> ，先要删除 <b>libmax.so</b> 才能让测试正确通过<br />
 </p>
@@ -410,9 +410,9 @@ error while loading shared libraries: libmyhello.so: cannot open shared object f
 </div>
 
 
-<div id="outline-container-org321666f" class="outline-2">
-<h2 id="org321666f">如何解决依赖地狱</h2>
-<div class="outline-text-2" id="text-org321666f">
+<div id="outline-container-orgb05b7a9" class="outline-2">
+<h2 id="orgb05b7a9">如何解决依赖地狱</h2>
+<div class="outline-text-2" id="text-orgb05b7a9">
 <p>
 当我因为软件版本的冲突原因，而不能安装一些软件时，我陷入了依赖地狱<br />
 这是因为我们使用的是全局环境下的库，我们可以参考 Python, Vue 的解决方法，单独创建一个环境提供依赖<br />
@@ -422,13 +422,13 @@ error while loading shared libraries: libmyhello.so: cannot open shared object f
 </div>
 </div>
 
-<div id="outline-container-org868fa6d" class="outline-2">
-<h2 id="org868fa6d">FIXME 依赖管理</h2>
-<div class="outline-text-2" id="text-org868fa6d">
+<div id="outline-container-org4bbed4f" class="outline-2">
+<h2 id="org4bbed4f">FIXME 依赖管理</h2>
+<div class="outline-text-2" id="text-org4bbed4f">
 </div>
-<div id="outline-container-org979239f" class="outline-3">
-<h3 id="org979239f">指定链接路径</h3>
-<div class="outline-text-3" id="text-org979239f">
+<div id="outline-container-org3865e2f" class="outline-3">
+<h3 id="org3865e2f">指定链接路径</h3>
+<div class="outline-text-3" id="text-org3865e2f">
 <p>
 try it<br />
 </p>
@@ -441,17 +441,17 @@ try it<br />
 </div>
 </div>
 
-<div id="outline-container-org4c7ec75" class="outline-3">
-<h3 id="org4c7ec75">链接静态函数库</h3>
+<div id="outline-container-orgde2313f" class="outline-3">
+<h3 id="orgde2313f">链接静态函数库</h3>
 </div>
-<div id="outline-container-org7c76964" class="outline-3">
-<h3 id="org7c76964">autogen 的使用</h3>
+<div id="outline-container-org53a566e" class="outline-3">
+<h3 id="org53a566e">autogen 的使用</h3>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-07-16 五 00:45</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

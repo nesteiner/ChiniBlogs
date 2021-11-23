@@ -296,7 +296,7 @@
     div_N = Int(floor(N / base))
     mod_N = N % base
     push!(stack, mod_N)
-  
+
     while div_N != 0
       N = div_N
       div_N = Int(floor(N / base))
@@ -412,9 +412,9 @@
       left == '[' && right == ']' || 
         left == '(' && right == ')'
     end
-  
+
     push!(stack, first(code))
-  
+
     for ch in code[2:end]
       if isleft(ch)
         push!(stack, ch)
@@ -426,7 +426,7 @@
         end
       end
     end
-  
+
     return isempty(stack)
   end
 
@@ -507,42 +507,365 @@
   function verify(tree::BinarySearchTree)
     queue = createQueue(AbstractBinaryNode)
     push!(queue, tree.root)
-  
+
     n0 = n2 = 0
-  
+
     for treenode in bfsiterate(tree)
       # here process the node
       if isleaf(treenode)
         n0 += 1
-      elseif !isnil(left(treenode)) && !isnil(right(treenode))
+        el seif !isnil(left(treenode)) && !isnil(right(treenode))
         n2 += 1
       end
     end
-  
+
     return n0 == n2 + 1
   end
 #+end_src
 *** 4. 中序遍历，后序遍历
 **** 函数说明
+***** 前提
+在 Julia 中，
+#+begin_src julia
+  for value in collection
+    # some operation
+  end
+#+end_src
+
+等同于
+#+begin_src julia
+  next = iterate(collection)
+  while next != nothing
+    (item, state) = next
+    # body
+    next = itearate(collection, state)
+  end
+#+end_src
+
+由于在设计上，我已经为二叉树的设置了遍历方法
+#+begin_src julia
+  for data in tree
+    print(data)
+  end
+#+end_src
+
+这里创建一个新的迭代器类型，并为其重载 =itearte= 方法
+与默认的 =iterate= 方法返回数值类型不同的是，这些迭代器的遍历方法返回 二叉树节点类型
+
+***** 迭代器类型
+#+begin_src julia
+  struct InOrderIterator <: AbstractBinaryTreeIterator
+    node::AbstractBinaryNode
+    length::Int
+  end
+
+  struct PostOrderIterator <: AbstractBinaryTreeIterator
+    node::AbstractBinaryNode
+    length::Int
+  end
+
+#+end_src
+
+***** 迭代方法
+1. 创建迭代器
+   #+begin_src julia
+     inorder(tree::AbstractBinaryTree) = InOrderIterator(tree.root, length(tree))
+     postorder(tree::AbstractBinaryTree) = PostOrderIterator(tree.root, length(tree))
+   #+end_src
+2. 使用 =for=
+   #+begin_src julia
+     for treenode in inorder(tree)
+       # do something with treenode
+     end
+
+     for treenode in postorder(tree)
+       # do something with treenode
+     end
+   #+end_src
 **** 测试案例
+#+begin_src julia
+  tree = createBSTree(Int)
+  arrays = [1, 4, 1, 3, 7, 7, 7, 3, 3, 2]
+
+  for i in arrays
+    insert!(tree, i)
+  end
+
+  for treenode in inorder(tree)
+    @show dataof(treenode)
+  end
+
+#+end_src
 **** 完整代码
+首先是中序遍历
+#+begin_src julia
+  function iterate(iterator::InOrderIterator)
+    node = iterator.node
+    if isnil(node)
+      return nothing
+    else
+      stack = createStack(AbstractBinaryNode)
+      current = node
+      if hasright(current)
+        push!(stack, right(current))
+      end
+
+      while hasleft(current)
+        push!(stack, left(current))
+        current = left(current)
+      end
+
+      return current, stack
+    end
+  end
+
+  function iterate(::InOrderIterator, stack::BaseList{AbstractBinaryNode})
+    if !isempty(stack)
+      current = first(stack)
+      pop!(stack)
+
+      if hasright(current)
+        push!(stack, right(current))
+      end
+
+      inner_cur = current
+      while hasleft(inner_cur)
+        push!(stack, left(inner_cur))
+        inner_cur = left(inner_cur)
+      end
+
+      return current, stack
+    else
+      return nothing
+    end
+  end
+
+#+end_src
+
+然后是后序遍历
+#+begin_src julia
+  function iterate(iterator::PostOrderIterator)
+    node = iterator.node
+    if isnil(node)
+      return nothing
+    else
+      stack = createStack(AbstractBinaryNode)
+      push!(stack, node)
+
+      current = first(stack)
+      pop!(stack)
+
+      if !isnil(left(current))
+        push!(stack, left(current))
+      end
+
+      if !isnil(right(current))
+        push!(stack, right(current))
+      end
+
+      return current, stack
+    end
+  end
+
+  function iterate(::PostOrderIterator, stack::BaseList{AbstractBinaryNode})
+    if !isempty(stack) 
+      current = first(stack)
+      pop!(stack)
+
+      if !isnil(left(current))
+        push!(stack, left(current))
+      end
+
+      if !isnil(right(current))
+        push!(stack, right(current))
+      end
+
+      return current, stack
+    else
+      return nothing
+    end
+  end
+#+end_src
+
 *** 5. 判断两个二叉树相等
 **** 函数说明
+#+begin_src julia
+  treeequal(leftTree::BinarySearchTree, rightTree::BinarySearchTree)
+#+end_src
+- 输入左树和右树
+- 返回他们是否相等
 **** 测试案例
+#+begin_src julia
+  @testset "practise 4" begin
+    lefttree = createBSTree(Int)
+    righttree = createBSTree(Int)
+
+    for i in 1:10
+      insert!(lefttree, i)
+      insert!(righttree, i)
+    end
+
+    @test treeequal(lefttree, righttree) == true
+
+    insert!(righttree, 1)
+    @test treeequal(lefttree, righttree) == false
+
+  end
+
+#+end_src
 **** 完整代码
+#+begin_src julia
+  function treeequal(leftTree::BinarySearchTree, rightTree::BinarySearchTree)
+    for (leftnode, rightnode) in Iterators.zip(leftTree, rightTree)
+      if leftnode != rightnode
+        return false
+      end
+    end
+  
+    return true
+  end
+#+end_src
 *** 6. 判断 是否完全二叉树
 **** 函数说明
+#+begin_src julia
+  iscomplete(tree::BinarySearchTree)
+#+end_src
+- 输入一个二叉树
+- 返回是否为完全二叉树
 **** 测试案例
+#+begin_src julia
+  @testset "practise 5" begin
+    newtree = createBSTree(Int)
+    for i in [2, 1, 4, 3]
+      insert!(newtree, i)
+    end
+  
+    @test iscomplete(newtree) == false
+  
+    insert!(newtree, 5)
+    @test iscomplete(newtree) == true
+  end
+#+end_src
 **** 完整代码
+#+begin_src julia
+  function iscomplete(tree::BinarySearchTree)
+    for treenode in bfsiterate(tree)
+      if isnil(left(treenode)) && !isnil(right(treenode))
+        return false
+      elseif !isnil(left(treenode)) && isnil(right(treenode))
+        return false
+      else
+        continue
+      end
+    end
+  
+    return true
+  end
+
+#+end_src
 *** 7. 后序遍历中第一个返回的节点
-**** 函数说明
-**** 测试案例
-**** 完整代码
+#+begin_src julia
+  @testset "后序遍历中第一个返回的节点" begin
+    newtree = createBSTree(Int)
+    for i in [2, 1, 4, 3, 5]
+      insert!(newtree, i)
+    end
+
+    @test dataof(first(postorder(newtree))) == 2
+  end
+#+end_src
 *** 8. 非递归实现 先序遍历，中序遍历，后序遍历
-**** 函数说明
-**** 测试案例
-**** 完整代码
+同题目4，添加前序遍历的迭代器类型
+#+begin_src julia
+  struct PreOrderIterator <: AbstractBinaryTreeIterator
+    node::AbstractBinaryNode
+    length::Int
+  end
+#+end_src
+
+为其定义创建方法
+#+begin_src julia
+  preorder(tree::AbstractBinaryTree) = PreOrderIterator(tree.root, length(tree))
+#+end_src
+
+再重载其 =iterate= 方法
+#+begin_src julia
+  function iterate(iterator::PreOrderIterator)
+    node = iterator.node
+    if isnil(node)
+      return nothing
+    else
+      stack = createStack(AbstractBinaryNode)
+      push!(stack, node)
+    
+      current = first(stack)
+      pop!(stack)
+
+      if !isnil(right(current))
+        push!(stack, right(current))
+      end
+    
+      if !isnil(left(current))
+        push!(stack, left(current))
+      end
+
+      return current, stack
+    end
+  end
+
+  function iterate(::PreOrderIterator, stack::BaseList{AbstractBinaryNode})
+    if !isempty(stack)
+      current = first(stack)
+      pop!(stack)
+
+      if !isnil(right(current))
+        push!(stack, right(current))
+      end
+    
+      if !isnil(left(current))
+        push!(stack, left(current))
+      end
+    
+
+      return current, stack
+
+    else
+      return nothing
+    end
+  end
+
+#+end_src
+
+测试案例不再赘述
 *** 9. 查看节点所在层次
 **** 函数说明
+=height(node::AbstractBinaryNode)=
+- 输入一个 二叉树节点
+- 输出其所在高度
+
+这里设置叶子节点的高度为1，逐步上升到根节点
 **** 测试案例
+#+begin_src julia
+  @testset "后序遍历中第一个返回的节点" begin
+    newtree = createBSTree(Int)
+    for i in [2, 1, 4, 3, 5]
+      insert!(newtree, i)
+    end
+
+    @test dataof(first(postorder(newtree))) == 2
+  end
+
+#+end_src
 **** 完整代码
+#+begin_src julia
+  function height(node::AbstractBinaryNode) 
+    if isnil(node)
+      return 0
+    else
+      leftHeight = height(left(node))
+      rightHeight = height(right(node))
+      return max(leftHeight, rightHeight) + 1
+    end
+  end
+
+#+end_src

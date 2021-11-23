@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-16 五 00:45 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Flutter Counter</title>
@@ -224,27 +224,27 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7501548">如何写一个 Flutter 应用</a></li>
-<li><a href="#orgddc619e">什么是 Scaffold 组件</a></li>
-<li><a href="#org581498c">如何布局多个组件</a></li>
-<li><a href="#org52ccf13">如何修饰样式</a></li>
-<li><a href="#org0ea08cd">对比 html 语法</a></li>
+<li><a href="#org1094059">如何写一个 Flutter 应用</a></li>
+<li><a href="#org18a3ec6">什么是 Scaffold 组件</a></li>
+<li><a href="#orge1a1720">如何布局多个组件</a></li>
+<li><a href="#org7f7318a">如何修饰样式</a></li>
+<li><a href="#orgbdc113e">对比 html 语法</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7501548" class="outline-2">
-<h2 id="org7501548">如何写一个 Flutter 应用</h2>
-<div class="outline-text-2" id="text-org7501548">
+<div id="outline-container-org1094059" class="outline-2">
+<h2 id="org1094059">如何写一个 Flutter 应用</h2>
+<div class="outline-text-2" id="text-org1094059">
 <p>
 我们从一个计数器讲起， 首先建立 <b>Counter</b> 类<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">Counter</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #986801;">Counter</span><span style="color: #a626a4;">()</span>: <span style="color: #e45649;">super</span><span style="color: #a626a4;">()</span>;
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">Counter</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">Counter</span><span style="color: #a626a4;">()</span>: <span style="color: #e45649; font-weight: bold;">super</span><span style="color: #a626a4;">()</span>;
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
       title: <span style="color: #50a14f;">'Flutter Counter'</span>,
       theme: <span style="color: #986801;">ThemeData</span><span style="color: #b751b6;">(</span>primarySwatch: <span style="color: #986801;">Colors</span>.blue<span style="color: #b751b6;">)</span>,
       home: <span style="color: #986801;">CounterHomePage</span><span style="color: #b751b6;">(</span>title: <span style="color: #50a14f;">'Flutter Counter Home Page'</span><span style="color: #b751b6;">)</span>,
@@ -261,8 +261,8 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">CounterHomePage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatefulWidget</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #986801;">CounterHomePage</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #e45649;">this</span>.title = <span style="color: #50a14f;">'Hello World'</span><span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>: <span style="color: #e45649;">super</span><span style="color: #a626a4;">()</span>;
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">CounterHomePage</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatefulWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #986801;">CounterHomePage</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #e45649; font-weight: bold;">this</span>.title = <span style="color: #50a14f;">'Hello World'</span><span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>: <span style="color: #e45649; font-weight: bold;">super</span><span style="color: #a626a4;">()</span>;
   <span style="color: #986801;">String</span> <span style="color: #6a1868;">title</span>;
 
   <span style="color: #b751b6;">@override</span>
@@ -277,7 +277,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">CounterHomePageState</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">State</span>&lt;<span style="color: #986801;">CounterHomePage</span>&gt; <span style="color: #4078f2;">{</span>
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">CounterHomePageState</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">State</span>&lt;<span style="color: #986801;">CounterHomePage</span>&gt; <span style="color: #4078f2;">{</span>
   <span style="color: #986801;">int</span> <span style="color: #6a1868;">count</span> = <span style="color: #b751b6;">0</span>;
 
   <span style="color: #986801;">void</span> <span style="color: #a626a4;">incrementCount</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
@@ -289,7 +289,7 @@
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
       appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span>widget.title<span style="color: #4db5bd;">)</span>,<span style="color: #b751b6;">)</span>,
       body: <span style="color: #986801;">Center</span><span style="color: #b751b6;">(</span>
         child: <span style="color: #986801;">Column</span><span style="color: #4db5bd;">(</span>
@@ -304,7 +304,7 @@
         child: <span style="color: #986801;">Text</span><span style="color: #50a14f;">(</span><span style="color: #50a14f;">'Open new route'</span><span style="color: #50a14f;">)</span>,
         onPressed: <span style="color: #50a14f;">()</span> <span style="color: #50a14f;">{</span>
           <span style="color: #986801;">Navigator</span>.push<span style="color: #b751b6;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #4078f2;">(</span>builder: <span style="color: #a626a4;">(</span>context<span style="color: #a626a4;">){</span>
-          <span style="color: #e45649;">return</span> <span style="color: #986801;">NewRoute</span><span style="color: #50a14f;">()</span>;
+          <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">NewRoute</span><span style="color: #50a14f;">()</span>;
           <span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span><span style="color: #b751b6;">)</span>;
       <span style="color: #50a14f;">}</span>,<span style="color: #a626a4;">)</span>
     <span style="color: #4078f2;">]</span>
@@ -340,16 +340,16 @@
 至此，我们的第一个计数器应用就搭建完毕了<br />
 </p>
 
-<div id="orgffadcc7" class="figure">
+<div id="orgaff8d7b" class="figure">
 <p><img src="../images/如何写一个_Flutter_应用/2021-06-12_16-10-49_screenshot.png" alt="2021-06-12_16-10-49_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgddc619e" class="outline-2">
-<h2 id="orgddc619e">什么是 Scaffold 组件</h2>
-<div class="outline-text-2" id="text-orgddc619e">
+<div id="outline-container-org18a3ec6" class="outline-2">
+<h2 id="org18a3ec6">什么是 Scaffold 组件</h2>
+<div class="outline-text-2" id="text-org18a3ec6">
 <p>
 在上面的 <span class="underline">CounterHomePageState</span> 中，还有个 <span class="underline">Scaffold</span> 组件没有讲，这是 <span class="underline">Flutter</span> 为我们提供的主页，<br />
 官网的描述：Material Design布局结构的基本实现， 类提供了用于显示drawer、snackbar和底部sheet的API。<br />
@@ -357,9 +357,9 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org581498c" class="outline-2">
-<h2 id="org581498c">如何布局多个组件</h2>
-<div class="outline-text-2" id="text-org581498c">
+<div id="outline-container-orge1a1720" class="outline-2">
+<h2 id="orge1a1720">如何布局多个组件</h2>
+<div class="outline-text-2" id="text-orge1a1720">
 <p>
 <span class="underline">Scaffold</span> 的 <span class="underline">body</span> 只能传递一个组件，想把一堆东西塞进去，可以使用 <span class="underline">Flutter</span> 提供的 <b>布局组件</b> 该类组件都有一个 <span class="underline">children</span> 属性，表示一个 <span class="underline">Widget</span> 数组<br />
 在上面的例子中， <span class="underline">Column</span> 就是一个布局组件，按竖直方向布局组件，并赋值 <span class="underline">mainAxisalignment</span> 为 <span class="underline">center</span> 表示主轴方向垂直对齐<br />
@@ -390,9 +390,9 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org52ccf13" class="outline-2">
-<h2 id="org52ccf13">如何修饰样式</h2>
-<div class="outline-text-2" id="text-org52ccf13">
+<div id="outline-container-org7f7318a" class="outline-2">
+<h2 id="org7f7318a">如何修饰样式</h2>
+<div class="outline-text-2" id="text-org7f7318a">
 <p>
 像 <span class="underline">css</span> 样式一样， <span class="underline">flutter</span> 中样式也可以继承，如果要更改，用 <span class="underline">Theme</span> 组件包装一下就可以了<br />
 其中 <span class="underline">Theme</span> 组件<br />
@@ -407,9 +407,9 @@
 </div>
 </div>
 
-<div id="outline-container-org0ea08cd" class="outline-2">
-<h2 id="org0ea08cd">对比 html 语法</h2>
-<div class="outline-text-2" id="text-org0ea08cd">
+<div id="outline-container-orgbdc113e" class="outline-2">
+<h2 id="orgbdc113e">对比 html 语法</h2>
+<div class="outline-text-2" id="text-orgbdc113e">
 <p>
 对比 html 的标签语法，比如<br />
 </p>
@@ -443,7 +443,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-07-16 五 00:45</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

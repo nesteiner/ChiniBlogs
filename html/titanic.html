@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-08-19 四 00:56 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Titanic 生存预测，使用Logistic分类</title>
@@ -224,57 +224,57 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6fb9a33">项目介绍</a></li>
-<li><a href="#orgeecd974">数据探索</a>
+<li><a href="#org66b5209">项目介绍</a></li>
+<li><a href="#orgb57c7c7">数据探索</a>
 <ul>
-<li><a href="#org9292ad9">字段含义</a></li>
-<li><a href="#orgadedd31">字段科学类型</a></li>
-<li><a href="#org22edbe2">描述数据</a></li>
+<li><a href="#orgebd9187">字段含义</a></li>
+<li><a href="#orga7504bd">字段科学类型</a></li>
+<li><a href="#org79dc790">描述数据</a></li>
 </ul>
 </li>
-<li><a href="#org6c970dc">数据处理</a>
+<li><a href="#org2557183">数据处理</a>
 <ul>
-<li><a href="#org3fbf480">对 train.csv 的数据处理策略</a>
+<li><a href="#org7a7ce25">对 train.csv 的数据处理策略</a>
 <ul>
-<li><a href="#org579167a">填充缺失值</a></li>
-<li><a href="#orge1af180">生成新的特征</a></li>
-<li><a href="#org81e34b9">对 Embarked 进行 OneHot 编码</a></li>
-<li><a href="#org01bc029">丢弃不用的特征</a></li>
+<li><a href="#org69c2ae6">填充缺失值</a></li>
+<li><a href="#org57a17f7">生成新的特征</a></li>
+<li><a href="#org56a86cd">对 Embarked 进行 OneHot 编码</a></li>
+<li><a href="#org5c7174b">丢弃不用的特征</a></li>
 </ul>
 </li>
-<li><a href="#orgf117f5f">对 test.csv 的数据处理策略</a></li>
-<li><a href="#orgeb345fe">数据处理模型</a></li>
-<li><a href="#org3f13c9e"><span class="todo TODO">TODO</span> 数据相关性</a></li>
+<li><a href="#org472d490">对 test.csv 的数据处理策略</a></li>
+<li><a href="#org1575798">数据处理模型</a></li>
+<li><a href="#orge8bf6fc"><span class="todo TODO">TODO</span> 数据相关性</a></li>
 </ul>
 </li>
-<li><a href="#orga5b996a">模型训练</a>
+<li><a href="#orgb42e525">模型训练</a>
 <ul>
-<li><a href="#org563bb7c">引入模型</a></li>
-<li><a href="#org8e8d772">拆解数据</a></li>
-<li><a href="#org6585722">模型训练与调试</a></li>
+<li><a href="#org741482e">引入模型</a></li>
+<li><a href="#orgdafb913">拆解数据</a></li>
+<li><a href="#org2a0af9c">模型训练与调试</a></li>
 </ul>
 </li>
-<li><a href="#org5a87961">投入使用</a>
+<li><a href="#org318b3ed">投入使用</a>
 <ul>
-<li><a href="#orgf177248">加载数据</a></li>
-<li><a href="#orgdd19784">处理数据</a></li>
-<li><a href="#orga0d4b07">生成预测结果</a></li>
-<li><a href="#orgbef6557">上传数据</a></li>
+<li><a href="#orge20e3b8">加载数据</a></li>
+<li><a href="#org40e6ed9">处理数据</a></li>
+<li><a href="#org6d37e0d">生成预测结果</a></li>
+<li><a href="#orgeb02dce">上传数据</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org6fb9a33" class="outline-2">
-<h2 id="org6fb9a33">项目介绍</h2>
-<div class="outline-text-2" id="text-org6fb9a33">
+<div id="outline-container-org66b5209" class="outline-2">
+<h2 id="org66b5209">项目介绍</h2>
+<div class="outline-text-2" id="text-org66b5209">
 <p>
 最近终于去学习 Julia 了，重温了下没做完的 Titanic 项目，打算做完<br />
 那就先导入必要的库吧<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">using</span> MLJ, DataFrames, StableRNGs, CSV, Plots
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">using</span> MLJ, DataFrames, StableRNGs, CSV, Plots
 plotly<span style="color: #4078f2;">()</span>
 </pre>
 </div>
@@ -292,13 +292,13 @@ plotly<span style="color: #4078f2;">()</span>
 </p>
 </div>
 </div>
-<div id="outline-container-orgeecd974" class="outline-2">
-<h2 id="orgeecd974">数据探索</h2>
-<div class="outline-text-2" id="text-orgeecd974">
+<div id="outline-container-orgb57c7c7" class="outline-2">
+<h2 id="orgb57c7c7">数据探索</h2>
+<div class="outline-text-2" id="text-orgb57c7c7">
 </div>
-<div id="outline-container-org9292ad9" class="outline-3">
-<h3 id="org9292ad9">字段含义</h3>
-<div class="outline-text-3" id="text-org9292ad9">
+<div id="outline-container-orgebd9187" class="outline-3">
+<h3 id="orgebd9187">字段含义</h3>
+<div class="outline-text-3" id="text-orgebd9187">
 <p>
 我从网上查到这些字段的含义，有些字段的类型虽然是 <b>Float</b> ，但也是 1.0, 2.0之类的，比如 <b>Age</b><br />
 </p>
@@ -396,9 +396,9 @@ plotly<span style="color: #4078f2;">()</span>
 </div>
 </div>
 
-<div id="outline-container-orgadedd31" class="outline-3">
-<h3 id="orgadedd31">字段科学类型</h3>
-<div class="outline-text-3" id="text-orgadedd31">
+<div id="outline-container-orga7504bd" class="outline-3">
+<h3 id="orga7504bd">字段科学类型</h3>
+<div class="outline-text-3" id="text-orga7504bd">
 <p>
 这个数据集使用分类预测，先要统一好各个字段的科学类型，不然一些 model 对字段不起作用<br />
 这里需要每个输入的数据类型是 <b>Continuous</b>, 而输出类型为 <b>Multiclass</b><br />
@@ -411,16 +411,16 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org34ac940" class="figure">
+<div id="orgb0c92c1" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-32-57_screenshot.png" alt="2021-08-19_00-32-57_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org22edbe2" class="outline-3">
-<h3 id="org22edbe2">描述数据</h3>
-<div class="outline-text-3" id="text-org22edbe2">
+<div id="outline-container-org79dc790" class="outline-3">
+<h3 id="org79dc790">描述数据</h3>
+<div class="outline-text-3" id="text-org79dc790">
 <p>
 看看这个数据有多少缺斤少两的<br />
 </p>
@@ -431,7 +431,7 @@ plotly<span style="color: #4078f2;">()</span>
 
 
 
-<div id="org9369cb6" class="figure">
+<div id="org6205374" class="figure">
 <p><img src="images/数据探索/2021-08-19_00-33-10_screenshot.png" alt="2021-08-19_00-33-10_screenshot.png" /><br />
 </p>
 </div>
@@ -440,9 +440,9 @@ plotly<span style="color: #4078f2;">()</span>
 </div>
 
 
-<div id="outline-container-org6c970dc" class="outline-2">
-<h2 id="org6c970dc">数据处理</h2>
-<div class="outline-text-2" id="text-org6c970dc">
+<div id="outline-container-org2557183" class="outline-2">
+<h2 id="org2557183">数据处理</h2>
+<div class="outline-text-2" id="text-org2557183">
 <p>
 探索完数据后，接下来可以<br />
 </p>
@@ -453,9 +453,9 @@ plotly<span style="color: #4078f2;">()</span>
 </ul>
 </div>
 
-<div id="outline-container-org3fbf480" class="outline-3">
-<h3 id="org3fbf480">对 train.csv 的数据处理策略</h3>
-<div class="outline-text-3" id="text-org3fbf480">
+<div id="outline-container-org7a7ce25" class="outline-3">
+<h3 id="org7a7ce25">对 train.csv 的数据处理策略</h3>
+<div class="outline-text-3" id="text-org7a7ce25">
 <p>
 从 train.csv 加载的数据中，我们发现<br />
 </p>
@@ -488,16 +488,16 @@ f(x) = log(x + 1)<br />
 不过在处理数据前，先把各个字段的科学类型转换好<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #a626a4;">typeTransformModel</span><span style="color: #4078f2;">(</span>dataframe<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">DataFrame</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649;">begin</span>
-  <span style="color: #e45649;">if</span> <span style="color: #e45649;">in</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">"Survived"</span>, names<span style="color: #a626a4;">(</span>dataframe<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
+<pre class="src src-julia"><span style="color: #a626a4;">typeTransformModel</span><span style="color: #4078f2;">(</span>dataframe<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">DataFrame</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649; font-weight: bold;">begin</span>
+  <span style="color: #e45649; font-weight: bold;">if</span> <span style="color: #e45649; font-weight: bold;">in</span><span style="color: #4078f2;">(</span><span style="color: #50a14f;">"Survived"</span>, names<span style="color: #a626a4;">(</span>dataframe<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>
     coerce!<span style="color: #4078f2;">(</span>dataframe, <span style="color: #4078f2; font-weight: bold;">:Survived</span> =&gt; Multiclass<span style="color: #4078f2;">)</span>
-  <span style="color: #e45649;">end</span>
+  <span style="color: #e45649; font-weight: bold;">end</span>
 
   coerce!<span style="color: #4078f2;">(</span>dataframe, Count =&gt; Continuous<span style="color: #4078f2;">)</span>
   coerce!<span style="color: #4078f2;">(</span>dataframe, Textual =&gt; Multiclass<span style="color: #4078f2;">)</span>
 
-  <span style="color: #e45649;">return</span> dataframe
-<span style="color: #e45649;">end</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> dataframe
+<span style="color: #e45649; font-weight: bold;">end</span>
 
 </pre>
 </div>
@@ -506,9 +506,9 @@ f(x) = log(x + 1)<br />
 接下来定义数据处理模型<br />
 </p>
 </div>
-<div id="outline-container-org579167a" class="outline-4">
-<h4 id="org579167a">填充缺失值</h4>
-<div class="outline-text-4" id="text-org579167a">
+<div id="outline-container-org69c2ae6" class="outline-4">
+<h4 id="org69c2ae6">填充缺失值</h4>
+<div class="outline-text-4" id="text-org69c2ae6">
 <div class="org-src-container">
 <pre class="src src-julia">fillMissingModel = FillImputer<span style="color: #4078f2;">(</span>features=<span style="color: #a626a4;">[</span><span style="color: #4078f2; font-weight: bold;">:Age</span>, <span style="color: #4078f2; font-weight: bold;">:Embarked</span><span style="color: #a626a4;">]</span>, continuous_fill = e -&gt; skipmissing<span style="color: #a626a4;">(</span>e<span style="color: #a626a4;">)</span> |&gt; mode, finite_fill = e -&gt; skipmissing<span style="color: #a626a4;">(</span>e<span style="color: #a626a4;">)</span> |&gt; mode<span style="color: #4078f2;">)</span>
 </pre>
@@ -516,25 +516,25 @@ f(x) = log(x + 1)<br />
 </div>
 </div>
 
-<div id="outline-container-orge1af180" class="outline-4">
-<h4 id="orge1af180">生成新的特征</h4>
-<div class="outline-text-4" id="text-orge1af180">
+<div id="outline-container-org57a17f7" class="outline-4">
+<h4 id="org57a17f7">生成新的特征</h4>
+<div class="outline-text-4" id="text-org57a17f7">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #a626a4;">newFeatureModel!</span><span style="color: #4078f2;">(</span>dataframe<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">DataFrame</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649;">begin</span>
+<pre class="src src-julia"><span style="color: #a626a4;">newFeatureModel!</span><span style="color: #4078f2;">(</span>dataframe<span style="color: #383a42; background-color: #fafafa;">::</span><span style="color: #986801;">DataFrame</span><span style="color: #4078f2;">)</span> = <span style="color: #e45649; font-weight: bold;">begin</span>
   <span style="color: #9ca0a4;"># </span><span style="color: #7fff00;">MODULE</span><span style="color: #9ca0a4;"> FeatureA &#32858;&#38598; Age, Sex --&gt; 12&#23681;&#20197;&#19979;&#20799;&#31461;&#20197;&#21450;&#22919;&#22899;&#65292;12&#23681;&#20197;&#19978;&#30007;&#24615;</span>
   <span style="color: #a626a4;">feature_filter_a</span><span style="color: #4078f2;">(</span>age, sex<span style="color: #4078f2;">)</span> = age &gt;= 12 &amp;&amp; sex == <span style="color: #50a14f;">"male"</span> ? <span style="color: #50a14f;">"A"</span> : <span style="color: #50a14f;">"B"</span>
   dataframe<span style="color: #4078f2;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:FeatureA</span><span style="color: #4078f2;">]</span> = map<span style="color: #4078f2;">(</span>feature_filter_a, dataframe<span style="color: #a626a4;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:Age</span><span style="color: #a626a4;">]</span>, dataframe<span style="color: #a626a4;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:Sex</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 
   <span style="color: #9ca0a4;"># </span><span style="color: #7fff00;">MODULE</span><span style="color: #9ca0a4;"> FeatureB &#32858;&#38598; SibSp, Parch ---&gt; &#23478;&#24237;&#20154;&#21592;&#25968;&#37327;</span>
-  <span style="color: #a626a4;">family_size</span><span style="color: #4078f2;">(</span>number<span style="color: #4078f2;">)</span> = <span style="color: #e45649;">begin</span>
-    <span style="color: #e45649;">if</span> number == 1
-      <span style="color: #e45649;">return</span> 0
-    <span style="color: #e45649;">elseif</span> number &gt;= 2 &amp;&amp; number &lt;= 4
-      <span style="color: #e45649;">return</span> 1
-    <span style="color: #e45649;">else</span>
-      <span style="color: #e45649;">return</span> 2
-    <span style="color: #e45649;">end</span>
-  <span style="color: #e45649;">end</span>
+  <span style="color: #a626a4;">family_size</span><span style="color: #4078f2;">(</span>number<span style="color: #4078f2;">)</span> = <span style="color: #e45649; font-weight: bold;">begin</span>
+    <span style="color: #e45649; font-weight: bold;">if</span> number == 1
+      <span style="color: #e45649; font-weight: bold;">return</span> 0
+    <span style="color: #e45649; font-weight: bold;">elseif</span> number &gt;= 2 &amp;&amp; number &lt;= 4
+      <span style="color: #e45649; font-weight: bold;">return</span> 1
+    <span style="color: #e45649; font-weight: bold;">else</span>
+      <span style="color: #e45649; font-weight: bold;">return</span> 2
+    <span style="color: #e45649; font-weight: bold;">end</span>
+  <span style="color: #e45649; font-weight: bold;">end</span>
 
   dataframe<span style="color: #4078f2;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:FeatureB</span><span style="color: #4078f2;">]</span> = map<span style="color: #4078f2;">(</span>family_size, dataframe<span style="color: #a626a4;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:Parch</span><span style="color: #a626a4;">]</span> .+ dataframe<span style="color: #a626a4;">[</span>!, <span style="color: #4078f2; font-weight: bold;">:SibSp</span><span style="color: #a626a4;">]</span> .+ 1<span style="color: #4078f2;">)</span>
 
@@ -544,16 +544,16 @@ f(x) = log(x + 1)<br />
 
   <span style="color: #9ca0a4;"># </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;"> don't forget to coerce scitype</span>
   coerce!<span style="color: #4078f2;">(</span>dataframe, <span style="color: #4078f2; font-weight: bold;">:FeatureA</span> =&gt; Multiclass, <span style="color: #4078f2; font-weight: bold;">:FeatureB</span> =&gt; Continuous<span style="color: #4078f2;">)</span>
-  <span style="color: #e45649;">return</span> dataframe
-<span style="color: #e45649;">end</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> dataframe
+<span style="color: #e45649; font-weight: bold;">end</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org81e34b9" class="outline-4">
-<h4 id="org81e34b9">对 Embarked 进行 OneHot 编码</h4>
-<div class="outline-text-4" id="text-org81e34b9">
+<div id="outline-container-org56a86cd" class="outline-4">
+<h4 id="org56a86cd">对 Embarked 进行 OneHot 编码</h4>
+<div class="outline-text-4" id="text-org56a86cd">
 <div class="org-src-container">
 <pre class="src src-julia">encodeModel = OneHotEncoder<span style="color: #4078f2;">(</span>features=<span style="color: #a626a4;">[</span><span style="color: #4078f2; font-weight: bold;">:Embarked</span>, <span style="color: #4078f2; font-weight: bold;">:FeatureA</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 </pre>
@@ -561,9 +561,9 @@ f(x) = log(x + 1)<br />
 </div>
 </div>
 
-<div id="outline-container-org01bc029" class="outline-4">
-<h4 id="org01bc029">丢弃不用的特征</h4>
-<div class="outline-text-4" id="text-org01bc029">
+<div id="outline-container-org5c7174b" class="outline-4">
+<h4 id="org5c7174b">丢弃不用的特征</h4>
+<div class="outline-text-4" id="text-org5c7174b">
 <div class="org-src-container">
 <pre class="src src-julia">dropUnusedModel = FeatureSelector<span style="color: #4078f2;">(</span>features = <span style="color: #a626a4;">[</span><span style="color: #4078f2; font-weight: bold;">:Age</span>, <span style="color: #4078f2; font-weight: bold;">:Sex</span>, <span style="color: #4078f2; font-weight: bold;">:SibSp</span>, <span style="color: #4078f2; font-weight: bold;">:Parch</span>, <span style="color: #4078f2; font-weight: bold;">:Cabin</span>, <span style="color: #4078f2; font-weight: bold;">:PassengerId</span>, <span style="color: #4078f2; font-weight: bold;">:Name</span>, <span style="color: #4078f2; font-weight: bold;">:Ticket</span><span style="color: #a626a4;">]</span>, ignore=<span style="color: #b751b6;">true</span><span style="color: #4078f2;">)</span>
 </pre>
@@ -572,9 +572,9 @@ f(x) = log(x + 1)<br />
 </div>
 </div>
 
-<div id="outline-container-orgf117f5f" class="outline-3">
-<h3 id="orgf117f5f">对 test.csv 的数据处理策略</h3>
-<div class="outline-text-3" id="text-orgf117f5f">
+<div id="outline-container-org472d490" class="outline-3">
+<h3 id="org472d490">对 test.csv 的数据处理策略</h3>
+<div class="outline-text-3" id="text-org472d490">
 <p>
 从 test.csv 加载的数据与 train.csv 有点不同，<br />
 </p>
@@ -593,9 +593,9 @@ f(x) = log(x + 1)<br />
 </div>
 </div>
 
-<div id="outline-container-orgeb345fe" class="outline-3">
-<h3 id="orgeb345fe">数据处理模型</h3>
-<div class="outline-text-3" id="text-orgeb345fe">
+<div id="outline-container-org1575798" class="outline-3">
+<h3 id="org1575798">数据处理模型</h3>
+<div class="outline-text-3" id="text-org1575798">
 <p>
 将各个模型串联起来，即可获得模型<br />
 </p>
@@ -623,7 +623,7 @@ output_data = MLJ.transform<span style="color: #4078f2;">(</span>transformMachin
 </div>
 
 
-<div id="org1c82dfa" class="figure">
+<div id="orgab96ed3" class="figure">
 <p><img src="./images/数据处理/2021-08-18_17-01-01_screenshot.png" alt="2021-08-18_17-01-01_screenshot.png" /><br />
 </p>
 </div>
@@ -651,9 +651,9 @@ output_sample = MLJ.transform<span style="color: #4078f2;">(</span>transformSamp
 </div>
 </div>
 
-<div id="outline-container-org3f13c9e" class="outline-3">
-<h3 id="org3f13c9e"><span class="todo TODO">TODO</span> 数据相关性</h3>
-<div class="outline-text-3" id="text-org3f13c9e">
+<div id="outline-container-orge8bf6fc" class="outline-3">
+<h3 id="orge8bf6fc"><span class="todo TODO">TODO</span> 数据相关性</h3>
+<div class="outline-text-3" id="text-orge8bf6fc">
 <p>
 其实还可以看看各个字段间的相关性，画个热力图就行了，问了以下 Slack 的人，发现在 StatsPlots 中已经有函数 corrplot<br />
 <a href="https://github.com/JuliaPlots/StatsPlots.jl#corrplot-and-cornerplot">相关文档在这</a><br />
@@ -662,19 +662,19 @@ output_sample = MLJ.transform<span style="color: #4078f2;">(</span>transformSamp
 </div>
 </div>
 </div>
-<div id="outline-container-orga5b996a" class="outline-2">
-<h2 id="orga5b996a">模型训练</h2>
-<div class="outline-text-2" id="text-orga5b996a">
+<div id="outline-container-orgb42e525" class="outline-2">
+<h2 id="orgb42e525">模型训练</h2>
+<div class="outline-text-2" id="text-orgb42e525">
 </div>
-<div id="outline-container-org563bb7c" class="outline-3">
-<h3 id="org563bb7c">引入模型</h3>
-<div class="outline-text-3" id="text-org563bb7c">
+<div id="outline-container-org741482e" class="outline-3">
+<h3 id="org741482e">引入模型</h3>
+<div class="outline-text-3" id="text-org741482e">
 <p>
 这是个分类问题，我打算使用 LogisticClassifier ，其他分类器也可以<br />
 从 MLJLinearModels 中导入模型<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #e45649;">using</span> MLJLinearModels
+<pre class="src src-julia"><span style="color: #e45649; font-weight: bold;">using</span> MLJLinearModels
 <span style="color: #4078f2; font-weight: bold;">@load</span> LogisticClassifier pkg=MLJLinearModels
 clf = LogisticClassifier<span style="color: #4078f2;">()</span>
 </pre>
@@ -693,9 +693,9 @@ clf = LogisticClassifier<span style="color: #4078f2;">()</span>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8e8d772" class="outline-3">
-<h3 id="org8e8d772">拆解数据</h3>
-<div class="outline-text-3" id="text-org8e8d772">
+<div id="outline-container-orgdafb913" class="outline-3">
+<h3 id="orgdafb913">拆解数据</h3>
+<div class="outline-text-3" id="text-orgdafb913">
 <p>
 先把特征字段和预测结果分开<br />
 </p>
@@ -715,9 +715,9 @@ train_row, test_row = partition<span style="color: #4078f2;">(</span>eachindex<s
 </div>
 </div>
 
-<div id="outline-container-org6585722" class="outline-3">
-<h3 id="org6585722">模型训练与调试</h3>
-<div class="outline-text-3" id="text-org6585722">
+<div id="outline-container-org2a0af9c" class="outline-3">
+<h3 id="org2a0af9c">模型训练与调试</h3>
+<div class="outline-text-3" id="text-org2a0af9c">
 <p>
 如果不需要调试模型的话，直接输入以下代码查看模型的训练情况<br />
 </p>
@@ -794,7 +794,7 @@ evaluate!<span style="color: #4078f2;">(</span>best_mach,
 </p>
 
 
-<div id="org2983296" class="figure">
+<div id="orge43cd63" class="figure">
 <p><img src="images/模型训练/2021-08-19_00-42-26_screenshot.png" alt="2021-08-19_00-42-26_screenshot.png" /><br />
 </p>
 </div>
@@ -803,9 +803,9 @@ evaluate!<span style="color: #4078f2;">(</span>best_mach,
 </div>
 
 
-<div id="outline-container-org5a87961" class="outline-2">
-<h2 id="org5a87961">投入使用</h2>
-<div class="outline-text-2" id="text-org5a87961">
+<div id="outline-container-org318b3ed" class="outline-2">
+<h2 id="org318b3ed">投入使用</h2>
+<div class="outline-text-2" id="text-org318b3ed">
 <p>
 <b><b>注意</b></b><br />
 MLJ为分类结果定义了两种情况，一种是概率的，一种是二分的，而 LogisticClassifier 输出的结果是概率的<br />
@@ -813,18 +813,18 @@ MLJ为分类结果定义了两种情况，一种是概率的，一种是二分�
 </p>
 </div>
 
-<div id="outline-container-orgf177248" class="outline-3">
-<h3 id="orgf177248">加载数据</h3>
-<div class="outline-text-3" id="text-orgf177248">
+<div id="outline-container-orge20e3b8" class="outline-3">
+<h3 id="orge20e3b8">加载数据</h3>
+<div class="outline-text-3" id="text-orge20e3b8">
 <div class="org-src-container">
 <pre class="src src-julia">origin_sample = CSV.read<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"data/test.csv"</span>, DataFrame<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdd19784" class="outline-3">
-<h3 id="orgdd19784">处理数据</h3>
-<div class="outline-text-3" id="text-orgdd19784">
+<div id="outline-container-org40e6ed9" class="outline-3">
+<h3 id="org40e6ed9">处理数据</h3>
+<div class="outline-text-3" id="text-org40e6ed9">
 <p>
 当然别忘了重新定义 fillMissingModel<br />
 </p>
@@ -844,9 +844,9 @@ output_sample = MLJ.transform<span style="color: #4078f2;">(</span>transformSamp
 </div>
 </div>
 </div>
-<div id="outline-container-orga0d4b07" class="outline-3">
-<h3 id="orga0d4b07">生成预测结果</h3>
-<div class="outline-text-3" id="text-orga0d4b07">
+<div id="outline-container-org6d37e0d" class="outline-3">
+<h3 id="org6d37e0d">生成预测结果</h3>
+<div class="outline-text-3" id="text-org6d37e0d">
 <div class="org-src-container">
 <pre class="src src-julia">output_predict = mode.<span style="color: #4078f2;">(</span>predict<span style="color: #a626a4;">(</span>best_mach, output_sample<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span> |&gt; nums -&gt; convert<span style="color: #4078f2;">(</span><span style="color: #986801;">Vector</span><span style="color: #a626a4;">{</span><span style="color: #986801;">Int</span><span style="color: #a626a4;">}</span>, nums<span style="color: #4078f2;">)</span>
 
@@ -870,16 +870,16 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 </div>
 </div>
 
-<div id="outline-container-orgbef6557" class="outline-3">
-<h3 id="orgbef6557">上传数据</h3>
-<div class="outline-text-3" id="text-orgbef6557">
+<div id="outline-container-orgeb02dce" class="outline-3">
+<h3 id="orgeb02dce">上传数据</h3>
+<div class="outline-text-3" id="text-orgeb02dce">
 <p>
 将 predict.csv 上传至 <a href="https://www.kaggle.com/c/titanic/submit">https://www.kaggle.com/c/titanic/submit</a><br />
 </p>
 
 
 
-<div id="org4be0e51" class="figure">
+<div id="orgb2aabfe" class="figure">
 <p><img src="images/投入使用/2021-08-19_00-42-46_screenshot.png" alt="2021-08-19_00-42-46_screenshot.png" /><br />
 </p>
 </div>
@@ -889,7 +889,7 @@ mode 返回概率最大的数，在这里只有对0与1的概率<br />
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-08-19 四 00:56</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

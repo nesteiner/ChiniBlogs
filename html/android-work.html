@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-16 五 00:45 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Android 大作业报告</title>
@@ -224,34 +224,34 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbfed98b">项目介绍</a></li>
-<li><a href="#org290d492">功能结构</a>
+<li><a href="#org1898dba">项目介绍</a></li>
+<li><a href="#org6babf0f">功能结构</a>
 <ul>
-<li><a href="#org867fc0e">登录界面</a></li>
-<li><a href="#org4f9eca0">笔记界面</a></li>
-<li><a href="#org7345698">消息界面</a></li>
+<li><a href="#orgd0fb7f5">登录界面</a></li>
+<li><a href="#org3cb27e6">笔记界面</a></li>
+<li><a href="#orgf320d1e">消息界面</a></li>
 </ul>
 </li>
-<li><a href="#org9d2043a">设计类</a>
+<li><a href="#org59e42ac">设计类</a>
 <ul>
-<li><a href="#orgf6f5af9">入口类</a></li>
-<li><a href="#org486522a">主页的设计</a></li>
-<li><a href="#org1ba11de">Login界面的设计</a></li>
-<li><a href="#orgef01eed">笔记界面的设计</a></li>
+<li><a href="#org961bf11">入口类</a></li>
+<li><a href="#org81c17d6">主页的设计</a></li>
+<li><a href="#org58e02fd">Login界面的设计</a></li>
+<li><a href="#org18717bd">笔记界面的设计</a></li>
 </ul>
 </li>
-<li><a href="#orga199e70">数据库</a>
+<li><a href="#org3897c3e">数据库</a>
 <ul>
-<li><a href="#org8bcf747">数据模型的操作</a></li>
-<li><a href="#orgfa4ae6d">组件的构建</a></li>
+<li><a href="#org0b8a372">数据模型的操作</a></li>
+<li><a href="#org6984484">组件的构建</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbfed98b" class="outline-2">
-<h2 id="orgbfed98b">项目介绍</h2>
-<div class="outline-text-2" id="text-orgbfed98b">
+<div id="outline-container-org1898dba" class="outline-2">
+<h2 id="org1898dba">项目介绍</h2>
+<div class="outline-text-2" id="text-org1898dba">
 <p>
 这次的大作业用的 <b>Flutter</b> 框架，虽然构建 UI 界面很容易，难的是各个组件之间的通信，以及对 async/await 的异步操作<br />
 这个应用由于时间原因选择了 <b>Flutter</b> 来开发，只实现了登录界面，笔记界面，通知界面<br />
@@ -260,31 +260,31 @@
 </div>
 </div>
 
-<div id="outline-container-org290d492" class="outline-2">
-<h2 id="org290d492">功能结构</h2>
-<div class="outline-text-2" id="text-org290d492">
+<div id="outline-container-org6babf0f" class="outline-2">
+<h2 id="org6babf0f">功能结构</h2>
+<div class="outline-text-2" id="text-org6babf0f">
 </div>
-<div id="outline-container-org867fc0e" class="outline-3">
-<h3 id="org867fc0e">登录界面</h3>
-<div class="outline-text-3" id="text-org867fc0e">
+<div id="outline-container-orgd0fb7f5" class="outline-3">
+<h3 id="orgd0fb7f5">登录界面</h3>
+<div class="outline-text-3" id="text-orgd0fb7f5">
 <p>
 这里只提供了登录界面，没有提供登录的相关操作，不过表单还是有的<br />
 </p>
 
-<div id="orgc00b93f" class="figure">
+<div id="org2bb95a9" class="figure">
 <p><img src="images/界面效果/2021-06-24_02-28-03_screenshot.png" alt="2021-06-24_02-28-03_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org4f9eca0" class="outline-3">
-<h3 id="org4f9eca0">笔记界面</h3>
-<div class="outline-text-3" id="text-org4f9eca0">
+<div id="outline-container-org3cb27e6" class="outline-3">
+<h3 id="org3cb27e6">笔记界面</h3>
+<div class="outline-text-3" id="text-org3cb27e6">
 <p>
 笔记界面的每一项由一个 NoteCard 组件构成，只提供了编辑功能，路由切换后会重置<br />
 </p>
 
-<div id="org5839edd" class="figure">
+<div id="orgbd0c7b4" class="figure">
 <p><img src="images/功能结构/2021-06-24_02-35-06_screenshot.png" alt="2021-06-24_02-35-06_screenshot.png" /><br />
 </p>
 </div>
@@ -294,7 +294,7 @@
 </p>
 
 
-<div id="org1708af2" class="figure">
+<div id="orgb632fda" class="figure">
 <p><img src="images/功能结构/2021-06-24_02-36-12_screenshot.png" alt="2021-06-24_02-36-12_screenshot.png" /><br />
 </p>
 </div>
@@ -304,22 +304,22 @@
 </p>
 
 
-<div id="org226d9d0" class="figure">
+<div id="org6c757f1" class="figure">
 <p><img src="images/功能结构/2021-06-24_02-36-52_screenshot.png" alt="2021-06-24_02-36-52_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7345698" class="outline-3">
-<h3 id="org7345698">消息界面</h3>
-<div class="outline-text-3" id="text-org7345698">
+<div id="outline-container-orgf320d1e" class="outline-3">
+<h3 id="orgf320d1e">消息界面</h3>
+<div class="outline-text-3" id="text-orgf320d1e">
 <p>
 消息界面完全仿照 原来的应用，没有什么稀奇的<br />
 </p>
 
 
-<div id="orgde52b90" class="figure">
+<div id="org8f8a255" class="figure">
 <p><img src="images/功能结构/2021-06-24_02-37-47_screenshot.png" alt="2021-06-24_02-37-47_screenshot.png" /><br />
 </p>
 </div>
@@ -327,25 +327,25 @@
 </div>
 </div>
 
-<div id="outline-container-org9d2043a" class="outline-2">
-<h2 id="org9d2043a">设计类</h2>
-<div class="outline-text-2" id="text-org9d2043a">
+<div id="outline-container-org59e42ac" class="outline-2">
+<h2 id="org59e42ac">设计类</h2>
+<div class="outline-text-2" id="text-org59e42ac">
 <p>
 这里介绍下这个项目的结构，重点不是代码，从入口讲起<br />
 </p>
 </div>
-<div id="outline-container-orgf6f5af9" class="outline-3">
-<h3 id="orgf6f5af9">入口类</h3>
-<div class="outline-text-3" id="text-orgf6f5af9">
+<div id="outline-container-org961bf11" class="outline-3">
+<h3 id="org961bf11">入口类</h3>
+<div class="outline-text-3" id="text-org961bf11">
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #986801;">void</span> <span style="color: #a626a4;">main</span><span style="color: #4078f2;">()</span> =&gt; runApp<span style="color: #4078f2;">(</span><span style="color: #986801;">App</span><span style="color: #a626a4;">()</span><span style="color: #4078f2;">)</span>;
 
-<span style="color: #e45649;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">final</span> <span style="color: #6a1868;">title</span> = <span style="color: #50a14f;">'HomeApp'</span>;
+<span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">final</span> <span style="color: #6a1868;">title</span> = <span style="color: #50a14f;">'HomeApp'</span>;
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
       title: title,
       home: <span style="color: #986801;">Home</span><span style="color: #b751b6;">()</span>,
     <span style="color: #50a14f;">)</span>;
@@ -356,9 +356,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org486522a" class="outline-3">
-<h3 id="org486522a">主页的设计</h3>
-<div class="outline-text-3" id="text-org486522a">
+<div id="outline-container-org81c17d6" class="outline-3">
+<h3 id="org81c17d6">主页的设计</h3>
+<div class="outline-text-3" id="text-org81c17d6">
 <p>
 主页中由三个页面，需要引入一个 TabView 组件来进行路由切换<br />
 </p>
@@ -367,7 +367,7 @@
 其中主页为<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #e45649;">class</span> Home <span style="color: #e45649;">extends</span> StatefulWidget <span style="color: #4078f2;">{</span>
+<pre class="src src-javascript"><span style="color: #e45649; font-weight: bold;">class</span> Home <span style="color: #e45649; font-weight: bold;">extends</span> StatefulWidget <span style="color: #4078f2;">{</span>
   @override
   HomeState createState<span style="color: #a626a4;">()</span> =&gt; HomeState<span style="color: #a626a4;">()</span>;
 <span style="color: #4078f2;">}</span>
@@ -377,20 +377,20 @@
 主页的构建由另一个类 HomeState 来实现，在其中使用 TabView<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">HomeState</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">State</span>&lt;<span style="color: #986801;">Home</span>&gt; <span style="color: #e45649;">with</span> <span style="color: #986801;">SingleTickerProviderStateMixin</span><span style="color: #4078f2;">{</span>
-  <span style="color: #a626a4;">late</span> <span style="color: #e45649;">final</span> <span style="color: #986801;">TabController</span> <span style="color: #6a1868;">controller</span> = <span style="color: #986801;">TabController</span><span style="color: #a626a4;">(</span>length: <span style="color: #b751b6;">3</span>, vsync: <span style="color: #e45649;">this</span><span style="color: #a626a4;">)</span>;
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">HomeState</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">State</span>&lt;<span style="color: #986801;">Home</span>&gt; <span style="color: #e45649; font-weight: bold;">with</span> <span style="color: #986801;">SingleTickerProviderStateMixin</span><span style="color: #4078f2;">{</span>
+  <span style="color: #a626a4;">late</span> <span style="color: #e45649; font-weight: bold;">final</span> <span style="color: #986801;">TabController</span> <span style="color: #6a1868;">controller</span> = <span style="color: #986801;">TabController</span><span style="color: #a626a4;">(</span>length: <span style="color: #b751b6;">3</span>, vsync: <span style="color: #e45649; font-weight: bold;">this</span><span style="color: #a626a4;">)</span>;
 
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">void</span> <span style="color: #a626a4;">dispose</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement dispose</span>
     controller.dispose<span style="color: #50a14f;">()</span>;
-    <span style="color: #e45649;">super</span>.dispose<span style="color: #50a14f;">()</span>;
+    <span style="color: #e45649; font-weight: bold;">super</span>.dispose<span style="color: #50a14f;">()</span>;
   <span style="color: #a626a4;">}</span>
 
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
       appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>
   bottom: <span style="color: #986801;">TabBar</span><span style="color: #4db5bd;">(</span>
     controller: controller,
@@ -422,9 +422,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1ba11de" class="outline-3">
-<h3 id="org1ba11de">Login界面的设计</h3>
-<div class="outline-text-3" id="text-org1ba11de">
+<div id="outline-container-org58e02fd" class="outline-3">
+<h3 id="org58e02fd">Login界面的设计</h3>
+<div class="outline-text-3" id="text-org58e02fd">
 <p>
 Login 的界面构建有些复杂，需要将其分解为几个部分<br />
 </p>
@@ -443,7 +443,7 @@ buildLoginButton<br />
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #b751b6;">@override</span>
 <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">SingleChildScrollView</span><span style="color: #a626a4;">(</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">SingleChildScrollView</span><span style="color: #a626a4;">(</span>
     child: buildColumn<span style="color: #50a14f;">(</span>context<span style="color: #50a14f;">)</span>,
   <span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
@@ -452,18 +452,18 @@ buildLoginButton<br />
 </ol>
 </div>
 </div>
-<div id="outline-container-orgef01eed" class="outline-3">
-<h3 id="orgef01eed">笔记界面的设计</h3>
-<div class="outline-text-3" id="text-orgef01eed">
+<div id="outline-container-org18717bd" class="outline-3">
+<h3 id="org18717bd">笔记界面的设计</h3>
+<div class="outline-text-3" id="text-org18717bd">
 <p>
 在应用打开的时候，需要从数据库读取，再生成数据对象 NoteCard<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">NoteCard</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatefulWidget</span> <span style="color: #4078f2;">{</span>
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">NoteCard</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatefulWidget</span> <span style="color: #4078f2;">{</span>
   <span style="color: #986801;">String</span> <span style="color: #6a1868;">title</span>;
   <span style="color: #986801;">String</span> <span style="color: #6a1868;">content</span>;
 
-  <span style="color: #986801;">NoteCard</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.title, <span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.content<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>;
+  <span style="color: #986801;">NoteCard</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #a626a4;">required</span> <span style="color: #e45649; font-weight: bold;">this</span>.title, <span style="color: #a626a4;">required</span> <span style="color: #e45649; font-weight: bold;">this</span>.content<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>;
 
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">CardState</span> <span style="color: #a626a4;">createState</span><span style="color: #a626a4;">()</span> =&gt; <span style="color: #986801;">CardState</span><span style="color: #a626a4;">(</span>title: title, content: content<span style="color: #a626a4;">)</span>;
@@ -479,41 +479,41 @@ buildLoginButton<br />
 </div>
 </div>
 
-<div id="outline-container-orga199e70" class="outline-2">
-<h2 id="orga199e70">数据库</h2>
-<div class="outline-text-2" id="text-orga199e70">
+<div id="outline-container-org3897c3e" class="outline-2">
+<h2 id="org3897c3e">数据库</h2>
+<div class="outline-text-2" id="text-org3897c3e">
 <p>
 由于 dart 是单线程的语言，打开数据库需要一定的时间，为了不影响整个程序的效率，dart 使用了异步的概念<br />
 这里将数据库的增，删，改，查操作都写在数据模型类中<br />
 </p>
 </div>
-<div id="outline-container-org8bcf747" class="outline-3">
-<h3 id="org8bcf747">数据模型的操作</h3>
-<div class="outline-text-3" id="text-org8bcf747">
+<div id="outline-container-org0b8a372" class="outline-3">
+<h3 id="org0b8a372">数据模型的操作</h3>
+<div class="outline-text-3" id="text-org0b8a372">
 <p>
 存储笔记的数据模型 note 中<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insert</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Note</span> <span style="color: #6a1868;">note</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.insert<span style="color: #a626a4;">(</span>
+<pre class="src src-dart"><span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insert</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Note</span> <span style="color: #6a1868;">note</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.insert<span style="color: #a626a4;">(</span>
     tableName,
     note.toMap<span style="color: #50a14f;">()</span>,
     conflictAlgorithm: <span style="color: #986801;">ConflictAlgorithm</span>.replace
   <span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">delete</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">id</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.delete<span style="color: #a626a4;">(</span>tableName, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">delete</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">id</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.delete<span style="color: #a626a4;">(</span>tableName, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">update</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Note</span> <span style="color: #6a1868;">note</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.update<span style="color: #a626a4;">(</span>
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">update</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Note</span> <span style="color: #6a1868;">note</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.update<span style="color: #a626a4;">(</span>
     tableName, note.toMap<span style="color: #50a14f;">()</span>, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>note.id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Note</span>&gt;&gt; <span style="color: #a626a4;">all</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">final</span> <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Map</span>&lt;<span style="color: #986801;">String</span>, <span style="color: #a626a4;">dynamic</span>&gt;&gt; <span style="color: #6a1868;">maps</span> = <span style="color: #e45649;">await</span> db.query<span style="color: #a626a4;">(</span>tableName<span style="color: #a626a4;">)</span>;
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">List</span>.generate<span style="color: #a626a4;">(</span>
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Note</span>&gt;&gt; <span style="color: #a626a4;">all</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">final</span> <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Map</span>&lt;<span style="color: #986801;">String</span>, <span style="color: #a626a4;">dynamic</span>&gt;&gt; <span style="color: #6a1868;">maps</span> = <span style="color: #e45649; font-weight: bold;">await</span> db.query<span style="color: #a626a4;">(</span>tableName<span style="color: #a626a4;">)</span>;
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">List</span>.generate<span style="color: #a626a4;">(</span>
     maps.length,
     <span style="color: #50a14f;">(</span><span style="color: #6a1868;">index</span><span style="color: #50a14f;">)</span> =&gt;
     <span style="color: #986801;">Note</span><span style="color: #50a14f;">(</span>
@@ -530,26 +530,26 @@ buildLoginButton<br />
 类似的，存储消息的数据模型 notify 中<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insert</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Notify</span> <span style="color: #6a1868;">notification</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.insert<span style="color: #a626a4;">(</span>
+<pre class="src src-dart"><span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">insert</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Notify</span> <span style="color: #6a1868;">notification</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.insert<span style="color: #a626a4;">(</span>
     tableName,
     notification.toMap<span style="color: #50a14f;">()</span>,
     conflictAlgorithm: <span style="color: #986801;">ConflictAlgorithm</span>.replace
   <span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">delete</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">id</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.delete<span style="color: #a626a4;">(</span>tableName, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">delete</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">id</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.delete<span style="color: #a626a4;">(</span>tableName, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">update</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Notify</span> <span style="color: #6a1868;">notification</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">await</span> db.update<span style="color: #a626a4;">(</span>
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">void</span>&gt; <span style="color: #a626a4;">update</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span>, <span style="color: #986801;">Notify</span> <span style="color: #6a1868;">notification</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">await</span> db.update<span style="color: #a626a4;">(</span>
     tableName, notification.toMap<span style="color: #50a14f;">()</span>, where: <span style="color: #50a14f;">'id = ?'</span>, whereArgs: <span style="color: #50a14f;">[</span>notification.id<span style="color: #50a14f;">]</span><span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
-<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Notify</span>&gt;&gt; <span style="color: #a626a4;">all</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span><span style="color: #4078f2;">)</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">final</span> <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Map</span>&lt;<span style="color: #986801;">String</span>, <span style="color: #a626a4;">dynamic</span>&gt;&gt; <span style="color: #6a1868;">maps</span> = <span style="color: #e45649;">await</span> db.query<span style="color: #a626a4;">(</span>tableName<span style="color: #a626a4;">)</span>;
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">List</span>.generate<span style="color: #a626a4;">(</span>
+<span style="color: #a626a4;">static</span> <span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Notify</span>&gt;&gt; <span style="color: #a626a4;">all</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Database</span> <span style="color: #6a1868;">db</span><span style="color: #4078f2;">)</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">final</span> <span style="color: #986801;">List</span>&lt;<span style="color: #986801;">Map</span>&lt;<span style="color: #986801;">String</span>, <span style="color: #a626a4;">dynamic</span>&gt;&gt; <span style="color: #6a1868;">maps</span> = <span style="color: #e45649; font-weight: bold;">await</span> db.query<span style="color: #a626a4;">(</span>tableName<span style="color: #a626a4;">)</span>;
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">List</span>.generate<span style="color: #a626a4;">(</span>
     maps.length,
     <span style="color: #50a14f;">(</span><span style="color: #6a1868;">index</span><span style="color: #50a14f;">)</span> =&gt;
     <span style="color: #986801;">Notify</span><span style="color: #50a14f;">(</span>
@@ -562,22 +562,22 @@ buildLoginButton<br />
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa4ae6d" class="outline-3">
-<h3 id="orgfa4ae6d">组件的构建</h3>
-<div class="outline-text-3" id="text-orgfa4ae6d">
+<div id="outline-container-org6984484" class="outline-3">
+<h3 id="org6984484">组件的构建</h3>
+<div class="outline-text-3" id="text-org6984484">
 <p>
 这里为什么要单独讲组件的构建，因为这里牵扯到数据的异步加载，还有 build 方法不能定义为异步的，具体参照<a href="https://flutterigniter.com/build-widget-with-async-method-call/">这篇文章</a><br />
 另外这里应用的构建代码定义在路由界面中<br />
 在 NoteRoute 中，先定义一个异步回调<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">NoteCard</span>&gt;&gt; <span style="color: #a626a4;">callAsyncFetch</span><span style="color: #4078f2;">()</span> <span style="color: #e45649;">async</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">final</span> <span style="color: #6a1868;">database</span> = openDatabase<span style="color: #a626a4;">(</span>
-    join<span style="color: #50a14f;">(</span><span style="color: #e45649;">await</span> getDatabasesPath<span style="color: #b751b6;">()</span>, <span style="color: #50a14f;">'todolist.db'</span><span style="color: #50a14f;">)</span>
+<pre class="src src-dart"><span style="color: #986801;">Future</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">NoteCard</span>&gt;&gt; <span style="color: #a626a4;">callAsyncFetch</span><span style="color: #4078f2;">()</span> <span style="color: #e45649; font-weight: bold;">async</span> <span style="color: #4078f2;">{</span>
+  <span style="color: #e45649; font-weight: bold;">final</span> <span style="color: #6a1868;">database</span> = openDatabase<span style="color: #a626a4;">(</span>
+    join<span style="color: #50a14f;">(</span><span style="color: #e45649; font-weight: bold;">await</span> getDatabasesPath<span style="color: #b751b6;">()</span>, <span style="color: #50a14f;">'todolist.db'</span><span style="color: #50a14f;">)</span>
   <span style="color: #a626a4;">)</span>;
 
-  <span style="color: #e45649;">var</span> <span style="color: #6a1868;">cards</span> = <span style="color: #e45649;">await</span> <span style="color: #986801;">Note</span>.all<span style="color: #a626a4;">(</span><span style="color: #e45649;">await</span> database<span style="color: #a626a4;">)</span>;
-  <span style="color: #e45649;">return</span> cards.map<span style="color: #a626a4;">(</span><span style="color: #50a14f;">(</span><span style="color: #6a1868;">e</span><span style="color: #50a14f;">)</span> =&gt; <span style="color: #986801;">NoteCard</span><span style="color: #50a14f;">(</span>title: e.title, content: e.content<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>.toList<span style="color: #a626a4;">()</span>;
+  <span style="color: #e45649; font-weight: bold;">var</span> <span style="color: #6a1868;">cards</span> = <span style="color: #e45649; font-weight: bold;">await</span> <span style="color: #986801;">Note</span>.all<span style="color: #a626a4;">(</span><span style="color: #e45649; font-weight: bold;">await</span> database<span style="color: #a626a4;">)</span>;
+  <span style="color: #e45649; font-weight: bold;">return</span> cards.map<span style="color: #a626a4;">(</span><span style="color: #50a14f;">(</span><span style="color: #6a1868;">e</span><span style="color: #50a14f;">)</span> =&gt; <span style="color: #986801;">NoteCard</span><span style="color: #50a14f;">(</span>title: e.title, content: e.content<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>.toList<span style="color: #a626a4;">()</span>;
 <span style="color: #4078f2;">}</span>
 </pre>
 </div>
@@ -589,15 +589,15 @@ buildLoginButton<br />
 <pre class="src src-dart"><span style="color: #b751b6;">@override</span>
 <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
   <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">FutureBuilder</span><span style="color: #a626a4;">(</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">FutureBuilder</span><span style="color: #a626a4;">(</span>
     future: callAsyncFetch<span style="color: #50a14f;">()</span>,
     builder: <span style="color: #50a14f;">(</span><span style="color: #6a1868;">context</span>, <span style="color: #986801;">AsyncSnapshot</span>&lt;<span style="color: #986801;">List</span>&lt;<span style="color: #986801;">NoteCard</span>&gt;&gt; <span style="color: #6a1868;">snapshot</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
-      <span style="color: #e45649;">if</span><span style="color: #b751b6;">(</span>snapshot.<span style="color: #6a1868;">hasData</span><span style="color: #b751b6;">)</span> <span style="color: #b751b6;">{</span>
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">ListView</span><span style="color: #4db5bd;">(</span>
+      <span style="color: #e45649; font-weight: bold;">if</span><span style="color: #b751b6;">(</span>snapshot.<span style="color: #6a1868;">hasData</span><span style="color: #b751b6;">)</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">ListView</span><span style="color: #4db5bd;">(</span>
     children: snapshot.data!,
   <span style="color: #4db5bd;">)</span>;
-      <span style="color: #b751b6;">}</span> <span style="color: #e45649;">else</span> <span style="color: #b751b6;">{</span>
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">CircularProgressIndicator</span><span style="color: #4db5bd;">()</span>;
+      <span style="color: #b751b6;">}</span> <span style="color: #e45649; font-weight: bold;">else</span> <span style="color: #b751b6;">{</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">CircularProgressIndicator</span><span style="color: #4db5bd;">()</span>;
       <span style="color: #b751b6;">}</span>
     <span style="color: #50a14f;">}</span>
   <span style="color: #a626a4;">)</span>;
@@ -611,7 +611,7 @@ buildLoginButton<br />
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-07-16 五 00:45</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

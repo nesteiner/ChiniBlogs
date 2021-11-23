@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-16 五 07:16 -->
+<!-- 2021-11-23 二 19:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Flutter 中的Router</title>
@@ -224,19 +224,19 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge21dc57">用你的应用来演示 路由用法</a>
+<li><a href="#org3f48909">用你的应用来演示 路由用法</a>
 <ul>
-<li><a href="#org61d3c08">1. 匿名路由跳转</a></li>
-<li><a href="#org80708f6">2. 命名路由跳转</a></li>
+<li><a href="#org56c3933">1. 匿名路由跳转</a></li>
+<li><a href="#orgb864a5d">2. 命名路由跳转</a></li>
 </ul>
 </li>
-<li><a href="#org3c34596">与 HTML 类比</a></li>
+<li><a href="#org44a658e">与 HTML 类比</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge21dc57" class="outline-2">
-<h2 id="orge21dc57">用你的应用来演示 路由用法</h2>
-<div class="outline-text-2" id="text-orge21dc57">
+<div id="outline-container-org3f48909" class="outline-2">
+<h2 id="org3f48909">用你的应用来演示 路由用法</h2>
+<div class="outline-text-2" id="text-org3f48909">
 <p>
 在这个演示里定义两个界面，HomePage 与 NextPage ，并从 HomePage 传递参数到 NextPage 中<br />
 接下来演示匿名路由和命名路由的情况<br />
@@ -246,7 +246,7 @@
 这是 <b>HomePage</b><br />
 </p>
 
-<div id="org6990a2f" class="figure">
+<div id="orgfb28fd6" class="figure">
 <p><img src="./images/用你的应用来演示_路由用法/2021-06-13_14-36-32_screenshot.png" alt="2021-06-13_14-36-32_screenshot.png" /><br />
 </p>
 </div>
@@ -256,30 +256,30 @@
 </p>
 
 
-<div id="org46359d1" class="figure">
+<div id="org3f1ebf2" class="figure">
 <p><img src="./images/用你的应用来演示_路由用法/2021-06-13_14-37-33_screenshot.png" alt="2021-06-13_14-37-33_screenshot.png" /><br />
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org61d3c08" class="outline-3">
-<h3 id="org61d3c08">1. 匿名路由跳转</h3>
-<div class="outline-text-3" id="text-org61d3c08">
+<div id="outline-container-org56c3933" class="outline-3">
+<h3 id="org56c3933">1. 匿名路由跳转</h3>
+<div class="outline-text-3" id="text-org56c3933">
 <p>
 首先是 HomePage<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">HomePage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">HomePage</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
 
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
-    <span style="color: #e45649;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #50a14f;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
-      <span style="color: #e45649;">return</span> <span style="color: #b751b6;">()</span> <span style="color: #b751b6;">{</span>
+    <span style="color: #e45649; font-weight: bold;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #50a14f;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
+      <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #b751b6;">()</span> <span style="color: #b751b6;">{</span>
   <span style="color: #986801;">Navigator</span>.push<span style="color: #4db5bd;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #4078f2;">(</span>builder: <span style="color: #a626a4;">(</span><span style="color: #6a1868;">builder</span><span style="color: #a626a4;">)</span> =&gt; <span style="color: #986801;">NextPage</span><span style="color: #a626a4;">(</span>message: message<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span><span style="color: #4db5bd;">)</span>;
       <span style="color: #b751b6;">}</span>;
     <span style="color: #50a14f;">}</span>;
 
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
       child: <span style="color: #986801;">Column</span><span style="color: #b751b6;">(</span>
   mainAxisAlignment: <span style="color: #986801;">MainAxisAlignment</span>.center,
   crossAxisAlignment: <span style="color: #986801;">CrossAxisAlignment</span>.center,
@@ -294,7 +294,7 @@
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
       appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'Home Page'</span><span style="color: #4db5bd;">)</span>,<span style="color: #b751b6;">)</span>,
       body: buildBody<span style="color: #b751b6;">(</span>context<span style="color: #b751b6;">)</span>,
     <span style="color: #50a14f;">)</span>;
@@ -307,19 +307,19 @@
 在跳转时通过构造函数来传递参数，其中 NextPage 为<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">NextPage</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">NextPage</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
   <span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span>;
-  <span style="color: #986801;">NextPage</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #a626a4;">required</span> <span style="color: #e45649;">this</span>.message<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>: <span style="color: #e45649;">super</span><span style="color: #a626a4;">()</span>;
+  <span style="color: #986801;">NextPage</span><span style="color: #a626a4;">(</span><span style="color: #50a14f;">{</span><span style="color: #a626a4;">required</span> <span style="color: #e45649; font-weight: bold;">this</span>.message<span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>: <span style="color: #e45649; font-weight: bold;">super</span><span style="color: #a626a4;">()</span>;
 
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Center</span><span style="color: #50a14f;">(</span>
       child: <span style="color: #986801;">Text</span><span style="color: #b751b6;">(</span><span style="color: #50a14f;">'the message from HomePage is'</span> + message, style: <span style="color: #986801;">TextStyle</span><span style="color: #4db5bd;">(</span>color: <span style="color: #986801;">Colors</span>.red, fontSize: <span style="color: #b751b6;">40</span><span style="color: #4db5bd;">)</span>,<span style="color: #b751b6;">)</span>,
     <span style="color: #50a14f;">)</span>;
   <span style="color: #a626a4;">}</span>
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Scaffold</span><span style="color: #50a14f;">(</span>
       appBar: <span style="color: #986801;">AppBar</span><span style="color: #b751b6;">(</span>title: <span style="color: #986801;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #50a14f;">'Next Page'</span>,<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span>,
       body: buildBody<span style="color: #b751b6;">(</span>context<span style="color: #b751b6;">)</span>,
     <span style="color: #50a14f;">)</span>;
@@ -329,19 +329,19 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org80708f6" class="outline-3">
-<h3 id="org80708f6">2. 命名路由跳转</h3>
-<div class="outline-text-3" id="text-org80708f6">
+<div id="outline-container-orgb864a5d" class="outline-3">
+<h3 id="orgb864a5d">2. 命名路由跳转</h3>
+<div class="outline-text-3" id="text-orgb864a5d">
 <p>
 命名路由需要在入口程序 App 中注册路由表，<br />
 </p>
 
 <div class="org-src-container">
-<pre class="src src-dart"><span style="color: #e45649;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
+<pre class="src src-dart"><span style="color: #e45649; font-weight: bold;">class</span> <span style="color: #986801;">App</span> <span style="color: #e45649; font-weight: bold;">extends</span> <span style="color: #986801;">StatelessWidget</span> <span style="color: #4078f2;">{</span>
   <span style="color: #b751b6;">@override</span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">build</span><span style="color: #a626a4;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
     <span style="color: #9ca0a4;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #9ca0a4;">: implement build</span>
-    <span style="color: #e45649;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
+    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">MaterialApp</span><span style="color: #50a14f;">(</span>
       title: <span style="color: #50a14f;">'Flutter Router Demo'</span>,
       home: <span style="color: #986801;">HomePage</span><span style="color: #b751b6;">()</span>,
       routes: <span style="color: #b751b6;">{</span>
@@ -360,8 +360,8 @@
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">in HomePage class, </span>
   <span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
-    <span style="color: #e45649;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #a626a4;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
-      <span style="color: #e45649;">return</span> <span style="color: #50a14f;">()</span> <span style="color: #50a14f;">{</span>
+    <span style="color: #e45649; font-weight: bold;">var</span> <span style="color: #6a1868;">fnpress</span> = <span style="color: #a626a4;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">message</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+      <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #50a14f;">()</span> <span style="color: #50a14f;">{</span>
   <span style="color: #986801;">Navigator</span>.pushNamed<span style="color: #b751b6;">(</span>context, <span style="color: #50a14f;">"Next"</span>, arguments: message<span style="color: #b751b6;">)</span>;
       <span style="color: #50a14f;">}</span>;
     <span style="color: #a626a4;">}</span>;
@@ -374,9 +374,9 @@
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #986801;">Widget</span> <span style="color: #a626a4;">buildBody</span><span style="color: #4078f2;">(</span><span style="color: #986801;">BuildContext</span> <span style="color: #6a1868;">context</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
-  <span style="color: #e45649;">var</span> <span style="color: #6a1868;">message</span> = <span style="color: #986801;">ModalRoute</span>.of<span style="color: #a626a4;">(</span>context<span style="color: #a626a4;">)</span>!.settings.arguments <span style="color: #a626a4;">as</span> <span style="color: #986801;">String</span>;
+  <span style="color: #e45649; font-weight: bold;">var</span> <span style="color: #6a1868;">message</span> = <span style="color: #986801;">ModalRoute</span>.of<span style="color: #a626a4;">(</span>context<span style="color: #a626a4;">)</span>!.settings.arguments <span style="color: #a626a4;">as</span> <span style="color: #986801;">String</span>;
 
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">Center</span><span style="color: #a626a4;">(</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">Center</span><span style="color: #a626a4;">(</span>
     child: <span style="color: #986801;">Text</span><span style="color: #50a14f;">(</span><span style="color: #50a14f;">'the message from HomePage is '</span> + message, style: <span style="color: #986801;">TextStyle</span><span style="color: #b751b6;">(</span>color: <span style="color: #986801;">Colors</span>.red, fontSize: <span style="color: #b751b6;">40</span><span style="color: #b751b6;">)</span>,<span style="color: #50a14f;">)</span>,
   <span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
@@ -388,9 +388,9 @@
 </div>
 
 
-<div id="outline-container-org3c34596" class="outline-2">
-<h2 id="org3c34596">与 HTML 类比</h2>
-<div class="outline-text-2" id="text-org3c34596">
+<div id="outline-container-org44a658e" class="outline-2">
+<h2 id="org44a658e">与 HTML 类比</h2>
+<div class="outline-text-2" id="text-org44a658e">
 <p>
 类比 html 中的路由跳转，路由是从一个页面地址跳转到另一个页面地址，而不变的对象是浏览器的标签页<br />
 在 这个程序 中，页面地址可以看作 Scaffold ，而标签页看作 MaterialApp<br />
@@ -400,7 +400,7 @@ flutter 则有两种情况，在非命名的路由中，只需修改 MaterialPag
 </p>
 <div class="org-src-container">
 <pre class="src src-dart"><span style="color: #986801;">Navigator</span>.push<span style="color: #4078f2;">(</span>context, <span style="color: #986801;">MaterialPageRoute</span><span style="color: #a626a4;">(</span>builder: <span style="color: #50a14f;">(</span><span style="color: #6a1868;">ctx</span><span style="color: #50a14f;">)</span> <span style="color: #50a14f;">{</span>
-  <span style="color: #e45649;">return</span> <span style="color: #986801;">NextPage</span><span style="color: #b751b6;">(</span>
+  <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #986801;">NextPage</span><span style="color: #b751b6;">(</span>
     data: <span style="color: #50a14f;">"Home Page Data"</span>,
   <span style="color: #b751b6;">)</span>;
 <span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span>;
@@ -429,7 +429,7 @@ flutter 则有两种情况，在非命名的路由中，只需修改 MaterialPag
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-07-16 五 07:16</p>
+<p class="date">Created: 2021-11-23 二 19:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
