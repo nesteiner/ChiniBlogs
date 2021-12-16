@@ -725,45 +725,7 @@
     return true
   end
 #+end_src
-*** 6. 判断 是否完全二叉树
-**** 函数说明
-#+begin_src julia
-  iscomplete(tree::BinarySearchTree)
-#+end_src
-- 输入一个二叉树
-- 返回是否为完全二叉树
-**** 测试案例
-#+begin_src julia
-  @testset "practise 5" begin
-    newtree = createBSTree(Int)
-    for i in [2, 1, 4, 3]
-      insert!(newtree, i)
-    end
-  
-    @test iscomplete(newtree) == false
-  
-    insert!(newtree, 5)
-    @test iscomplete(newtree) == true
-  end
-#+end_src
-**** 完整代码
-#+begin_src julia
-  function iscomplete(tree::BinarySearchTree)
-    for treenode in bfsiterate(tree)
-      if isnil(left(treenode)) && !isnil(right(treenode))
-        return false
-      elseif !isnil(left(treenode)) && isnil(right(treenode))
-        return false
-      else
-        continue
-      end
-    end
-  
-    return true
-  end
-
-#+end_src
-*** 7. 后序遍历中第一个返回的节点
+*** 6. 后序遍历中第一个返回的节点
 #+begin_src julia
   @testset "后序遍历中第一个返回的节点" begin
     newtree = createBSTree(Int)
@@ -774,7 +736,7 @@
     @test dataof(first(postorder(newtree))) == 2
   end
 #+end_src
-*** 8. 非递归实现 先序遍历，中序遍历，后序遍历
+*** 7. 非递归实现 先序遍历，中序遍历，后序遍历
 同题目4，添加前序遍历的迭代器类型
 #+begin_src julia
   struct PreOrderIterator <: AbstractBinaryTreeIterator
@@ -837,7 +799,7 @@
 #+end_src
 
 测试案例不再赘述
-*** 9. 查看节点所在层次
+*** 8. 查看节点所在层次
 **** 函数说明
 =height(node::AbstractBinaryNode)=
 - 输入一个 二叉树节点
