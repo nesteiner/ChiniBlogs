@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-21 二 20:28 -->
+<!-- 2021-12-25 六 14:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
+<title>Android 项目总结报告</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Steiner" />
 <style type="text/css">
@@ -219,6 +219,7 @@
 </head>
 <body>
 <div id="content">
+<h1 class="title">Android 项目总结报告</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -269,6 +270,7 @@
 </ul>
 </div>
 </div>
+
 <div id="outline-container-orgae04193" class="outline-2">
 <h2 id="orgae04193">Android 项目总结报告</h2>
 <div class="outline-text-2" id="text-orgae04193">
@@ -295,7 +297,7 @@
 <li>国内疫情数据概况<br /></li>
 </ul>
 
-<div id="orgc67d924" class="figure">
+<div id="org29cd5b1" class="figure">
 <p><img src="images/Android_项目总结报告/国内疫情数据概览.jpg" alt="国内疫情数据概览.jpg" /><br />
 </p>
 </div>
@@ -303,7 +305,7 @@
 <li>疫情热点<br /></li>
 </ul>
 
-<div id="org5781b92" class="figure">
+<div id="org8d26bc0" class="figure">
 <p><img src="images/Android_项目总结报告/疫情热点.jpg" alt="疫情热点.jpg" /><br />
 </p>
 </div>
@@ -311,7 +313,7 @@
 <li>各地疫情数据<br /></li>
 </ul>
 
-<div id="orgeb4bebb" class="figure">
+<div id="org2baccf6" class="figure">
 <p><img src="images/Android_项目总结报告/各省疫情数据.jpg" alt="各省疫情数据.jpg" /><br />
 </p>
 </div>
@@ -968,16 +970,16 @@
 <pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildOneWithIncr</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">field</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">count</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">incr</span>, <span style="color: #ECBE7B;">Color</span> <span style="color: #dcaeea;">color</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
   <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">text</span> = <span style="color: #ECBE7B;">Text</span>.rich<span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">TextSpan</span><span style="color: #98be65;">(</span>
       children: <span style="color: #a9a1e1;">[</span>
-     <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
-       text: <span style="color: #98be65;">"&#36739;&#26152;&#26085;"</span>,
-       style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: <span style="color: #ECBE7B;">Colors</span>.black, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
-     <span style="color: #4db5bd;">)</span>,
+  <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
+    text: <span style="color: #98be65;">"&#36739;&#26152;&#26085;"</span>,
+    style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: <span style="color: #ECBE7B;">Colors</span>.black, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
+  <span style="color: #4db5bd;">)</span>,
 
-     <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
-       text: incr &gt; <span style="color: #a9a1e1;">0</span> ? <span style="color: #98be65;">"+"</span> + incr.toString<span style="color: #51afef;">()</span> : incr.toString<span style="color: #51afef;">()</span>,
-       style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: color, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
-   <span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">]</span>
-
+  <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
+    text: incr &gt; <span style="color: #a9a1e1;">0</span> ? <span style="color: #98be65;">"+"</span> + incr.toString<span style="color: #51afef;">()</span> : incr.toString<span style="color: #51afef;">()</span>,
+    style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: color, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
+  <span style="color: #4db5bd;">)</span>
+      <span style="color: #a9a1e1;">]</span>
   <span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
 
   <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #c678dd;">(</span>
@@ -1393,7 +1395,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-12-21 二 20:28</p>
+<p class="date">Created: 2021-12-25 六 14:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
