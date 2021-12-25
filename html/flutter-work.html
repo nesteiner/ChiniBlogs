@@ -1,0 +1,1400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-21 二 20:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgae04193">Android 项目总结报告</a>
+<ul>
+<li><a href="#org129a6f7">项目介绍</a></li>
+<li><a href="#orgb5e9c31">功能简介</a>
+<ul>
+<li><a href="#org145fd53">1. 查看国内疫情</a></li>
+<li><a href="#orgd3c8e18">2. 查看国外疫情</a></li>
+</ul>
+</li>
+<li><a href="#org032f70d">实现思路</a>
+<ul>
+<li><a href="#orgbab9b78">1. 数据获取</a>
+<ul>
+<li><a href="#orgff0f214">数据模型</a></li>
+<li><a href="#org8973dd0">数据获取</a>
+<ul>
+<li><a href="#orgbc0cdb6">国内疫情页面 NationwidePage 中</a></li>
+<li><a href="#org0ba671c">国外疫情页面 AbroadwidePage 中</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org684e855">2. 组件模型</a>
+<ul>
+<li><a href="#org10e1a47">表示新闻的组件 NewsCard</a></li>
+<li><a href="#org842b12d">表示国内疫情数据概况的组件 OverviewCard</a></li>
+<li><a href="#org723647d">表示各地疫情数据的组件 ProvinceDescTable</a></li>
+<li><a href="#org38a4eb4">表示海外主要国家疫情数据的组件 AbroadDescTable</a></li>
+</ul>
+</li>
+<li><a href="#orga91c119">3. 页面</a>
+<ul>
+<li><a href="#org1fc7858">页面概览</a></li>
+<li><a href="#orga127d7b">页面加载时</a></li>
+<li><a href="#orgf52b725">构建全国疫情界面 NationwidePage</a></li>
+<li><a href="#org7ba0a95">构建国外疫情界面 AbroadWidePage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org32b6ced">项目心得</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgae04193" class="outline-2">
+<h2 id="orgae04193">Android 项目总结报告</h2>
+<div class="outline-text-2" id="text-orgae04193">
+</div>
+<div id="outline-container-org129a6f7" class="outline-3">
+<h3 id="org129a6f7">项目介绍</h3>
+<div class="outline-text-3" id="text-org129a6f7">
+<ol class="org-ol">
+<li>名称<br />
+疫情查看<br /></li>
+<li>独立完成<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb5e9c31" class="outline-3">
+<h3 id="orgb5e9c31">功能简介</h3>
+<div class="outline-text-3" id="text-orgb5e9c31">
+</div>
+<div id="outline-container-org145fd53" class="outline-4">
+<h4 id="org145fd53">1. 查看国内疫情</h4>
+<div class="outline-text-4" id="text-org145fd53">
+<ul class="org-ul">
+<li>国内疫情数据概况<br /></li>
+</ul>
+
+<div id="orgc67d924" class="figure">
+<p><img src="images/Android_项目总结报告/国内疫情数据概览.jpg" alt="国内疫情数据概览.jpg" /><br />
+</p>
+</div>
+<ul class="org-ul">
+<li>疫情热点<br /></li>
+</ul>
+
+<div id="org5781b92" class="figure">
+<p><img src="images/Android_项目总结报告/疫情热点.jpg" alt="疫情热点.jpg" /><br />
+</p>
+</div>
+<ul class="org-ul">
+<li>各地疫情数据<br /></li>
+</ul>
+
+<div id="orgeb4bebb" class="figure">
+<p><img src="images/Android_项目总结报告/各省疫情数据.jpg" alt="各省疫情数据.jpg" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd3c8e18" class="outline-4">
+<h4 id="orgd3c8e18">2. 查看国外疫情</h4>
+<div class="outline-text-4" id="text-orgd3c8e18">
+<ul class="org-ul">
+<li>查看海外主要国家疫情数据<br />
+<img src="images/Android_项目总结报告/海外主要国家疫情.jpg" alt="海外主要国家疫情.jpg" /><br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org032f70d" class="outline-3">
+<h3 id="org032f70d">实现思路</h3>
+<div class="outline-text-3" id="text-org032f70d">
+</div>
+<div id="outline-container-orgbab9b78" class="outline-4">
+<h4 id="orgbab9b78">1. 数据获取</h4>
+<div class="outline-text-4" id="text-orgbab9b78">
+<p>
+整个应用有三类模型，分别是 <b>数据模型</b> ， <b>组件</b> 和 <b>页面</b><br />
+</p>
+</div>
+<div id="outline-container-orgff0f214" class="outline-5">
+<h5 id="orgff0f214">数据模型</h5>
+<div class="outline-text-5" id="text-orgff0f214">
+<p>
+应用中用到的数据来自于 服务器接口，定义 <b>数据模型</b> 来表示数据结构，其中<br />
+</p>
+
+<ol class="org-ol">
+<li><p>
+表示 国内疫情数据概况 <code>Overview</code><br />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">是否能为空</th>
+<th scope="col" class="org-left">字段名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">现有确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">currentConfirmedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">confirmedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">疑似确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">suspectedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计治愈</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">curedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计死亡</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">deadCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计无症状</td>
+<td class="org-left">int</td>
+<td class="org-left">false</td>
+<td class="org-left">seriousCount</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 疑似确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">suspectedIncr</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 现有确症</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">currentConfirmedIncr</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 累计确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">confirmedIncr</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 累计治愈</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">curedIncr</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 累计死亡</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">deadIncr</td>
+</tr>
+
+<tr>
+<td class="org-left">较昨日 累计无症状</td>
+<td class="org-left">int</td>
+<td class="org-left">true</td>
+<td class="org-left">seriousIncr</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+表示 一条疫情热点 <code>News</code><br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">字段名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">发布日期</td>
+<td class="org-left">int</td>
+<td class="org-left">pubDate</td>
+</tr>
+
+<tr>
+<td class="org-left">发布时间</td>
+<td class="org-left">string</td>
+<td class="org-left">pubDateStr</td>
+</tr>
+
+<tr>
+<td class="org-left">标题</td>
+<td class="org-left">string</td>
+<td class="org-left">title</td>
+</tr>
+
+<tr>
+<td class="org-left">内容</td>
+<td class="org-left">string</td>
+<td class="org-left">summary</td>
+</tr>
+
+<tr>
+<td class="org-left">消息来源</td>
+<td class="org-left">string</td>
+<td class="org-left">infoSource</td>
+</tr>
+
+<tr>
+<td class="org-left">消息来源网址</td>
+<td class="org-left">string</td>
+<td class="org-left">sourceUrl</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>
+表示 一个省的疫情数据 <code>ProvinceDesc</code><br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">字段名称</th>
+<th scope="col" class="org-left">对应JSON字段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">省的名称</td>
+<td class="org-left">string</td>
+<td class="org-left">name</td>
+<td class="org-left">childStatistic</td>
+</tr>
+
+<tr>
+<td class="org-left">累计治愈</td>
+<td class="org-left">int</td>
+<td class="org-left">totalCured</td>
+<td class="org-left">totalCured</td>
+</tr>
+
+<tr>
+<td class="org-left">累计死亡</td>
+<td class="org-left">int</td>
+<td class="org-left">totalDeath</td>
+<td class="org-left">totalDeath</td>
+</tr>
+
+<tr>
+<td class="org-left">累计确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">totalConfirmed</td>
+<td class="org-left">totalConfirmed</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+表示 一条国外疫情数据热点 <code>AbroadNews</code><br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">字段名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">洲名称</td>
+<td class="org-left">string</td>
+<td class="org-left">continents</td>
+</tr>
+
+<tr>
+<td class="org-left">国家名称</td>
+<td class="org-left">string</td>
+<td class="org-left">provinceName</td>
+</tr>
+
+<tr>
+<td class="org-left">现有确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">currentConfirmedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计确诊</td>
+<td class="org-left">int</td>
+<td class="org-left">confirmedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计治愈</td>
+<td class="org-left">int</td>
+<td class="org-left">curedCount</td>
+</tr>
+
+<tr>
+<td class="org-left">累计死亡</td>
+<td class="org-left">int</td>
+<td class="org-left">deadCount</td>
+</tr>
+</tbody>
+</table></li>
+
+<li><p>
+表示 国内疫情 <code>LocalDesc</code><br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">字段名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">新闻列表</td>
+<td class="org-left">List&lt;News&gt;</td>
+<td class="org-left">newslist</td>
+</tr>
+
+<tr>
+<td class="org-left">疫情数据概览</td>
+<td class="org-left">Overview</td>
+<td class="org-left">overview</td>
+</tr>
+
+<tr>
+<td class="org-left">危险地区 <b>暂时未用到</b></td>
+<td class="org-left">RiskArea</td>
+<td class="org-left">riskArea</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>
+表示 国外疫情 <code>AbroadDesc</code><br />
+这里由于阿里云那个接口的JSON字段就是这个 <code>newslist</code> ，我就懒得改名了<br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">数据名称</th>
+<th scope="col" class="org-left">数据类型</th>
+<th scope="col" class="org-left">字段名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">所有海外主要国家的疫情数据</td>
+<td class="org-left">List&lt;AbroadNews&gt;</td>
+<td class="org-left">newslist</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org8973dd0" class="outline-5">
+<h5 id="org8973dd0">数据获取</h5>
+<div class="outline-text-5" id="text-org8973dd0">
+<p>
+数据获取发生在页面加载时，由于数据来源不同，需要用到两个不同的后端接口，不过都是返回 <b>JSON</b> 数据<br />
+为各个数据模型定义静态构造方法 <code>fromJSON(dynamic json)</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #c678dd;">static</span> <span style="color: #ECBE7B;">News</span> <span style="color: #c678dd;">fromJSON</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Map</span>&lt;<span style="color: #ECBE7B;">String</span>, <span style="color: #c678dd;">dynamic</span>&gt; <span style="color: #dcaeea;">json</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">News</span><span style="color: #c678dd;">(</span>
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'id'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'pubDate'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'pubDateStr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'title'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'summary'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'infoSource'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'sourceUrl'</span><span style="color: #98be65;">]</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+<span style="color: #c678dd;">static</span> <span style="color: #ECBE7B;">Overview</span> <span style="color: #c678dd;">fromJSON</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Map</span>&lt;<span style="color: #ECBE7B;">String</span>, <span style="color: #c678dd;">dynamic</span>&gt; <span style="color: #dcaeea;">json</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Overview</span><span style="color: #c678dd;">(</span>
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'currentConfirmedCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'confirmedCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'suspectedCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'curedCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'deadCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'seriousCount'</span><span style="color: #98be65;">]</span>!,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'suspectedIncr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'currentConfirmedIncr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'confirmedIncr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'curedIncr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'deadIncr'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'seriousIncr'</span><span style="color: #98be65;">]</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+<span style="color: #c678dd;">static</span> <span style="color: #ECBE7B;">ProvinceDesc</span> <span style="color: #c678dd;">fromJSON</span><span style="color: #51afef;">(</span><span style="color: #c678dd;">dynamic</span> <span style="color: #dcaeea;">json</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">this json is part of `provinceArray`</span>
+  <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">cityArray</span> = json<span style="color: #c678dd;">[</span><span style="color: #98be65;">"cityArray"</span><span style="color: #c678dd;">]</span>;
+  <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">CityDesc</span>&gt; <span style="color: #dcaeea;">list</span> = cityArray
+    .map&lt;<span style="color: #ECBE7B;">CityDesc</span>&gt;<span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #dcaeea;">city</span><span style="color: #98be65;">)</span> =&gt; <span style="color: #ECBE7B;">CityDesc</span><span style="color: #98be65;">(</span>city<span style="color: #a9a1e1;">[</span><span style="color: #98be65;">"totalCured"</span><span style="color: #a9a1e1;">]</span>, city<span style="color: #a9a1e1;">[</span><span style="color: #98be65;">"totalDeath"</span><span style="color: #a9a1e1;">]</span>, city<span style="color: #a9a1e1;">[</span><span style="color: #98be65;">"childStatistic"</span><span style="color: #a9a1e1;">]</span>, city<span style="color: #a9a1e1;">[</span><span style="color: #98be65;">"totalConfirmed"</span><span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>
+    .toList<span style="color: #c678dd;">()</span>;
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">ProvinceDesc</span><span style="color: #c678dd;">(</span>json<span style="color: #98be65;">[</span><span style="color: #98be65;">"childStatistic"</span><span style="color: #98be65;">]</span>, json<span style="color: #98be65;">[</span><span style="color: #98be65;">"totalCured"</span><span style="color: #98be65;">]</span>, json<span style="color: #98be65;">[</span><span style="color: #98be65;">"totalDeath"</span><span style="color: #98be65;">]</span>, json<span style="color: #98be65;">[</span><span style="color: #98be65;">"totalConfirmed"</span><span style="color: #98be65;">]</span>, list<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+<span style="color: #c678dd;">static</span> <span style="color: #ECBE7B;">AbroadNews</span> <span style="color: #c678dd;">fromJSON</span><span style="color: #51afef;">(</span><span style="color: #c678dd;">dynamic</span> <span style="color: #dcaeea;">json</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">AbroadNews</span><span style="color: #c678dd;">(</span>
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'continents'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'provinceName'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'currentConfirmedCount'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'confirmedCount'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'curedCount'</span><span style="color: #98be65;">]</span>,
+    json<span style="color: #98be65;">[</span><span style="color: #98be65;">'deadCount'</span><span style="color: #98be65;">]</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgbc0cdb6" class="outline-6">
+<h6 id="orgbc0cdb6">国内疫情页面 NationwidePage 中</h6>
+<div class="outline-text-6" id="text-orgbc0cdb6">
+<ol class="org-ol">
+<li><p>
+获取 <b>国内疫情</b> <code>LocalDesc</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Future</span>&lt;<span style="color: #ECBE7B;">LocalDesc</span>&gt; <span style="color: #c678dd;">fetchLocalDesc</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">async</span> <span style="color: #51afef;">{</span>
+  <span style="color: #ECBE7B;">Dio</span> <span style="color: #dcaeea;">dio</span> = <span style="color: #ECBE7B;">Dio</span><span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">Response</span> <span style="color: #dcaeea;">response</span> = <span style="color: #51afef;">await</span> dio.<span style="color: #c678dd;">get</span><span style="color: #c678dd;">(</span>
+    <span style="color: #98be65;">"http://api.tianapi.com/ncov/index"</span>,
+    queryParameters: <span style="color: #98be65;">{</span><span style="color: #98be65;">"key"</span>: <span style="color: #98be65;">"822216440f57b9d9cbac5dfcdb856449"</span><span style="color: #98be65;">}</span><span style="color: #c678dd;">)</span>;
+
+  <span style="color: #ECBE7B;">LocalDesc</span> <span style="color: #dcaeea;">localDesc</span> = <span style="color: #ECBE7B;">LocalDesc</span>.fromJSON<span style="color: #c678dd;">(</span>response.data<span style="color: #c678dd;">)</span>;
+  <span style="color: #51afef;">return</span> localDesc;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+其中 <code>LocalDesc</code> 的静态构造方法为<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #c678dd;">static</span> <span style="color: #ECBE7B;">LocalDesc</span> <span style="color: #c678dd;">fromJSON</span><span style="color: #51afef;">(</span><span style="color: #c678dd;">dynamic</span> <span style="color: #dcaeea;">responseJSON</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #5B6268;">// </span><span style="color: #00ffff;">ATTENTION</span><span style="color: #5B6268;"> exception here, may the type error</span>
+  <span style="color: #ECBE7B;">Map</span>&lt;<span style="color: #ECBE7B;">String</span>, <span style="color: #c678dd;">dynamic</span>&gt; <span style="color: #dcaeea;">json</span> = responseJSON<span style="color: #c678dd;">[</span><span style="color: #98be65;">'newslist'</span><span style="color: #c678dd;">][</span><span style="color: #a9a1e1;">0</span><span style="color: #c678dd;">]</span>;
+  <span style="color: #5B6268;">//  </span><span style="color: #5B6268;">create newslist from this list</span>
+  <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">News</span>&gt; <span style="color: #dcaeea;">newslist</span> = json<span style="color: #c678dd;">[</span><span style="color: #98be65;">'news'</span><span style="color: #c678dd;">]</span>.map&lt;<span style="color: #ECBE7B;">News</span>&gt;<span style="color: #c678dd;">(</span><span style="color: #98be65;">(</span><span style="color: #dcaeea;">e</span><span style="color: #98be65;">)</span> =&gt; <span style="color: #ECBE7B;">News</span>.fromJSON<span style="color: #98be65;">(</span>e<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>.toList<span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">Overview</span> <span style="color: #dcaeea;">overview</span> = <span style="color: #ECBE7B;">Overview</span>.fromJSON<span style="color: #c678dd;">(</span>json<span style="color: #98be65;">[</span><span style="color: #98be65;">'desc'</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #ECBE7B;">RiskArea</span> <span style="color: #dcaeea;">riskArea</span> = <span style="color: #ECBE7B;">RiskArea</span>.fromJSON<span style="color: #c678dd;">(</span>json<span style="color: #98be65;">[</span><span style="color: #98be65;">'riskarea'</span><span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">LocalDesc</span><span style="color: #c678dd;">(</span>newslist, overview, riskArea<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div></li>
+
+<li><p>
+获取 <b>各省疫情数据</b> <code>List&lt;ProvinceDesc&gt;</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Future</span>&lt;<span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">ProvinceDesc</span>&gt;&gt; <span style="color: #c678dd;">fetchProvinceDesc</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">async</span> <span style="color: #51afef;">{</span>
+  <span style="color: #ECBE7B;">Dio</span> <span style="color: #dcaeea;">dio</span> = <span style="color: #ECBE7B;">Dio</span><span style="color: #c678dd;">()</span>;
+  <span style="color: #51afef;">const</span> <span style="color: #dcaeea;">url</span> = <span style="color: #98be65;">"http://ncovdata.market.alicloudapi.com/ncov/cityDiseaseInfoWithTrend"</span>;
+  dio.options.headers<span style="color: #c678dd;">[</span><span style="color: #98be65;">"Authorization"</span><span style="color: #c678dd;">]</span> = <span style="color: #98be65;">"APPCODE 66ae9e35defd4088994a8f35372001e6"</span>;
+
+  <span style="color: #ECBE7B;">Response</span> <span style="color: #dcaeea;">response</span> = <span style="color: #51afef;">await</span> dio.<span style="color: #c678dd;">get</span><span style="color: #c678dd;">(</span>url<span style="color: #c678dd;">)</span>;
+  <span style="color: #51afef;">return</span> response.data<span style="color: #c678dd;">[</span><span style="color: #98be65;">"provinceArray"</span><span style="color: #c678dd;">]</span>.map&lt;<span style="color: #ECBE7B;">ProvinceDesc</span>&gt;<span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">ProvinceDesc</span>.fromJSON<span style="color: #c678dd;">)</span>.toList<span style="color: #c678dd;">()</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org0ba671c" class="outline-6">
+<h6 id="org0ba671c">国外疫情页面 AbroadwidePage 中</h6>
+<div class="outline-text-6" id="text-org0ba671c">
+<p>
+获取 <code>AbroadDesc</code> <br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Future</span>&lt;<span style="color: #ECBE7B;">AbroadDesc</span>&gt; <span style="color: #c678dd;">fetchAbroadDesc</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">async</span> <span style="color: #51afef;">{</span>
+  <span style="color: #ECBE7B;">Dio</span> <span style="color: #dcaeea;">dio</span> = <span style="color: #ECBE7B;">Dio</span><span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">Response</span> <span style="color: #dcaeea;">response</span> = <span style="color: #51afef;">await</span> dio.<span style="color: #c678dd;">get</span><span style="color: #c678dd;">(</span>
+    <span style="color: #98be65;">"http://api.tianapi.com/ncovabroad/index"</span>,
+    queryParameters: <span style="color: #98be65;">{</span><span style="color: #98be65;">"key"</span>: <span style="color: #98be65;">"822216440f57b9d9cbac5dfcdb856449"</span><span style="color: #98be65;">}</span>
+  <span style="color: #c678dd;">)</span>;
+
+  <span style="color: #ECBE7B;">AbroadDesc</span> <span style="color: #dcaeea;">abroadDesc</span> = <span style="color: #ECBE7B;">AbroadDesc</span>.fromJSON<span style="color: #c678dd;">(</span>response.data<span style="color: #c678dd;">)</span>;
+  <span style="color: #51afef;">return</span> abroadDesc;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org684e855" class="outline-4">
+<h4 id="org684e855">2. 组件模型</h4>
+<div class="outline-text-4" id="text-org684e855">
+<p>
+拥有数据还不够，需要定义组件来显示数据<br />
+</p>
+</div>
+<div id="outline-container-org10e1a47" class="outline-5">
+<h5 id="org10e1a47">表示新闻的组件 NewsCard</h5>
+<div class="outline-text-5" id="text-org10e1a47">
+<p>
+一条新闻的显示有点特殊，一开始他不会把所有东西展示出来，需要你点击他的标题后，跳转到具体页面查看新闻内容，也就是页面 <b>NewsFullPage</b><br />
+</p>
+
+<p>
+组件中包含一个 <b>News</b> 数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">NewsCard</span> <span style="color: #51afef;">extends</span> <span style="color: #ECBE7B;">StatelessWidget</span> <span style="color: #51afef;">{</span>
+  <span style="color: #c678dd;">late</span> <span style="color: #ECBE7B;">News</span> <span style="color: #dcaeea;">news</span>;
+  <span style="color: #ECBE7B;">NewsCard</span><span style="color: #c678dd;">(</span><span style="color: #51afef;">this</span>.news<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+<p>
+通过 <b>news</b> 显示其新闻标题<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildRow</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">SizedBox</span><span style="color: #c678dd;">(</span>
+    height: <span style="color: #a9a1e1;">50</span>,
+    child: <span style="color: #ECBE7B;">Row</span><span style="color: #98be65;">(</span>
+      mainAxisAlignment: <span style="color: #ECBE7B;">MainAxisAlignment</span>.spaceBetween,
+      children: <span style="color: #a9a1e1;">[</span>
+    <span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span>news.title<span style="color: #4db5bd;">)</span>,
+    <span style="color: #ECBE7B;">Icon</span><span style="color: #4db5bd;">(</span><span style="color: #ECBE7B;">Icons</span>.arrow_forward_ios<span style="color: #4db5bd;">)</span>,
+      <span style="color: #a9a1e1;">]</span>,
+    <span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+再将其用按钮组件包裹，使其点击过后跳转到页面 <b>NewsFullPage</b> ，用 <b>news</b> 构造<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildButton</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">OutlineButton</span><span style="color: #c678dd;">(</span>
+    onPressed: <span style="color: #98be65;">()</span> <span style="color: #98be65;">{</span>
+  <span style="color: #ECBE7B;">Navigator</span>.push<span style="color: #a9a1e1;">(</span>
+    context,
+    <span style="color: #ECBE7B;">MaterialPageRoute</span><span style="color: #4db5bd;">(</span>
+      builder: <span style="color: #51afef;">(</span><span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> =&gt; <span style="color: #ECBE7B;">NewsFullPage</span><span style="color: #51afef;">(</span>news<span style="color: #51afef;">)</span>
+    <span style="color: #4db5bd;">)</span>,
+      <span style="color: #a9a1e1;">)</span>;
+    <span style="color: #98be65;">}</span>,
+    child: buildRow<span style="color: #98be65;">(</span>context<span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org842b12d" class="outline-5">
+<h5 id="org842b12d">表示国内疫情数据概况的组件 OverviewCard</h5>
+<div class="outline-text-5" id="text-org842b12d">
+<p>
+组件中包含数据类型 <b>Overview</b><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">OverviewCard</span> <span style="color: #51afef;">extends</span> <span style="color: #ECBE7B;">StatelessWidget</span> <span style="color: #51afef;">{</span>
+  <span style="color: #c678dd;">late</span> <span style="color: #ECBE7B;">Overview</span> <span style="color: #dcaeea;">overview</span>;
+  <span style="color: #ECBE7B;">OverviewCard</span><span style="color: #c678dd;">(</span><span style="color: #51afef;">this</span>.overview<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+<p>
+在获取 <b>Overview</b> 数据时，我们发现一些 <b>较昨日</b> 的数据是没有的，因为相关数据还没有发布，这类数据不为空时需要显示，<br />
+为此这里有两种显示方法，<br />
+</p>
+<ol class="org-ol">
+<li><p>
+相关数据为空时<br />
+调用函数 <code>buildOne</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildOne</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">field</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">count</span>, <span style="color: #ECBE7B;">Color</span> <span style="color: #dcaeea;">color</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #c678dd;">(</span>
+    children: <span style="color: #98be65;">[</span>
+      <span style="color: #ECBE7B;">Text</span><span style="color: #a9a1e1;">(</span>count.toString<span style="color: #4db5bd;">()</span>, style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #4db5bd;">(</span>fontSize: <span style="color: #a9a1e1;">30</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w800, color: color<span style="color: #4db5bd;">)</span>,<span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">Text</span><span style="color: #a9a1e1;">(</span>field, style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #4db5bd;">(</span>color: <span style="color: #ECBE7B;">Colors</span>.black, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w800<span style="color: #4db5bd;">)</span>,<span style="color: #a9a1e1;">)</span>
+    <span style="color: #98be65;">]</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+构建组件列表<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart">widgets = <span style="color: #51afef;">[</span>
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#30830;&#35786;'</span>, overview.currentConfirmedCount, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #c678dd;">)</span>,
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#22659;&#22806;&#36755;&#20837;'</span>, overview.suspectedCount, <span style="color: #ECBE7B;">Colors</span>.orange<span style="color: #c678dd;">)</span>,
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#26080;&#30151;&#29366;'</span>, overview.seriousCount, <span style="color: #ECBE7B;">Colors</span>.brown<span style="color: #c678dd;">)</span>,
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.confirmedCount, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #c678dd;">)</span>,
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#27515;&#20129;'</span>, overview.deadCount, <span style="color: #ECBE7B;">Colors</span>.blueGrey<span style="color: #c678dd;">)</span>,
+  buildOne<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.curedCount, <span style="color: #ECBE7B;">Colors</span>.green<span style="color: #c678dd;">)</span>,
+<span style="color: #51afef;">]</span>;
+
+</pre>
+</div></li>
+<li><p>
+相关数据不为空时<br />
+调用函数 <code>buildOneWithIncr</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildOneWithIncr</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">String</span> <span style="color: #dcaeea;">field</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">count</span>, <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">incr</span>, <span style="color: #ECBE7B;">Color</span> <span style="color: #dcaeea;">color</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">text</span> = <span style="color: #ECBE7B;">Text</span>.rich<span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">TextSpan</span><span style="color: #98be65;">(</span>
+      children: <span style="color: #a9a1e1;">[</span>
+     <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
+       text: <span style="color: #98be65;">"&#36739;&#26152;&#26085;"</span>,
+       style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: <span style="color: #ECBE7B;">Colors</span>.black, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
+     <span style="color: #4db5bd;">)</span>,
+
+     <span style="color: #ECBE7B;">TextSpan</span><span style="color: #4db5bd;">(</span>
+       text: incr &gt; <span style="color: #a9a1e1;">0</span> ? <span style="color: #98be65;">"+"</span> + incr.toString<span style="color: #51afef;">()</span> : incr.toString<span style="color: #51afef;">()</span>,
+       style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #51afef;">(</span>color: color, fontSize: <span style="color: #a9a1e1;">14</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w500<span style="color: #51afef;">)</span>
+   <span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">]</span>
+
+  <span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #c678dd;">(</span>
+    children: <span style="color: #98be65;">[</span>
+      text,
+      buildOne<span style="color: #a9a1e1;">(</span>context, field, count, color<span style="color: #a9a1e1;">)</span>
+    <span style="color: #98be65;">]</span>,
+  <span style="color: #c678dd;">)</span>;
+
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+<p>
+构造组件列表<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart">widgets = <span style="color: #51afef;">[</span>
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#30830;&#35786;'</span>, overview.currentConfirmedCount, overview.currentConfirmedIncr!, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #c678dd;">)</span>,
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#22659;&#22806;&#36755;&#20837;'</span>, overview.suspectedCount, overview.suspectedIncr!, <span style="color: #ECBE7B;">Colors</span>.orange<span style="color: #c678dd;">)</span>,
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#26080;&#30151;&#29366;'</span>, overview.seriousCount, overview.seriousIncr!, <span style="color: #ECBE7B;">Colors</span>.brown<span style="color: #c678dd;">)</span>,
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.confirmedCount, overview.confirmedIncr!, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #c678dd;">)</span>,
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#27515;&#20129;'</span>, overview.deadCount, overview.deadIncr!, <span style="color: #ECBE7B;">Colors</span>.blueGrey<span style="color: #c678dd;">)</span>,
+  buildOneWithIncr<span style="color: #c678dd;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.curedCount, overview.curedIncr!, <span style="color: #ECBE7B;">Colors</span>.green<span style="color: #c678dd;">)</span>,
+<span style="color: #51afef;">]</span>;
+
+</pre>
+</div></li>
+</ol>
+
+<p>
+构造完成后，将组件列表以网格的形式显示，并将此用 <code>Padding</code> 包裹，另外由于网格组件的高度没有限制，用 <code>ConstrainedBox</code> 限制整个组件高度<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a9a1e1;">@override</span>
+<span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">build</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">ConstrainedBox</span><span style="color: #c678dd;">(</span>
+    constraints: <span style="color: #ECBE7B;">BoxConstraints</span><span style="color: #98be65;">(</span>
+      maxHeight: <span style="color: #a9a1e1;">240</span>
+    <span style="color: #98be65;">)</span>,
+    child: <span style="color: #ECBE7B;">Center</span><span style="color: #98be65;">(</span>
+      child: <span style="color: #ECBE7B;">Padding</span><span style="color: #a9a1e1;">(</span>
+  padding: <span style="color: #ECBE7B;">EdgeInsets</span>.all<span style="color: #4db5bd;">(</span><span style="color: #a9a1e1;">10</span><span style="color: #4db5bd;">)</span>,
+  child: buildGrid<span style="color: #4db5bd;">(</span>context<span style="color: #4db5bd;">)</span>,
+      <span style="color: #a9a1e1;">)</span>
+    <span style="color: #98be65;">)</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+<span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildGrid</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">Widget</span>&gt; <span style="color: #dcaeea;">widgets</span> = <span style="color: #c678dd;">[]</span>;
+  <span style="color: #51afef;">if</span><span style="color: #c678dd;">(</span>overview.confirmedIncr == <span style="color: #a9a1e1;">null</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    widgets = <span style="color: #98be65;">[</span>
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#30830;&#35786;'</span>, overview.currentConfirmedCount, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #a9a1e1;">)</span>,
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#22659;&#22806;&#36755;&#20837;'</span>, overview.suspectedCount, <span style="color: #ECBE7B;">Colors</span>.orange<span style="color: #a9a1e1;">)</span>,
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#26080;&#30151;&#29366;'</span>, overview.seriousCount, <span style="color: #ECBE7B;">Colors</span>.brown<span style="color: #a9a1e1;">)</span>,
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.confirmedCount, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #a9a1e1;">)</span>,
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#27515;&#20129;'</span>, overview.deadCount, <span style="color: #ECBE7B;">Colors</span>.blueGrey<span style="color: #a9a1e1;">)</span>,
+      buildOne<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.curedCount, <span style="color: #ECBE7B;">Colors</span>.green<span style="color: #a9a1e1;">)</span>,
+    <span style="color: #98be65;">]</span>;
+  <span style="color: #c678dd;">}</span> <span style="color: #51afef;">else</span> <span style="color: #c678dd;">{</span>
+    widgets = <span style="color: #98be65;">[</span>
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#30830;&#35786;'</span>, overview.currentConfirmedCount, overview.currentConfirmedIncr!, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #a9a1e1;">)</span>,
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#22659;&#22806;&#36755;&#20837;'</span>, overview.suspectedCount, overview.suspectedIncr!, <span style="color: #ECBE7B;">Colors</span>.orange<span style="color: #a9a1e1;">)</span>,
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#29616;&#23384;&#26080;&#30151;&#29366;'</span>, overview.seriousCount, overview.seriousIncr!, <span style="color: #ECBE7B;">Colors</span>.brown<span style="color: #a9a1e1;">)</span>,
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.confirmedCount, overview.confirmedIncr!, <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #a9a1e1;">)</span>,
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#27515;&#20129;'</span>, overview.deadCount, overview.deadIncr!, <span style="color: #ECBE7B;">Colors</span>.blueGrey<span style="color: #a9a1e1;">)</span>,
+      buildOneWithIncr<span style="color: #a9a1e1;">(</span>context, <span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span>, overview.curedCount, overview.curedIncr!, <span style="color: #ECBE7B;">Colors</span>.green<span style="color: #a9a1e1;">)</span>,
+    <span style="color: #98be65;">]</span>;
+  <span style="color: #c678dd;">}</span>
+
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">GridView</span>.count<span style="color: #c678dd;">(</span>
+    crossAxisCount: <span style="color: #a9a1e1;">3</span>,
+    children: widgets,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org723647d" class="outline-5">
+<h5 id="org723647d">表示各地疫情数据的组件 ProvinceDescTable</h5>
+<div class="outline-text-5" id="text-org723647d">
+<p>
+组件中包含一个 <code>List&lt;ProvinceDesc&gt; provinceDescList</code> 数据，通过他用一个数据表格 <code>DataTable</code> 显示每一个省的疫情数据<br />
+其中数据列有<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart">columns: <span style="color: #51afef;">[</span>
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #c678dd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">'&#22320;&#21306;'</span><span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #c678dd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span><span style="color: #98be65;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #c678dd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #c678dd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">'&#27515;&#20129;'</span><span style="color: #98be65;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #c678dd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #c678dd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">'&#27835;&#24840;'</span><span style="color: #98be65;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #c678dd;">)</span>
+<span style="color: #51afef;">]</span>,
+</pre>
+</div>
+
+<p>
+每一行都是一个省的数据，这里用 <code>map</code> 函数式构造<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart">rows: provinceDescList.map<span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span><span style="color: #dcaeea;">province</span><span style="color: #c678dd;">)</span> =&gt; <span style="color: #ECBE7B;">DataRow</span><span style="color: #c678dd;">(</span>cells: <span style="color: #98be65;">[</span>
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span>province.name, softWrap: <span style="color: #a9a1e1;">true</span>,<span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span>province.totalConfirmed.toString<span style="color: #51afef;">()</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span>province.totalDeath.toString<span style="color: #51afef;">()</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #a9a1e1;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span>province.totalCured.toString<span style="color: #51afef;">()</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>
+<span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>.toList<span style="color: #51afef;">()</span>,
+
+</pre>
+</div>
+
+<p>
+这样表格就搭建好了<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildTable</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #5B6268;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #5B6268;">: implement build</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">DataTable</span><span style="color: #c678dd;">(</span>
+    headingTextStyle: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #98be65;">(</span>fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w800, fontSize: <span style="color: #a9a1e1;">16</span>, color: <span style="color: #ECBE7B;">Colors</span>.black<span style="color: #98be65;">)</span>,
+    headingRowHeight: <span style="color: #a9a1e1;">50</span>,
+    columns: <span style="color: #98be65;">[</span>
+      <span style="color: #ECBE7B;">DataColumn</span><span style="color: #a9a1e1;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#22320;&#21306;'</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataColumn</span><span style="color: #a9a1e1;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span><span style="color: #4db5bd;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataColumn</span><span style="color: #a9a1e1;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#27515;&#20129;'</span><span style="color: #4db5bd;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #a9a1e1;">)</span>,
+      <span style="color: #ECBE7B;">DataColumn</span><span style="color: #a9a1e1;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#27835;&#24840;'</span><span style="color: #4db5bd;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #a9a1e1;">)</span>
+    <span style="color: #98be65;">]</span>,
+
+    rows: provinceDescList.map<span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #dcaeea;">province</span><span style="color: #a9a1e1;">)</span> =&gt; <span style="color: #ECBE7B;">DataRow</span><span style="color: #a9a1e1;">(</span>cells: <span style="color: #4db5bd;">[</span>
+    <span style="color: #ECBE7B;">DataCell</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #c678dd;">(</span>province.name, softWrap: <span style="color: #a9a1e1;">true</span>,<span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>,
+    <span style="color: #ECBE7B;">DataCell</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #c678dd;">(</span>province.totalConfirmed.toString<span style="color: #98be65;">()</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>,
+    <span style="color: #ECBE7B;">DataCell</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #c678dd;">(</span>province.totalDeath.toString<span style="color: #98be65;">()</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>,
+    <span style="color: #ECBE7B;">DataCell</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #c678dd;">(</span>province.totalCured.toString<span style="color: #98be65;">()</span><span style="color: #c678dd;">)</span><span style="color: #51afef;">)</span>
+    <span style="color: #4db5bd;">]</span><span style="color: #a9a1e1;">)</span><span style="color: #98be65;">)</span>.toList<span style="color: #98be65;">()</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+
+<p>
+另外组件显示的时候发现数据太多，页面内容溢出，这里用嵌套的两个 <code>SingleChildScrollView</code> 包裹表格，使其能够上下左右拖动<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a9a1e1;">@override</span>
+<span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">build</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">SingleChildScrollView</span><span style="color: #c678dd;">(</span>
+    scrollDirection: <span style="color: #ECBE7B;">Axis</span>.vertical,
+    child: <span style="color: #ECBE7B;">SingleChildScrollView</span><span style="color: #98be65;">(</span>
+      scrollDirection: <span style="color: #ECBE7B;">Axis</span>.horizontal,
+      child: buildTable<span style="color: #a9a1e1;">(</span>context<span style="color: #a9a1e1;">)</span>,
+    <span style="color: #98be65;">)</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org38a4eb4" class="outline-5">
+<h5 id="org38a4eb4">表示海外主要国家疫情数据的组件 AbroadDescTable</h5>
+<div class="outline-text-5" id="text-org38a4eb4">
+<p>
+同上，类似的方法搭建表格<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">AbroadDescTable</span> <span style="color: #51afef;">extends</span> <span style="color: #ECBE7B;">StatelessWidget</span> <span style="color: #51afef;">{</span>
+  <span style="color: #c678dd;">late</span> <span style="color: #ECBE7B;">AbroadDesc</span> <span style="color: #dcaeea;">abroadDesc</span>;
+  <span style="color: #ECBE7B;">AbroadDescTable</span><span style="color: #c678dd;">(</span><span style="color: #51afef;">this</span>.abroadDesc<span style="color: #c678dd;">)</span>;
+
+
+  <span style="color: #a9a1e1;">@override</span>
+  <span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">build</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">SingleChildScrollView</span><span style="color: #98be65;">(</span>
+      scrollDirection: <span style="color: #ECBE7B;">Axis</span>.vertical,
+      child: <span style="color: #ECBE7B;">SingleChildScrollView</span><span style="color: #a9a1e1;">(</span>
+  scrollDirection: <span style="color: #ECBE7B;">Axis</span>.horizontal,
+  child: buildTable<span style="color: #4db5bd;">(</span>context<span style="color: #4db5bd;">)</span>,
+      <span style="color: #a9a1e1;">)</span>
+    <span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+  <span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildTable</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #51afef;">var</span> <span style="color: #dcaeea;">tableItems</span> = abroadDesc.newslist;
+    <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">DataTable</span><span style="color: #98be65;">(</span>
+      headingRowHeight: <span style="color: #a9a1e1;">50</span>,
+      headingTextStyle: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #a9a1e1;">(</span>fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w800, fontSize: <span style="color: #a9a1e1;">16</span>, color: <span style="color: #ECBE7B;">Colors</span>.black<span style="color: #a9a1e1;">)</span>,
+      columns: <span style="color: #a9a1e1;">[</span>
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #4db5bd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#22320;&#21306;'</span><span style="color: #51afef;">)</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #4db5bd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#32047;&#35745;&#30830;&#35786;'</span><span style="color: #51afef;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #4db5bd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#32047;&#35745;&#27515;&#20129;'</span><span style="color: #51afef;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #4db5bd;">)</span>,
+  <span style="color: #ECBE7B;">DataColumn</span><span style="color: #4db5bd;">(</span>label: <span style="color: #ECBE7B;">Text</span><span style="color: #51afef;">(</span><span style="color: #98be65;">'&#27515;&#20129;&#29575;'</span><span style="color: #51afef;">)</span>, numeric: <span style="color: #a9a1e1;">true</span><span style="color: #4db5bd;">)</span>
+      <span style="color: #a9a1e1;">]</span>,
+      rows: tableItems.map<span style="color: #a9a1e1;">(</span><span style="color: #4db5bd;">(</span><span style="color: #dcaeea;">item</span><span style="color: #4db5bd;">)</span> =&gt; <span style="color: #ECBE7B;">DataRow</span><span style="color: #4db5bd;">(</span>cells: <span style="color: #51afef;">[</span>
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span>item.provinceName, softWrap: <span style="color: #a9a1e1;">true</span>,<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span>item.confirmedCount.toString<span style="color: #a9a1e1;">()</span>, textAlign: <span style="color: #ECBE7B;">TextAlign</span>.right,<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span>item.deadCount.toString<span style="color: #a9a1e1;">()</span>, textAlign: <span style="color: #ECBE7B;">TextAlign</span>.right,<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>,
+      <span style="color: #ECBE7B;">DataCell</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #a9a1e1;">(</span><span style="color: #51afef;">(</span>item.deadCount / item.confirmedCount<span style="color: #51afef;">)</span> * <span style="color: #a9a1e1;">100</span><span style="color: #a9a1e1;">)</span>
+    .toStringAsFixed<span style="color: #a9a1e1;">(</span><span style="color: #a9a1e1;">2</span><span style="color: #a9a1e1;">)</span> + <span style="color: #98be65;">"%"</span>, textAlign: <span style="color: #ECBE7B;">TextAlign</span>.right,<span style="color: #98be65;">)</span><span style="color: #c678dd;">)</span>,
+      <span style="color: #51afef;">]</span><span style="color: #4db5bd;">)</span><span style="color: #a9a1e1;">)</span>.toList<span style="color: #a9a1e1;">()</span>,
+
+    <span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga91c119" class="outline-4">
+<h4 id="orga91c119">3. 页面</h4>
+<div class="outline-text-4" id="text-orga91c119">
+</div>
+<div id="outline-container-org1fc7858" class="outline-5">
+<h5 id="org1fc7858">页面概览</h5>
+<div class="outline-text-5" id="text-org1fc7858">
+<p>
+应用中一共两个主页面<br />
+</p>
+<ul class="org-ul">
+<li><code>NationwidePage</code> 国内疫情页面<br /></li>
+<li><code>AbroadwidePage</code> 国外疫情页面<br /></li>
+</ul>
+
+<p>
+由于点击新闻要查看完整内容，将所有新闻组件 <code>NewsCard</code> 组织在一起，构成小组件 <code>NewsShortcutPage</code><br />
+又将新闻的标题，内容，发布时间的字段在 <code>NewsFullPage</code> 中显示<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orga127d7b" class="outline-5">
+<h5 id="orga127d7b">页面加载时</h5>
+<div class="outline-text-5" id="text-orga127d7b">
+<p>
+数据的请求我放在了页面加载的时候，加载数据时产生了 <code>Future</code> ，将其传递给 <code>FutureBuilder</code> 组件，构建页面内容<br />
+如果数据还在请求中，返回 <code>Circularprogressindicator</code> 表示数据仍在加载中<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf52b725" class="outline-5">
+<h5 id="orgf52b725">构建全国疫情界面 NationwidePage</h5>
+<div class="outline-text-5" id="text-orgf52b725">
+<p>
+由于获取数据用到两个不同的后端接口，这里将 <b>疫情数据概览</b> 和 <b>疫情热点</b> 合在一起构建，<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildFutureLocalDesc</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">final</span> <span style="color: #dcaeea;">padding</span> = <span style="color: #ECBE7B;">EdgeInsets</span>.only<span style="color: #c678dd;">(</span>left: <span style="color: #a9a1e1;">10</span>, top: <span style="color: #a9a1e1;">10</span><span style="color: #c678dd;">)</span>;
+  <span style="color: #51afef;">final</span> <span style="color: #dcaeea;">title1</span> = <span style="color: #ECBE7B;">Container</span><span style="color: #c678dd;">(</span>
+    padding: padding,
+    child: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">"&#22269;&#20869;&#30123;&#24773;&#25968;&#25454;"</span>, style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #a9a1e1;">(</span>fontSize: <span style="color: #a9a1e1;">30</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w900, color: <span style="color: #ECBE7B;">Colors</span>.blue<span style="color: #a9a1e1;">)</span>,<span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">final</span> <span style="color: #dcaeea;">title2</span> = <span style="color: #ECBE7B;">Container</span><span style="color: #c678dd;">(</span>
+    padding: padding,
+    child: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">"&#30123;&#24773;&#28909;&#28857;"</span>, style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #a9a1e1;">(</span>fontSize: <span style="color: #a9a1e1;">30</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w900, color: <span style="color: #ECBE7B;">Colors</span>.red<span style="color: #a9a1e1;">)</span>,<span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">FutureBuilder</span><span style="color: #c678dd;">(</span>
+    future: fetchLocalDesc<span style="color: #98be65;">()</span>,
+    builder: <span style="color: #98be65;">(</span><span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">AsyncSnapshot</span> <span style="color: #dcaeea;">snapshot</span><span style="color: #98be65;">)</span> <span style="color: #98be65;">{</span>
+      <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">Widget</span>&gt; <span style="color: #dcaeea;">firstchildren</span> = <span style="color: #a9a1e1;">[]</span>;
+      <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">Widget</span>&gt; <span style="color: #dcaeea;">secondchildren</span> = <span style="color: #a9a1e1;">[]</span>;
+
+      <span style="color: #51afef;">if</span><span style="color: #a9a1e1;">(</span>snapshot.hasData &amp;&amp; snapshot.data != <span style="color: #a9a1e1;">null</span><span style="color: #a9a1e1;">)</span> <span style="color: #a9a1e1;">{</span>
+  <span style="color: #ECBE7B;">LocalDesc</span> <span style="color: #dcaeea;">localDesc</span> = snapshot.data;
+  firstchildren = <span style="color: #4db5bd;">[</span>title1, <span style="color: #ECBE7B;">OverviewCard</span><span style="color: #51afef;">(</span>localDesc.overview<span style="color: #51afef;">)</span><span style="color: #4db5bd;">]</span>;
+  secondchildren = <span style="color: #4db5bd;">[</span>title2, <span style="color: #ECBE7B;">NewsShortcutPage</span><span style="color: #51afef;">(</span>localDesc.newslist<span style="color: #51afef;">)</span><span style="color: #4db5bd;">]</span>;
+      <span style="color: #a9a1e1;">}</span> <span style="color: #51afef;">else</span> <span style="color: #a9a1e1;">{</span>
+  firstchildren = <span style="color: #4db5bd;">[</span>title1, <span style="color: #ECBE7B;">CircularProgressIndicator</span><span style="color: #51afef;">()</span><span style="color: #4db5bd;">]</span>;
+  secondchildren = <span style="color: #4db5bd;">[</span>title2, <span style="color: #ECBE7B;">CircularProgressIndicator</span><span style="color: #51afef;">()</span><span style="color: #4db5bd;">]</span>;
+      <span style="color: #a9a1e1;">}</span>
+
+      <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #a9a1e1;">(</span>
+  children: <span style="color: #4db5bd;">[</span>
+    <span style="color: #ECBE7B;">Column</span><span style="color: #51afef;">(</span>
+      crossAxisAlignment: <span style="color: #ECBE7B;">CrossAxisAlignment</span>.start,
+      children: firstchildren,
+    <span style="color: #51afef;">)</span>,
+
+    <span style="color: #ECBE7B;">Column</span><span style="color: #51afef;">(</span>
+      crossAxisAlignment: <span style="color: #ECBE7B;">CrossAxisAlignment</span>.start,
+      children: secondchildren,
+    <span style="color: #51afef;">)</span>
+  <span style="color: #4db5bd;">]</span>,
+      <span style="color: #a9a1e1;">)</span>;
+    <span style="color: #98be65;">}</span>
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+
+<p>
+再将 <b>各省疫情数据</b> 独自构建<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">buildFutureProvinceDesc</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">final</span> <span style="color: #dcaeea;">title</span> = <span style="color: #ECBE7B;">Container</span><span style="color: #c678dd;">(</span>
+    padding: <span style="color: #ECBE7B;">EdgeInsets</span>.only<span style="color: #98be65;">(</span>left: <span style="color: #a9a1e1;">10</span>, top: <span style="color: #a9a1e1;">10</span><span style="color: #98be65;">)</span>,
+    child: <span style="color: #ECBE7B;">Text</span><span style="color: #98be65;">(</span><span style="color: #98be65;">"&#21508;&#22320;&#30123;&#24773;&#25968;&#25454;"</span>, style: <span style="color: #ECBE7B;">TextStyle</span><span style="color: #a9a1e1;">(</span>fontSize: <span style="color: #a9a1e1;">30</span>, fontWeight: <span style="color: #ECBE7B;">FontWeight</span>.w900, color: <span style="color: #ECBE7B;">Colors</span>.grey<span style="color: #a9a1e1;">)</span>,<span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">FutureBuilder</span><span style="color: #c678dd;">(</span>
+    future: fetchProvinceDesc<span style="color: #98be65;">()</span>,
+    builder: <span style="color: #98be65;">(</span><span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">AsyncSnapshot</span> <span style="color: #dcaeea;">snapshot</span><span style="color: #98be65;">)</span> <span style="color: #98be65;">{</span>
+      <span style="color: #51afef;">if</span><span style="color: #a9a1e1;">(</span>snapshot.hasData &amp;&amp; snapshot.data != <span style="color: #a9a1e1;">null</span><span style="color: #a9a1e1;">)</span> <span style="color: #a9a1e1;">{</span>
+  <span style="color: #ECBE7B;">List</span>&lt;<span style="color: #ECBE7B;">ProvinceDesc</span>&gt; <span style="color: #dcaeea;">provinceDescList</span> = snapshot.data;
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #4db5bd;">(</span>
+    crossAxisAlignment: <span style="color: #ECBE7B;">CrossAxisAlignment</span>.start,
+    children: <span style="color: #51afef;">[</span>
+      title,
+      <span style="color: #ECBE7B;">ProvinceDescTable</span><span style="color: #c678dd;">(</span>provinceDescList<span style="color: #c678dd;">)</span>
+    <span style="color: #51afef;">]</span>,
+  <span style="color: #4db5bd;">)</span>;
+
+      <span style="color: #a9a1e1;">}</span> <span style="color: #51afef;">else</span> <span style="color: #a9a1e1;">{</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">Column</span><span style="color: #4db5bd;">(</span>
+    crossAxisAlignment: <span style="color: #ECBE7B;">CrossAxisAlignment</span>.start,
+    children: <span style="color: #51afef;">[</span>
+      title,
+      <span style="color: #ECBE7B;">CircularProgressIndicator</span><span style="color: #c678dd;">()</span>
+    <span style="color: #51afef;">]</span>,
+  <span style="color: #4db5bd;">)</span>;
+
+      <span style="color: #a9a1e1;">}</span>
+    <span style="color: #98be65;">}</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+<p>
+最后引入 <code>SingleChildscrollview</code> 添加滚动功能，并防止页面溢出<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #a9a1e1;">@override</span>
+<span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">build</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+
+  <span style="color: #5B6268;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #5B6268;">: implement build</span>
+  <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">SingleChildScrollView</span><span style="color: #c678dd;">(</span>
+    child: <span style="color: #ECBE7B;">Column</span><span style="color: #98be65;">(</span>
+      children: <span style="color: #a9a1e1;">[</span>
+  buildFutureLocalDesc<span style="color: #4db5bd;">(</span>context<span style="color: #4db5bd;">)</span>,
+  buildFutureProvinceDesc<span style="color: #4db5bd;">(</span>context<span style="color: #4db5bd;">)</span>
+      <span style="color: #a9a1e1;">]</span>,
+    <span style="color: #98be65;">)</span>,
+  <span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ba0a95" class="outline-5">
+<h5 id="org7ba0a95">构建国外疫情界面 AbroadWidePage</h5>
+<div class="outline-text-5" id="text-org7ba0a95">
+<p>
+同上，只不过构建过程比较简单<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-dart"><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">AbroadwidePage</span> <span style="color: #51afef;">extends</span> <span style="color: #ECBE7B;">StatelessWidget</span> <span style="color: #51afef;">{</span>
+  <span style="color: #a9a1e1;">@override</span>
+  <span style="color: #ECBE7B;">Widget</span> <span style="color: #c678dd;">build</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">BuildContext</span> <span style="color: #dcaeea;">context</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #5B6268;">// </span><span style="color: #FF0000;">TODO</span><span style="color: #5B6268;">: implement build</span>
+    <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">FutureBuilder</span><span style="color: #98be65;">(</span>
+      future: fetchAbroadDesc<span style="color: #a9a1e1;">()</span>,
+      builder: <span style="color: #a9a1e1;">(</span><span style="color: #dcaeea;">context</span>, <span style="color: #ECBE7B;">AsyncSnapshot</span> <span style="color: #dcaeea;">snapshot</span><span style="color: #a9a1e1;">)</span> <span style="color: #a9a1e1;">{</span>
+  <span style="color: #51afef;">if</span><span style="color: #4db5bd;">(</span>snapshot.hasData &amp;&amp; snapshot.data != <span style="color: #a9a1e1;">null</span><span style="color: #4db5bd;">)</span> <span style="color: #4db5bd;">{</span>
+    <span style="color: #ECBE7B;">AbroadDesc</span> <span style="color: #dcaeea;">abroadDesc</span> = snapshot.data;
+    <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">AbroadDescTable</span><span style="color: #51afef;">(</span>abroadDesc<span style="color: #51afef;">)</span>;
+  <span style="color: #4db5bd;">}</span> <span style="color: #51afef;">else</span> <span style="color: #4db5bd;">{</span>
+    <span style="color: #51afef;">return</span> <span style="color: #ECBE7B;">CircularProgressIndicator</span><span style="color: #51afef;">()</span>;
+  <span style="color: #4db5bd;">}</span>
+      <span style="color: #a9a1e1;">}</span>
+    <span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org32b6ced" class="outline-3">
+<h3 id="org32b6ced">项目心得</h3>
+<div class="outline-text-3" id="text-org32b6ced">
+<p>
+真他娘的累，还好用的 <b>Flutter</b> ，这要用 <b>Android</b> 会伤到前列腺<br />
+这里还是有几点遗憾没有解决<br />
+</p>
+<ol class="org-ol">
+<li>风险地区的没有显示<br />
+由于编程能力有限，地区的名称比较详细，有省到市，到区，到小区，我懒得把同一省的地区归纳到一起<br />
+所以这个功能就懒得做了<br /></li>
+<li>省的疫情数据显示了，市的没有<br />
+在 <code>ProvinceDescTable</code> 中，每一行的省字段可以点击扩展，然后看到所管辖的市的疫情数据，在 <code>Flutter</code> 中<br />
+我还没有调试好这个组件，所以先废弃<br /></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-12-21 二 20:28</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-21 二 23:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C++ 期末作业报告</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">C++ 期末作业报告</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9441e27">项目介绍</a></li>
+<li><a href="#org0e976fc">设计思路</a>
+<ul>
+<li><a href="#org862f18c">作为编辑器的程序</a>
+<ul>
+<li><a href="#orga430f37">初始化环境</a></li>
+<li><a href="#org987172d">循环处理按键</a></li>
+<li><a href="#orge101c9d">退出</a></li>
+</ul>
+</li>
+<li><a href="#org150a1b2">作为文本浏览的程序</a></li>
+</ul>
+</li>
+<li><a href="#orgd08b983">代码实现</a>
+<ul>
+<li><a href="#org0e279b9">主函数</a></li>
+<li><a href="#org3fd9201">数据对象 Editor</a></li>
+<li><a href="#org9d6bb4a">初始化环境</a></li>
+<li><a href="#orge80c404">事件循环处理</a>
+<ul>
+<li><a href="#org0ccde15">1. 如何打开文件</a></li>
+<li><a href="#orgf2a7451">2. 如何刷新屏幕</a></li>
+<li><a href="#org1bcd239">3. 如何读取按键</a></li>
+<li><a href="#orgb2b428a">4. 如何处理按键</a></li>
+<li><a href="#orgd7eeb8b">5. 什么时候退出</a></li>
+<li><a href="#orgd9f5a4d">6. 如何将终端还原为规范模式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9441e27" class="outline-2">
+<h2 id="org9441e27">项目介绍</h2>
+<div class="outline-text-2" id="text-org9441e27">
+<p>
+这次作死来试试手写编辑器，作为一次 <b>Project Based Learning</b> ，我选择了<a href="https://viewsourcecode.org/snaptoken/kilo/index.html">这个教程</a><br />
+这个教程教你在单文件中用 1000 行C代码来实现一个迷你的编辑器，带有代码高亮，无第三方依赖<br />
+这个教程一共有7步，每一步教你实现<br />
+</p>
+<ol class="org-ol">
+<li><code>Setup</code> 环境设置<br /></li>
+<li><code>Entering raw mode</code> 进入终端原始模式<br /></li>
+<li><code>Raw input and output</code> 原始的输入和输出<br /></li>
+<li><code>A text viewer</code> 文本浏览<br /></li>
+<li><code>A text editor</code> 文本编辑<br /></li>
+<li><code>Search</code> 文字搜索<br /></li>
+<li><code>Syntax highlighting</code> 语法高亮<br /></li>
+</ol>
+
+<p>
+这里由于能力有限，只实现到 文本浏览这一块，不过这个项目挺有意思，我打算有时间接着实现<br />
+</p>
+
+
+<div id="org81b3787" class="figure">
+<p><img src="images/editor.png" alt="editor.png" /><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e976fc" class="outline-2">
+<h2 id="org0e976fc">设计思路</h2>
+<div class="outline-text-2" id="text-org0e976fc">
+<blockquote>
+<p>
+在 Linux 中，可以使用 ANSI 转义码（ANSI escape codes）设置终端的字符显示颜色、移动光标位置、清除字符显示等。<br />
+ANSI 转义码是由终端自身支持，独立于编程语言之外，可以在 C 语言、Java、Python、或者 Shell 中使用。<br />
+</p>
+</blockquote>
+
+<p>
+需要补充的是，电脑每秒都在按一定的频率刷新屏幕，在程序里的具体体现为，渲染好当前页面后，刷新，清楚页面，然后接着<br />
+把数据渲染上去<br />
+</p>
+
+<p>
+基于此，程序功能大致分为这么几块，<br />
+</p>
+<ol class="org-ol">
+<li><code>data</code> 全局数据相关<br /></li>
+<li><code>terminal</code> 终端操作的<br /></li>
+<li><code>init</code> 程序初始化操作<br /></li>
+<li><code>input</code> 处理输入字符的<br /></li>
+<li><code>output</code> 处理输出的，比如刷新屏幕<br /></li>
+</ol>
+
+
+<p>
+由于此前用C代码超了一遍源程序，对代码有了一些理解，这里打算用 <code>C++</code> 来实现一版<br />
+另外发现在这个程序中使用类的继承是不合适的，这里用到 <code>C++</code> 只是用来代替 <code>C</code> ，做一些抽象，少些点代码而已<br />
+</p>
+</div>
+
+<div id="outline-container-org862f18c" class="outline-3">
+<h3 id="org862f18c">作为编辑器的程序</h3>
+<div class="outline-text-3" id="text-org862f18c">
+<p>
+这时候程序只是作为一个编辑器，需要响应的就只是光标的移动， 这时程序一共分为三大步<br />
+</p>
+</div>
+<div id="outline-container-orga430f37" class="outline-4">
+<h4 id="orga430f37">初始化环境</h4>
+<div class="outline-text-4" id="text-orga430f37">
+<ul class="org-ul">
+<li>设置终端为原始模式<br /></li>
+<li>获取终端窗口大小<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org987172d" class="outline-4">
+<h4 id="org987172d">循环处理按键</h4>
+<div class="outline-text-4" id="text-org987172d">
+<ol class="org-ol">
+<li>刷新屏幕<br /></li>
+<li>读取按键<br />
+<ul class="org-ul">
+<li>是 组合键<br /></li>
+<li>是 方向键 或 <code>PageUp</code> 或 <code>Home</code> 等按键<br /></li>
+<li>是 普通的字符<br /></li>
+</ul></li>
+<li>渲染屏幕<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge101c9d" class="outline-4">
+<h4 id="orge101c9d">退出</h4>
+<div class="outline-text-4" id="text-orge101c9d">
+<p>
+还原终端为规范模式<br />
+</p>
+
+<p>
+注意<br />
+</p>
+<ol class="org-ol">
+<li>终端有三种工作模式：规范模式、非规范模式、原始模式<br /></li>
+<li>在termios结构的c<sub>lflag中设置ICANNON标志来定义终端以何种模式工作</sub>，默认为规范模式。<br /></li>
+<li><b>规范模式</b> 所有输入基于行进行处理。在用户输入一个行结束符（回车符、EOF等）之前，<br />
+系统调用 <code>read</code> 函数读不到用户输入的任何字符<br />
+其次，除了EOF之外的行结束符与普通字符一样会被 <code>read</code> 函数读取到缓冲区中。一次调用 <code>read</code> 只能读取一行数据。<br /></li>
+<li><b>非规范模式</b> 所有输入时即时有效的，不需要用户另外输入行结束符。<br /></li>
+<li><b>原始模式</b> 是一种特殊的非规范模式，所有的输入数据以字节为单位被处理。即有一个字节输入时，触发输入有效。<br /></li>
+</ol>
+
+<p>
+这里由于要处理方向键，组合键这类按键，所以选择 <b>原始模式</b><br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org150a1b2" class="outline-3">
+<h3 id="org150a1b2">作为文本浏览的程序</h3>
+<div class="outline-text-3" id="text-org150a1b2">
+<p>
+文本浏览不仅要在初始化环境时进入原始模式，还要读入文件<br />
+光标的移动由于文件的引入，需要实现 <b>垂直滚动</b> 和 <b>水平滚动</b> ，需要全局状态来记录光标的位置 <code>cursorx</code> 与 <code>cursory</code> ，<br />
+还要记录所在的行数 <code>colsOffset</code> 和列数 <code>rowsOffset</code> ，并与终端窗口大小比较，判断是否需要滚动<br />
+</p>
+
+<p>
+除此之外还要处理文本中的制表符 '\t' ，需要为制表符指定渲染的长度，设置光标移动遇到制表符时，直接调到下一个字符，<br />
+这里定义一个新的 <code>renderx</code> 来替代 <code>cursorx</code> 的部分功能，并提供 <code>cursorx</code> 到 <code>renderx</code> 的转换方法 <code>cxtorx</code><br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd08b983" class="outline-2">
+<h2 id="orgd08b983">代码实现</h2>
+<div class="outline-text-2" id="text-orgd08b983">
+</div>
+<div id="outline-container-org0e279b9" class="outline-3">
+<h3 id="org0e279b9">主函数</h3>
+<div class="outline-text-3" id="text-org0e279b9">
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">argc</span>, <span style="color: #ECBE7B;">char</span> * <span style="color: #dcaeea;">argv</span><span style="color: #c678dd;">[]</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #ECBE7B;">Editor</span> <span style="color: #dcaeea;">editor</span>;
+
+  <span style="color: #51afef;">if</span><span style="color: #c678dd;">(</span>argc &gt;= 2<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    editor.open<span style="color: #98be65;">(</span>argv<span style="color: #a9a1e1;">[</span>1<span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+  editor.setStatus<span style="color: #c678dd;">(</span><span style="color: #98be65;">"HELP: Ctrl-Q = quit"</span><span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">while</span> <span style="color: #c678dd;">(</span><span style="color: #a9a1e1;">true</span><span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    editor.refreshScreen<span style="color: #98be65;">()</span>;
+    <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">key</span> = editor.readkey<span style="color: #98be65;">()</span>;
+    editor.processkey<span style="color: #98be65;">(</span>key<span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+  <span style="color: #51afef;">return</span> 0;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+参考我们的设计思路，定义一个 <code>Editor</code> 类，在其构造时就将终端进入原始模式，并获取终端窗口大小<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org3fd9201" class="outline-3">
+<h3 id="org3fd9201">数据对象 Editor</h3>
+<div class="outline-text-3" id="text-org3fd9201">
+<p>
+<code>Editor</code> 表示编辑器，通过其存储的变量来实现光标移动和文件读取等功能<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Editor</span> <span style="color: #51afef;">{</span>
+<span style="color: #51afef;">private</span>:                        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">for basic</span>
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">screenrows</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">screencols</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">cursorx</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">cursory</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">renderx</span>;
+
+<span style="color: #51afef;">private</span>:                        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">for read file</span>
+  <span style="color: #ECBE7B;">vector</span><span style="color: #c678dd;">&lt;</span><span style="color: #ECBE7B;">string</span><span style="color: #c678dd;">&gt;</span> <span style="color: #dcaeea;">rows</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">rowoffset</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">coloffset</span>;
+
+<span style="color: #51afef;">private</span>:                        <span style="color: #5B6268;">// </span><span style="color: #5B6268;">for status</span>
+  <span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">filename</span>;
+  <span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">status</span>;
+  <span style="color: #ECBE7B;">time_t</span> <span style="color: #dcaeea;">status_time</span>;
+
+<span style="color: #51afef;">private</span>:
+  <span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">windowsize</span><span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">enableraw</span><span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">cxtorx</span><span style="color: #c678dd;">(</span><span style="color: #ECBE7B;">string</span> &amp; <span style="color: #dcaeea;">chars</span><span style="color: #c678dd;">)</span>;
+
+<span style="color: #51afef;">public</span>:
+  <span style="color: #c678dd;">Editor</span><span style="color: #c678dd;">()</span>;                     <span style="color: #5B6268;">/* </span><span style="color: #5B6268;">this is for initialize</span><span style="color: #5B6268;"> */</span>
+  ~<span style="color: #c678dd;">Editor</span><span style="color: #c678dd;">()</span>;
+
+<span style="color: #51afef;">}</span>;
+
+</pre>
+</div>
+
+<p>
+他还有一系列函数来处理终端输入，输出<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">public</span>:
+  <span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">readkey</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">processkey</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">key</span><span style="color: #51afef;">)</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">open</span><span style="color: #51afef;">(</span><span style="color: #51afef;">const</span> <span style="color: #ECBE7B;">char</span> * <span style="color: #dcaeea;">filename</span><span style="color: #51afef;">)</span>;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">public</span>:
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">refreshScreen</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">drawrows</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">string</span> &amp; <span style="color: #dcaeea;">appendbuf</span><span style="color: #51afef;">)</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">drawStatusBar</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">string</span> &amp; <span style="color: #dcaeea;">appendbuf</span><span style="color: #51afef;">)</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">drawMessageBar</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">string</span> &amp; <span style="color: #dcaeea;">appendbuf</span><span style="color: #51afef;">)</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">setStatus</span><span style="color: #51afef;">(</span><span style="color: #51afef;">const</span> <span style="color: #ECBE7B;">char</span> * <span style="color: #dcaeea;">fmt</span>, ...<span style="color: #51afef;">)</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">scroll</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">string</span> <span style="color: #c678dd;">updaterow</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">string</span> &amp; <span style="color: #dcaeea;">chars</span><span style="color: #51afef;">)</span>;
+</pre>
+</div>
+
+<p>
+这里我顺带着把光标的移动给抽象成函数了<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">private</span>:
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">moveleft</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">moveright</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">moveup</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">movedown</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">homekey</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">endkey</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">pageup</span><span style="color: #51afef;">()</span>;
+  <span style="color: #ECBE7B;">void</span> <span style="color: #c678dd;">pagedown</span><span style="color: #51afef;">()</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9d6bb4a" class="outline-3">
+<h3 id="org9d6bb4a">初始化环境</h3>
+<div class="outline-text-3" id="text-org9d6bb4a">
+<p>
+编辑器中还添加了一个功能， <code>status bar</code> <br />
+在获取了 <code>screenrows</code> 后需要减掉两行来放 <code>status bar</code> 和 <code>status message</code><br />
+</p>
+
+<p>
+在构造函数中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">Editor</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  cursorx = cursory = renderx = 0;
+  screencols = screenrows = 0;
+  rowoffset = coloffset = 0;
+  filename = <span style="color: #98be65;">""</span>;
+  status = <span style="color: #98be65;">""</span>;
+  status_time = 0;
+
+  enableraw<span style="color: #c678dd;">()</span>;
+  windowsize<span style="color: #c678dd;">()</span>;
+  screenrows -= 2;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+其中的一些私有函数定义为<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">int</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">windowsize</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">struct</span> <span style="color: #ECBE7B;">winsize</span> <span style="color: #dcaeea;">ws</span>;
+
+  <span style="color: #51afef;">if</span> <span style="color: #c678dd;">(</span>ioctl<span style="color: #98be65;">(</span>STDOUT_FILENO, TIOCGWINSZ, &amp;ws<span style="color: #98be65;">)</span> == -1 || ws.ws_col == 0<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    <span style="color: #51afef;">return</span> -1;
+  <span style="color: #c678dd;">}</span> <span style="color: #51afef;">else</span> <span style="color: #c678dd;">{</span>
+    screencols = ws.ws_col;
+    screenrows = ws.ws_row;
+    <span style="color: #51afef;">return</span> 0;
+  <span style="color: #c678dd;">}</span>
+<span style="color: #51afef;">}</span>
+
+<span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">enableraw</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">struct</span> <span style="color: #ECBE7B;">termios</span> <span style="color: #dcaeea;">raw</span>;
+  tcgetattr<span style="color: #c678dd;">(</span>STDIN_FILENO, &amp;originTermios<span style="color: #c678dd;">)</span>;
+
+  raw = originTermios;
+  raw.c_iflag &amp;= ~<span style="color: #c678dd;">(</span>BRKINT | ICRNL | INPCK | ISTRIP | IXON<span style="color: #c678dd;">)</span>;
+  raw.c_oflag &amp;= ~<span style="color: #c678dd;">(</span>OPOST<span style="color: #c678dd;">)</span>;
+  raw.c_cflag |= <span style="color: #c678dd;">(</span>CS8<span style="color: #c678dd;">)</span>;
+  raw.c_lflag &amp;= ~<span style="color: #c678dd;">(</span>ECHO | ICANON | IEXTEN | ISIG<span style="color: #c678dd;">)</span>;
+  raw.c_cc<span style="color: #c678dd;">[</span>VMIN<span style="color: #c678dd;">]</span> = 0;
+  raw.c_cc<span style="color: #c678dd;">[</span>VTIME<span style="color: #c678dd;">]</span> = 1;
+  tcsetattr<span style="color: #c678dd;">(</span>STDIN_FILENO, TCSAFLUSH, &amp;raw<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+
+<p>
+其中 <code>originTermios</code> 是全局变量<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge80c404" class="outline-3">
+<h3 id="orge80c404">事件循环处理</h3>
+<div class="outline-text-3" id="text-orge80c404">
+<p>
+在主函数中，编辑器打开了一个文本，然后处理键盘输入事件<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">if</span><span style="color: #51afef;">(</span>argc &gt;= 2<span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  editor.open<span style="color: #c678dd;">(</span>argv<span style="color: #98be65;">[</span>1<span style="color: #98be65;">]</span><span style="color: #c678dd;">)</span>;
+ <span style="color: #51afef;">}</span>
+
+editor.setStatus<span style="color: #51afef;">(</span><span style="color: #98be65;">"HELP: Ctrl-Q = quit"</span><span style="color: #51afef;">)</span>;
+
+<span style="color: #51afef;">while</span> <span style="color: #51afef;">(</span><span style="color: #a9a1e1;">true</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  editor.refreshScreen<span style="color: #c678dd;">()</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">key</span> = editor.readkey<span style="color: #c678dd;">()</span>;
+  editor.processkey<span style="color: #c678dd;">(</span>key<span style="color: #c678dd;">)</span>;
+ <span style="color: #51afef;">}</span>
+
+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0ccde15" class="outline-4">
+<h4 id="org0ccde15">1. 如何打开文件</h4>
+<div class="outline-text-4" id="text-org0ccde15">
+<p>
+<code>Editor</code> 用一个 <code>string</code> 动态数组 <code>rows</code> 保存每一行的文本内容<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">open</span><span style="color: #51afef;">(</span><span style="color: #51afef;">const</span> <span style="color: #ECBE7B;">char</span> * <span style="color: #dcaeea;">path</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  filename = path;
+  <span style="color: #ECBE7B;">ifstream</span> <span style="color: #dcaeea;">is</span><span style="color: #c678dd;">(</span>filename, <span style="color: #a9a1e1;">ios</span>::in<span style="color: #c678dd;">)</span>;
+
+  <span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">buffer</span>;
+  <span style="color: #a9a1e1;">std</span>::getline<span style="color: #c678dd;">(</span>is, buffer<span style="color: #c678dd;">)</span>;
+
+  <span style="color: #51afef;">while</span><span style="color: #c678dd;">(</span>is<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    rows.push_back<span style="color: #98be65;">(</span>buffer<span style="color: #98be65;">)</span>;
+    <span style="color: #a9a1e1;">std</span>::getline<span style="color: #98be65;">(</span>is, buffer<span style="color: #98be65;">)</span>;
+  <span style="color: #c678dd;">}</span>
+
+  is.close<span style="color: #c678dd;">()</span>;
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgf2a7451" class="outline-4">
+<h4 id="orgf2a7451">2. 如何刷新屏幕</h4>
+<div class="outline-text-4" id="text-orgf2a7451">
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">refreshScreen</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  scroll<span style="color: #c678dd;">()</span>;
+
+  <span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">appendbuf</span> = <span style="color: #98be65;">""</span>;
+  appendbuf += <span style="color: #98be65;">"\e[?25l"</span>;
+  appendbuf += <span style="color: #98be65;">"\e[H"</span>;
+  drawrows<span style="color: #c678dd;">(</span>appendbuf<span style="color: #c678dd;">)</span>;
+  drawStatusBar<span style="color: #c678dd;">(</span>appendbuf<span style="color: #c678dd;">)</span>;
+  drawMessageBar<span style="color: #c678dd;">(</span>appendbuf<span style="color: #c678dd;">)</span>;
+
+  <span style="color: #ECBE7B;">stringstream</span> <span style="color: #dcaeea;">ss</span>;
+  <span style="color: #5B6268;">// </span><span style="color: #5B6268;">ss &lt;&lt; "\e[" &lt;&lt; cursory + 1 &lt;&lt; ";" &lt;&lt; cursorx + 1 &lt;&lt; "H";</span>
+  ss &lt;&lt; <span style="color: #98be65;">"\e["</span>
+     &lt;&lt; cursory - rowoffset + 1
+     &lt;&lt; <span style="color: #98be65;">";"</span>
+     &lt;&lt; renderx - coloffset + 1
+     &lt;&lt; <span style="color: #98be65;">"H"</span>;
+  appendbuf += ss.str<span style="color: #c678dd;">()</span>;
+  appendbuf += <span style="color: #98be65;">"\e[?25h"</span>;
+  cout &lt;&lt; appendbuf &lt;&lt; <span style="color: #a9a1e1;">std</span>::flush;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>首先调整光标位置，处理一些越界的情况，调用函数 <code>scroll</code><br /></li>
+<li>添加 ANSI 转义字符 <code>\e[?25l</code> <b>隐藏光标</b><br /></li>
+<li>添加 ANSI 转义字符 <code>\e[H</code> <b>定位光标到左上角</b><br /></li>
+<li>渲染此时的文本内容 <code>drawrow</code><br /></li>
+<li>渲染 <code>status bar</code><br /></li>
+<li>渲染 <code>status message</code><br /></li>
+<li>添加 ANSI 转义字符 <code>\e[x;yH</code> <b>定位光标</b> 到 <code>(x, y)</code><br /></li>
+<li>添加 ANSI 转义字符 <code>\e[?25h</code> <b>显示光标</b><br /></li>
+</ol>
+
+<p>
+注意， <code>cout</code> 后一定要加 <code>std::flush</code> ，马上打印出字符串，不然字符串就会留在缓存区中，看到的情况就是 <b>没有光标</b><br />
+</p>
+</div>
+</div>
+<div id="outline-container-org1bcd239" class="outline-4">
+<h4 id="org1bcd239">3. 如何读取按键</h4>
+<div class="outline-text-4" id="text-org1bcd239">
+<p>
+这里用的完全是作者的代码，其中全都是 <code>C</code> 的一些技巧，正考虑如何写一个 <code>C++</code> 风格的，更加精简的 <code>readKey</code> 函数<br />
+这段代码的主要功能是，判断输入的按键是字符还是一些方向键，不管怎么样，他都扔一个 <b>整数</b> 的 <code>key</code> 出去<br />
+切忌，一定要用 <code>int</code> 来接受这个 <code>key</code> ，不然按什么键都不会有反映<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgb2b428a" class="outline-4">
+<h4 id="orgb2b428a">4. 如何处理按键</h4>
+<div class="outline-text-4" id="text-orgb2b428a">
+<p>
+还好这个程序没有没有实现文本编辑功能，只需要根据按键移动光标即可，这里用 <code>processKey</code> 来处理<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">processkey</span><span style="color: #51afef;">(</span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">key</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">{</span>
+  <span style="color: #51afef;">switch</span> <span style="color: #c678dd;">(</span>key<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+  <span style="color: #51afef;">case</span> HOME_KEY:
+    homekey<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> END_KEY:
+    endkey<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> PAGE_UP:
+    pageup<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> PAGE_DOWN:
+    pagedown<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+
+  <span style="color: #51afef;">case</span> ARROW_UP:
+    moveup<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> ARROW_DOWN:
+    movedown<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> ARROW_LEFT:
+    moveleft<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #51afef;">case</span> ARROW_RIGHT:
+    moveright<span style="color: #98be65;">()</span>;
+    <span style="color: #51afef;">break</span>;
+  <span style="color: #c678dd;">}</span>
+
+  <span style="color: #ECBE7B;">string</span> <span style="color: #dcaeea;">row</span> = <span style="color: #c678dd;">(</span>cursory &gt;= rows.size<span style="color: #98be65;">()</span><span style="color: #c678dd;">)</span> ? <span style="color: #98be65;">""</span> : rows<span style="color: #c678dd;">[</span>cursory<span style="color: #c678dd;">]</span>;
+  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">rowlen</span> = row.length<span style="color: #c678dd;">()</span>;
+  <span style="color: #51afef;">if</span><span style="color: #c678dd;">(</span>cursorx &gt; rowlen<span style="color: #c678dd;">)</span> <span style="color: #c678dd;">{</span>
+    cursorx = rowlen;
+  <span style="color: #c678dd;">}</span>
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+最后几行的代码是在每次光标移动后，如果光标的 <code>x</code> 坐标超过这行文字的长度，将光标对其到行尾<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgd7eeb8b" class="outline-4">
+<h4 id="orgd7eeb8b">5. 什么时候退出</h4>
+<div class="outline-text-4" id="text-orgd7eeb8b">
+<p>
+我们定义按下 <code>Ctrl + Q</code> 组合键退出，<br />
+首先要辨认 <code>Ctrl</code> 系列组合键，这里使用文本宏 <code>CTRL_KEY</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef; font-weight: bold;">#define</span> <span style="color: #c678dd;">CTRL_KEY</span><span style="color: #51afef;">(</span><span style="color: #dcaeea;">k</span><span style="color: #51afef;">)</span> <span style="color: #51afef;">(</span><span style="color: #c678dd;">(</span>k<span style="color: #c678dd;">)</span> &amp; 0x1f<span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+在 <code>processKey</code> 中，添加一个条件开关即可<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #51afef;">case</span> CTRL_KEY<span style="color: #51afef;">(</span><span style="color: #98be65;">'q'</span><span style="color: #51afef;">)</span>:
+    cout &lt;&lt; <span style="color: #98be65;">"\e[2J"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::flush;
+    cout &lt;&lt; <span style="color: #98be65;">"\e[H"</span> &lt;&lt; <span style="color: #a9a1e1;">std</span>::flush;
+
+    exit<span style="color: #51afef;">(</span>0<span style="color: #51afef;">)</span>;
+    <span style="color: #51afef;">break</span>;
+</pre>
+</div>
+
+<p>
+转义符 <code>\e[2J</code> 表示 清除屏幕显示的内容，不过在 Ubuntu 上测试，光标位置会保持不变<br />
+转义符 <code>\e[H</code> 表示将光标移动到左上角，不过在本机测试时好像不会<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgd9f5a4d" class="outline-4">
+<h4 id="orgd9f5a4d">6. 如何将终端还原为规范模式</h4>
+<div class="outline-text-4" id="text-orgd9f5a4d">
+<p>
+由于我们是手动退出的，程序跳过了 <code>Editor</code> 的析构函数并回收资源，我们需要定义一个函数 <code>disableraw</code> 来注册到 <code>atexit</code> 系统调用中<br />
+这样程序退出的时候终端就会还原<br />
+其中 <code>disableraw</code> 定义为 <code>Editor</code> 的静态函数(这里是我设计失误)<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ECBE7B;">void</span> <span style="color: #a9a1e1;">Editor</span>::<span style="color: #c678dd;">disableraw</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  tcsetattr<span style="color: #c678dd;">(</span>STDIN_FILENO, TCSAFLUSH, &amp;originTermios<span style="color: #c678dd;">)</span>;
+<span style="color: #51afef;">}</span>
+</pre>
+</div>
+
+<p>
+然后在构造函数中添加即可<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-c++">atexit<span style="color: #51afef;">(</span><span style="color: #a9a1e1;">Editor</span>::disableraw<span style="color: #51afef;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-12-21 二 23:36</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-23 四 15:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HTML5 移动开发 期末作业</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">HTML5 移动开发 期末作业</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb314185">项目介绍</a></li>
+<li><a href="#orge559e15">主题内容</a></li>
+<li><a href="#org9017e23">模块设计</a>
+<ul>
+<li><a href="#org7ce1c73">全局组件</a></li>
+<li><a href="#orgcfe6977">打卡组件</a></li>
+<li><a href="#org46d42b7">任务组件</a></li>
+<li><a href="#orgb7ea4e5">时钟组件</a></li>
+</ul>
+</li>
+<li><a href="#org5c0eee7">组件实现</a>
+<ul>
+<li><a href="#org3e8b2f8">可复用的打卡组件</a></li>
+<li><a href="#orgefe6050">分离的任务组件</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb314185" class="outline-2">
+<h2 id="orgb314185">项目介绍</h2>
+<div class="outline-text-2" id="text-orgb314185">
+<p>
+参照去年的作业内容，对源代码进行了大幅度修改，从原来的 <code>Vue2</code> 修改到 <code>Vue3 CompositionAPI</code> + <code>typescript</code> + <code>scss</code><br />
+这次修改是为了提高组件设计的质量，纠正以前的一些错误，就当是大作业了<br />
+另外废弃了 <code>Pomodoro</code> 组件，因为运行时会让浏览器卡死，暂时不做修改<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orge559e15" class="outline-2">
+<h2 id="orge559e15">主题内容</h2>
+<div class="outline-text-2" id="text-orge559e15">
+<p>
+这个项目有<br />
+</p>
+<ul class="org-ul">
+<li><b>Teambition</b> 软件项目管理<br /></li>
+<li><b>滴答清单</b> 中的习惯打卡<br /></li>
+<li>我的第一个Vue程序 <b>电子时钟</b><br /></li>
+</ul>
+
+
+
+<div id="orgf6c20f1" class="figure">
+<p><img src="images/主题内容/2021-12-23_14-36-46_screenshot.png" alt="2021-12-23_14-36-46_screenshot.png" /><br />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9017e23" class="outline-2">
+<h2 id="org9017e23">模块设计</h2>
+<div class="outline-text-2" id="text-org9017e23">
+</div>
+<div id="outline-container-org7ce1c73" class="outline-3">
+<h3 id="org7ce1c73">全局组件</h3>
+<div class="outline-text-3" id="text-org7ce1c73">
+<p>
+页面中有两个组件，不管路由如何更改，他们都是存在的<br />
+</p>
+<ol class="org-ol">
+<li><p>
+<code>PageHeader</code><br />
+</p>
+
+<div id="org9ab259c" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-40-33_screenshot.png" alt="2021-12-23_14-40-33_screenshot.png" /><br />
+</p>
+</div></li>
+<li><p>
+<code>PageMenu</code><br />
+</p>
+
+<div id="org26afd33" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-40-42_screenshot.png" alt="2021-12-23_14-40-42_screenshot.png" /><br />
+</p>
+</div></li>
+</ol>
+
+<p>
+在 <code>App.vue</code> 项目入口中，导入他们<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #51afef;">import</span> PageHeader <span style="color: #51afef;">from</span> <span style="color: #98be65;">'@/components/Page/Header.vue'</span>
+<span style="color: #51afef;">import</span> PageMenu <span style="color: #51afef;">from</span> <span style="color: #98be65;">'@/components/Page/Menu.vue'</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #c678dd;">template</span>&gt;
+  &lt;<span style="color: #c678dd;">page-header</span>/&gt;
+  &lt;<span style="color: #c678dd;">div</span> <span style="color: #dcaeea;">class</span>=<span style="color: #98be65;">"router-view"</span>&gt;
+    &lt;<span style="color: #c678dd;">router-view</span>/&gt;
+  &lt;/<span style="color: #c678dd;">div</span>&gt;
+
+  &lt;<span style="color: #c678dd;">page-menu</span>/&gt;
+&lt;/<span style="color: #c678dd;">template</span>&gt;
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcfe6977" class="outline-3">
+<h3 id="orgcfe6977">打卡组件</h3>
+<div class="outline-text-3" id="text-orgcfe6977">
+
+<div id="org813eac8" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-43-30_screenshot.png" alt="2021-12-23_14-43-30_screenshot.png" /><br />
+</p>
+</div>
+
+
+<div id="orgdb80afd" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-53-36_screenshot.png" alt="2021-12-23_14-53-36_screenshot.png" /><br />
+</p>
+</div>
+
+<p>
+打卡组件由两部分组成，一个是入口 <code>Card</code> ，一个是 <code>Modal</code> 悬浮窗<br />
+点击 <code>Card</code> 后会是悬浮窗出现<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org46d42b7" class="outline-3">
+<h3 id="org46d42b7">任务组件</h3>
+<div class="outline-text-3" id="text-org46d42b7">
+<p>
+类似的，任务组件也由两部分组成，一个是入口 <code>Entry</code> ，一个是任务列表 <code>TaskList</code><br />
+不同的是，点击 <code>Entry</code> 后，路由会调到另一个界面显示 <code>TaskList</code><br />
+</p>
+
+
+<div id="org3aace61" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-57-16_screenshot.png" alt="2021-12-23_14-57-16_screenshot.png" /><br />
+</p>
+</div>
+
+
+<div id="org2c7225f" class="figure">
+<p><img src="images/模块设计/2021-12-23_14-57-49_screenshot.png" alt="2021-12-23_14-57-49_screenshot.png" /><br />
+</p>
+</div>
+
+
+
+<div id="org6c1ba79" class="figure">
+<p><img src="images/模块设计/2021-12-23_15-01-22_screenshot.png" alt="2021-12-23_15-01-22_screenshot.png" /><br />
+</p>
+</div>
+
+<p>
+在任务列表组件中，顺带实现任务的添加，任务列表重命名和任务列表添加<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb7ea4e5" class="outline-3">
+<h3 id="orgb7ea4e5">时钟组件</h3>
+<div class="outline-text-3" id="text-orgb7ea4e5">
+
+<div id="orgcc3f073" class="figure">
+<p><img src="images/模块设计/2021-12-23_15-02-34_screenshot.png" alt="2021-12-23_15-02-34_screenshot.png" /><br />
+</p>
+</div>
+
+<p>
+时钟组件尤其简单，不过需要在一个使用 <code>PageMenu</code> 控制其显示<br />
+在 <code>App.vue</code> 中，将 <code>clock</code> 的显示交给变量 <code>clockActive</code> 控制<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #c678dd;">page-menu</span>
+  @toggle:clock=<span style="color: #98be65;">"toggleClock"</span>/&gt;
+&lt;<span style="color: #c678dd;">clock</span> <span style="color: #c678dd;">v-model</span>:<span style="color: #dcaeea;">active</span>=<span style="color: #98be65;">"clockActive"</span>/&gt;
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">clockActive</span> = <span style="color: #c678dd;">ref</span><span style="color: #51afef;">(</span><span style="color: #a9a1e1;">false</span><span style="color: #51afef;">)</span>
+</pre>
+</div>
+
+<p>
+点击 <code>PageMenu</code> 中的时钟图标时，触发 <code>@toggle:clock</code> 事件，调用 <code>toggleClock</code> 处理<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #51afef;">function</span> <span style="color: #c678dd;">toggleClock</span><span style="color: #51afef;">()</span> <span style="color: #51afef;">{</span>
+  clockActive.value = <span style="color: #a9a1e1;">true</span>
+<span style="color: #51afef;">}</span>
+
+</pre>
+</div>
+
+<p>
+然后时钟页面就会慢慢降落下来，知道点击圆形按钮后收回去<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c0eee7" class="outline-2">
+<h2 id="org5c0eee7">组件实现</h2>
+<div class="outline-text-2" id="text-org5c0eee7">
+<p>
+这里挑几个来写吧，其他的有点简单<br />
+</p>
+</div>
+<div id="outline-container-org3e8b2f8" class="outline-3">
+<h3 id="org3e8b2f8">可复用的打卡组件</h3>
+<div class="outline-text-3" id="text-org3e8b2f8">
+<p>
+在页面中有四个打卡组件，在 <code>Home.vue</code> 中他们的部署代码是<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #c678dd;">div</span> <span style="color: #dcaeea;">class</span>=<span style="color: #98be65;">"record"</span>&gt;
+  &lt;<span style="color: #c678dd;">MedicineCard</span>/&gt;
+  &lt;<span style="color: #c678dd;">HomeWorkCard</span>/&gt;
+  &lt;<span style="color: #c678dd;">ReadingCard</span>/&gt;
+  &lt;<span style="color: #c678dd;">WritingCard</span>/&gt;
+&lt;/<span style="color: #c678dd;">div</span>&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #51afef;">import</span> <span style="color: #51afef;">{</span>MedicineCard, HomeWorkCard, ReadingCard, WritingCard<span style="color: #51afef;">}</span> <span style="color: #51afef;">from</span> <span style="color: #98be65;">'@/components/Record'</span>;
+</pre>
+</div>
+
+<p>
+在组件绘制中，用到了 <code>Card</code> 和 <code>Modal</code> 两个组件，然后通过其中的命名插槽 <code>slot</code> 和 <code>props</code> 来实现不同的内容<br />
+以 <code>MediceCard</code> 为例，在模板中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #c678dd;">template</span>&gt;
+  &lt;<span style="color: #c678dd;">div</span> <span style="color: #dcaeea;">class</span>=<span style="color: #98be65;">"record-medicine"</span>&gt;
+    &lt;<span style="color: #c678dd;">Card</span> :title=<span style="color: #98be65;">"title"</span> :isdone=<span style="color: #98be65;">"isdone"</span> @toggle=<span style="color: #98be65;">"togglemodal"</span>&gt;
+      &lt;<span style="color: #c678dd;">template</span> v-slot:icon&gt;
+        <span style="color: #5B6268;">&lt;!-- </span><span style="color: #5B6268;">svg code </span><span style="color: #5B6268;">--&gt;</span>
+      &lt;/<span style="color: #c678dd;">template</span>&gt;
+    &lt;/<span style="color: #c678dd;">Card</span>&gt;
+
+    &lt;<span style="color: #c678dd;">Modal</span> :title=<span style="color: #98be65;">"title"</span> :words=<span style="color: #98be65;">"words"</span> :color=<span style="color: #98be65;">"color"</span>  <span style="color: #c678dd;">v-model</span>:<span style="color: #dcaeea;">active</span>=<span style="color: #98be65;">"active"</span>&gt;
+      &lt;<span style="color: #c678dd;">template</span> v-slot:background-image&gt;
+        <span style="color: #5B6268;">&lt;!-- </span><span style="color: #5B6268;">svg code </span><span style="color: #5B6268;">--&gt;</span>
+      &lt;/<span style="color: #c678dd;">template</span>&gt;
+
+    &lt;/<span style="color: #c678dd;">Modal</span>&gt;
+
+  &lt;/<span style="color: #c678dd;">div</span>&gt;
+&lt;/<span style="color: #c678dd;">template</span>&gt;
+
+</pre>
+</div>
+
+<p>
+这样以后，可以通过修改 <code>color</code> , <code>words</code>, <code>title</code> 属性，插入不同 <code>svg</code> 代码到插槽 <code>icon</code> 和 <code>background-image</code> 中<br />
+来实现不同的卡片和不同的遮罩层 <code>Modal</code> <br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgefe6050" class="outline-3">
+<h3 id="orgefe6050">分离的任务组件</h3>
+<div class="outline-text-3" id="text-orgefe6050">
+<p>
+参照网页应用的设计，任务组件的入口 <code>Entry</code> 和 任务列表 <code>TaskList</code> 是分离的，通过 <code>Entry</code> 跳转到<br />
+<code>/project</code> 路由，并渲染 <code>TaskList</code> 组件<br />
+那么渲染 <code>TaskList</code> 的数据从哪里来？ 如果有后端的话， <code>TaskList</code> 应该通过参数 <code>id</code> 向后端请求，<br />
+所以在 <code>/project</code> 路由中定义了虚假的数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #c678dd;">template</span>&gt;
+  &lt;<span style="color: #c678dd;">div</span> <span style="color: #dcaeea;">class</span>=<span style="color: #98be65;">"project-view"</span>&gt;
+    &lt;<span style="color: #c678dd;">template</span> <span style="color: #dcaeea;">v-for</span>=<span style="color: #98be65;">"(taskgroup, index) in taskgroups"</span> :key=<span style="color: #98be65;">"index"</span>&gt;
+      &lt;<span style="color: #c678dd;">TaskList</span>
+        :id=<span style="color: #98be65;">"taskgroup.id"</span>
+        <span style="color: #c678dd;">v-model</span>:<span style="color: #dcaeea;">title</span>=<span style="color: #98be65;">"taskgroup.title"</span>
+        <span style="color: #c678dd;">v-model</span>:<span style="color: #dcaeea;">tasks</span>=<span style="color: #98be65;">"taskgroup.tasks"</span>
+        @addlist=<span style="color: #98be65;">"addlist(index, $event)"</span>
+        @delete=<span style="color: #98be65;">"deletelist(index)"</span>
+        /&gt;
+    &lt;/<span style="color: #c678dd;">template</span>&gt;
+  &lt;/<span style="color: #c678dd;">div</span>&gt;
+&lt;/<span style="color: #c678dd;">template</span>&gt;
+
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-typescript"><span style="color: #51afef;">const</span> <span style="color: #dcaeea;">taskgroups</span> = <span style="color: #c678dd;">ref</span><span style="color: #51afef;">(</span><span style="color: #c678dd;">[</span>
+  <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">TaskGroup</span><span style="color: #98be65;">(</span>1, <span style="color: #98be65;">"&#21551;&#21160;&#39033;&#30446;"</span>, <span style="color: #a9a1e1;">[</span>
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#31435;&#39033;&#20934;&#22791;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#39033;&#30446;&#31574;&#21010;&#26041;&#26696;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#39033;&#30446;&#21551;&#21160;&#20250;'</span><span style="color: #4db5bd;">)</span>
+  <span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span>,
+
+  <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">TaskGroup</span><span style="color: #98be65;">(</span>2, <span style="color: #98be65;">"&#25191;&#34892;&#25512;&#36827;"</span>, <span style="color: #a9a1e1;">[</span>
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#20135;&#21697;&#26041;&#26696;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#36827;&#31243;&#27719;&#25253;PPT'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#39033;&#30446;&#20013;&#26399;&#22238;&#39038;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#19968;&#26399;&#20132;&#20184;&#39564;&#25910;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#20108;&#26399;&#20132;&#20184;&#39564;&#25910;'</span><span style="color: #4db5bd;">)</span>
+  <span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span>,
+
+  <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">TaskGroup</span><span style="color: #98be65;">(</span>3, <span style="color: #98be65;">'&#39118;&#38505;&#31649;&#29702;'</span>, <span style="color: #a9a1e1;">[</span>
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#20135;&#21697;&#35774;&#35745;&#39118;&#38505;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#24320;&#21457;&#36827;&#24230;&#39118;&#38505;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#39564;&#25910;&#39118;&#38505;'</span><span style="color: #4db5bd;">)</span>
+  <span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span>,
+
+  <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">TaskGroup</span><span style="color: #98be65;">(</span>4, <span style="color: #98be65;">'&#24635;&#32467;&#22238;&#39038;'</span>, <span style="color: #a9a1e1;">[</span>
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#39033;&#30446;&#22797;&#30424;&#24635;&#32467;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#25991;&#26723;&#26803;&#29702;&#27785;&#28096;'</span><span style="color: #4db5bd;">)</span>,
+    <span style="color: #51afef;">new</span> <span style="color: #ECBE7B;">Task</span><span style="color: #4db5bd;">(</span><span style="color: #98be65;">'&#12304;&#31034;&#20363;&#12305;&#25968;&#25454;&#20998;&#26512;'</span><span style="color: #4db5bd;">)</span>
+  <span style="color: #a9a1e1;">]</span><span style="color: #98be65;">)</span>
+<span style="color: #c678dd;">]</span><span style="color: #51afef;">)</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2021-12-23 四 15:32</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
