@@ -29,7 +29,7 @@
 
 <tbody>
 <tr>
-<td class="org-left"><a href="../html/counter.html">counter</a></td>
+<td class="org-left"><a href="./html/counter.html">counter</a></td>
 <td class="org-left">Flutter</td>
 <td class="org-left">&#xa0;</td>
 </tr>
