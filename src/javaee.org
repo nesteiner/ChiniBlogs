@@ -1,6 +1,9 @@
 #+title: JavaEE 大作业报告
-* 程序需求
-** 学生信息管理
+* 程序需求分析
+** 用户需求分析
+这次的选题是第一题，用户需要看到一个表格来显示所有数据，然后通过表格提供的编辑功能来对数据进行操作
+** 功能需求分析
+*** 学生信息管理
 首先是在一个表格中显示所有的学生信息，并在表格中提供操作按钮，能够对该列进行编辑和删除操作
 如果是编辑操作，跳转到另外一个 *编辑页面* ，在其中编辑信息
 
@@ -11,7 +14,7 @@
 #+DOWNLOADED: screenshot @ 2021-12-24 22:37:21
 [[file:images/程序需求/2021-12-24_22-37-21_screenshot.png]]
 
-** 课程管理
+*** 课程管理
 类似的，用一个表格显示所有课程信息，并在表格中提供查看按钮，跳转到另外的页面查看该课程的知识点和案例
 
 #+DOWNLOADED: screenshot @ 2021-12-24 22:37:47
@@ -20,8 +23,8 @@
 #+DOWNLOADED: screenshot @ 2021-12-24 22:38:26
 [[file:images/程序需求/2021-12-24_22-38-26_screenshot.png]]
 
-* 程序设计
-** 系统架构
+* 系统设计
+** 系统架构及工作原理
 这里采用前后端分离的方法，后端只需要对数据进行增删改查，重难点都在前端，娘的折磨了我一个月的设计，以后干脆用极简主义来做
 *** 前端
 - Vue3 + composition api
@@ -34,10 +37,12 @@
 - jetty server
 - ibatis
 - mybatis
-** 工作原理
-前端负责交互，后端负责数据操作，其中 =Controller= 全部设置为 =RestController=
+
+
+** 系统总体设计
+设计上前端负责交互，后端负责数据操作，其中 =Controller= 全部设置为 =RestController=
 前后端之间的数据传递使用 =JSON= 格式，使用 =Restful= 接口
-** 总体设计
+
 *** 前端页面
 **** 学生管理
 - =Home.vue=
@@ -87,10 +92,11 @@
 - =RawSectionMapper=
 - =StudentMapper=
 
-* 数据模型
-** 数据表
+
+** 系统数据模型设计
+*** 数据表的创建
 程序中涉及到的有三个表
-*** 学生管理
+**** 学生管理
 #+begin_src sql
   create table Student(
     `id` int not null primary key auto_increment,
@@ -105,7 +111,7 @@
     `job` varchar(40)
   );
 #+end_src
-*** 课程管理
+**** 课程管理
 #+begin_src sql
   create table Course(
     `id` int not null primary key auto_increment,
@@ -124,9 +130,10 @@
   );
 
 #+end_src
-** 对应的Java类和数据表映射
-*** 学生管理
-**** Java类
+
+*** 对应的Java类和数据库映射
+**** 学生管理
+***** Java类
 #+begin_src java
   @Data
   @NoArgsConstructor
@@ -145,7 +152,7 @@
   }
 
 #+end_src
-**** 数据表映射
+***** 数据表映射
 #+begin_src java
   public interface StudentMapper {
       @Select("select * from Student")
@@ -178,8 +185,8 @@
   }
 
 #+end_src
-*** 课程管理
-**** Java类
+**** 课程管理
+***** Java类
 #+begin_src java
   public class Course {
       int id;
@@ -209,7 +216,7 @@
   }
 
 #+end_src
-**** 数据表映射
+***** 数据表映射
 #+begin_src java
   public interface CourseMapper {
       @Select("select * from Course")
@@ -266,6 +273,7 @@
   }
 
 #+end_src
+
 * 系统实现
 ** 数据库的连接和配置
 在 =classpath: resourses/db.properties= 中，定义以下属性
@@ -539,3 +547,6 @@
   }
 
 #+end_src
+
+
+* 结论

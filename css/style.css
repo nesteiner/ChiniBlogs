@@ -3,7 +3,6 @@ body {
     font-weight: 300;
     color: #262420;
     background: #f7f8fc;
-    text-align: justify;
     hyphens: auto;
 }
 
@@ -16,6 +15,17 @@ body {
 
 #preamble {
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.skip-nav-link {
+    position: absolute;
+    transform: translateY(-120%);
+    padding: 0.5rem 1.5rem;
+    left: 0.5rem;
+}
+
+.skip-nav-link:focus {
+    transform: translateY(0);
 }
 
 #wrapper {
@@ -96,7 +106,7 @@ a:hover {
     font-weight: bold;
     padding: 0 16px;
     margin: 1.5em 0;
-  /* background-image: url('/images/link.svg'); */
+    background-image: url('/images/link.svg');
     background-repeat: no-repeat;
     background-position: 22px;
     background-size: 24px 24px;
