@@ -96,6 +96,13 @@
 <td class="org-left">Julia</td>
 <td class="org-left">离散数学</td>
 </tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/symbolics.html">Symbolics.jl 简单使用</a></td>
+<td class="org-left">Julia</td>
+<td class="org-left">符号计算</td>
+</tr>
 </tbody>
 </table>
 
