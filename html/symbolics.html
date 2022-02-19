@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-19 六 16:41 -->
+<!-- 2022-02-19 六 16:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Symbolics.jl 简单使用</title>
@@ -239,6 +239,11 @@
 <li><a href="#org36046ef">1.3. 生成 Julia 函数</a></li>
 </ul>
 </li>
+<li><a href="#orgab63999">2. 疑问</a>
+<ul>
+<li><a href="#org8d562e2">2.1. 怎么没有积分啊</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -390,15 +395,34 @@ f_func<span style="color: #ae81ff;">(</span>1<span style="color: #ae81ff;">)</sp
 <li><code>build_function</code> 需要一个表达式，和其参数变量表<br /></li>
 <li>如果是 <code>f(x, y)</code> ，应该输入 <code>build_function(f, x, y)</code><br /></li>
 <li>如果是 <code>f([x, y])</code> , 应该输入 <code>build_function(f, [x, y])</code><br /></li>
-<li><code>build_function</code> 返回的是 Julia 函数的 <code>Expr</code> 类型, <code>eval</code> 他即可获得函数</li>
+<li><code>build_function</code> 返回的是 Julia 函数的 <code>Expr</code> 类型, <code>eval</code> 他即可获得函数<br /></li>
 </ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab63999" class="outline-2">
+<h2 id="orgab63999"><span class="section-number-2">2</span> 疑问</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org8d562e2" class="outline-3">
+<h3 id="org8d562e2"><span class="section-number-3">2.1</span> 怎么没有积分啊</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+这个包里确实没有写积分的函数，不过我已经提了个 <b>Issue</b> 给作者<br />
+<a href="https://github.com/JuliaSymbolics/Symbolics.jl/issues/532">https://github.com/JuliaSymbolics/Symbolics.jl/issues/532</a><br />
+</p>
+
+<p>
+<img src="images/疑问/2022-02-19_16-52-00_screenshot.png" alt="2022-02-19_16-52-00_screenshot.png" /><br />
+我都已经给他跪了，不信他不理我</p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2022-02-19 六 16:41</p>
+<p class="date">Created: 2022-02-19 六 16:52</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

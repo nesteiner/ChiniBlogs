@@ -77,3 +77,12 @@
 2. 如果是 =f(x, y)= ，应该输入 =build_function(f, x, y)=
 3. 如果是 =f([x, y])= , 应该输入 =build_function(f, [x, y])=
 4. =build_function= 返回的是 Julia 函数的 =Expr= 类型, =eval= 他即可获得函数
+
+* 疑问
+** 怎么没有积分啊
+这个包里确实没有写积分的函数，不过我已经提了个 *Issue* 给作者
+https://github.com/JuliaSymbolics/Symbolics.jl/issues/532
+
+#+DOWNLOADED: screenshot @ 2022-02-19 16:52:00
+[[file:images/疑问/2022-02-19_16-52-00_screenshot.png]]
+我都已经给他跪了，不信他不理我
