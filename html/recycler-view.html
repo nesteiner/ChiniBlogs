@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-23 二 19:25 -->
+<!-- 2022-02-24 四 23:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RecyclerView笔记</title>
+<title>RecyclerView 简单使用</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Steiner" />
 <style type="text/css">
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="css/org.css"/>
+<link rel="stylesheet" type="text/css" href="/home/steiner/ChiniBlogs/html/css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -219,183 +219,185 @@
 </head>
 <body>
 <div id="content">
-<h1 class="title">RecyclerView笔记</h1>
+<h1 class="title">RecyclerView 简单使用</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org637e2b3">如何使用 RecyclerView</a></li>
-<li><a href="#org936ff8c">Adapter</a>
+<li><a href="#org8ddf0cc">1. RecyclerView</a>
 <ul>
-<li><a href="#org5d13f1c">Adapter 怎么渲染数据</a>
-<ul>
-<li><a href="#org2bb8999">ViewHolder</a></li>
-<li><a href="#org3add9b4">XML 布局</a></li>
+<li><a href="#orga670fd0">1.1. 代码总览</a></li>
+<li><a href="#orgcadec2f">1.2. 有关Adapter</a></li>
+<li><a href="#org094db3c">1.3. 有关ViewHolder</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a href="#orgabacba6">LayoutManager</a></li>
-</ul>
 </div>
 </div>
 
-<div id="outline-container-org637e2b3" class="outline-2">
-<h2 id="org637e2b3">如何使用 RecyclerView</h2>
-<div class="outline-text-2" id="text-org637e2b3">
+<div id="outline-container-org8ddf0cc" class="outline-2">
+<h2 id="org8ddf0cc"><span class="section-number-2">1</span> RecyclerView</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这个 <code>View</code> 的使用当初我用的不是很明白，现在有点懂了，我们自顶向下设计 <code>View</code><br />
+</p>
+</div>
+<div id="outline-container-orga670fd0" class="outline-3">
+<h3 id="orga670fd0"><span class="section-number-3">1.1</span> 代码总览</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+在 <code>MainActivity</code> 中，<br />
+</p>
 <div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">RecyclerView</span> <span style="color: #6a1868;">recyclerView</span> = findViewById<span style="color: #4078f2;">(</span>R.id.recycler_view<span style="color: #4078f2;">)</span>;
-<span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649; font-weight: bold;">new</span> <span style="color: #986801;">OwnAdapter</span><span style="color: #4078f2;">(</span><span style="color: #e45649; font-weight: bold;">this</span>, data<span style="color: #4078f2;">)</span>;
-<span style="color: #986801;">LinearLayoutManager</span> <span style="color: #6a1868;">layoutmanager</span> = <span style="color: #e45649; font-weight: bold;">new</span> <span style="color: #986801;">LinearLayoutManager</span><span style="color: #4078f2;">(</span><span style="color: #e45649; font-weight: bold;">this</span>, <span style="color: #b751b6;">LinearLayoutManager</span>.VERTICAL, <span style="color: #b751b6;">false</span><span style="color: #4078f2;">)</span>;
-recyclerView.setAdapter<span style="color: #4078f2;">(</span>adapter<span style="color: #4078f2;">)</span>;
-recyclerView.setLayoutManager<span style="color: #4078f2;">(</span>layoutmanager<span style="color: #4078f2;">)</span>;
-</pre>
-</div>
+<pre class="src src-java"><span style="color: #b751b6;">@Override</span>
+<span style="color: #e45649;">protected</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onCreate</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">super</span>.onCreate<span style="color: #a626a4;">(</span>savedInstanceState<span style="color: #a626a4;">)</span>;
+    setContentView<span style="color: #a626a4;">(</span>R.layout.activity_main<span style="color: #a626a4;">)</span>;
 
-<p>
-<b>RecyclerView</b> 的渲染需要确定：<br />
-</p>
-<ol class="org-ol">
-<li>需要渲染什么数据<br /></li>
-<li>怎么渲染数据<br /></li>
-<li>怎么对所有渲染后的 <b>View</b> 进行布局<br /></li>
-</ol>
-</div>
-</div>
-
-<div id="outline-container-org936ff8c" class="outline-2">
-<h2 id="org936ff8c">Adapter</h2>
-<div class="outline-text-2" id="text-org936ff8c">
-
-<div id="org321a73e" class="figure">
-<p><img src="./images/Adapter.png" alt="Adapter.png" /><br />
-</p>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">OwnAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649; font-weight: bold;">new</span> <span style="color: #986801;">OwnAdapter</span><span style="color: #4078f2;">(</span><span style="color: #e45649; font-weight: bold;">this</span>, data<span style="color: #4078f2;">)</span>;
-recyclerView.setAdapter<span style="color: #4078f2;">(</span>adapter<span style="color: #4078f2;">)</span>;
-</pre>
-</div>
-
-<p>
-Adapter 就像是一个工厂，引入原料 <b>data</b> ，在内部经过加工处理后，出口给目标客户 <b>this</b><br />
-相当于在 <b>Activity</b> 与数据之间建立起一座桥梁<br />
-</p>
-</div>
-
-<div id="outline-container-org5d13f1c" class="outline-3">
-<h3 id="org5d13f1c">Adapter 怎么渲染数据</h3>
-<div class="outline-text-3" id="text-org5d13f1c">
-<p>
-<b>Adapter</b> 首先要有基础设施<br />
-</p>
-<ol class="org-ol">
-<li>粗加工流水线 <b>layoutInflater</b><br /></li>
-<li>材料输入口 <b>data</b> ，在这里为 <b>students</b><br /></li>
-</ol>
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #986801;">LayoutInflater</span> <span style="color: #6a1868;">layoutInflater</span>;
-<span style="color: #986801;">List</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">Student</span><span style="color: #4078f2;">&gt;</span> <span style="color: #6a1868;">students</span>;
-</pre>
-</div>
-
-<p>
-在 <b>Adapter</b> 数据处理工厂中，对每一个需要处理的数据都会进行如下操作：<br />
-</p>
-<ol class="org-ol">
-<li>粗加工<br /></li>
-<li>招工<br /></li>
-<li>分配工作<br /></li>
-</ol>
-
-<p>
-先是对材料进行粗加工，再招募一位工人来进行细加工渲染 <b>onCreateViewHolder</b><br />
-再是为其指定加工方法 <b>onBindViewHolder</b><br />
-</p>
-
-<div class="org-src-container">
-<pre class="src src-java"><span style="color: #b751b6;">@NonNull</span>
-<span style="color: #b751b6;">@Override</span>
-<span style="color: #e45649; font-weight: bold;">public</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #a626a4;">onCreateViewHolder</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">parent</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">viewType</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
-    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#25307;&#24037;</span>
-    <span style="color: #986801;">View</span> <span style="color: #6a1868;">itemView</span> = layoutInflater.inflate<span style="color: #a626a4;">(</span>R.layout.student_layout, <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span>;
-    <span style="color: #e45649; font-weight: bold;">return</span> <span style="color: #e45649; font-weight: bold;">new</span> <span style="color: #986801;">OwnViewHolder</span><span style="color: #a626a4;">(</span>itemView<span style="color: #a626a4;">)</span>;
-<span style="color: #4078f2;">}</span>
-
-<span style="color: #b751b6;">@Override</span>
-<span style="color: #e45649; font-weight: bold;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onBindViewHolder</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">OwnViewHolder</span> <span style="color: #6a1868;">holder</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">position</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
-    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#20998;&#37197;&#24037;&#20316;</span>
-    <span style="color: #986801;">Student</span> <span style="color: #6a1868;">student</span> = students.get<span style="color: #a626a4;">(</span>position<span style="color: #a626a4;">)</span>;
-    Log.d<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"after here"</span><span style="color: #a626a4;">)</span>;
-    holder.text_age.setText<span style="color: #a626a4;">(</span>String.valueOf<span style="color: #50a14f;">(</span>student.age<span style="color: #50a14f;">)</span><span style="color: #a626a4;">)</span>;
-    holder.text_name.setText<span style="color: #a626a4;">(</span>student.name<span style="color: #a626a4;">)</span>;
-    Log.d<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"fuck"</span>, <span style="color: #50a14f;">"finished here"</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">RecyclerView</span> <span style="color: #6a1868;">recyclerView</span> = <span style="color: #a626a4;">(</span><span style="color: #986801;">RecyclerView</span><span style="color: #a626a4;">)</span> findViewById<span style="color: #a626a4;">(</span>R.id.recyclerview<span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">Integer</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">data</span> = Stream.iterate<span style="color: #a626a4;">(</span>1, n -&gt; n + 1<span style="color: #a626a4;">)</span>.limit<span style="color: #a626a4;">(</span>100<span style="color: #a626a4;">)</span>.collect<span style="color: #a626a4;">(</span>Collectors.toList<span style="color: #50a14f;">()</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">CustomAdapter</span> <span style="color: #6a1868;">adapter</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">CustomAdapter</span><span style="color: #a626a4;">(</span>data<span style="color: #a626a4;">)</span>;
+    <span style="color: #b751b6;">RecyclerView</span>.<span style="color: #986801;">LayoutManager</span> <span style="color: #6a1868;">layoutManager</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">GridLayoutManager</span><span style="color: #a626a4;">(</span><span style="color: #e45649;">this</span>, 4<span style="color: #a626a4;">)</span>;
+    recyclerView.setAdapter<span style="color: #a626a4;">(</span>adapter<span style="color: #a626a4;">)</span>;
+    recyclerView.setLayoutManager<span style="color: #a626a4;">(</span>layoutManager<span style="color: #a626a4;">)</span>;
 <span style="color: #4078f2;">}</span>
 
 </pre>
 </div>
-</div>
-<div id="outline-container-org2bb8999" class="outline-4">
-<h4 id="org2bb8999">ViewHolder</h4>
-<div class="outline-text-4" id="text-org2bb8999">
+
 <p>
-<b>ViewHolder</b> 负责对 <b>itemView</b> 进行细加工，指定加工方法定义在 <b>onBindViewHolder</b> 回调中<br />
-<b>ViewHolder</b> 工人的招募定义在 <b>onCreateviewholder</b> 回调中，不过首先需要指定一个 <b>XML</b> 布局文件作为渲染模板，为 <b>ViewHolder</b> 提供使用,<br />
-这样 <b>ViewHolder</b> 才能定位到布局中的 <b>id</b> <br />
+我们<br />
+</p>
+<ol class="org-ol">
+<li>定义了一个 <code>RecyclerView</code><br /></li>
+<li>定义了一个 <code>CustomAdapter</code><br /></li>
+<li>为 <code>CustomAdapter</code> 提供了数据<br /></li>
+<li>为 <code>RecyclerView</code> 设置 <code>adapter</code><br /></li>
+<li>为 <code>RecyclerView</code> 设置 <code>layoutmanager</code><br /></li>
+</ol>
+
+<p>
+注意，这里我们没用到 <code>ViewHolder</code> 这个东西，这个东西由 <code>Adapter</code> 操纵，相当于<br />
+</p>
+<ul class="org-ul">
+<li><code>RecyclerView</code><br />
+<ul class="org-ul">
+<li><code>Adapter</code><br />
+<ul class="org-ul">
+<li><code>ViewHolder</code><br /></li>
+<li><code>ViewHolder</code><br /></li>
+<li><code>ViewHolder</code><br /></li>
+<li><code>ViewHolder</code><br /></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcadec2f" class="outline-3">
+<h3 id="orgcadec2f"><span class="section-number-3">1.2</span> 有关Adapter</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+定义 <code>Adapter</code> 需要继承 <code>RecyclerView.Adapter</code> ，他的作用是衔接 <code>RecyclerView</code> 与 <code>ViewHolder</code> ，即 <code>RecyclerView</code> 通过<br />
+<code>Adapter</code> 来设置每个 <code>ViewHolder</code> 的视图，这里我们需要设置三个关键方法<br />
+</p>
+<ul class="org-ul">
+<li><code>onCreateViewHolder</code><br />
+每当 <code>RecyclerView</code> 需要创建新的 ViewHolder 时，它都会调用此方法n<br />
+此方法会创建并初始化 <code>ViewHolder</code> 及其关联的 <code>View</code> ，但不会填充视图的内容，因为 <code>ViewHolder</code> 此时尚未绑定到具体数据。<br /></li>
+<li><code>onBindViewHolder</code><br />
+<code>RecyclerView</code> 调用此方法将 <code>ViewHolder</code> 与数据相关联<br /></li>
+<li><code>getItemCount</code><br />
+<code>RecyclerView</code> 调用此方法来获取数据集的大小<br /></li>
+</ul>
+
+<p>
+这里我们为 <code>Adapter</code> 设置私有数据 <code>data</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">CustomAdapter</span> <span style="color: #e45649;">extends</span> <span style="color: #b751b6;">RecyclerView</span>.<span style="color: #986801;">Adapter</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">CustomViewHolder</span><span style="color: #4078f2;">&gt;</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">private</span> <span style="color: #986801;">List</span><span style="color: #a626a4;">&lt;</span><span style="color: #986801;">Integer</span><span style="color: #a626a4;">&gt;</span> <span style="color: #6a1868;">data</span>;
+
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">CustomAdapter</span><span style="color: #a626a4;">(</span><span style="color: #986801;">List</span><span style="color: #50a14f;">&lt;</span><span style="color: #986801;">Integer</span><span style="color: #50a14f;">&gt;</span> <span style="color: #6a1868;">data</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">this</span>.data = data;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #b751b6;">@NonNull</span>
+    <span style="color: #b751b6;">@Override</span>
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">CustomViewHolder</span> <span style="color: #a626a4;">onCreateViewHolder</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">parent</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">viewType</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">final</span> <span style="color: #986801;">View</span> <span style="color: #6a1868;">view</span> = LayoutInflater.from<span style="color: #50a14f;">(</span>parent.getContext<span style="color: #b751b6;">()</span><span style="color: #50a14f;">)</span>.inflate<span style="color: #50a14f;">(</span>R.layout.item_layout, parent, <span style="color: #b751b6;">false</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #e45649;">return</span> <span style="color: #e45649;">new</span> <span style="color: #986801;">CustomViewHolder</span><span style="color: #50a14f;">(</span>view<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #b751b6;">@Override</span>
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onBindViewHolder</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">CustomViewHolder</span> <span style="color: #6a1868;">holder</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">position</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        holder.setText<span style="color: #50a14f;">(</span>String.format<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"this is item %d"</span>, data.get<span style="color: #4db5bd;">(</span>position<span style="color: #4db5bd;">)</span><span style="color: #b751b6;">)</span><span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #b751b6;">@Override</span>
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">int</span> <span style="color: #a626a4;">getItemCount</span><span style="color: #a626a4;">()</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> data.size<span style="color: #50a14f;">()</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<p>
+由于上面的代码使用到了 <code>ViewHolder</code> ，也要看下面的代码才能理解<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org3add9b4" class="outline-4">
-<h4 id="org3add9b4">XML 布局</h4>
-<div class="outline-text-4" id="text-org3add9b4">
+<div id="outline-container-org094db3c" class="outline-3">
+<h3 id="org094db3c"><span class="section-number-3">1.3</span> 有关ViewHolder</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<code>ViewHolder</code> 用来表示一个布局，因此需要为其设置布局和类代码，这里随便布局一下<br />
+</p>
 <div class="org-src-container">
-<pre class="src src-xml">&lt;<span style="color: #a626a4;">LinearLayout</span>
-    <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">android</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res/android"</span>
-    <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">app</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res-auto"</span>
-    <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">tools</span>=<span style="color: #50a14f;">"http://schemas.android.com/tools"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>
-    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">padding</span>=<span style="color: #50a14f;">"10dp"</span>
-    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">orientation</span>=<span style="color: #50a14f;">"vertical"</span>
-    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>&gt;
-
-  &lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>&gt;
-    &lt;<span style="color: #a626a4;">TextView</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"wrap_content"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">text</span>=<span style="color: #50a14f;">"Name: "</span>/&gt;
-
-    &lt;<span style="color: #a626a4;">TextView</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">id</span>=<span style="color: #50a14f;">"@+id/sname"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">text</span>=<span style="color: #50a14f;">"hello"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"wrap_content"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>/&gt;
-  &lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
-
-  &lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>&gt;
-    &lt;<span style="color: #a626a4;">TextView</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"wrap_content"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">text</span>=<span style="color: #50a14f;">"Age: "</span>/&gt;
-
-    &lt;<span style="color: #a626a4;">TextView</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">id</span>=<span style="color: #50a14f;">"@+id/sage"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">text</span>=<span style="color: #50a14f;">"hello"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_marginLeft</span>=<span style="color: #50a14f;">"13dp"</span>
-              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"wrap_content"</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>/&gt;
-  &lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
+<pre class="src src-xml">&lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">android</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res/android"</span>
+              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>&gt;
+  &lt;<span style="color: #a626a4;">TextView</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">id</span>=<span style="color: #50a14f;">"@+id/textview"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>/&gt;
 &lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
 </pre>
 </div>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">CustomViewHolder</span> <span style="color: #e45649;">extends</span> <span style="color: #b751b6;">RecyclerView</span>.<span style="color: #986801;">ViewHolder</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">TextView</span> <span style="color: #6a1868;">textView</span>;
+    <span style="color: #e45649;">public</span> <span style="color: #a626a4;">CustomViewHolder</span><span style="color: #a626a4;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">View</span> <span style="color: #6a1868;">itemView</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">super</span><span style="color: #50a14f;">(</span>itemView<span style="color: #50a14f;">)</span>;
+        textView = itemView.findViewById<span style="color: #50a14f;">(</span>R.id.textview<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">setText</span><span style="color: #a626a4;">(</span><span style="color: #986801;">String</span> <span style="color: #6a1868;">text</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        textView.setText<span style="color: #50a14f;">(</span>text<span style="color: #50a14f;">)</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
 </div>
-</div>
-</div>
-</div>
-<div id="outline-container-orgabacba6" class="outline-2">
-<h2 id="orgabacba6">LayoutManager</h2>
-<div class="outline-text-2" id="text-orgabacba6">
+
 <p>
-就是对所有渲染后的 <b>View</b> 进行布局，没什么好说的，这个比较简单，直接用就行了<br />
+在 <code>ViewHolder</code> 中，我们<br />
 </p>
+<ul class="org-ul">
+<li>为其定义了一个私有变量 <code>TextView</code><br /></li>
+<li>定义了一个 <code>setText</code> 来设置 <code>TextView</code> 的显示<br /></li>
+<li>外部可以使用 <code>setText</code> 来设置布局的显示，看 <code>Adapter</code> 的代码<br /></li>
+</ul>
+
+<p>
+至此，相关代码已完成编写，可以运行了  </p>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2021-11-23 二 19:25</p>
+<p class="date">Created: 2022-02-24 四 23:02</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

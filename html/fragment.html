@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-24 四 23:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Android Fragment 简单使用</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/home/steiner/ChiniBlogs/html/css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Android Fragment 简单使用</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgce390ff">1. Fragment</a>
+<ul>
+<li><a href="#org206cc04">1.1. 什么是 Fragment</a></li>
+<li><a href="#org987f78d">1.2. Fragment 有什么用</a></li>
+<li><a href="#orgf57f025">1.3. 如何使用 Fragment</a>
+<ul>
+<li><a href="#org0da084a">1.3.1. 相关回调</a></li>
+<li><a href="#org933baa0">1.3.2. 静态添加 Fragment</a></li>
+<li><a href="#org2e8d026">1.3.3. 动态添加 Fragment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgce390ff" class="outline-2">
+<h2 id="orgce390ff"><span class="section-number-2">1</span> Fragment</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这篇笔记大部分参考自 <a href="https://www.jianshu.com/p/2bf21cefb763">这篇教程</a><br />
+</p>
+</div>
+<div id="outline-container-org206cc04" class="outline-3">
+<h3 id="org206cc04"><span class="section-number-3">1.1</span> 什么是 Fragment</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<code>Fragment</code> 是 <code>Activity</code> 界面中的一部分，可理解为模块化的 <code>Activity</code><br />
+</p>
+<ol class="org-ol">
+<li><code>Fragment</code> 不能独立存在，必须嵌入到 <code>Activity</code> 中<br /></li>
+<li><code>Fragment</code> 具有自己的生命周期，接收它自己的事件，并可以在 <code>Activity</code> 运行时被添加或删除<br /></li>
+<li><code>Fragment</code> 的生命周期直接受所在的Activity的影响。如：当 <code>Activity</code> 暂停时，它拥有的所有 <code>Fragment</code> 们都暂停<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org987f78d" class="outline-3">
+<h3 id="org987f78d"><span class="section-number-3">1.2</span> Fragment 有什么用</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+支持动态，灵活的界面设计<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgf57f025" class="outline-3">
+<h3 id="orgf57f025"><span class="section-number-3">1.3</span> 如何使用 Fragment</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org0da084a" class="outline-4">
+<h4 id="org0da084a"><span class="section-number-4">1.3.1</span> 相关回调</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<ol class="org-ol">
+<li><code>onAttach</code> 方法<br />
+Fragment和Activity建立关联的时候调用（获得activity的传递的值）<br /></li>
+<li><code>onCreateView</code> 方法<br />
+为Fragment创建视图（加载布局）时调用（给当前的fragment绘制UI布局，可以使用线程更新UI）<br /></li>
+<li><code>onActivityCreated</code> 方法<br />
+当Activity中的onCreate方法执行完后调用（表示activity执行oncreate方法完成了的时候会调用此方法）<br /></li>
+<li><code>onDestroyView</code> 方法<br />
+Fragment中的布局被移除时调用（表示fragment销毁相关联的UI布局）<br /></li>
+<li><code>onDetach</code> 方法<br />
+Fragment和Activity解除关联的时候调用（脱离activity）<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org933baa0" class="outline-4">
+<h4 id="org933baa0"><span class="section-number-4">1.3.2</span> 静态添加 Fragment</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+首先需要创建一个 <code>fragment</code> 类，并为其创建布局文件 <code>example_fragment.xml</code> ，再将其配置到 <code>activity_main.xml</code> 中<br />
+</p>
+<ol class="org-ol">
+<li><p>
+<code>example_fragment.xml</code> 布局文件<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">android</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">tools</span>=<span style="color: #50a14f;">"http://schemas.android.com/tools"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">orientation</span>=<span style="color: #50a14f;">"vertical"</span> &gt;
+
+    &lt;<span style="color: #a626a4;">TextView</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">text</span>=<span style="color: #50a14f;">"@string/example_fragment"</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"wrap_content"</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"wrap_content"</span>/&gt;
+
+&lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
+</pre>
+</div></li>
+
+<li><p>
+<code>FragmentLayoutTest.java</code> 类文件<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">FragmentLayoutTest</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">Fragment</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #b751b6;">@Override</span>
+    <span style="color: #e45649;">public</span> <span style="color: #986801;">View</span> <span style="color: #a626a4;">onCreateView</span><span style="color: #a626a4;">(</span><span style="color: #986801;">LayoutInflater</span> <span style="color: #6a1868;">inflater</span>, <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">container</span>,
+                             <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+
+        <span style="color: #e45649;">return</span> inflater.inflate<span style="color: #50a14f;">(</span>R.layout.example_fragment, container, <span style="color: #b751b6;">false</span><span style="color: #50a14f;">)</span>;
+        <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#23558;example_fragment.xml&#20316;&#20026;&#35813;Fragment&#30340;&#24067;&#23616;&#25991;&#20214;</span>
+        <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#21363;&#30456;&#24403;&#20110;FragmentLayoutTest&#30452;&#25509;&#35843;&#29992;example_fragment.xml&#26469;&#26174;&#31034;&#21040;Fragment&#20013;</span>
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div></li>
+<li><p>
+在 <code>activity_main</code> 布局文件中,<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;?<span style="color: #e45649;">xml</span> <span style="color: #84888b; font-style: italic;">version="1.0" encoding="utf-8"</span>?&gt;
+&lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">android</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res/android"</span>
+              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>
+              <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">baselineAligned</span>=<span style="color: #50a14f;">"false"</span>&gt;
+  &lt;<span style="color: #a626a4;">fragment</span> <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">name</span>=<span style="color: #50a14f;">"com.example.criminalintent.FragmentLayoutTest"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">id</span>=<span style="color: #50a14f;">"@+id/list"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_weight</span>=<span style="color: #50a14f;">"1"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+            <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>/&gt;
+&lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org2e8d026" class="outline-4">
+<h4 id="org2e8d026"><span class="section-number-4">1.3.3</span> 动态添加 Fragment</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+或者，我们在运行时为主界面添加 <code>fragment</code> ，这时我们不用在 <code>activity_main.xml</code> 布局中声明 <code>fragment</code><br />
+而是使用三个步骤添加<br />
+</p>
+<ol class="org-ol">
+<li>获取 <code>FragmentManager</code><br /></li>
+<li>获取 <code>FragmentTransaction</code><br /></li>
+<li>创建 <code>Fragment</code><br /></li>
+<li>添加 <code>Fragment</code><br /></li>
+</ol>
+
+<p>
+不过我们先调整下 <code>activity_main.xml</code> 布局<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #a626a4;">LinearLayout</span> <span style="color: #a626a4;">xmlns</span>:<span style="color: #6a1868;">android</span>=<span style="color: #50a14f;">"http://schemas.android.com/apk/res/android"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>
+    <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">orientation</span>=<span style="color: #50a14f;">"vertical"</span> &gt;
+
+    &lt;<span style="color: #a626a4;">FrameLayout</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">id</span>=<span style="color: #50a14f;">"@+id/fragment_container"</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_width</span>=<span style="color: #50a14f;">"match_parent"</span>
+        <span style="color: #a626a4;">android</span>:<span style="color: #6a1868;">layout_height</span>=<span style="color: #50a14f;">"match_parent"</span>/&gt;
+
+&lt;/<span style="color: #a626a4;">LinearLayout</span>&gt;
+</pre>
+</div>
+
+<p>
+在主界面的类文件中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #b751b6;">@Override</span>
+<span style="color: #e45649;">protected</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onCreate</span><span style="color: #4078f2;">(</span><span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">super</span>.onCreate<span style="color: #a626a4;">(</span>savedInstanceState<span style="color: #a626a4;">)</span>;
+    setContentView<span style="color: #a626a4;">(</span>R.layout.fragment_transaction_test<span style="color: #a626a4;">)</span>;
+    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#27493;&#39588;1&#65306;&#33719;&#21462;FragmentManager</span>
+    <span style="color: #986801;">FragmentManager</span> <span style="color: #6a1868;">fragmentManager</span> = getFragmentManager<span style="color: #a626a4;">()</span>;
+    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#27493;&#39588;2&#65306;&#33719;&#21462;FragmentTransaction        </span>
+    <span style="color: #986801;">FragmentTransaction</span> <span style="color: #6a1868;">fragmentTransaction</span> = fragmentManager.beginTransaction<span style="color: #a626a4;">()</span>;
+
+    <span style="color: #986801;">FragmentLayoutTest</span> <span style="color: #6a1868;">fragment</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">FragmentLayoutTest</span><span style="color: #a626a4;">()</span>;
+    fragmentTransaction.add<span style="color: #a626a4;">(</span>R.id.fragment_container, fragment<span style="color: #a626a4;">)</span>;
+    fragmentTransaction.commit<span style="color: #a626a4;">()</span>;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2022-02-24 四 23:02</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
