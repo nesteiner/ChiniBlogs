@@ -1,5 +1,4 @@
 *.doc
 *.docx
-project.org
-index.org
 test/
+!/css/*
