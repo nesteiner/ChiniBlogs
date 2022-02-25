@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-19 六 19:22 -->
+<!-- 2022-02-25 五 07:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Symbolics.jl 简单使用</title>
@@ -193,7 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/home/steiner/ChiniBlogs/html/css/org.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -263,7 +263,7 @@
 生成变量符号，只需要<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #66d9ef;">@variables</span> x y
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@variables</span> x y
 </pre>
 </div>
 
@@ -299,8 +299,8 @@
 或者我们还可以这样声明 <code>p</code><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #66d9ef;">f</span><span style="color: #ae81ff;">(</span>x<span style="color: #ae81ff;">)</span> = -16x^2 + 100
-p = f<span style="color: #ae81ff;">(</span>x<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia"><span style="color: #a626a4;">f</span><span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span> = -16x^2 + 100
+p = f<span style="color: #4078f2;">(</span>x<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 </div>
@@ -312,7 +312,7 @@ p = f<span style="color: #ae81ff;">(</span>x<span style="color: #ae81ff;">)</spa
 写好了表达式还不够，有时候我们将其中一个函数看作另一个函数的参数，比如 <code>f(g(x))</code><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">substitude<span style="color: #ae81ff;">(</span>p, x =&gt; x^2<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">substitude<span style="color: #4078f2;">(</span>p, x =&gt; x^2<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 <p>
@@ -329,13 +329,13 @@ p = f<span style="color: #ae81ff;">(</span>x<span style="color: #ae81ff;">)</spa
 有一个 <code>expand</code> 参数，为 <code>true</code> 时展开表达式，来看一个例子<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">  <span style="color: #66d9ef;">@variables</span> a b c x
+<pre class="src src-julia">  <span style="color: #4078f2; font-weight: bold;">@variables</span> a b c x
   quad = a*x^2 + b*x + c
   quad + quad^2 - quad^3
 
-  simpify<span style="color: #ae81ff;">(</span>quad, expand=<span style="color: #fd971f;">true</span><span style="color: #ae81ff;">)</span>
-<span style="color: #49483e;"># </span><span style="color: #75715e;">julia&gt; simplify(ans,expand=true)</span>
-<span style="color: #49483e;"># </span><span style="color: #75715e;">c + b*x + c^2 + (a + b^2)*(x^2) + (a^2)*(x^4) + 2a*c*(x^2) + 2b*c*x + 2a*b*(x^3) - (c^3) - (a^3)*(x^6) - (b^3)*(x^3) - 3a*(c^2)*(x^2) - 3a*(b^2)*(x^4) - 3b*x*(c^2) - 3c*(b^2)*(x^2) - 3c*(a^2)*(x^4) - 3b*(a^2)*(x^5) - 6a*b*c*(x^3)</span>
+  simpify<span style="color: #4078f2;">(</span>quad, expand=<span style="color: #b751b6;">true</span><span style="color: #4078f2;">)</span>
+<span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">julia&gt; simplify(ans,expand=true)</span>
+<span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">c + b*x + c^2 + (a + b^2)*(x^2) + (a^2)*(x^4) + 2a*c*(x^2) + 2b*c*x + 2a*b*(x^3) - (c^3) - (a^3)*(x^6) - (b^3)*(x^3) - 3a*(c^2)*(x^2) - 3a*(b^2)*(x^4) - 3b*x*(c^2) - 3c*(b^2)*(x^2) - 3c*(a^2)*(x^4) - 3b*(a^2)*(x^5) - 6a*b*c*(x^3)</span>
 </pre>
 </div>
 </div>
@@ -347,8 +347,8 @@ p = f<span style="color: #ae81ff;">(</span>x<span style="color: #ae81ff;">)</spa
 与求导相关的函数是 <code>Differential</code> ，中文意思 <b>微分</b><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #66d9ef;">@variables</span> t
-D = Differential<span style="color: #ae81ff;">(</span>t<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia"><span style="color: #4078f2; font-weight: bold;">@variables</span> t
+D = Differential<span style="color: #4078f2;">(</span>t<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 <p>
@@ -357,14 +357,14 @@ D = Differential<span style="color: #ae81ff;">(</span>t<span style="color: #ae81
 </p>
 <div class="org-src-container">
 <pre class="src src-julia">z = t + t^2
-D<span style="color: #ae81ff;">(</span>z<span style="color: #ae81ff;">)</span>
+D<span style="color: #4078f2;">(</span>z<span style="color: #4078f2;">)</span>
 </pre>
 </div>
 <p>
 然而求导部分是惰性的，怕消耗太多时间，需要调用 <code>expand_derivatives</code> 来获取表达式<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">expand_derivatives<span style="color: #ae81ff;">(</span>D<span style="color: #66d9ef;">(</span>z<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span> <span style="color: #49483e;"># </span><span style="color: #75715e;">1 + 2t</span>
+<pre class="src src-julia">expand_derivatives<span style="color: #4078f2;">(</span>D<span style="color: #a626a4;">(</span>z<span style="color: #a626a4;">)</span><span style="color: #4078f2;">)</span> <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">1 + 2t</span>
 </pre>
 </div>
 </div>
@@ -386,9 +386,9 @@ D<span style="color: #ae81ff;">(</span>z<span style="color: #ae81ff;">)</span>
 我们直接调用 <code>p(1)</code> 是会报错的，我们需要根据他来生成一个函数调用<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">f_expr = build_function<span style="color: #ae81ff;">(</span>p, x<span style="color: #ae81ff;">)</span>
-f_func = eval<span style="color: #ae81ff;">(</span>f_expr<span style="color: #ae81ff;">)</span>
-f_func<span style="color: #ae81ff;">(</span>1<span style="color: #ae81ff;">)</span> <span style="color: #49483e;"># </span><span style="color: #75715e;">84</span>
+<pre class="src src-julia">f_expr = build_function<span style="color: #4078f2;">(</span>p, x<span style="color: #4078f2;">)</span>
+f_func = eval<span style="color: #4078f2;">(</span>f_expr<span style="color: #4078f2;">)</span>
+f_func<span style="color: #4078f2;">(</span>1<span style="color: #4078f2;">)</span> <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">84</span>
 </pre>
 </div>
 <ol class="org-ol">
@@ -423,7 +423,7 @@ f_func<span style="color: #ae81ff;">(</span>1<span style="color: #ae81ff;">)</sp
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2022-02-19 六 19:22</p>
+<p class="date">Created: 2022-02-25 五 07:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
