@@ -120,3 +120,32 @@
 </tbody>
 </table>
 
+
+# 学习笔记
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">文件名</td>
+<td class="org-left">分类</td>
+<td class="org-left">标签</td>
+</tr>
+
+
+<tr>
+<td class="org-left"><a href="./random-event">条件概率与全概率公式推导</a></td>
+<td class="org-left">概率论</td>
+<td class="org-left">随机事件</td>
+</tr>
+</tbody>
+</table>
+
