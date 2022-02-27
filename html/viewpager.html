@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-27 日 18:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ViewPager 简单使用</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">ViewPager 简单使用</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org54e0cbb">1. ViewPager</a>
+<ul>
+<li><a href="#orgb1d9755">1.1. Activity 布局</a></li>
+<li><a href="#orgd7e0e91">1.2. Adapter 介绍</a>
+<ul>
+<li><a href="#orgd568b5c">1.2.1. FragmentPagerAdapter</a></li>
+<li><a href="#orga4c8dac">1.2.2. FragmentStatePagerAdapter</a></li>
+<li><a href="#orga507695">1.2.3. 实例</a></li>
+</ul>
+</li>
+<li><a href="#org1e44955">1.3. Fragment 布局</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org54e0cbb" class="outline-2">
+<h2 id="org54e0cbb"><span class="section-number-2">1</span> ViewPager</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>ViewPager</code> 简单来说就是一个能滑动切换视图的控件，由一个 <code>Activity</code> 包裹，总体结构是<br />
+</p>
+<ul class="org-ul">
+<li><code>Activity</code><br />
+<ul class="org-ul">
+<li><b>adapter</b><br />
+<ul class="org-ul">
+<li><code>fragment</code><br /></li>
+<li><code>fragment</code><br /></li>
+<li><code>fragment</code><br /></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>
+其中 <code>Activity</code> 通过 <b>adapter</b> 来操作 <code>fragment</code> 显示<br />
+</p>
+</div>
+<div id="outline-container-orgb1d9755" class="outline-3">
+<h3 id="orgb1d9755"><span class="section-number-3">1.1</span> Activity 布局</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<code>activity_pageview.xml</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;<span style="color: #66d9ef;">RelativeLayout</span> <span style="color: #a1efe4;">xmlns</span>:<span style="color: #f92672;">android</span>=<span style="color: #a6e22e;">"http://schemas.android.com/apk/res/android"</span>
+                <span style="color: #a1efe4;">xmlns</span>:<span style="color: #f92672;">tools</span>=<span style="color: #a6e22e;">"http://schemas.android.com/tools"</span>
+                <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_width</span>=<span style="color: #a6e22e;">"match_parent"</span>
+                <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_height</span>=<span style="color: #a6e22e;">"match_parent"</span> &gt;
+
+  &lt;<span style="color: #66d9ef;">androidx.viewpager.widget.ViewPager</span>
+      <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">id</span>=<span style="color: #a6e22e;">"@+id/viewpager"</span>
+      <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_width</span>=<span style="color: #a6e22e;">"fill_parent"</span>
+      <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_height</span>=<span style="color: #a6e22e;">"fill_parent"</span> /&gt;
+
+&lt;/<span style="color: #66d9ef;">RelativeLayout</span>&gt;
+
+</pre>
+</div>
+
+<p>
+<code>PageViewActivity.java</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">PageViewActivity</span> <span style="color: #ae81ff;">extends</span> <span style="color: #f4bf75;">FragmentActivity</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #f4bf75;">MyPageAdapter</span> <span style="color: #f92672;">pageAdapter</span>;
+
+    <span style="color: #fd971f;">@Override</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">void</span> <span style="color: #66d9ef;">onCreate</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">Bundle</span> <span style="color: #f92672;">savedInstanceState</span><span style="color: #66d9ef;">)</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #ae81ff;">super</span>.onCreate<span style="color: #a1efe4;">(</span>savedInstanceState<span style="color: #a1efe4;">)</span>;
+        setContentView<span style="color: #a1efe4;">(</span>R.layout.activity_page_view<span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #f4bf75;">List</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #a1efe4;">&gt;</span> <span style="color: #f92672;">fragments</span> = getFragments<span style="color: #a1efe4;">()</span>;
+
+        pageAdapter = <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">MyPageAdapter</span><span style="color: #a1efe4;">(</span>getSupportFragmentManager<span style="color: #a6e22e;">()</span>, fragments<span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #f4bf75;">ViewPager</span> <span style="color: #f92672;">pager</span> = <span style="color: #a1efe4;">(</span><span style="color: #f4bf75;">ViewPager</span><span style="color: #a1efe4;">)</span> findViewById<span style="color: #a1efe4;">(</span>R.id.viewpager<span style="color: #a1efe4;">)</span>;
+        pager.setAdapter<span style="color: #a1efe4;">(</span>pageAdapter<span style="color: #a1efe4;">)</span>;
+
+    <span style="color: #66d9ef;">}</span>
+
+    <span style="color: #ae81ff;">private</span> <span style="color: #f4bf75;">List</span><span style="color: #66d9ef;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #66d9ef;">&gt;</span> <span style="color: #66d9ef;">getFragments</span><span style="color: #66d9ef;">()</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #f4bf75;">List</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #a1efe4;">&gt;</span> <span style="color: #f92672;">fList</span> = <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">ArrayList</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #a1efe4;">&gt;()</span>;
+
+        fList.add<span style="color: #a1efe4;">(</span>MyFragment.newInstance<span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"Fragment 1"</span><span style="color: #a6e22e;">)</span><span style="color: #a1efe4;">)</span>;
+        fList.add<span style="color: #a1efe4;">(</span>MyFragment.newInstance<span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"Fragment 2"</span><span style="color: #a6e22e;">)</span><span style="color: #a1efe4;">)</span>;
+        fList.add<span style="color: #a1efe4;">(</span>MyFragment.newInstance<span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"Fragment 3"</span><span style="color: #a6e22e;">)</span><span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #ae81ff;">return</span> fList;
+    <span style="color: #66d9ef;">}</span>
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd7e0e91" class="outline-3">
+<h3 id="orgd7e0e91"><span class="section-number-3">1.2</span> Adapter 介绍</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<code>Adapter</code> 虽然有三种，但这里只需要介绍 <code>FragmentPagerAdapter</code> 与 <code>FragmentStatePagerAdapter</code> 即可，他们两个需要重写的方法是一致的<br />
+</p>
+</div>
+<div id="outline-container-orgd568b5c" class="outline-4">
+<h4 id="orgd568b5c"><span class="section-number-4">1.2.1</span> FragmentPagerAdapter</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ul class="org-ul">
+<li><code>FragmentPagerAdapter</code> 是 <code>PagerAdapter</code> 中的其中一种实现<br /></li>
+<li>它将每一个页面表示为一个 <code>Fragment</code> ，并且每一个 <code>Fragment</code> 都将会保存到 <code>fragment manager</code> 当中<br /></li>
+<li>这种pager十分适用于有一些静态 <code>fragment</code> ，例如一组 <code>tabs</code> 的时候使用<br /></li>
+<li>每个页面对应的 <code>Fragment</code> 当用户可以访问的时候会一直存在内存中，但是，当这个页面不可见的时候，view hierarchy将会被销毁<br /></li>
+<li>这样子会导致应用程序占有太多资源。当页面数量比较大的时候，建议使用 <code>FragmentStatePagerAdapter</code><br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga4c8dac" class="outline-4">
+<h4 id="orga4c8dac"><span class="section-number-4">1.2.2</span> FragmentStatePagerAdapter</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li>当使用FragmentStatePagerAdapter 时，实现将只保留当前页面，当页面离开视线后，就会被消除，释放其资源<br /></li>
+<li>而在页面需要显示时，生成新的页面<br /></li>
+<li>这么实现的好处就是当拥有大量的页面时，不必在内存中占用大量的内存<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga507695" class="outline-4">
+<h4 id="orga507695"><span class="section-number-4">1.2.3</span> 实例</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+<code>MyPageAdapter.java</code><br />
+</p>
+
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">MyPageAdapter</span> <span style="color: #ae81ff;">extends</span> <span style="color: #f4bf75;">FragmentStatePagerAdapter</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #ae81ff;">private</span> <span style="color: #f4bf75;">List</span><span style="color: #66d9ef;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #66d9ef;">&gt;</span> <span style="color: #f92672;">fragments</span>;
+
+    <span style="color: #ae81ff;">public</span> <span style="color: #66d9ef;">MyPageAdapter</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">FragmentManager</span> <span style="color: #f92672;">fm</span>, <span style="color: #f4bf75;">List</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">Fragment</span><span style="color: #a1efe4;">&gt;</span> <span style="color: #f92672;">fragments</span><span style="color: #66d9ef;">)</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #ae81ff;">super</span><span style="color: #a1efe4;">(</span>fm<span style="color: #a1efe4;">)</span>;
+        <span style="color: #ae81ff;">this</span>.fragments = fragments;
+    <span style="color: #66d9ef;">}</span>
+    <span style="color: #fd971f;">@Override</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">Fragment</span> <span style="color: #66d9ef;">getItem</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">int</span> <span style="color: #f92672;">position</span><span style="color: #66d9ef;">)</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #ae81ff;">return</span> <span style="color: #ae81ff;">this</span>.fragments.get<span style="color: #a1efe4;">(</span>position<span style="color: #a1efe4;">)</span>;
+    <span style="color: #66d9ef;">}</span>
+
+    <span style="color: #fd971f;">@Override</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">int</span> <span style="color: #66d9ef;">getCount</span><span style="color: #66d9ef;">()</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #ae81ff;">return</span> <span style="color: #ae81ff;">this</span>.fragments.size<span style="color: #a1efe4;">()</span>;
+    <span style="color: #66d9ef;">}</span>
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e44955" class="outline-3">
+<h3 id="org1e44955"><span class="section-number-3">1.3</span> Fragment 布局</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<code>fragment_layout.xml</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-xml">&lt;?<span style="color: #ae81ff;">xml</span> <span style="color: #a59f85;">version="1.0" encoding="utf-8"</span>?&gt;
+&lt;<span style="color: #66d9ef;">TextView</span> <span style="color: #a1efe4;">xmlns</span>:<span style="color: #f92672;">android</span>=<span style="color: #a6e22e;">"http://schemas.android.com/apk/res/android"</span>
+          <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">id</span>=<span style="color: #a6e22e;">"@+id/tv_bg"</span>
+          <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_width</span>=<span style="color: #a6e22e;">"match_parent"</span>
+          <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">layout_height</span>=<span style="color: #a6e22e;">"match_parent"</span>
+          <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">gravity</span>=<span style="color: #a6e22e;">"center_horizontal"</span>
+          <span style="color: #a1efe4;">android</span>:<span style="color: #f92672;">paddingTop</span>=<span style="color: #a6e22e;">"100dp"</span>&gt;
+
+&lt;/<span style="color: #66d9ef;">TextView</span>&gt;
+</pre>
+</div>
+
+<p>
+<code>MyFragment.java</code><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">MyFragment</span> <span style="color: #ae81ff;">extends</span> <span style="color: #f4bf75;">Fragment</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">static</span> <span style="color: #ae81ff;">final</span> <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">EXTRA_MESSAGE</span> = <span style="color: #a6e22e;">"EXTRA_MESSAGE"</span>;
+
+    <span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">static</span> <span style="color: #ae81ff;">final</span> <span style="color: #f4bf75;">MyFragment</span> <span style="color: #66d9ef;">newInstance</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">String</span> <span style="color: #f92672;">message</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #66d9ef;">{</span>
+        <span style="color: #f4bf75;">MyFragment</span> <span style="color: #f92672;">f</span> = <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">MyFragment</span><span style="color: #a1efe4;">()</span>;
+        <span style="color: #f4bf75;">Bundle</span> <span style="color: #f92672;">bdl</span> = <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">Bundle</span><span style="color: #a1efe4;">(</span>1<span style="color: #a1efe4;">)</span>;
+        bdl.putString<span style="color: #a1efe4;">(</span>EXTRA_MESSAGE, message<span style="color: #a1efe4;">)</span>;
+        f.setArguments<span style="color: #a1efe4;">(</span>bdl<span style="color: #a1efe4;">)</span>;
+        <span style="color: #ae81ff;">return</span> f;
+    <span style="color: #66d9ef;">}</span>
+
+    <span style="color: #fd971f;">@Override</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">View</span> <span style="color: #66d9ef;">onCreateView</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">LayoutInflater</span> <span style="color: #f92672;">inflater</span>, <span style="color: #f4bf75;">ViewGroup</span> <span style="color: #f92672;">container</span>,
+                             <span style="color: #f4bf75;">Bundle</span> <span style="color: #f92672;">savedInstanceState</span><span style="color: #66d9ef;">)</span> <span style="color: #66d9ef;">{</span>
+        <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">message</span> = getArguments<span style="color: #a1efe4;">()</span>.getString<span style="color: #a1efe4;">(</span>EXTRA_MESSAGE<span style="color: #a1efe4;">)</span>;
+        <span style="color: #f4bf75;">View</span> <span style="color: #f92672;">v</span> = inflater.inflate<span style="color: #a1efe4;">(</span>R.layout.myfragment_layout, container, <span style="color: #fd971f;">false</span><span style="color: #a1efe4;">)</span>;
+        <span style="color: #f4bf75;">TextView</span> <span style="color: #f92672;">messageTextView</span> = <span style="color: #a1efe4;">(</span><span style="color: #f4bf75;">TextView</span><span style="color: #a1efe4;">)</span>v.findViewById<span style="color: #a1efe4;">(</span>R.id.textView<span style="color: #a1efe4;">)</span>;
+        messageTextView.setText<span style="color: #a1efe4;">(</span>message<span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #ae81ff;">return</span> v;
+    <span style="color: #66d9ef;">}</span>
+
+<span style="color: #ae81ff;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2022-02-27 日 18:36</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
