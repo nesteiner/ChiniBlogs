@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-03-04 五 16:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Android Room 简单使用</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Android Room 简单使用</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge8a68a9">1. Android Room 简单使用</a>
+<ul>
+<li><a href="#org28e30a2">1.1. 说明</a></li>
+<li><a href="#org918f5f1">1.2. 添加依赖</a></li>
+<li><a href="#org3a11100">1.3. 配置类</a>
+<ul>
+<li><a href="#org0ca7472">1.3.1. 数据实体</a></li>
+<li><a href="#org93f3ad5">1.3.2. 数据访问对象</a></li>
+<li><a href="#orge200fa1">1.3.3. 数据库类</a></li>
+</ul>
+</li>
+<li><a href="#org1f1cbfe">1.4. 投入使用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge8a68a9" class="outline-2">
+<h2 id="orge8a68a9"><span class="section-number-2">1</span> Android Room 简单使用</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org28e30a2" class="outline-3">
+<h3 id="org28e30a2"><span class="section-number-3">1.1</span> 说明</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+这次没有用内置的 <code>SQLite</code> 库，而是直接使用了 <code>Room</code> ，原因之一是 <code>SQLite</code> 在创建数据库的时候出错了，排查不到哪一步出错<br />
+二是这个 <code>Room</code> 与 <b>Flutter</b> 中的 <code>floor</code> 框架非常相似，可以无缝迁移<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org918f5f1" class="outline-3">
+<h3 id="org918f5f1"><span class="section-number-3">1.2</span> 添加依赖</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+在 <code>src/build.gradle</code> 中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-groovy">dependencies <span style="color: #ae81ff;">{</span>
+    <span style="color: #ae81ff;">def</span> <span style="color: #f92672;">room_version</span> = <span style="color: #a6e22e;">"2.4.2"</span>
+    implementation <span style="color: #a6e22e;">"androidx.room:room-runtime:</span><span style="color: #f92672;">$room_version</span><span style="color: #a6e22e;">"</span>
+    annotationProcessor <span style="color: #a6e22e;">"androidx.room:room-compiler:</span><span style="color: #f92672;">$room_version</span><span style="color: #a6e22e;">"</span>
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a11100" class="outline-3">
+<h3 id="org3a11100"><span class="section-number-3">1.3</span> 配置类</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<code>Room</code> 包含三个主要组件<br />
+</p>
+<ul class="org-ul">
+<li>数据库类<br /></li>
+<li>数据实体<br /></li>
+<li>数据访问对象(DAO)<br /></li>
+</ul>
+<p>
+他们的定义如下<br />
+</p>
+</div>
+<div id="outline-container-org0ca7472" class="outline-4">
+<h4 id="org0ca7472"><span class="section-number-4">1.3.1</span> 数据实体</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #fd971f;">@Entity</span>
+<span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">User</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #fd971f;">@PrimaryKey</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">int</span> <span style="color: #f92672;">uid</span>;
+
+    <span style="color: #fd971f;">@ColumnInfo</span><span style="color: #66d9ef;">(</span>name = <span style="color: #a6e22e;">"first_name"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">firstName</span>;
+
+    <span style="color: #fd971f;">@ColumnInfo</span><span style="color: #66d9ef;">(</span>name = <span style="color: #a6e22e;">"last_name"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">lastName</span>;
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org93f3ad5" class="outline-4">
+<h4 id="org93f3ad5"><span class="section-number-4">1.3.2</span> 数据访问对象</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #fd971f;">@Dao</span>
+<span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">interface</span> <span style="color: #f4bf75;">UserDao</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #fd971f;">@Query</span><span style="color: #66d9ef;">(</span><span style="color: #a6e22e;">"SELECT * FROM user"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #f4bf75;">List</span><span style="color: #66d9ef;">&lt;</span><span style="color: #f4bf75;">User</span><span style="color: #66d9ef;">&gt;</span> <span style="color: #66d9ef;">getAll</span><span style="color: #66d9ef;">()</span>;
+
+    <span style="color: #fd971f;">@Query</span><span style="color: #66d9ef;">(</span><span style="color: #a6e22e;">"SELECT * FROM user WHERE uid IN (:userIds)"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #f4bf75;">List</span><span style="color: #66d9ef;">&lt;</span><span style="color: #f4bf75;">User</span><span style="color: #66d9ef;">&gt;</span> <span style="color: #66d9ef;">loadAllByIds</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">int</span><span style="color: #a1efe4;">[]</span> <span style="color: #f92672;">userIds</span><span style="color: #66d9ef;">)</span>;
+
+    <span style="color: #fd971f;">@Query</span><span style="color: #66d9ef;">(</span><span style="color: #a6e22e;">"SELECT * FROM user WHERE first_name LIKE :first AND "</span> +
+           <span style="color: #a6e22e;">"last_name LIKE :last LIMIT 1"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #f4bf75;">User</span> <span style="color: #66d9ef;">findByName</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">String</span> <span style="color: #f92672;">first</span>, <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">last</span><span style="color: #66d9ef;">)</span>;
+
+    <span style="color: #fd971f;">@Insert</span>
+    <span style="color: #f4bf75;">void</span> <span style="color: #66d9ef;">insertAll</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">User</span>... <span style="color: #f92672;">users</span><span style="color: #66d9ef;">)</span>;
+
+    <span style="color: #fd971f;">@Delete</span>
+    <span style="color: #f4bf75;">void</span> <span style="color: #66d9ef;">delete</span><span style="color: #66d9ef;">(</span><span style="color: #f4bf75;">User</span> <span style="color: #f92672;">user</span><span style="color: #66d9ef;">)</span>;
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+
+<p>
+注意<br />
+</p>
+<ul class="org-ul">
+<li>他只需要一个接口来表示 <code>DAO</code> 类型，代码会自动生成，不需要担心<br /></li>
+<li>变量名替换用冒号 <code>:</code> <br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge200fa1" class="outline-4">
+<h4 id="orge200fa1"><span class="section-number-4">1.3.3</span> 数据库类</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #fd971f;">@Database</span><span style="color: #ae81ff;">(</span>entities = <span style="color: #66d9ef;">{</span>User.<span style="color: #ae81ff;">class</span><span style="color: #66d9ef;">}</span>, version = 1<span style="color: #ae81ff;">)</span>
+<span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">abstract</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">AppDatabase</span> <span style="color: #ae81ff;">extends</span> <span style="color: #f4bf75;">RoomDatabase</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">abstract</span> <span style="color: #f4bf75;">UserDao</span> <span style="color: #66d9ef;">userDao</span><span style="color: #66d9ef;">()</span>;
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f1cbfe" class="outline-3">
+<h3 id="org1f1cbfe"><span class="section-number-3">1.4</span> 投入使用</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+这里不使用官方教程提供的实例，而是<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #f4bf75;">AppDatabase</span> <span style="color: #f92672;">database</span> = Room.databaseBuilder<span style="color: #ae81ff;">(</span>
+                getApplicationContext<span style="color: #66d9ef;">()</span>,
+                AppDatabase.<span style="color: #ae81ff;">class</span>,
+                <span style="color: #a6e22e;">"test.db"</span><span style="color: #ae81ff;">)</span>
+                .allowMainThreadQueries<span style="color: #ae81ff;">()</span>.build<span style="color: #ae81ff;">()</span>;
+
+<span style="color: #f4bf75;">UserDao</span> <span style="color: #f92672;">userDao</span> = database.userDao<span style="color: #ae81ff;">()</span>;
+</pre>
+</div>
+<p>
+不知道为什么，直接使用 <code>build</code> 方法会产生错误，需要添加一个 <code>allowMainThreadQueries</code> <br />
+另外我们添加了一个 <code>Button</code> 和 <code>TextView</code> 来实现一些交互，简单来说，按钮来添加数据， <code>TextView</code> 来显示数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #f4bf75;">Button</span> <span style="color: #f92672;">button</span> = findViewById<span style="color: #ae81ff;">(</span>R.id.button_add<span style="color: #ae81ff;">)</span>;
+<span style="color: #f4bf75;">TextView</span> <span style="color: #f92672;">textView</span> = findViewById<span style="color: #ae81ff;">(</span>R.id.textView<span style="color: #ae81ff;">)</span>;
+button.setOnClickListener<span style="color: #ae81ff;">(</span>view -&gt; <span style="color: #66d9ef;">{</span>
+        userDao.insertAll<span style="color: #a1efe4;">(</span>
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span>1, <span style="color: #a6e22e;">"hello"</span>, <span style="color: #a6e22e;">"world"</span><span style="color: #a6e22e;">)</span>,
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span>2, <span style="color: #a6e22e;">"fuck"</span>, <span style="color: #a6e22e;">"you"</span><span style="color: #a6e22e;">)</span>,
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span>3, <span style="color: #a6e22e;">"holy"</span>, <span style="color: #a6e22e;">"shit"</span><span style="color: #a6e22e;">)</span>
+                          <span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #f4bf75;">List</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">User</span><span style="color: #a1efe4;">&gt;</span> <span style="color: #f92672;">users</span> = userDao.getAll<span style="color: #a1efe4;">()</span>;
+        textView.setText<span style="color: #a1efe4;">(</span>users.stream<span style="color: #a6e22e;">()</span>.map<span style="color: #a6e22e;">(</span>x -&gt; x.toString<span style="color: #f4bf75;">()</span><span style="color: #a6e22e;">)</span>.collect<span style="color: #a6e22e;">(</span>Collectors.joining<span style="color: #f4bf75;">(</span><span style="color: #a6e22e;">"\n"</span><span style="color: #f4bf75;">)</span><span style="color: #a6e22e;">)</span><span style="color: #a1efe4;">)</span>;
+    <span style="color: #66d9ef;">}</span><span style="color: #ae81ff;">)</span>;
+
+</pre>
+</div>
+<p>
+别忘了给 <code>User</code> 添加构造函数<br />
+</p>
+
+<p>
+现在问题来了，第一次点击按钮是没有问题的，第二次点击就会出错<br />
+这是因为数据库主键重复了，我们重新设置下数据模型类<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #fd971f;">@Entity</span>
+<span style="color: #ae81ff;">public</span> <span style="color: #ae81ff;">class</span> <span style="color: #f4bf75;">User</span> <span style="color: #ae81ff;">{</span>
+    <span style="color: #fd971f;">@PrimaryKey</span><span style="color: #66d9ef;">(</span>autoGenerate = <span style="color: #fd971f;">true</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">Integer</span> <span style="color: #f92672;">uid</span>;
+
+    <span style="color: #fd971f;">@ColumnInfo</span><span style="color: #66d9ef;">(</span>name = <span style="color: #a6e22e;">"first_name"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">firstName</span>;
+
+    <span style="color: #fd971f;">@ColumnInfo</span><span style="color: #66d9ef;">(</span>name = <span style="color: #a6e22e;">"last_name"</span><span style="color: #66d9ef;">)</span>
+    <span style="color: #ae81ff;">public</span> <span style="color: #f4bf75;">String</span> <span style="color: #f92672;">lastName</span>;
+<span style="color: #ae81ff;">}</span>
+</pre>
+</div>
+
+<p>
+像 <code>floor</code> 框架一样，将主键的值设为 <code>null</code> ，程序会在数据库中自动添加主键，这样以后修改关于添加的代码<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java">button.setOnClickListener<span style="color: #ae81ff;">(</span>view -&gt; <span style="color: #66d9ef;">{</span>
+        userDao.insertAll<span style="color: #a1efe4;">(</span>
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"hello"</span>, <span style="color: #a6e22e;">"world"</span><span style="color: #a6e22e;">)</span>,
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"fuck"</span>, <span style="color: #a6e22e;">"you"</span><span style="color: #a6e22e;">)</span>,
+                          <span style="color: #ae81ff;">new</span> <span style="color: #f4bf75;">User</span><span style="color: #a6e22e;">(</span><span style="color: #a6e22e;">"holy"</span>, <span style="color: #a6e22e;">"shit"</span><span style="color: #a6e22e;">)</span>
+                          <span style="color: #a1efe4;">)</span>;
+
+        <span style="color: #f4bf75;">List</span><span style="color: #a1efe4;">&lt;</span><span style="color: #f4bf75;">User</span><span style="color: #a1efe4;">&gt;</span> <span style="color: #f92672;">users</span> = userDao.getAll<span style="color: #a1efe4;">()</span>;
+        textView.setText<span style="color: #a1efe4;">(</span>users.stream<span style="color: #a6e22e;">()</span>.map<span style="color: #a6e22e;">(</span>x -&gt; x.toString<span style="color: #f4bf75;">()</span><span style="color: #a6e22e;">)</span>.collect<span style="color: #a6e22e;">(</span>Collectors.joining<span style="color: #f4bf75;">(</span><span style="color: #a6e22e;">"\n"</span><span style="color: #f4bf75;">)</span><span style="color: #a6e22e;">)</span><span style="color: #a1efe4;">)</span>;
+    <span style="color: #66d9ef;">}</span><span style="color: #ae81ff;">)</span>;
+</pre>
+</div>
+
+<p>
+再次运行你会发现 <b>又出错了</b> ，错误有关数据库迁移 <code>Migration</code><br />
+这时因为原来的数据表有更改，需要修改原来的数据来兼容现有的数据库版本，这里我们简单处理，直接删掉重建一个<br />
+在创建数据库时<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #f4bf75;">AppDatabase</span> <span style="color: #f92672;">database</span> = Room.databaseBuilder<span style="color: #ae81ff;">(</span>
+        getApplicationContext<span style="color: #66d9ef;">()</span>,
+        AppDatabase.<span style="color: #ae81ff;">class</span>,
+        <span style="color: #a6e22e;">"test.db"</span><span style="color: #ae81ff;">)</span>
+        .fallbackToDestructiveMigration<span style="color: #ae81ff;">()</span>
+        .allowMainThreadQueries<span style="color: #ae81ff;">()</span>.build<span style="color: #ae81ff;">()</span>;
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2022-03-04 五 16:01</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
