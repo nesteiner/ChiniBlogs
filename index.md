@@ -167,6 +167,13 @@
 <td class="org-left">Android</td>
 <td class="org-left">Toolbar</td>
 </tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/android-communication.html">Android Activity, Fragment 通信</a></td>
+<td class="org-left">Android</td>
+<td class="org-left">通信</td>
+</tr>
 </tbody>
 </table>
 
@@ -192,7 +199,7 @@
 
 
 <tr>
-<td class="org-left"><a href="./random-event">条件概率与全概率公式推导</a></td>
+<td class="org-left"><a href="./html/random-event.html">条件概率与全概率公式推导</a></td>
 <td class="org-left">概率论</td>
 <td class="org-left">随机事件</td>
 </tr>

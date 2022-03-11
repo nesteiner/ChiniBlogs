@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-03-11 五 18:58 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Android 通信简单应用</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Steiner" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Android 通信简单应用</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1c92ba5">1. Activity 之间通信</a>
+<ul>
+<li><a href="#org217fb6c">1.1. 原来的通信方法</a>
+<ul>
+<li><a href="#org257014a">1.1.1. 通信发起端</a></li>
+<li><a href="#org77c3ac9">1.1.2. 通信接收端</a></li>
+<li><a href="#orge91cfcf">1.1.3. 双向数据流</a></li>
+</ul>
+</li>
+<li><a href="#org58dc3ef">1.2. Result API 方法</a>
+<ul>
+<li><a href="#orgbf766ef">1.2.1. 两边协定</a></li>
+<li><a href="#org77b211f">1.2.2. 输入端</a></li>
+<li><a href="#orgc067b2e">1.2.3. 输出端</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org08ecdcc">2. Fragment 之间通信</a>
+<ul>
+<li><a href="#org608367b">2.1. 输入端</a></li>
+<li><a href="#org05937ea">2.2. 输出端</a></li>
+<li><a href="#orge7f85b2">2.3. 补充</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1c92ba5" class="outline-2">
+<h2 id="org1c92ba5"><span class="section-number-2">1</span> Activity 之间通信</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+从一个 <code>Activity</code> 跳转到另一个 <code>Activity</code> 时，可以携带一些数据进去，这个就是 <code>Activity</code> 之间的通信<br />
+跳转到 <code>Activity</code> 之后可以响应通信，不过需要发起端调用 <code>startActivityForResult</code> ，接收端调用 <code>setResult</code><br />
+这种通信方法我不能类比到组件之间的通信，组件之间通信都是单向数据流，这个是 <b>双向数据流</b><br />
+</p>
+</div>
+<div id="outline-container-org217fb6c" class="outline-3">
+<h3 id="org217fb6c"><span class="section-number-3">1.1</span> 原来的通信方法</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org257014a" class="outline-4">
+<h4 id="org257014a"><span class="section-number-4">1.1.1</span> 通信发起端</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+跳转需要借助 <code>Intent</code> 对象，指定来源的上下文和目标的类，调用 <code>startActivity</code> 即可<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #4078f2;">(</span><span style="color: #e45649;">this</span>, TargetClass.<span style="color: #e45649;">class</span><span style="color: #4078f2;">)</span>;
+startActivity<span style="color: #4078f2;">(</span>intent<span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+如果需要携带数据，创建一个 <code>Bundle</code> 对象绑定到 <code>Intent</code> 即可<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #4078f2;">(</span><span style="color: #e45649;">this</span>, TargetClass.<span style="color: #e45649;">class</span><span style="color: #4078f2;">)</span>;
+<span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">bundle</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Bundle</span><span style="color: #4078f2;">()</span>;
+bundle.putString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"message"</span>, <span style="color: #50a14f;">"Hello World"</span><span style="color: #4078f2;">)</span>;
+intent.putExtras<span style="color: #4078f2;">(</span>bundle<span style="color: #4078f2;">)</span>;
+startActivity<span style="color: #4078f2;">(</span>intent<span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+
+<p>
+其实也可以不用 <code>Bundle</code> ，直接给 <code>Intent</code> 来添加<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org77c3ac9" class="outline-4">
+<h4 id="org77c3ac9"><span class="section-number-4">1.1.2</span> 通信接收端</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+跳转到接收端后，使用 <code>getIntent</code> 来获取对端的 <code>Intent</code> 对象，并查看绑定的数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = getIntent<span style="color: #4078f2;">()</span>;
+<span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">bundle</span> = intent.getExtras<span style="color: #4078f2;">()</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge91cfcf" class="outline-4">
+<h4 id="orge91cfcf"><span class="section-number-4">1.1.3</span> 双向数据流</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+通信发起端调用 <code>startActivityForResult</code> 并携带数据是一个方向，通信接收端调用 <code>setResult</code> 并携带数据与对端是另一个方向<br />
+在发起端<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #4078f2;">()</span>;
+<span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">bundle</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Bundle</span><span style="color: #4078f2;">()</span>;
+bundle.putString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"message"</span>, <span style="color: #50a14f;">"Hello"</span><span style="color: #4078f2;">)</span>;
+intent.putExtras<span style="color: #4078f2;">(</span>bundle<span style="color: #4078f2;">)</span>;
+
+startActivityForResult<span style="color: #4078f2;">(</span>intent, 2<span style="color: #4078f2;">)</span>
+</pre>
+</div>
+
+<p>
+注意 <code>startActivityForResult</code> 第二个参数要大于0，才会接收对端的数据，并跳转到 <code>onActivityResult</code> 回调<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">protected</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onActivityResult</span><span style="color: #4078f2;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">requestCode</span>, <span style="color: #986801;">int</span> <span style="color: #6a1868;">resultCode</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">Intent</span> <span style="color: #6a1868;">data</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">super</span>.onActivityResult<span style="color: #a626a4;">(</span>requestCode, resultCode, data<span style="color: #a626a4;">)</span>;
+
+    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#23545;&#31471;&#23558;&#25968;&#25454;&#20889;&#20837; data &#65292;&#21487;&#20197;&#20174;&#37324;&#38754;&#33719;&#21462;&#25968;&#25454;</span>
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+
+<p>
+在接收端回复<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #4078f2;">()</span>;
+<span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">bundle</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Bundle</span><span style="color: #4078f2;">()</span>;
+bundle.putString<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"result"</span>, <span style="color: #50a14f;">"Fuck You"</span><span style="color: #4078f2;">)</span>;
+
+intent.putExtras<span style="color: #4078f2;">(</span>bundle<span style="color: #4078f2;">)</span>;
+setResult<span style="color: #4078f2;">(</span>RESULT_OK, intent<span style="color: #4078f2;">)</span>;
+finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">&#32467;&#26463;&#22768;&#26126;&#21608;&#26399;&#65292;&#36339;&#36716;&#21040;&#21407;&#26469;&#30340; Activity</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org58dc3ef" class="outline-3">
+<h3 id="org58dc3ef"><span class="section-number-3">1.2</span> Result API 方法</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<code>Result API</code> 是官方支持的方法，可以替代原来的通信方法，通信之间可以更加安全吧，应该<br />
+</p>
+</div>
+<div id="outline-container-orgbf766ef" class="outline-4">
+<h4 id="orgbf766ef"><span class="section-number-4">1.2.1</span> 两边协定</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+在 <code>Result API</code> 下，两端的通信更像是函数，输入一个数据，函数会输出一个结果<br />
+两边需要定义一个协议，规定输入的数据类型和输出的数据类型<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #e45649;">class</span> <span style="color: #986801;">ResultContract</span> <span style="color: #e45649;">extends</span> <span style="color: #986801;">ActivityResultContract</span><span style="color: #4078f2;">&lt;</span><span style="color: #986801;">String</span>, <span style="color: #986801;">String</span><span style="color: #4078f2;">&gt;</span> 
+</pre>
+</div>
+
+<p>
+为其定义 <code>createIntent</code> 方法，表示如何输入数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #986801;">Intent</span> <span style="color: #a626a4;">createIntent</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">Context</span> <span style="color: #6a1868;">context</span>, <span style="color: #986801;">String</span> <span style="color: #6a1868;">input</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #a626a4;">(</span>context, SecondActivity.<span style="color: #e45649;">class</span><span style="color: #a626a4;">)</span>;
+    intent.putExtra<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"name"</span>, input<span style="color: #a626a4;">)</span>;
+    <span style="color: #e45649;">return</span> intent;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+<p>
+为其定义 <code>parseIntent</code> 方法，表示如何解析接收到的输出数据<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #986801;">String</span> <span style="color: #a626a4;">parseResult</span><span style="color: #4078f2;">(</span><span style="color: #986801;">int</span> <span style="color: #6a1868;">resultCode</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #986801;">String</span> <span style="color: #6a1868;">data</span> = intent.getStringExtra<span style="color: #a626a4;">(</span><span style="color: #50a14f;">"result"</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #e45649;">if</span><span style="color: #a626a4;">(</span>resultCode == <span style="color: #b751b6;">Activity</span>.RESULT_OK &amp;&amp; data != <span style="color: #b751b6;">null</span><span style="color: #a626a4;">)</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> data;
+    <span style="color: #a626a4;">}</span> <span style="color: #e45649;">else</span> <span style="color: #a626a4;">{</span>
+        <span style="color: #e45649;">return</span> <span style="color: #b751b6;">null</span>;
+    <span style="color: #a626a4;">}</span>
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org77b211f" class="outline-4">
+<h4 id="org77b211f"><span class="section-number-4">1.2.2</span> 输入端</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+使用 <code>Result API</code> ，页面跳转的方式也要改变了，需要一个 <code>Launcher</code> 来进行操作<br />
+这个 <code>Launcher</code> 的构造需要上面的两边协定和一个回调，这个回调用来处理 <code>paserResult</code> 后的数据<br />
+这里设置用 <code>Toast</code> 回显<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #986801;">ActivityResultLauncher</span> <span style="color: #6a1868;">activityLauncher</span> = registerForActivityResult<span style="color: #4078f2;">(</span>
+        <span style="color: #e45649;">new</span> <span style="color: #986801;">ResultContract</span><span style="color: #a626a4;">()</span>, result -&gt; <span style="color: #a626a4;">{</span>
+            Toast.makeText<span style="color: #50a14f;">(</span>getApplicationContext<span style="color: #b751b6;">()</span>, result, <span style="color: #b751b6;">Toast</span>.LENGTH_SHORT<span style="color: #50a14f;">)</span>.show<span style="color: #50a14f;">()</span>;
+        <span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc067b2e" class="outline-4">
+<h4 id="orgc067b2e"><span class="section-number-4">1.2.3</span> 输出端</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+输出端的做法没有多大改变，一样的<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java">button.setOnClickListener<span style="color: #4078f2;">(</span>view -&gt; <span style="color: #a626a4;">{</span>
+        <span style="color: #986801;">Intent</span> <span style="color: #6a1868;">intent</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Intent</span><span style="color: #50a14f;">()</span>;
+        <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">bundle</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Bundle</span><span style="color: #50a14f;">()</span>;
+        bundle.putString<span style="color: #50a14f;">(</span><span style="color: #50a14f;">"result"</span>, <span style="color: #50a14f;">"Hello Mother Fucker"</span><span style="color: #50a14f;">)</span>;
+        intent.putExtras<span style="color: #50a14f;">(</span>bundle<span style="color: #50a14f;">)</span>;
+        setResult<span style="color: #50a14f;">(</span>RESULT_OK, intent<span style="color: #50a14f;">)</span>;
+        finish<span style="color: #50a14f;">()</span>;
+    <span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org08ecdcc" class="outline-2">
+<h2 id="org08ecdcc"><span class="section-number-2">2</span> Fragment 之间通信</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>Framgent</code> 之间的通信也想函数那样，输入一个值，输出一个值<br />
+不同的是，输入端需要在 <code>FragmentManager</code> 上设置一个 <code>Listener</code> 来接收输出值，并设置键 <code>requestKey</code> 提供位置<br />
+输出端需要通过 <code>FragmentManager</code> 来设置输出值到 <code>requestKey</code> 上<br />
+<img src="images/Fragment_之间同行/2022-03-08_20-46-33_screenshot.png" alt="2022-03-08_20-46-33_screenshot.png" /><br />
+</p>
+</div>
+<div id="outline-container-org608367b" class="outline-3">
+<h3 id="org608367b"><span class="section-number-3">2.1</span> 输入端</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+挑重要的来讲，输入端需要设置 <code>requestKey</code> 和处理输出值的回调<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #b751b6;">@Override</span>
+<span style="color: #e45649;">public</span> <span style="color: #986801;">void</span> <span style="color: #a626a4;">onCreate</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">super</span>.onCreate<span style="color: #a626a4;">(</span>savedInstanceState<span style="color: #a626a4;">)</span>;
+
+    getParentFragmentManager<span style="color: #a626a4;">()</span>.setFragmentResultListener<span style="color: #a626a4;">(</span>
+            <span style="color: #50a14f;">"requestKey"</span>,
+            <span style="color: #e45649;">this</span>,
+            <span style="color: #50a14f;">(</span>requestKey, bundle<span style="color: #50a14f;">)</span> -&gt; <span style="color: #50a14f;">{</span>
+                <span style="color: #986801;">String</span> <span style="color: #6a1868;">result</span> = bundle.getString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"bundleKey"</span><span style="color: #b751b6;">)</span>;
+                resultTextView.setText<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"Fuck You"</span> + result<span style="color: #b751b6;">)</span>;
+            <span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>;
+<span style="color: #4078f2;">}</span>
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org05937ea" class="outline-3">
+<h3 id="org05937ea"><span class="section-number-3">2.2</span> 输出端</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #986801;">View</span> <span style="color: #a626a4;">onCreateView</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">LayoutInflater</span> <span style="color: #6a1868;">inflater</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">container</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
+    <span style="color: #e45649;">final</span> <span style="color: #986801;">View</span> <span style="color: #6a1868;">view</span> = inflater.inflate<span style="color: #a626a4;">(</span>R.layout.fragment2, container, <span style="color: #b751b6;">false</span><span style="color: #a626a4;">)</span>;
+    <span style="color: #986801;">Button</span> <span style="color: #6a1868;">button</span> = view.findViewById<span style="color: #a626a4;">(</span>R.id.button<span style="color: #a626a4;">)</span>;
+    button.setOnClickListener<span style="color: #a626a4;">(</span>_view -&gt; <span style="color: #50a14f;">{</span>
+            <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">result</span> = <span style="color: #e45649;">new</span> <span style="color: #986801;">Bundle</span><span style="color: #b751b6;">()</span>;
+            result.putString<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"bundleKey"</span>, <span style="color: #50a14f;">"result"</span><span style="color: #b751b6;">)</span>;
+            getParentFragmentManager<span style="color: #b751b6;">()</span>.setFragmentResult<span style="color: #b751b6;">(</span><span style="color: #50a14f;">"requestKey"</span>, result<span style="color: #b751b6;">)</span>;
+        <span style="color: #50a14f;">}</span><span style="color: #a626a4;">)</span>;
+
+    <span style="color: #e45649;">return</span> view;
+<span style="color: #4078f2;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge7f85b2" class="outline-3">
+<h3 id="orge7f85b2"><span class="section-number-3">2.3</span> 补充</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+以上都是同一级的 <code>Fragment</code> 之间通信，没涉及到父子之间通信，其实也是类似的<br />
+<img src="images/Fragment_之间同行/2022-03-08_20-50-31_screenshot.png" alt="2022-03-08_20-50-31_screenshot.png" /><br />
+只需将 <code>getParentFragmentManager</code> 改为 <code>getChildFragmentManager</code> 即可<br />
+注意，他们都是用同一个 <code>FragmentManager</code> 来通信的</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2022-03-11 五 18:58</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
