@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-03-11 五 18:58 -->
+<!-- 2022-03-11 五 22:37 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Android 通信简单应用</title>
@@ -236,16 +236,16 @@
 <li><a href="#org58dc3ef">1.2. Result API 方法</a>
 <ul>
 <li><a href="#orgbf766ef">1.2.1. 两边协定</a></li>
-<li><a href="#org77b211f">1.2.2. 输入端</a></li>
-<li><a href="#orgc067b2e">1.2.3. 输出端</a></li>
+<li><a href="#org608367b">1.2.2. 输入端</a></li>
+<li><a href="#org05937ea">1.2.3. 输出端</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#org08ecdcc">2. Fragment 之间通信</a>
 <ul>
-<li><a href="#org608367b">2.1. 输入端</a></li>
-<li><a href="#org05937ea">2.2. 输出端</a></li>
+<li><a href="#org9d1c2be">2.1. 输入端</a></li>
+<li><a href="#orgf8bd85e">2.2. 输出端</a></li>
 <li><a href="#orge7f85b2">2.3. 补充</a></li>
 </ul>
 </li>
@@ -402,8 +402,8 @@ finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// <
 </div>
 </div>
 </div>
-<div id="outline-container-org77b211f" class="outline-4">
-<h4 id="org77b211f"><span class="section-number-4">1.2.2</span> 输入端</h4>
+<div id="outline-container-org608367b" class="outline-4">
+<h4 id="org608367b"><span class="section-number-4">1.2.2</span> 输入端</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 使用 <code>Result API</code> ，页面跳转的方式也要改变了，需要一个 <code>Launcher</code> 来进行操作<br />
@@ -419,8 +419,8 @@ finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// <
 </div>
 </div>
 </div>
-<div id="outline-container-orgc067b2e" class="outline-4">
-<h4 id="orgc067b2e"><span class="section-number-4">1.2.3</span> 输出端</h4>
+<div id="outline-container-org05937ea" class="outline-4">
+<h4 id="org05937ea"><span class="section-number-4">1.2.3</span> 输出端</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 输出端的做法没有多大改变，一样的<br />
@@ -451,8 +451,8 @@ finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// <
 <img src="images/Fragment_之间同行/2022-03-08_20-46-33_screenshot.png" alt="2022-03-08_20-46-33_screenshot.png" /><br />
 </p>
 </div>
-<div id="outline-container-org608367b" class="outline-3">
-<h3 id="org608367b"><span class="section-number-3">2.1</span> 输入端</h3>
+<div id="outline-container-org9d1c2be" class="outline-3">
+<h3 id="org9d1c2be"><span class="section-number-3">2.1</span> 输入端</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 挑重要的来讲，输入端需要设置 <code>requestKey</code> 和处理输出值的回调<br />
@@ -475,8 +475,8 @@ finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// <
 </div>
 </div>
 </div>
-<div id="outline-container-org05937ea" class="outline-3">
-<h3 id="org05937ea"><span class="section-number-3">2.2</span> 输出端</h3>
+<div id="outline-container-orgf8bd85e" class="outline-3">
+<h3 id="orgf8bd85e"><span class="section-number-3">2.2</span> 输出端</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-java"><span style="color: #e45649;">public</span> <span style="color: #986801;">View</span> <span style="color: #a626a4;">onCreateView</span><span style="color: #4078f2;">(</span><span style="color: #b751b6;">@NonNull</span> <span style="color: #986801;">LayoutInflater</span> <span style="color: #6a1868;">inflater</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">ViewGroup</span> <span style="color: #6a1868;">container</span>, <span style="color: #b751b6;">@Nullable</span> <span style="color: #986801;">Bundle</span> <span style="color: #6a1868;">savedInstanceState</span><span style="color: #4078f2;">)</span> <span style="color: #4078f2;">{</span>
@@ -508,7 +508,7 @@ finish<span style="color: #4078f2;">()</span> <span style="color: #9ca0a4;">// <
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2022-03-11 五 18:58</p>
+<p class="date">Created: 2022-03-11 五 22:37</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

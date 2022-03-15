@@ -1,4 +1,5 @@
 #+title: Android Room 简单使用
+#+export_file_name: ../docx/android-room.docx
 * Android Room 简单使用
 ** 说明
 这次没有用内置的 =SQLite= 库，而是直接使用了 =Room= ，原因之一是 =SQLite= 在创建数据库的时候出错了，排查不到哪一步出错
