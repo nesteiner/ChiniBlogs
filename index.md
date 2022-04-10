@@ -103,6 +103,13 @@
 <td class="org-left">Julia</td>
 <td class="org-left">符号计算</td>
 </tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/scrapy-spider.html">Scrapy 简单使用</a></td>
+<td class="org-left">Scrapy</td>
+<td class="org-left">网络爬虫</td>
+</tr>
 </tbody>
 </table>
 
