@@ -38,3 +38,7 @@
 * 学习笔记
 | 文件名                   | 分类   | 标签     |
 | [[file:./html/random-event.html][条件概率与全概率公式推导]] | 概率论 | 随机事件 |
+
+* 学校作业文档
+| 文件名             | 分类     | 标签 |
+| [[file:./html/operating-system.org][比较Linux与Android]] | 操作系统 | 操作系统 |
