@@ -110,6 +110,13 @@
 <td class="org-left">Scrapy</td>
 <td class="org-left">网络爬虫</td>
 </tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/julia-calculus.html">Julia 微积分简要介绍</a></td>
+<td class="org-left">Julia</td>
+<td class="org-left">微积分</td>
+</tr>
 </tbody>
 </table>
 
