@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-05-05 四 20:36 -->
+<!-- 2022-05-06 五 13:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>有监督回归</title>
@@ -432,6 +432,9 @@ ElasticNetRegression<span style="color: #ae81ff;">(</span>&#955;, &#947;; lambda
 <div id="outline-container-org53fc96a" class="outline-3">
 <h3 id="org53fc96a"><span class="section-number-3">3.1.</span> 数据准备</h3>
 <div class="outline-text-3" id="text-3-1">
+<p>
+竞赛数据来自 <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview">https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview</a><br />
+</p>
 <div class="org-src-container">
 <pre class="src src-julia"><span style="color: #ae81ff;">using</span> MLJ, CSV, StableRNGs, MLJLinearModels, Plots
 <span style="color: #ae81ff;">import</span> DataFrames: DataFrame, select, describe
@@ -471,7 +474,7 @@ Type:           Int64
 </p>
 
 
-<div id="org50d277c" class="figure">
+<div id="orgc986a70" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-56-37_screenshot.png" alt="2022-05-05_19-56-37_screenshot.png" /><br />
 </p>
 </div>
@@ -618,7 +621,7 @@ Type:           Int64
 </pre>
 </div>
 
-<div id="org30e0df9" class="figure">
+<div id="org896a8d2" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-27-36_screenshot.png" alt="2022-05-03_22-27-36_screenshot.png" /><br />
 </p>
 </div>
@@ -639,7 +642,7 @@ Type:           Int64
 </div>
 
 
-<div id="orgcce9f7a" class="figure">
+<div id="org8d96d46" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-32-02_screenshot.png" alt="2022-05-03_22-32-02_screenshot.png" /><br />
 </p>
 </div>
@@ -656,7 +659,7 @@ Type:           Int64
 </div>
 
 
-<div id="org529fa89" class="figure">
+<div id="orgf4cbcde" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-34-34_screenshot.png" alt="2022-05-03_22-34-34_screenshot.png" /><br />
 </p>
 </div>
@@ -680,7 +683,7 @@ Type:           Int64
 </pre>
 </div>
 
-<div id="orgf340930" class="figure">
+<div id="orgf474be2" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-36-46_screenshot.png" alt="2022-05-03_22-36-46_screenshot.png" /><br />
 </p>
 </div>
@@ -709,7 +712,7 @@ Type:           Int64
 </div>
 
 
-<div id="orge858b14" class="figure">
+<div id="orgc55005b" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-39-31_screenshot.png" alt="2022-05-03_22-39-31_screenshot.png" /><br />
 </p>
 </div>
@@ -732,7 +735,7 @@ Type:           Int64
 </div>
 
 
-<div id="org3d1e569" class="figure">
+<div id="orgefa000c" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-41-17_screenshot.png" alt="2022-05-03_22-41-17_screenshot.png" /><br />
 </p>
 </div>
@@ -752,7 +755,7 @@ Type:           Int64
 
 
 
-<div id="orge694a20" class="figure">
+<div id="org72decaf" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-43-16_screenshot.png" alt="2022-05-03_22-43-16_screenshot.png" /><br />
 </p>
 </div>
@@ -772,7 +775,7 @@ Type:           Int64
 
 
 
-<div id="org7baa1ee" class="figure">
+<div id="org09e98ac" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-44-30_screenshot.png" alt="2022-05-03_22-44-30_screenshot.png" /><br />
 </p>
 </div>
@@ -794,7 +797,7 @@ Type:           Int64
 </div>
 
 
-<div id="org2e9a122" class="figure">
+<div id="org6a2e345" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-53-30_screenshot.png" alt="2022-05-03_22-53-30_screenshot.png" /><br />
 </p>
 </div>
@@ -962,7 +965,7 @@ plt.show<span style="color: #ae81ff;">()</span>
 </p>
 
 
-<div id="orgdb29f17" class="figure">
+<div id="org686f37f" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_18-23-15_screenshot.png" alt="2022-05-05_18-23-15_screenshot.png" /><br />
 </p>
 </div>
@@ -1002,7 +1005,7 @@ plt.show<span style="color: #ae81ff;">()</span>
 
 
 
-<div id="org0fa217d" class="figure">
+<div id="orge067ab8" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_18-58-23_screenshot.png" alt="2022-05-05_18-58-23_screenshot.png" /><br />
 </p>
 </div>
@@ -1131,7 +1134,7 @@ evaluate!<span style="color: #ae81ff;">(</span>tunedMach, resampling = cv, measu
 
 
 
-<div id="org4d071b2" class="figure">
+<div id="org937d06c" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-24-51_screenshot.png" alt="2022-05-05_19-24-51_screenshot.png" /><br />
 </p>
 </div>
@@ -1165,7 +1168,7 @@ evaluate!<span style="color: #ae81ff;">(</span>tunedMach, resampling = cv, measu
 
 
 
-<div id="org4fc4ff7" class="figure">
+<div id="org365a415" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-29-43_screenshot.png" alt="2022-05-05_19-29-43_screenshot.png" /><br />
 </p>
 </div>
@@ -1196,7 +1199,7 @@ CSV.write<span style="color: #ae81ff;">(</span><span style="color: #a6e22e;">"da
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2022-05-05 四 20:36</p>
+<p class="date">Created: 2022-05-06 五 13:13</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
