@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-05-06 五 13:13 -->
+<!-- 2022-05-08 日 23:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>有监督回归</title>
@@ -223,82 +223,82 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6e6d9bc">1. 算法介绍</a>
+<li><a href="#orgf0b38af">1. 算法介绍</a>
 <ul>
-<li><a href="#org280dc1f">1.1. 基本算法</a></li>
-<li><a href="#org350243e">1.2. l2 约束</a></li>
-<li><a href="#org6969cd6">1.3. l1 约束</a></li>
-<li><a href="#org99abcca">1.4. l1 + l2 约束</a></li>
+<li><a href="#orgbff25c5">1.1. 基本算法</a></li>
+<li><a href="#org264d112">1.2. l2 约束</a></li>
+<li><a href="#org5933bcb">1.3. l1 约束</a></li>
+<li><a href="#org17ed71b">1.4. l1 + l2 约束</a></li>
 </ul>
 </li>
-<li><a href="#org573c868">2. MLJLinearModels 使用</a>
+<li><a href="#org8093776">2. MLJLinearModels 使用</a>
 <ul>
-<li><a href="#org5d0a1f6">2.1. Ridge</a></li>
-<li><a href="#orga6bfe28">2.2. Lasso</a></li>
-<li><a href="#org1f5e4fe">2.3. Elastic-Net</a></li>
-<li><a href="#orgf4bcc84">2.4. 说明</a></li>
+<li><a href="#org2cb2bb0">2.1. Ridge</a></li>
+<li><a href="#org7657f49">2.2. Lasso</a></li>
+<li><a href="#org2dea6bd">2.3. Elastic-Net</a></li>
+<li><a href="#orgc18a2bd">2.4. 说明</a></li>
 </ul>
 </li>
-<li><a href="#org8eadb2f">3. 实例 波士顿房价预测</a>
+<li><a href="#orgae927a4">3. 实例 波士顿房价预测</a>
 <ul>
-<li><a href="#org53fc96a">3.1. 数据准备</a></li>
-<li><a href="#org5fc0e47">3.2. 观察各项主要特征与房价售价的关系</a>
+<li><a href="#org3fcdb54">3.1. 数据准备</a></li>
+<li><a href="#org2df8fed">3.2. 观察各项主要特征与房价售价的关系</a>
 <ul>
-<li><a href="#orge429be8">3.2.1. [存疑]分析 SalePrice</a></li>
-<li><a href="#org6a9780d">3.2.2. 分析特征数据</a></li>
-<li><a href="#org7d6d88e">3.2.3. 验证主要特征是否满足要求</a>
+<li><a href="#org714750e">3.2.1. [存疑]分析 SalePrice</a></li>
+<li><a href="#org9075a5e">3.2.2. 分析特征数据</a></li>
+<li><a href="#orgcf31797">3.2.3. 验证主要特征是否满足要求</a>
 <ul>
-<li><a href="#orgd5728df">3.2.3.1. 类别型特征</a>
+<li><a href="#org20b695f">3.2.3.1. 类别型特征</a>
 <ul>
-<li><a href="#org0b13c33">CentralAir 中央空调</a></li>
-<li><a href="#org09562bb">OverallQual 总体评价</a></li>
-<li><a href="#org9f89079">YearBuilt 建造年份</a></li>
-<li><a href="#orgc434fbd">Neighborhood 地段</a></li>
+<li><a href="#orgd5ac7d8">CentralAir 中央空调</a></li>
+<li><a href="#org724d485">OverallQual 总体评价</a></li>
+<li><a href="#org71cd74a">YearBuilt 建造年份</a></li>
+<li><a href="#org97762d7">Neighborhood 地段</a></li>
 </ul>
 </li>
-<li><a href="#org35f3d09">3.2.3.2. 数值型特征</a>
+<li><a href="#org6880a3e">3.2.3.2. 数值型特征</a>
 <ul>
-<li><a href="#org59ede6c">LotArea 地表面积</a></li>
-<li><a href="#org82e4f53">GrLivArea 生活面积</a></li>
-<li><a href="#org2cbcc03">TotalBsmtSF 地下室总面积</a></li>
-<li><a href="#org15e74b4">MiscVal</a></li>
-<li><a href="#orgf722611">GarageArea/GarageCars 车库</a></li>
+<li><a href="#org6b6dd45">LotArea 地表面积</a></li>
+<li><a href="#orgdba4bd5">GrLivArea 生活面积</a></li>
+<li><a href="#orga813271">TotalBsmtSF 地下室总面积</a></li>
+<li><a href="#orgfd0b967">MiscVal</a></li>
+<li><a href="#org6675344">GarageArea/GarageCars 车库</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgcaeb2e5">3.2.4. 主要特征</a></li>
+<li><a href="#orgd870919">3.2.4. 主要特征</a></li>
 </ul>
 </li>
-<li><a href="#org8da6428">3.3. 更加科学的分析数据</a>
+<li><a href="#org16e0150">3.3. 更加科学的分析数据</a>
 <ul>
-<li><a href="#org28180a7">3.3.1. 关系矩阵</a></li>
-<li><a href="#org7a7d920">3.3.2. [存疑]房价关系矩阵</a></li>
-<li><a href="#orgd87305a">3.3.3. [存疑]绘制关系点图</a></li>
+<li><a href="#orgdc39e20">3.3.1. 关系矩阵</a></li>
+<li><a href="#org64fc096">3.3.2. [存疑]房价关系矩阵</a></li>
+<li><a href="#orgb854a83">3.3.3. [存疑]绘制关系点图</a></li>
 </ul>
 </li>
-<li><a href="#org46b9e5c">3.4. 开始模拟数据</a>
+<li><a href="#orgbde23f2">3.4. 开始模拟数据</a>
 <ul>
-<li><a href="#org730ee8d">3.4.1. 处理数据</a></li>
-<li><a href="#org296f557">3.4.2. 模型训练</a></li>
-<li><a href="#org036b78e">3.4.3. 补充: lightGBM 模型训练</a></li>
+<li><a href="#orga312372">3.4.1. 处理数据</a></li>
+<li><a href="#org8d5afda">3.4.2. 模型训练</a></li>
+<li><a href="#org44c275f">3.4.3. 补充: lightGBM 模型训练</a></li>
 </ul>
 </li>
-<li><a href="#org0ceac7c">3.5. 检验测试集数据</a></li>
+<li><a href="#org96e5793">3.5. 检验测试集数据</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6e6d9bc" class="outline-2">
-<h2 id="org6e6d9bc"><span class="section-number-2">1.</span> 算法介绍</h2>
+<div id="outline-container-orgf0b38af" class="outline-2">
+<h2 id="orgf0b38af"><span class="section-number-2">1.</span> 算法介绍</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 这里简要介绍下各算法和他们之间的关系，详细理解请百度一下<br />
 </p>
 </div>
-<div id="outline-container-org280dc1f" class="outline-3">
-<h3 id="org280dc1f"><span class="section-number-3">1.1.</span> 基本算法</h3>
+<div id="outline-container-orgbff25c5" class="outline-3">
+<h3 id="orgbff25c5"><span class="section-number-3">1.1.</span> 基本算法</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 最小二乘法是众多机器学习算法中极为重要的一种基础算法<br />
@@ -309,8 +309,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org350243e" class="outline-3">
-<h3 id="org350243e"><span class="section-number-3">1.2.</span> l2 约束</h3>
+<div id="outline-container-org264d112" class="outline-3">
+<h3 id="org264d112"><span class="section-number-3">1.2.</span> l2 约束</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 由此，引入带有约束条件的最小二乘法 -&#x2014; Ridge 回归<br />
@@ -322,8 +322,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org6969cd6" class="outline-3">
-<h3 id="org6969cd6"><span class="section-number-3">1.3.</span> l1 约束</h3>
+<div id="outline-container-org5933bcb" class="outline-3">
+<h3 id="org5933bcb"><span class="section-number-3">1.3.</span> l1 约束</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 由此，引入可以吧大部分参数都置为0的稀疏学习算法<br />
@@ -331,8 +331,8 @@
 </p>
 </div>
 </div>
-<div id="outline-container-org99abcca" class="outline-3">
-<h3 id="org99abcca"><span class="section-number-3">1.4.</span> l1 + l2 约束</h3>
+<div id="outline-container-org17ed71b" class="outline-3">
+<h3 id="org17ed71b"><span class="section-number-3">1.4.</span> l1 + l2 约束</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 虽然 l1 约束的最小二乘学习法是非常有用的学习方法，但是在实际应用中，经常会遇到些许限制<br />
@@ -355,12 +355,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org573c868" class="outline-2">
-<h2 id="org573c868"><span class="section-number-2">2.</span> MLJLinearModels 使用</h2>
+<div id="outline-container-org8093776" class="outline-2">
+<h2 id="org8093776"><span class="section-number-2">2.</span> MLJLinearModels 使用</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org5d0a1f6" class="outline-3">
-<h3 id="org5d0a1f6"><span class="section-number-3">2.1.</span> Ridge</h3>
+<div id="outline-container-org2cb2bb0" class="outline-3">
+<h3 id="org2cb2bb0"><span class="section-number-3">2.1.</span> Ridge</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 \(J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_2^2\tag{1}\)<br />
@@ -370,14 +370,14 @@
 <b>RidgeRegressor</b><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">RidgeRegression<span style="color: #ae81ff;">()</span>
-RidgeRegression<span style="color: #ae81ff;">(</span>&#955;; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">RidgeRegression()
+RidgeRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orga6bfe28" class="outline-3">
-<h3 id="orga6bfe28"><span class="section-number-3">2.2.</span> Lasso</h3>
+<div id="outline-container-org7657f49" class="outline-3">
+<h3 id="org7657f49"><span class="section-number-3">2.2.</span> Lasso</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 \(J = \frac{1}{n}\sum_{i = 1}^n (f( x_i) - y_i)^2 + \lambda \|w\|_1\tag{2}\)<br />
@@ -387,29 +387,29 @@ RidgeRegression<span style="color: #ae81ff;">(</span>&#955;; lambda, fit_interce
 <b>LassoRegressor</b><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">LassoRegression<span style="color: #ae81ff;">()</span>
-LassoRegression<span style="color: #ae81ff;">(</span>&#955;; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">LassoRegression()
+LassoRegression(λ; lambda, fit_intercept, penalize_intercept, scale_penalty_with_samples)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org1f5e4fe" class="outline-3">
-<h3 id="org1f5e4fe"><span class="section-number-3">2.3.</span> Elastic-Net</h3>
+<div id="outline-container-org2dea6bd" class="outline-3">
+<h3 id="org2dea6bd"><span class="section-number-3">2.3.</span> Elastic-Net</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 \(\smash{\min_{w}}\sum_{i=1}^m(y_i-\sum_{j=1}^dx_{ij}w_j)^2 + \lambda\sum_{j=1}^d|w_j|+\lambda \sum_{j=1}^dw_j^2 \tag{3}\)<br />
 <b>ElasticNetRegression</b><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">ElasticNetRegression<span style="color: #ae81ff;">()</span>
-ElasticNetRegression<span style="color: #ae81ff;">(</span>&#955;<span style="color: #ae81ff;">)</span>
-ElasticNetRegression<span style="color: #ae81ff;">(</span>&#955;, &#947;; lambda, gamma, fit_intercept, penalize_intercept, scale_penalty_with_samples<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">ElasticNetRegression()
+ElasticNetRegression(λ)
+ElasticNetRegression(λ, γ; lambda, gamma, fit_intercept, penalize_intercept, scale_penalty_with_samples)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf4bcc84" class="outline-3">
-<h3 id="orgf4bcc84"><span class="section-number-3">2.4.</span> 说明</h3>
+<div id="outline-container-orgc18a2bd" class="outline-3">
+<h3 id="orgc18a2bd"><span class="section-number-3">2.4.</span> 说明</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 其实可以不用管<br />
@@ -425,37 +425,37 @@ ElasticNetRegression<span style="color: #ae81ff;">(</span>&#955;, &#947;; lambda
 </div>
 </div>
 </div>
-<div id="outline-container-org8eadb2f" class="outline-2">
-<h2 id="org8eadb2f"><span class="section-number-2">3.</span> 实例 波士顿房价预测</h2>
+<div id="outline-container-orgae927a4" class="outline-2">
+<h2 id="orgae927a4"><span class="section-number-2">3.</span> 实例 波士顿房价预测</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org53fc96a" class="outline-3">
-<h3 id="org53fc96a"><span class="section-number-3">3.1.</span> 数据准备</h3>
+<div id="outline-container-org3fcdb54" class="outline-3">
+<h3 id="org3fcdb54"><span class="section-number-3">3.1.</span> 数据准备</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 竞赛数据来自 <a href="https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview">https://www.kaggle.com/competitions/house-prices-advanced-regression-techniques/overview</a><br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">using</span> MLJ, CSV, StableRNGs, MLJLinearModels, Plots
-<span style="color: #ae81ff;">import</span> DataFrames: DataFrame, select, describe
-<span style="color: #ae81ff;">using</span> Statistics
+<pre class="src src-julia">using MLJ, CSV, StableRNGs, MLJLinearModels, Plots
+import DataFrames: DataFrame, select, describe
+using Statistics
 
 
-dataTrain = CSV.read<span style="color: #ae81ff;">(</span><span style="color: #a6e22e;">"data/train.csv"</span>, DataFrame<span style="color: #ae81ff;">)</span>
-dataTest = CSV.read<span style="color: #ae81ff;">(</span><span style="color: #a6e22e;">"data/test.csv"</span>, DataFrame<span style="color: #ae81ff;">)</span>
+dataTrain = CSV.read("data/train.csv", DataFrame)
+dataTest = CSV.read("data/test.csv", DataFrame)
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org5fc0e47" class="outline-3">
-<h3 id="org5fc0e47"><span class="section-number-3">3.2.</span> 观察各项主要特征与房价售价的关系</h3>
+<div id="outline-container-org2df8fed" class="outline-3">
+<h3 id="org2df8fed"><span class="section-number-3">3.2.</span> 观察各项主要特征与房价售价的关系</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-orge429be8" class="outline-4">
-<h4 id="orge429be8"><span class="section-number-4">3.2.1.</span> [存疑]分析 SalePrice</h4>
+<div id="outline-container-org714750e" class="outline-4">
+<h4 id="org714750e"><span class="section-number-4">3.2.1.</span> [存疑]分析 SalePrice</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
-<pre class="src src-julia">julia&gt; describe<span style="color: #ae81ff;">(</span>dataTrain<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #66d9ef;">]</span><span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">julia&gt; describe(dataTrain[!, :SalePrice])
 Summary Stats:
 Length:         1460
 Missing Count:  0
@@ -474,7 +474,7 @@ Type:           Int64
 </p>
 
 
-<div id="orgc986a70" class="figure">
+<div id="org4c803ba" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-56-37_screenshot.png" alt="2022-05-05_19-56-37_screenshot.png" /><br />
 </p>
 </div>
@@ -492,8 +492,8 @@ Type:           Int64
 </p>
 </div>
 </div>
-<div id="outline-container-org6a9780d" class="outline-4">
-<h4 id="org6a9780d"><span class="section-number-4">3.2.2.</span> 分析特征数据</h4>
+<div id="outline-container-org9075a5e" class="outline-4">
+<h4 id="org9075a5e"><span class="section-number-4">3.2.2.</span> 分析特征数据</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 入选特征<br />
@@ -582,24 +582,24 @@ Type:           Int64
 
 
 
-<div id="outline-container-org7d6d88e" class="outline-4">
-<h4 id="org7d6d88e"><span class="section-number-4">3.2.3.</span> 验证主要特征是否满足要求</h4>
+<div id="outline-container-orgcf31797" class="outline-4">
+<h4 id="orgcf31797"><span class="section-number-4">3.2.3.</span> 验证主要特征是否满足要求</h4>
 <div class="outline-text-4" id="text-3-2-3">
 </div>
-<div id="outline-container-orgd5728df" class="outline-5">
-<h5 id="orgd5728df"><span class="section-number-5">3.2.3.1.</span> 类别型特征</h5>
+<div id="outline-container-org20b695f" class="outline-5">
+<h5 id="org20b695f"><span class="section-number-5">3.2.3.1.</span> 类别型特征</h5>
 <div class="outline-text-5" id="text-3-2-3-1">
 </div>
-<div id="outline-container-org0b13c33" class="outline-6">
-<h6 id="org0b13c33">CentralAir 中央空调</h6>
-<div class="outline-text-6" id="text-org0b13c33">
+<div id="outline-container-orgd5ac7d8" class="outline-6">
+<h6 id="orgd5ac7d8">CentralAir 中央空调</h6>
+<div class="outline-text-6" id="text-orgd5ac7d8">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">using</span> StatsPlots
-<span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:CentralAir</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    boxplot<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">using StatsPlots
+let column = :CentralAir
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    boxplot(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 <p>
@@ -609,57 +609,57 @@ Type:           Int64
 </div>
 </div>
 
-<div id="outline-container-org09562bb" class="outline-6">
-<h6 id="org09562bb">OverallQual 总体评价</h6>
-<div class="outline-text-6" id="text-org09562bb">
+<div id="outline-container-org724d485" class="outline-6">
+<h6 id="org724d485">OverallQual 总体评价</h6>
+<div class="outline-text-6" id="text-org724d485">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:OverallQual</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    boxplot<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :OverallQual
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    boxplot(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 
-<div id="org896a8d2" class="figure">
+<div id="org483db98" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-27-36_screenshot.png" alt="2022-05-03_22-27-36_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9f89079" class="outline-6">
-<h6 id="org9f89079">YearBuilt 建造年份</h6>
-<div class="outline-text-6" id="text-org9f89079">
+<div id="outline-container-org71cd74a" class="outline-6">
+<h6 id="org71cd74a">YearBuilt 建造年份</h6>
+<div class="outline-text-6" id="text-org71cd74a">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:YearBuilt</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    boxplot<span style="color: #ae81ff;">(</span>columnX, columnY, size=<span style="color: #66d9ef;">(</span>2600, 1200<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :YearBuilt
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    boxplot(columnX, columnY, size=(2600, 1200)) |&gt; display
+end
 
 </pre>
 </div>
 
 
-<div id="org8d96d46" class="figure">
+<div id="orga8bfd94" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-32-02_screenshot.png" alt="2022-05-03_22-32-02_screenshot.png" /><br />
 </p>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:YearBuilt</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    boxplot<span style="color: #ae81ff;">(</span>columnX, columnY, size=<span style="color: #66d9ef;">(</span>2600, 1200<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span> |&gt; display
-    scatter<span style="color: #ae81ff;">(</span>columnX, columnY, ylim=<span style="color: #66d9ef;">(</span>0, 800000<span style="color: #66d9ef;">)</span>, size=<span style="color: #66d9ef;">(</span>1500, 1000<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :YearBuilt
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    boxplot(columnX, columnY, size=(2600, 1200)) |&gt; display
+    scatter(columnX, columnY, ylim=(0, 800000), size=(1500, 1000)) |&gt; display
+end
 
 </pre>
 </div>
 
 
-<div id="orgf4cbcde" class="figure">
+<div id="orgd4cee0d" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-34-34_screenshot.png" alt="2022-05-03_22-34-34_screenshot.png" /><br />
 </p>
 </div>
@@ -670,20 +670,20 @@ Type:           Int64
 </div>
 </div>
 
-<div id="outline-container-orgc434fbd" class="outline-6">
-<h6 id="orgc434fbd">Neighborhood 地段</h6>
-<div class="outline-text-6" id="text-orgc434fbd">
+<div id="outline-container-org97762d7" class="outline-6">
+<h6 id="org97762d7">Neighborhood 地段</h6>
+<div class="outline-text-6" id="text-org97762d7">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:Neighborhood</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    boxplot<span style="color: #ae81ff;">(</span>columnX, columnY, size = <span style="color: #66d9ef;">(</span>1300, 600<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :Neighborhood
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    boxplot(columnX, columnY, size = (1300, 600)) |&gt; display
+end
 
 </pre>
 </div>
 
-<div id="orgf474be2" class="figure">
+<div id="org31f3b57" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-36-46_screenshot.png" alt="2022-05-03_22-36-46_screenshot.png" /><br />
 </p>
 </div>
@@ -695,24 +695,24 @@ Type:           Int64
 </div>
 </div>
 
-<div id="outline-container-org35f3d09" class="outline-5">
-<h5 id="org35f3d09"><span class="section-number-5">3.2.3.2.</span> 数值型特征</h5>
+<div id="outline-container-org6880a3e" class="outline-5">
+<h5 id="org6880a3e"><span class="section-number-5">3.2.3.2.</span> 数值型特征</h5>
 <div class="outline-text-5" id="text-3-2-3-2">
 </div>
-<div id="outline-container-org59ede6c" class="outline-6">
-<h6 id="org59ede6c">LotArea 地表面积</h6>
-<div class="outline-text-6" id="text-org59ede6c">
+<div id="outline-container-org6b6dd45" class="outline-6">
+<h6 id="org6b6dd45">LotArea 地表面积</h6>
+<div class="outline-text-6" id="text-org6b6dd45">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:LotArea</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    scatter<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :LotArea
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    scatter(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 
 
-<div id="orgc55005b" class="figure">
+<div id="org102d3c0" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-39-31_screenshot.png" alt="2022-05-03_22-39-31_screenshot.png" /><br />
 </p>
 </div>
@@ -722,82 +722,82 @@ Type:           Int64
 </p>
 </div>
 </div>
-<div id="outline-container-org82e4f53" class="outline-6">
-<h6 id="org82e4f53">GrLivArea 生活面积</h6>
-<div class="outline-text-6" id="text-org82e4f53">
+<div id="outline-container-orgdba4bd5" class="outline-6">
+<h6 id="orgdba4bd5">GrLivArea 生活面积</h6>
+<div class="outline-text-6" id="text-orgdba4bd5">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:GrLivArea</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    scatter<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :GrLivArea
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    scatter(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 
 
-<div id="orgefa000c" class="figure">
+<div id="org371994a" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-41-17_screenshot.png" alt="2022-05-03_22-41-17_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2cbcc03" class="outline-6">
-<h6 id="org2cbcc03">TotalBsmtSF 地下室总面积</h6>
-<div class="outline-text-6" id="text-org2cbcc03">
+<div id="outline-container-orga813271" class="outline-6">
+<h6 id="orga813271">TotalBsmtSF 地下室总面积</h6>
+<div class="outline-text-6" id="text-orga813271">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:TotalBsmtSF</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    scatter<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :TotalBsmtSF
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    scatter(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 
 
 
-<div id="org72decaf" class="figure">
+<div id="org2e3c8e8" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-43-16_screenshot.png" alt="2022-05-03_22-43-16_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org15e74b4" class="outline-6">
-<h6 id="org15e74b4">MiscVal</h6>
-<div class="outline-text-6" id="text-org15e74b4">
+<div id="outline-container-orgfd0b967" class="outline-6">
+<h6 id="orgfd0b967">MiscVal</h6>
+<div class="outline-text-6" id="text-orgfd0b967">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> column = <span style="color: #fd971f;">:MiscVal</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnX = dataTrain<span style="color: #ae81ff;">[</span>!, column<span style="color: #ae81ff;">]</span>
-    scatter<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+<pre class="src src-julia">let column = :MiscVal
+    columnY = dataTrain[!, :SalePrice]
+    columnX = dataTrain[!, column]
+    scatter(columnX, columnY) |&gt; display
+end
 </pre>
 </div>
 
 
 
-<div id="org09e98ac" class="figure">
+<div id="orgb46116b" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-44-30_screenshot.png" alt="2022-05-03_22-44-30_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf722611" class="outline-6">
-<h6 id="orgf722611">GarageArea/GarageCars 车库</h6>
-<div class="outline-text-6" id="text-orgf722611">
+<div id="outline-container-org6675344" class="outline-6">
+<h6 id="org6675344">GarageArea/GarageCars 车库</h6>
+<div class="outline-text-6" id="text-org6675344">
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> columns = <span style="color: #ae81ff;">[</span><span style="color: #fd971f;">:GarageArea</span>, <span style="color: #fd971f;">:GarageCars</span><span style="color: #ae81ff;">]</span>
-    columnY = dataTrain<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span>
-    columnXs = map<span style="color: #ae81ff;">(</span>column -&gt; dataTrain<span style="color: #66d9ef;">[</span>!, column<span style="color: #66d9ef;">]</span>, columns<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">let columns = [:GarageArea, :GarageCars]
+    columnY = dataTrain[!, :SalePrice]
+    columnXs = map(column -&gt; dataTrain[!, column], columns)
 
-    <span style="color: #ae81ff;">for</span> columnX <span style="color: #ae81ff;">in</span> columnXs
-        scatter<span style="color: #ae81ff;">(</span>columnX, columnY<span style="color: #ae81ff;">)</span> |&gt; display
-    <span style="color: #ae81ff;">end</span>
-<span style="color: #ae81ff;">end</span>
+    for columnX in columnXs
+	scatter(columnX, columnY) |&gt; display
+    end
+end
 </pre>
 </div>
 
 
-<div id="org6a2e345" class="figure">
+<div id="org3f3b284" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-03_22-53-30_screenshot.png" alt="2022-05-03_22-53-30_screenshot.png" /><br />
 </p>
 </div>
@@ -811,8 +811,8 @@ Type:           Int64
 </div>
 </div>
 </div>
-<div id="outline-container-orgcaeb2e5" class="outline-4">
-<h4 id="orgcaeb2e5"><span class="section-number-4">3.2.4.</span> 主要特征</h4>
+<div id="outline-container-orgd870919" class="outline-4">
+<h4 id="orgd870919"><span class="section-number-4">3.2.4.</span> 主要特征</h4>
 <div class="outline-text-4" id="text-3-2-4">
 <p>
 总结起来，最后<br />
@@ -888,8 +888,8 @@ Type:           Int64
 </div>
 </div>
 
-<div id="outline-container-org8da6428" class="outline-3">
-<h3 id="org8da6428"><span class="section-number-3">3.3.</span> 更加科学的分析数据</h3>
+<div id="outline-container-org16e0150" class="outline-3">
+<h3 id="org16e0150"><span class="section-number-3">3.3.</span> 更加科学的分析数据</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 上面的分析可以说非常主观，所以说多多少少还是会不放心，会担心自己选择的特征会不会多了或者少了，<br />
@@ -903,23 +903,23 @@ Type:           Int64
 </ul>
 </div>
 
-<div id="outline-container-org28180a7" class="outline-4">
-<h4 id="org28180a7"><span class="section-number-4">3.3.1.</span> 关系矩阵</h4>
+<div id="outline-container-orgdc39e20" class="outline-4">
+<h4 id="orgdc39e20"><span class="section-number-4">3.3.1.</span> 关系矩阵</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 教程中有局限性， <b>关系矩阵只涉及到数值型数据</b> ，这里我们也这样做，因为他的特征数有80多个，我懒得弄<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> _schema = schema<span style="color: #ae81ff;">(</span>dataTrain<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">let _schema = schema(dataTrain)
     _names = _schema.names
     _scitypes = _schema.scitypes
-    indexs = collect<span style="color: #ae81ff;">(</span>map<span style="color: #66d9ef;">(</span>x -&gt; x == Count || x == Continuous, _scitypes<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
-    columns = _names<span style="color: #ae81ff;">[</span>indexs<span style="color: #ae81ff;">]</span> |&gt; collect
-    _data = select<span style="color: #ae81ff;">(</span>dataTrain, columns<span style="color: #ae81ff;">)</span>
-    _corr = cor<span style="color: #ae81ff;">(</span>Matrix<span style="color: #66d9ef;">(</span>_data<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
-    labels = string.<span style="color: #ae81ff;">(</span>columns<span style="color: #ae81ff;">)</span>
-    heatmap<span style="color: #ae81ff;">(</span>labels, labels, _corr, xrotation = -90, size = figureSize, xticks = <span style="color: #fd971f;">:all</span>, yticks = <span style="color: #fd971f;">:all</span><span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+    indexs = collect(map(x -&gt; x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |&gt; collect
+    _data = select(dataTrain, columns)
+    _corr = cor(Matrix(_data))
+    labels = string.(columns)
+    heatmap(labels, labels, _corr, xrotation = -90, size = figureSize, xticks = :all, yticks = :all) |&gt; display
+end
 </pre>
 </div>
 
@@ -943,20 +943,20 @@ Type:           Int64
 </div>
 </div>
 
-<div id="outline-container-org7a7d920" class="outline-4">
-<h4 id="org7a7d920"><span class="section-number-4">3.3.2.</span> [存疑]房价关系矩阵</h4>
+<div id="outline-container-org64fc096" class="outline-4">
+<h4 id="org64fc096"><span class="section-number-4">3.3.2.</span> [存疑]房价关系矩阵</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 这里显示相关性最大的10个特征<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #f92672;">k</span>  = 10 <span style="color: #75715e;"># </span><span style="color: #75715e;">&#20851;&#31995;&#30697;&#38453;&#20013;&#23558;&#26174;&#31034;10&#20010;&#29305;&#24449;</span>
-<span style="color: #f92672;">cols</span> = corrmat.nlargest<span style="color: #ae81ff;">(</span>k, <span style="color: #a6e22e;">'SalePrice'</span><span style="color: #ae81ff;">)[</span><span style="color: #a6e22e;">'SalePrice'</span><span style="color: #ae81ff;">]</span>.index
-<span style="color: #f92672;">cm</span> = np.corrcoef<span style="color: #ae81ff;">(</span>data_train<span style="color: #66d9ef;">[</span>cols<span style="color: #66d9ef;">]</span>.values.T<span style="color: #ae81ff;">)</span>
-sns.<span style="color: #a1efe4;">set</span><span style="color: #ae81ff;">(</span>font_scale=1.25<span style="color: #ae81ff;">)</span>
-hm = sns.heatmap<span style="color: #ae81ff;">(</span>cm, cbar=<span style="color: #fd971f;">True</span>, annot=<span style="color: #fd971f;">True</span>, \
-                 square=<span style="color: #fd971f;">True</span>, fmt=<span style="color: #a6e22e;">'.2f'</span>, annot_kws=<span style="color: #66d9ef;">{</span><span style="color: #a6e22e;">'size'</span>: 10<span style="color: #66d9ef;">}</span>, yticklabels=cols.values, xticklabels=cols.values<span style="color: #ae81ff;">)</span>
-plt.show<span style="color: #ae81ff;">()</span>
+<pre class="src src-python">k  = 10 # 关系矩阵中将显示10个特征
+cols = corrmat.nlargest(k, 'SalePrice')['SalePrice'].index
+cm = np.corrcoef(data_train[cols].values.T)
+sns.set(font_scale=1.25)
+hm = sns.heatmap(cm, cbar=True, annot=True, \
+		 square=True, fmt='.2f', annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+plt.show()
 </pre>
 </div>
 
@@ -965,7 +965,7 @@ plt.show<span style="color: #ae81ff;">()</span>
 </p>
 
 
-<div id="org686f37f" class="figure">
+<div id="orgd942b48" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_18-23-15_screenshot.png" alt="2022-05-05_18-23-15_screenshot.png" /><br />
 </p>
 </div>
@@ -978,34 +978,34 @@ plt.show<span style="color: #ae81ff;">()</span>
 我只做到这里<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #ae81ff;">let</span> _schema = schema<span style="color: #ae81ff;">(</span>dataTrain<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">let _schema = schema(dataTrain)
     _names = _schema.names
     _scitypes = _schema.scitypes
-    indexs = collect<span style="color: #ae81ff;">(</span>map<span style="color: #66d9ef;">(</span>x -&gt; x == Count || x == Continuous, _scitypes<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
-    columns = _names<span style="color: #ae81ff;">[</span>indexs<span style="color: #ae81ff;">]</span> |&gt; collect
-    labels = string.<span style="color: #ae81ff;">(</span>columns<span style="color: #ae81ff;">)</span>
-    _data = select<span style="color: #ae81ff;">(</span>dataTrain, columns<span style="color: #ae81ff;">)</span>
-    _corr = cor<span style="color: #ae81ff;">(</span>Matrix<span style="color: #66d9ef;">(</span>_data<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
+    indexs = collect(map(x -&gt; x == Count || x == Continuous, _scitypes))
+    columns = _names[indexs] |&gt; collect
+    labels = string.(columns)
+    _data = select(dataTrain, columns)
+    _corr = cor(Matrix(_data))
 
-    _dataframe = DataFrame<span style="color: #ae81ff;">(</span>_corr, columns<span style="color: #ae81ff;">)</span>
-    nlarget = _dataframe<span style="color: #ae81ff;">[</span>partialsortperm<span style="color: #66d9ef;">(</span>_dataframe<span style="color: #a1efe4;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #a1efe4;">]</span>, 1:10, rev=<span style="color: #fd971f;">true</span><span style="color: #66d9ef;">)</span>, :<span style="color: #ae81ff;">]</span>
+    _dataframe = DataFrame(_corr, columns)
+    nlarget = _dataframe[partialsortperm(_dataframe[!, :SalePrice], 1:10, rev=true), :]
 
-    heatmap<span style="color: #ae81ff;">(</span>Matrix<span style="color: #66d9ef;">(</span>nlarget<span style="color: #66d9ef;">)</span>, xrotation = -90, size = figureSize, xticks = <span style="color: #fd971f;">:all</span>, yticks = <span style="color: #fd971f;">:all</span>, aspect_ratio = <span style="color: #fd971f;">:equal</span><span style="color: #ae81ff;">)</span>
+    heatmap(Matrix(nlarget), xrotation = -90, size = figureSize, xticks = :all, yticks = :all, aspect_ratio = :equal)
 
-    nrow, ncol = size<span style="color: #ae81ff;">(</span>_corr<span style="color: #ae81ff;">)</span>
+    nrow, ncol = size(_corr)
     fontsize = 15
 
-    <span style="color: #66d9ef;">fn</span><span style="color: #ae81ff;">(</span>tuple<span style="color: #ae81ff;">)</span> = <span style="color: #ae81ff;">(</span>tuple<span style="color: #66d9ef;">[</span>1<span style="color: #66d9ef;">]</span>, tuple<span style="color: #66d9ef;">[</span>2<span style="color: #66d9ef;">]</span>, text<span style="color: #66d9ef;">(</span>round<span style="color: #a1efe4;">(</span>_corr<span style="color: #a6e22e;">[</span>tuple<span style="color: #f4bf75;">[</span>1<span style="color: #f4bf75;">]</span>, tuple<span style="color: #f4bf75;">[</span>2<span style="color: #f4bf75;">]</span><span style="color: #a6e22e;">]</span>, digits = 2<span style="color: #a1efe4;">)</span>, fontsize, <span style="color: #fd971f;">:white</span>, <span style="color: #fd971f;">:center</span><span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
-    ann = map<span style="color: #ae81ff;">(</span>fn, Iterators.product<span style="color: #66d9ef;">(</span>1:nrow, 1:ncol<span style="color: #66d9ef;">)</span> |&gt; collect |&gt; vec<span style="color: #ae81ff;">)</span>
+    fn(tuple) = (tuple[1], tuple[2], text(round(_corr[tuple[1], tuple[2]], digits = 2), fontsize, :white, :center))
+    ann = map(fn, Iterators.product(1:nrow, 1:ncol) |&gt; collect |&gt; vec)
 
-    annotate!<span style="color: #ae81ff;">(</span>ann, linecolor = <span style="color: #fd971f;">:white</span><span style="color: #ae81ff;">)</span> |&gt; display
-<span style="color: #ae81ff;">end</span>
+    annotate!(ann, linecolor = :white) |&gt; display
+end
 </pre>
 </div>
 
 
 
-<div id="orge067ab8" class="figure">
+<div id="orgadbf073" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_18-58-23_screenshot.png" alt="2022-05-05_18-58-23_screenshot.png" /><br />
 </p>
 </div>
@@ -1019,8 +1019,8 @@ plt.show<span style="color: #ae81ff;">()</span>
 </ol>
 </div>
 </div>
-<div id="outline-container-orgd87305a" class="outline-4">
-<h4 id="orgd87305a"><span class="section-number-4">3.3.3.</span> [存疑]绘制关系点图</h4>
+<div id="outline-container-orgb854a83" class="outline-4">
+<h4 id="orgb854a83"><span class="section-number-4">3.3.3.</span> [存疑]绘制关系点图</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 目前找到一个 <code>PairPlots</code> 包，我还要研究一下<br />
@@ -1028,19 +1028,19 @@ plt.show<span style="color: #ae81ff;">()</span>
 </div>
 </div>
 </div>
-<div id="outline-container-org46b9e5c" class="outline-3">
-<h3 id="org46b9e5c"><span class="section-number-3">3.4.</span> 开始模拟数据</h3>
+<div id="outline-container-orgbde23f2" class="outline-3">
+<h3 id="orgbde23f2"><span class="section-number-3">3.4.</span> 开始模拟数据</h3>
 <div class="outline-text-3" id="text-3-4">
 </div>
-<div id="outline-container-org730ee8d" class="outline-4">
-<h4 id="org730ee8d"><span class="section-number-4">3.4.1.</span> 处理数据</h4>
+<div id="outline-container-orga312372" class="outline-4">
+<h4 id="orga312372"><span class="section-number-4">3.4.1.</span> 处理数据</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <ol class="org-ol">
 <li><p>
 首先我们选取特征<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">columns = <span style="color: #ae81ff;">[</span><span style="color: #fd971f;">:OverallQual</span>, <span style="color: #fd971f;">:GrLivArea</span>, <span style="color: #fd971f;">:GarageCars</span>, <span style="color: #fd971f;">:TotalBsmtSF</span>, <span style="color: #fd971f;">:FullBath</span>, <span style="color: #fd971f;">:TotRmsAbvGrd</span>, <span style="color: #fd971f;">:YearBuilt</span><span style="color: #ae81ff;">]</span>
+<pre class="src src-julia">columns = [:OverallQual, :GrLivArea, :GarageCars, :TotalBsmtSF, :FullBath, :TotRmsAbvGrd, :YearBuilt]
 </pre>
 </div></li>
 
@@ -1048,9 +1048,9 @@ plt.show<span style="color: #ae81ff;">()</span>
 定义训练集的处理模型<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">trainTransformModel = Pipeline<span style="color: #ae81ff;">(</span>
-    FeatureSelector<span style="color: #66d9ef;">(</span>features = columns<span style="color: #66d9ef;">)</span>,
-    dataframe -&gt; coerce<span style="color: #66d9ef;">(</span>dataframe, Count =&gt; Continuous<span style="color: #66d9ef;">)</span><span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">trainTransformModel = Pipeline(
+    FeatureSelector(features = columns),
+    dataframe -&gt; coerce(dataframe, Count =&gt; Continuous))
 </pre>
 </div></li>
 
@@ -1058,22 +1058,22 @@ plt.show<span style="color: #ae81ff;">()</span>
 定义测试集的处理模型<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia"><span style="color: #66d9ef;">processFeature!</span><span style="color: #ae81ff;">(</span>dataframe::<span style="color: #f4bf75;">DataFrame</span><span style="color: #ae81ff;">)</span> = <span style="color: #ae81ff;">begin</span>
-    dataframe<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:GarageCars</span><span style="color: #ae81ff;">]</span> = replace<span style="color: #ae81ff;">(</span>dataframe<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:GarageCars</span><span style="color: #66d9ef;">]</span>, <span style="color: #a6e22e;">"NA"</span> =&gt; <span style="color: #fd971f;">missing</span><span style="color: #ae81ff;">)</span>
-    dataframe<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:GarageCars</span><span style="color: #ae81ff;">]</span> = map<span style="color: #ae81ff;">(</span>x -&gt; ismissing<span style="color: #66d9ef;">(</span>x<span style="color: #66d9ef;">)</span> <span style="color: #ae81ff;">?</span> x <span style="color: #ae81ff;">:</span> parse<span style="color: #66d9ef;">(</span>Float64, x<span style="color: #66d9ef;">)</span>, dataframe<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:GarageCars</span><span style="color: #66d9ef;">]</span><span style="color: #ae81ff;">)</span>
-    dataframe<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:TotalBsmtSF</span><span style="color: #ae81ff;">]</span> = replace<span style="color: #ae81ff;">(</span>dataframe<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:TotalBsmtSF</span><span style="color: #66d9ef;">]</span>, <span style="color: #a6e22e;">"NA"</span> =&gt; <span style="color: #fd971f;">missing</span><span style="color: #ae81ff;">)</span>
-    dataframe<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:TotalBsmtSF</span><span style="color: #ae81ff;">]</span> = map<span style="color: #ae81ff;">(</span>x -&gt; ismissing<span style="color: #66d9ef;">(</span>x<span style="color: #66d9ef;">)</span> <span style="color: #ae81ff;">?</span> x <span style="color: #ae81ff;">:</span> parse<span style="color: #66d9ef;">(</span>Float64, x<span style="color: #66d9ef;">)</span>, dataframe<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:TotalBsmtSF</span><span style="color: #66d9ef;">]</span><span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">processFeature!(dataframe::DataFrame) = begin
+    dataframe[!, :GarageCars] = replace(dataframe[!, :GarageCars], "NA" =&gt; missing)
+    dataframe[!, :GarageCars] = map(x -&gt; ismissing(x) ? x : parse(Float64, x), dataframe[!, :GarageCars])
+    dataframe[!, :TotalBsmtSF] = replace(dataframe[!, :TotalBsmtSF], "NA" =&gt; missing)
+    dataframe[!, :TotalBsmtSF] = map(x -&gt; ismissing(x) ? x : parse(Float64, x), dataframe[!, :TotalBsmtSF])
 
-    coerce!<span style="color: #ae81ff;">(</span>dataframe, Count =&gt; Continuous<span style="color: #ae81ff;">)</span>
-    <span style="color: #ae81ff;">return</span> dataframe
-<span style="color: #ae81ff;">end</span>
+    coerce!(dataframe, Count =&gt; Continuous)
+    return dataframe
+end
 
-testTransformModel = Pipeline<span style="color: #ae81ff;">(</span>
-    FeatureSelector<span style="color: #66d9ef;">(</span>features = columns<span style="color: #66d9ef;">)</span>,
+testTransformModel = Pipeline(
+    FeatureSelector(features = columns),
     processFeature!,
-    FillImputer<span style="color: #66d9ef;">(</span>features = columns<span style="color: #66d9ef;">)</span>,
-    <span style="color: #75715e;"># </span><span style="color: #75715e;">Standardizer(features = columns)</span>
-<span style="color: #ae81ff;">)</span>
+    FillImputer(features = columns),
+    # Standardizer(features = columns)
+)
 
 </pre>
 </div></li>
@@ -1082,13 +1082,13 @@ testTransformModel = Pipeline<span style="color: #ae81ff;">(</span>
 处理原始数据，产出数据集<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">trainTransformMach = machine<span style="color: #ae81ff;">(</span>trainTransformModel, dataTrain<span style="color: #ae81ff;">)</span>
-testTransformMach = machine<span style="color: #ae81ff;">(</span>testTransformModel, dataTest<span style="color: #ae81ff;">)</span>
-fit!<span style="color: #ae81ff;">(</span>trainTransformMach<span style="color: #ae81ff;">)</span>
-fit!<span style="color: #ae81ff;">(</span>testTransformMach<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">trainTransformMach = machine(trainTransformModel, dataTrain)
+testTransformMach = machine(testTransformModel, dataTest)
+fit!(trainTransformMach)
+fit!(testTransformMach)
 
-transformedDataTrain = transform<span style="color: #ae81ff;">(</span>trainTransformMach, dataTrain<span style="color: #ae81ff;">)</span>
-transformedDataTest = transform<span style="color: #ae81ff;">(</span>testTransformMach, dataTest<span style="color: #ae81ff;">)</span>
+transformedDataTrain = transform(trainTransformMach, dataTrain)
+transformedDataTest = transform(testTransformMach, dataTest)
 </pre>
 </div></li>
 
@@ -1097,78 +1097,78 @@ transformedDataTest = transform<span style="color: #ae81ff;">(</span>testTransfo
 </p>
 <div class="org-src-container">
 <pre class="src src-julia">X = transformedDataTrain
-y = coerce<span style="color: #ae81ff;">(</span>dataTrain<span style="color: #66d9ef;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #66d9ef;">]</span>, Continuous<span style="color: #ae81ff;">)</span>
-train, test = partition<span style="color: #ae81ff;">(</span>eachindex<span style="color: #66d9ef;">(</span>y<span style="color: #66d9ef;">)</span>, 0.8, rng=rng<span style="color: #ae81ff;">)</span>
+y = coerce(dataTrain[!, :SalePrice], Continuous)
+train, test = partition(eachindex(y), 0.8, rng=rng)
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org296f557" class="outline-4">
-<h4 id="org296f557"><span class="section-number-4">3.4.2.</span> 模型训练</h4>
+<div id="outline-container-org8d5afda" class="outline-4">
+<h4 id="org8d5afda"><span class="section-number-4">3.4.2.</span> 模型训练</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <p>
 这里我们使用 <b>Ridge</b> 模型来检验<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">rng = StableRNG<span style="color: #ae81ff;">(</span>1234<span style="color: #ae81ff;">)</span>
-cv = CV<span style="color: #ae81ff;">(</span>nfolds = 6, rng = rng<span style="color: #ae81ff;">)</span>
-tuning = Grid<span style="color: #ae81ff;">(</span>resolution=10, rng = rng<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">rng = StableRNG(1234)
+cv = CV(nfolds = 6, rng = rng)
+tuning = Grid(resolution=10, rng = rng)
 
-<span style="color: #75715e;"># </span><span style="color: #7fff00;">MODULE</span><span style="color: #75715e;"> try Ridge</span>
-ridge = RidgeRegressor<span style="color: #ae81ff;">()</span>
-rangeLambda = range<span style="color: #ae81ff;">(</span>ridge, <span style="color: #fd971f;">:lambda</span>, lower = 0.1, upper = 10.0, scale=<span style="color: #fd971f;">:log</span><span style="color: #ae81ff;">)</span>
+# MODULE try Ridge
+ridge = RidgeRegressor()
+rangeLambda = range(ridge, :lambda, lower = 0.1, upper = 10.0, scale=:log)
 
 
-tunedModel = TunedModel<span style="color: #ae81ff;">(</span>model = ridge,
-                        range = <span style="color: #66d9ef;">[</span>rangeLambda<span style="color: #66d9ef;">]</span>,
-                        measure = rms,
-                        resampling = cv,
-                        tuning = tuning<span style="color: #ae81ff;">)</span>
-tunedMach = machine<span style="color: #ae81ff;">(</span>tunedModel, X, y<span style="color: #ae81ff;">)</span>
-fit!<span style="color: #ae81ff;">(</span>tunedMach, rows = train<span style="color: #ae81ff;">)</span>
+tunedModel = TunedModel(model = ridge,
+			range = [rangeLambda],
+			measure = rms,
+			resampling = cv,
+			tuning = tuning)
+tunedMach = machine(tunedModel, X, y)
+fit!(tunedMach, rows = train)
 
-evaluate!<span style="color: #ae81ff;">(</span>tunedMach, resampling = cv, measure = <span style="color: #66d9ef;">[</span>rms, l1<span style="color: #66d9ef;">]</span>, rows = test<span style="color: #ae81ff;">)</span>
+evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
 </pre>
 </div>
 
 
 
-<div id="org937d06c" class="figure">
+<div id="orge49220a" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-24-51_screenshot.png" alt="2022-05-05_19-24-51_screenshot.png" /><br />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org036b78e" class="outline-4">
-<h4 id="org036b78e"><span class="section-number-4">3.4.3.</span> 补充: lightGBM 模型训练</h4>
+<div id="outline-container-org44c275f" class="outline-4">
+<h4 id="org44c275f"><span class="section-number-4">3.4.3.</span> 补充: lightGBM 模型训练</h4>
 <div class="outline-text-4" id="text-3-4-3">
 <div class="org-src-container">
-<pre class="src src-julia">LGBMRegressor = <span style="color: #66d9ef;">@load</span> LGBMRegressor
-lgb = LGBMRegressor<span style="color: #ae81ff;">()</span>
-lgbm = machine<span style="color: #ae81ff;">(</span>lgb, X, y<span style="color: #ae81ff;">)</span>
-boostRange = range<span style="color: #ae81ff;">(</span>lgb, <span style="color: #fd971f;">:num_iterations</span>, lower = 2, upper = 500<span style="color: #ae81ff;">)</span>
-rangeLeaf = range<span style="color: #ae81ff;">(</span>lgb, <span style="color: #fd971f;">:min_data_in_leaf</span>, lower = 1, upper = 50<span style="color: #ae81ff;">)</span>
-rangeIteration = range<span style="color: #ae81ff;">(</span>lgb, <span style="color: #fd971f;">:num_iterations</span>, lower = 50, upper = 100<span style="color: #ae81ff;">)</span>
-rangeMinData = range<span style="color: #ae81ff;">(</span>lgb, <span style="color: #fd971f;">:min_data_in_leaf</span>, lower = 2, upper = 10<span style="color: #ae81ff;">)</span>
-rangeLearningRate = range<span style="color: #ae81ff;">(</span>lgb, <span style="color: #fd971f;">:learning_rate</span>, lower = 0.1, upper = 1<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">LGBMRegressor = @load LGBMRegressor
+lgb = LGBMRegressor()
+lgbm = machine(lgb, X, y)
+boostRange = range(lgb, :num_iterations, lower = 2, upper = 500)
+rangeLeaf = range(lgb, :min_data_in_leaf, lower = 1, upper = 50)
+rangeIteration = range(lgb, :num_iterations, lower = 50, upper = 100)
+rangeMinData = range(lgb, :min_data_in_leaf, lower = 2, upper = 10)
+rangeLearningRate = range(lgb, :learning_rate, lower = 0.1, upper = 1)
 
-tunedModel = TunedModel<span style="color: #ae81ff;">(</span>model = lgb,
-                        tuning = Grid<span style="color: #66d9ef;">(</span>resolution = 5, rng = rng<span style="color: #66d9ef;">)</span>,
-                        resampling = cv,
-                        ranges = <span style="color: #66d9ef;">[</span>rangeIteration, rangeMinData, rangeLearningRate<span style="color: #66d9ef;">]</span>,
-                        measure = rms<span style="color: #ae81ff;">)</span>
+tunedModel = TunedModel(model = lgb,
+			tuning = Grid(resolution = 5, rng = rng),
+			resampling = cv,
+			ranges = [rangeIteration, rangeMinData, rangeLearningRate],
+			measure = rms)
 
-tunedMachine = machine<span style="color: #ae81ff;">(</span>tunedModel, X, y<span style="color: #ae81ff;">)</span>
-fit!<span style="color: #ae81ff;">(</span>tunedMachine, rows = train<span style="color: #ae81ff;">)</span>
-evaluate!<span style="color: #ae81ff;">(</span>tunedMach, resampling = cv, measure = <span style="color: #66d9ef;">[</span>rms, l1<span style="color: #66d9ef;">]</span>, rows = test<span style="color: #ae81ff;">)</span>
+tunedMachine = machine(tunedModel, X, y)
+fit!(tunedMachine, rows = train)
+evaluate!(tunedMach, resampling = cv, measure = [rms, l1], rows = test)
 </pre>
 </div>
 
 
 
-<div id="org365a415" class="figure">
+<div id="org02c3b0f" class="figure">
 <p><img src="images/实例_波士顿房价预测/2022-05-05_19-29-43_screenshot.png" alt="2022-05-05_19-29-43_screenshot.png" /><br />
 </p>
 </div>
@@ -1176,17 +1176,17 @@ evaluate!<span style="color: #ae81ff;">(</span>tunedMach, resampling = cv, measu
 </div>
 </div>
 
-<div id="outline-container-org0ceac7c" class="outline-3">
-<h3 id="org0ceac7c"><span class="section-number-3">3.5.</span> 检验测试集数据</h3>
+<div id="outline-container-org96e5793" class="outline-3">
+<h3 id="org96e5793"><span class="section-number-3">3.5.</span> 检验测试集数据</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 这里我们用 <b>lightGBM</b> 产出的数据来提交，不得不说，这个模型老牛逼了<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-julia">predictions = predict<span style="color: #ae81ff;">(</span>tunedMachine, transformedDataTest<span style="color: #ae81ff;">)</span>
-output = DataFrame<span style="color: #ae81ff;">(</span>Id=dataTest.Id<span style="color: #ae81ff;">)</span>
-output<span style="color: #ae81ff;">[</span>!, <span style="color: #fd971f;">:SalePrice</span><span style="color: #ae81ff;">]</span> = predictions
-CSV.write<span style="color: #ae81ff;">(</span><span style="color: #a6e22e;">"data/submission.csv"</span>, output<span style="color: #ae81ff;">)</span>
+<pre class="src src-julia">predictions = predict(tunedMachine, transformedDataTest)
+output = DataFrame(Id=dataTest.Id)
+output[!, :SalePrice] = predictions
+CSV.write("data/submission.csv", output)
 </pre>
 </div>
 
@@ -1199,7 +1199,7 @@ CSV.write<span style="color: #ae81ff;">(</span><span style="color: #a6e22e;">"da
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Steiner</p>
-<p class="date">Created: 2022-05-06 五 13:13</p>
+<p class="date">Created: 2022-05-08 日 23:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

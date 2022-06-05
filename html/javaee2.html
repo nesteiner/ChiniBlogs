@@ -1,0 +1,1266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-05-19 Thu 19:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>企业级JavaEE案例分析及实战开发-&#x2014;博客系统的设计和实现</title>
+<meta name="author" content="Steiner" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org.css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">企业级JavaEE案例分析及实战开发-&#x2014;博客系统的设计和实现</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6439916">1. 系统简介</a></li>
+<li><a href="#org67c5869">2. 需求分析</a>
+<ul>
+<li><a href="#org0ff3c08">2.1. HomeView 主页设计</a></li>
+<li><a href="#org31d3240">2.2. ArticleList 文章列表</a>
+<ul>
+<li><a href="#org23d6857">2.2.1. 文章入口</a></li>
+<li><a href="#org8c1a020">2.2.2. 文章内容</a></li>
+<li><a href="#org5919cc3">2.2.3. 文章操作</a></li>
+</ul>
+</li>
+<li><a href="#org576a14c">2.3. PostArticle 文章上传</a></li>
+<li><a href="#org9e2fbd7">2.4. CateManage 栏目管理</a></li>
+</ul>
+</li>
+<li><a href="#org817a20c">3. 设计方案</a>
+<ul>
+<li><a href="#orgd843bd4">3.1. 后端设计方案</a></li>
+<li><a href="#orgbbaa2f7">3.2. 前端设计方案</a>
+<ul>
+<li><a href="#org546ab1c">3.2.1. 页面</a></li>
+<li><a href="#orgb0f79dc">3.2.2. 与后端的交互</a>
+<ul>
+<li><a href="#orgab40604">3.2.2.1. ArticleService</a></li>
+<li><a href="#orgd106ff4">3.2.2.2. CategoryService</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org434215a">4. 实现源码</a>
+<ul>
+<li><a href="#org23d6ee7">4.1. Controller</a>
+<ul>
+<li><a href="#org4d89c7b">4.1.1. ArticleController</a></li>
+<li><a href="#org71ee6d8">4.1.2. CategoryController</a></li>
+</ul>
+</li>
+<li><a href="#orgd9b98c9">4.2. Service</a>
+<ul>
+<li><a href="#orgb101e50">4.2.1. ArticleService</a></li>
+<li><a href="#org5a5fbb3">4.2.2. CategoryService</a></li>
+</ul>
+</li>
+<li><a href="#org42f84d0">4.3. Mapper</a>
+<ul>
+<li><a href="#orgb702c6f">4.3.1. ArticleMapper</a></li>
+<li><a href="#org82065a0">4.3.2. CategoryMapper</a></li>
+</ul>
+</li>
+<li><a href="#org28d1393">4.4. Model</a>
+<ul>
+<li><a href="#orgd1a354b">4.4.1. Article</a></li>
+<li><a href="#org3872d42">4.4.2. Category</a></li>
+</ul>
+</li>
+<li><a href="#org44ce22f">4.5. mybatis mapper</a>
+<ul>
+<li><a href="#orga2f4bae">4.5.1. ArticleMapper.xml</a></li>
+<li><a href="#org6d059c7">4.5.2. CategoryMapper.xml</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6439916" class="outline-2">
+<h2 id="org6439916"><span class="section-number-2">1.</span> 系统简介</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+这个项目参考自 <a href="https://github.com/lenve/VBlog">https://github.com/lenve/VBlog</a> ，对这个项目的功能进行了大幅度裁剪，删去了<br />
+</p>
+<ul class="org-ul">
+<li>登录功能<br /></li>
+<li>用户管理<br /></li>
+<li>数据统计<br /></li>
+<li>数据库删除文章<br /></li>
+<li>时间戳<br /></li>
+</ul>
+<p>
+前端从原来的代码修改了一点，后端大幅度修改，不得不说，这孙子前端写得跟屎一样<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org67c5869" class="outline-2">
+<h2 id="org67c5869"><span class="section-number-2">2.</span> 需求分析</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+项目有三个功能，<br />
+</p>
+<ul class="org-ul">
+<li>文章管理<br /></li>
+<li>发表文章<br /></li>
+<li>栏目管理<br /></li>
+</ul>
+</div>
+
+<div id="outline-container-org0ff3c08" class="outline-3">
+<h3 id="org0ff3c08"><span class="section-number-3">2.1.</span> HomeView 主页设计</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+主页要包括三个页面，分别是<br />
+</p>
+<ul class="org-ul">
+<li>文章管理<br />
+<ul class="org-ul">
+<li>文章列表<br /></li>
+<li>发表文章<br /></li>
+</ul></li>
+<li>栏目管理<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org31d3240" class="outline-3">
+<h3 id="org31d3240"><span class="section-number-3">2.2.</span> ArticleList 文章列表</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org23d6857" class="outline-4">
+<h4 id="org23d6857"><span class="section-number-4">2.2.1.</span> 文章入口</h4>
+<div class="outline-text-4" id="text-2-2-1">
+
+<div id="orgc2ca05c" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-46-23_screenshot.png" alt="2022-05-19_16-46-23_screenshot.png" /><br />
+</p>
+</div>
+<ul class="org-ul">
+<li>实现标签页<br /></li>
+<li>实现表格，展示文章<br /></li>
+<li>点击链接，跳转到文章内容<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8c1a020" class="outline-4">
+<h4 id="org8c1a020"><span class="section-number-4">2.2.2.</span> 文章内容</h4>
+<div class="outline-text-4" id="text-2-2-2">
+
+<div id="orgd3600a1" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-57-16_screenshot.png" alt="2022-05-19_16-57-16_screenshot.png" /><br />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>展示文章的 html 内容<br /></li>
+<li>返回按钮<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5919cc3" class="outline-4">
+<h4 id="org5919cc3"><span class="section-number-4">2.2.3.</span> 文章操作</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+操作有两个，修改和删除，其中<br />
+</p>
+<ul class="org-ul">
+<li>修改跳转到 <code>PostArticle</code><br /></li>
+<li>删除将文章放入回收站<br /></li>
+</ul>
+
+
+<div id="orgd4dac3d" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-59-32_screenshot.png" alt="2022-05-19_16-59-32_screenshot.png" /><br />
+</p>
+</div>
+
+
+<div id="org245c2b8" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-59-59_screenshot.png" alt="2022-05-19_16-59-59_screenshot.png" /><br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org576a14c" class="outline-3">
+<h3 id="org576a14c"><span class="section-number-3">2.3.</span> PostArticle 文章上传</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<div id="orgbff5323" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-46-33_screenshot.png" alt="2022-05-19_16-46-33_screenshot.png" /><br />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>左侧使用 <code>markdown</code> 语法<br /></li>
+<li>右侧渲染 <code>html</code> 内容<br /></li>
+<li>可以保存到草稿箱<br /></li>
+<li>可以直接发表文章<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9e2fbd7" class="outline-3">
+<h3 id="org9e2fbd7"><span class="section-number-3">2.4.</span> CateManage 栏目管理</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<div id="org5671b06" class="figure">
+<p><img src="images/需求分析/2022-05-19_16-46-39_screenshot.png" alt="2022-05-19_16-46-39_screenshot.png" /><br />
+</p>
+</div>
+<ul class="org-ul">
+<li>显示编号<br /></li>
+<li>显示栏目名称<br /></li>
+<li>编辑和删除操作<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org817a20c" class="outline-2">
+<h2 id="org817a20c"><span class="section-number-2">3.</span> 设计方案</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd843bd4" class="outline-3">
+<h3 id="orgd843bd4"><span class="section-number-3">3.1.</span> 后端设计方案</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+后端的项目结构如下<br />
+</p>
+<ul class="org-ul">
+<li>model<br />
+<ul class="org-ul">
+<li>Article<br /></li>
+<li>Category<br /></li>
+</ul></li>
+
+<li>mapper<br />
+<ul class="org-ul">
+<li>ArticleMapper<br /></li>
+<li>CategoryMapper<br /></li>
+</ul></li>
+
+<li>service<br />
+<ul class="org-ul">
+<li>ArticleService<br /></li>
+<li>CategoryService<br /></li>
+</ul></li>
+
+<li>controller<br />
+<ul class="org-ul">
+<li>ArticleController<br /></li>
+<li>CategoryController<br /></li>
+</ul></li>
+</ul>
+
+
+<p>
+其中路由接口为<br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">请求方法</th>
+<th scope="col" class="org-left">请求地址</th>
+<th scope="col" class="org-left">请求参数</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">GET</td>
+<td class="org-left"><a href="http://localhost:8082/article/all">http://localhost:8082/article/all</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">请求所有文章</td>
+</tr>
+
+<tr>
+<td class="org-left">GET</td>
+<td class="org-left"><a href="http://localhost:8082/article/%7BarticleId">http://localhost:8082/article/%7BarticleId</a>}</td>
+<td class="org-left">articleId: number</td>
+<td class="org-left">请求id为articleId的文章</td>
+</tr>
+
+<tr>
+<td class="org-left">POST</td>
+<td class="org-left"><a href="http://localhost:8082/article/">http://localhost:8082/article/</a></td>
+<td class="org-left">article: Article</td>
+<td class="org-left">添加一个文章数据</td>
+</tr>
+
+<tr>
+<td class="org-left">PUT</td>
+<td class="org-left"><a href="http://localhost:8082/article/dustbin">http://localhost:8082/article/dustbin</a></td>
+<td class="org-left">{articleIds: number[], state: number}</td>
+<td class="org-left">将id包含于articleIds的文章放入垃圾桶</td>
+</tr>
+
+<tr>
+<td class="org-left">PUT</td>
+<td class="org-left"><a href="http://localhost:8082/article/restore">http://localhost:8082/article/restore</a></td>
+<td class="org-left">{articleId: number}</td>
+<td class="org-left">还原id为articleId的文章</td>
+</tr>
+
+<tr>
+<td class="org-left">GET</td>
+<td class="org-left"><a href="http://localhost:8082/category/all">http://localhost:8082/category/all</a></td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">请求所有栏目</td>
+</tr>
+
+<tr>
+<td class="org-left">DELETE</td>
+<td class="org-left"><a href="http://localhost:8082/category/%7BcategoryId">http://localhost:8082/category/%7BcategoryId</a>}</td>
+<td class="org-left">categoryId: number</td>
+<td class="org-left">请求id为categoryId的栏目</td>
+</tr>
+
+<tr>
+<td class="org-left">POST</td>
+<td class="org-left"><a href="http://localhost:8082/cateogry">http://localhost:8082/cateogry</a></td>
+<td class="org-left">category: Category</td>
+<td class="org-left">添加一个栏目数据</td>
+</tr>
+
+<tr>
+<td class="org-left">PUT</td>
+<td class="org-left"><a href="http://localhost:8082/category">http://localhost:8082/category</a></td>
+<td class="org-left">category: Category</td>
+<td class="org-left">修改一个category</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgbbaa2f7" class="outline-3">
+<h3 id="orgbbaa2f7"><span class="section-number-3">3.2.</span> 前端设计方案</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org546ab1c" class="outline-4">
+<h4 id="org546ab1c"><span class="section-number-4">3.2.1.</span> 页面</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+前端有1个大界面，5个小界面<br />
+</p>
+<ul class="org-ul">
+<li>HomeView<br />
+<ul class="org-ul">
+<li>ArticleList<br />
+<ul class="org-ul">
+<li>BlogTable<br /></li>
+<li>BlogDetail<br /></li>
+</ul></li>
+<li>PostArticle<br /></li>
+<li>CateManage<br /></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb0f79dc" class="outline-4">
+<h4 id="orgb0f79dc"><span class="section-number-4">3.2.2.</span> 与后端的交互</h4>
+<div class="outline-text-4" id="text-3-2-2">
+</div>
+<div id="outline-container-orgab40604" class="outline-5">
+<h5 id="orgab40604"><span class="section-number-5">3.2.2.1.</span> ArticleService</h5>
+<div class="outline-text-5" id="text-3-2-2-1">
+<div class="org-src-container">
+<pre class="src src-javascript">import axios from 'axios'
+const instance = axios.create({
+  baseURL: 'http://localhost:8082/article',
+  timeout: 3000,
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+})
+
+class Service {
+  static async insertOne(article) {
+    let response = await instance.post('/', JSON.stringify(article))
+    return response.data
+  }
+
+  static async findAllByState(state, page, count, keywords) {
+    let response = await instance.get('/all', {
+      params: {
+	state,
+	page,
+	count,
+	keywords
+      }
+    })
+
+    return response.data
+  }
+
+  static async findOne(id) {
+    let response = await instance.get(`/${id}`)
+
+    return response.data
+  }
+
+  static async updateAllWithState(ids, state) {
+    let response = await instance.put('/dustbin', JSON.stringify({
+      articleIds: ids,
+      state
+    }))
+
+    return response.data
+  }
+
+  static async restoreOne(id) {
+    let response = await instance.put('/restore', JSON.stringify({
+      articleId: id
+    }))
+
+    return response.data
+  }
+}
+
+export default Service
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd106ff4" class="outline-5">
+<h5 id="orgd106ff4"><span class="section-number-5">3.2.2.2.</span> CategoryService</h5>
+<div class="outline-text-5" id="text-3-2-2-2">
+<div class="org-src-container">
+<pre class="src src-javascript">import axios from 'axios'
+const instance = axios.create({
+  baseURL: 'http://localhost:8082/category',
+  timeout: 3000,
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+})
+
+class Service {
+  static async findAll() {
+    let response = await instance.get('/all')
+    return response.data
+  }
+
+  static async deleteOne(id) {
+    let response = await instance.delete(`/${id}`)
+    return response.data
+  }
+
+  static async insertOne(category) {
+    let response = await instance.post('/', JSON.stringify(category))
+    return response.data
+  }
+
+  static async updateOne(category) {
+    let response = await instance.put('/', JSON.stringify(category))
+    return response.data
+  }
+}
+
+export default Service
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org434215a" class="outline-2">
+<h2 id="org434215a"><span class="section-number-2">4.</span> 实现源码</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org23d6ee7" class="outline-3">
+<h3 id="org23d6ee7"><span class="section-number-3">4.1.</span> Controller</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-org4d89c7b" class="outline-4">
+<h4 id="org4d89c7b"><span class="section-number-4">4.1.1.</span> ArticleController</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<div class="org-src-container">
+<pre class="src src-java">@RestController
+@RequestMapping("/article")
+public class ArticleController {
+    @Autowired
+    ArticleService articleService;
+
+    @PostMapping("/")
+    public Response&lt;String&gt; insertOne(@RequestBody Article article) {
+	int result = articleService.insertOne(article);
+	return result != -1 ? Response.Ok("success", article.getId().toString())
+	    : Response.Err("error", article.getState() == 0 ? "文章保存失败" : "文章发表失败");
+    }
+
+    @GetMapping("/all")
+    public Response&lt;List&lt;Article&gt;&gt; findAllByState(@RequestParam(value = "state", defaultValue = "-1") Integer state,
+						  @RequestParam(value = "page", defaultValue = "1") Integer page,
+						  @RequestParam(value = "count", defaultValue = "6") Integer count,
+						  String keywords) {
+	List&lt;Article&gt; articles = articleService.findAllByState(state, page, count, keywords);
+	System.out.println("fuck you: " + articles);
+	return Response.Ok("articles", articles);
+    }
+
+    @GetMapping("/{articleId}")
+    public Response&lt;Article&gt; findOne(@PathVariable Long articleId) {
+	return Response.Ok("article", articleService.findOne(articleId));
+    }
+
+    @PutMapping("/dustbin")
+    public Response&lt;String&gt; updateAllWithState(@RequestBody Map&lt;String, Object&gt; params) {
+	List&lt;Long&gt; aids = (List&lt;Long&gt;) params.get("articleIds");
+	Integer state = (Integer) params.get("state");
+
+	int result = articleService.updateAllWithState(aids, state);
+	if(result == aids.size()) {
+	    return Response.Ok("success", "delete success");
+	} else {
+	    return Response.Err("error", "delete failed");
+	}
+    }
+
+    @PutMapping("/restore")
+    public Response&lt;String&gt; restoreOne(@RequestBody Map&lt;String, Long&gt; params) {
+	Long articleId = params.get("articleId");
+	int result = articleService.restoreOne(articleId);
+	return result == 1 ? Response.Ok("success", "restore success")
+	    : Response.Err("error", "restore failed");
+    }
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org71ee6d8" class="outline-4">
+<h4 id="org71ee6d8"><span class="section-number-4">4.1.2.</span> CategoryController</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<div class="org-src-container">
+<pre class="src src-java">@RestController
+@RequestMapping("/category")
+public class CategoryController {
+    @Autowired
+    CategoryService categoryService;
+
+    @GetMapping("/all")
+    public Response&lt;List&lt;Category&gt;&gt; findAll() {
+	return Response.Ok("categories", categoryService.findAll());
+    }
+
+    @DeleteMapping("/{categoryId}")
+    public Response&lt;String&gt; deleteOne(@PathVariable Long categoryId) {
+	int result = categoryService.deleteOne(categoryId);
+	return result != -1 ? Response.Ok("success", "delete success")
+	    : Response.Err("error", "delete failed");
+    }
+
+    @PostMapping
+    public Response&lt;String&gt; insertOne(@RequestBody Category category) {
+	if(category.getName().equals("") || category.getName() == null) {
+	    return Response.Err("error", "there is no category name");
+	} else {
+	    int result = categoryService.insertOne(category);
+	    return result == 1 ? Response.Ok("success", "insert success")
+		: Response.Err("error", "insert failed");
+	}
+
+    }
+
+    @PutMapping
+    public Response&lt;String&gt; updateOne(@RequestBody Category category) {
+	int result = categoryService.updateOne(category);
+	return result == 1 ? Response.Ok("success", "update success")
+	    : Response.Err("error", "update failed");
+    }
+}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd9b98c9" class="outline-3">
+<h3 id="orgd9b98c9"><span class="section-number-3">4.2.</span> Service</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-orgb101e50" class="outline-4">
+<h4 id="orgb101e50"><span class="section-number-4">4.2.1.</span> ArticleService</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<div class="org-src-container">
+<pre class="src src-java">@Service
+@Transactional
+public class ArticleService {
+    @Autowired
+    ArticleMapper articleMapper;
+
+    @Autowired
+    TagMapper tagMapper;
+
+    @Autowired
+    CategoryMapper categoryMapper;
+
+    public int insertOne(Article article) {
+	//处理文章摘要
+	if (article.getSummary() == null || "".equals(article.getSummary())) {
+	    //直接截取
+	    String stripHtml = stripHtml(article.getHtmlContent());
+	    article.setSummary(stripHtml.substring(0, stripHtml.length() &gt; 50 ? 50 : stripHtml.length()));
+	}
+	if (article.getId() == -1) {
+	    //添加操作
+	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	    if (article.getState() == 1) {
+		//设置发表日期
+		article.setPublishDate(timestamp);
+	    }
+	    article.setEditTime(timestamp);
+	    //设置当前用户
+	    int i = articleMapper.insertOne(article);
+
+	    return i;
+	} else {
+	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	    if (article.getState() == 1) {
+		//设置发表日期
+		article.setPublishDate(timestamp);
+	    }
+	    //更新
+	    article.setEditTime(new Timestamp(System.currentTimeMillis()));
+	    int i = articleMapper.updateOne(article);
+	    //修改标签
+
+	    return i;
+	}
+    }
+
+    private int insertToArticle(List&lt;String&gt; dynamicTags, Long aid) {
+	//1.删除该文章目前所有的标签
+	tagMapper.deleteOneByArticleId(aid);
+	//2.将上传上来的标签全部存入数据库
+	tagMapper.insertAll(dynamicTags);
+	//3.查询这些标签的id
+	List&lt;Long&gt; tIds = tagMapper.findAllIdByName(dynamicTags);
+	//4.重新给文章设置标签
+	int i = tagMapper.insertToArticle(tIds, aid);
+	return i == dynamicTags.size() ? i : -1;
+    }
+
+    public String stripHtml(String content) {
+	content = content.replaceAll("&lt;p .*?&gt;", "");
+	content = content.replaceAll("&lt;br\\s*/?&gt;", "");
+	content = content.replaceAll("\\&lt;.*?&gt;", "");
+	return content;
+    }
+
+    public List&lt;Article&gt; findAllByState(Integer state, Integer page, Integer count,String keywords) {
+	int start = (page - 1) * count;
+	List&lt;Article&gt; articles = articleMapper.findAllByState(state, start, count, keywords);
+	articles.forEach(article -&gt; {
+		Long categoryId = article.getCategoryId();
+		Category category = categoryMapper.findOne(categoryId);
+		article.setCategoryName(category.getName());
+	    });
+	return articles;
+    }
+
+    public Article findOne(Long id) {
+	Article article = articleMapper.findOne(id);
+	articleMapper.increPageView(id);
+	return article;
+    }
+
+    public int updateAllWithState(List&lt;Long&gt; articleIds, Integer state) {
+	if(state == 2) {
+	    return articleMapper.deleteAllWith(articleIds);
+	} else {
+	    return articleMapper.updateAllWithState(articleIds, 2);
+	}
+    }
+
+    public int restoreOne(Long articleId) {
+	return articleMapper.updateOneWithState(articleId, 1);
+    }
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a5fbb3" class="outline-4">
+<h4 id="org5a5fbb3"><span class="section-number-4">4.2.2.</span> CategoryService</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<div class="org-src-container">
+<pre class="src src-java">@Service
+@Transactional
+public class CategoryService {
+    @Autowired
+    CategoryMapper categoryMapper;
+
+    public List&lt;Category&gt; findAll() {
+	return categoryMapper.findAll();
+    }
+
+    public int deleteAll(List&lt;Integer&gt; ids) {
+	int result = categoryMapper.deleteAllWith(ids);
+	return result;
+    }
+
+    public int deleteOne(Long id) {
+	return categoryMapper.deleteOne(id);
+    }
+    public int updateOne(Category category) {
+	int result = categoryMapper.updateOne(category);
+	return result;
+    }
+
+    public int insertOne(Category category) {
+	int result = categoryMapper.insertOne(category);
+	return result;
+    }
+
+}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org42f84d0" class="outline-3">
+<h3 id="org42f84d0"><span class="section-number-3">4.3.</span> Mapper</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+<div id="outline-container-orgb702c6f" class="outline-4">
+<h4 id="orgb702c6f"><span class="section-number-4">4.3.1.</span> ArticleMapper</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<div class="org-src-container">
+<pre class="src src-java">@Mapper
+public interface ArticleMapper {
+    int insertOne(Article article);
+    int updateOne(Article article);
+    List&lt;Article&gt; findAllByState(Integer state, Integer start, Integer count, String keywords);
+    int findCountByState(Integer state, String keywords);
+    int updateAllWithState(List&lt;Long&gt; articleIds, Integer state);
+    int updateOneWithState(Long articleId, Integer state);
+    int deleteAllWith(List&lt;Long&gt; ids);
+    Article findOne(Long id);
+    // List&lt;String&gt; findCategories();
+    void increPageView(Long articleId);
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82065a0" class="outline-4">
+<h4 id="org82065a0"><span class="section-number-4">4.3.2.</span> CategoryMapper</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<div class="org-src-container">
+<pre class="src src-java">@Mapper
+public interface CategoryMapper {
+    List&lt;Category&gt; findAll();
+    Category findOne(Long id);
+    int deleteAllWith(List&lt;Integer&gt; ids);
+    int deleteOne(Long id);
+    int updateOne(Category category);
+    int insertOne(Category category);
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org28d1393" class="outline-3">
+<h3 id="org28d1393"><span class="section-number-3">4.4.</span> Model</h3>
+<div class="outline-text-3" id="text-4-4">
+</div>
+<div id="outline-container-orgd1a354b" class="outline-4">
+<h4 id="orgd1a354b"><span class="section-number-4">4.4.1.</span> Article</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<div class="org-src-container">
+<pre class="src src-java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Article {
+    Long id;
+    Long categoryId;
+
+    String title;
+    String markdownContent;
+    String htmlContent;
+    String summary;
+    String categoryName;
+    Timestamp publishDate;
+    Timestamp editTime;
+
+    Integer state;
+    Integer pageView;
+
+    List&lt;Tag&gt; tags;
+
+
+    public String getPublishDate() {
+	if(publishDate == null) {
+	    return null;
+	} else {
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    return format.format(publishDate);
+	}
+    }
+
+    public String getEditTime() {
+	if(editTime == null) {
+	    return null;
+	} else {
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    return format.format(editTime);
+	}
+    }
+
+    public void setPublishDate(String publishDateString) {
+	this.publishDate = Timestamp.valueOf(publishDateString);
+    }
+
+    public void setEditTime(String editTimeString) {
+	this.editTime = Timestamp.valueOf(editTimeString);
+    }
+
+    public void setPublishDate(Timestamp publishDate) {
+	this.publishDate = publishDate;
+    }
+
+    public void setEditTime(Timestamp editTime) {
+	this.editTime = editTime;
+    }
+}
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3872d42" class="outline-4">
+<h4 id="org3872d42"><span class="section-number-4">4.4.2.</span> Category</h4>
+<div class="outline-text-4" id="text-4-4-2">
+<div class="org-src-container">
+<pre class="src src-java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category {
+    Long id;
+    String name;
+}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org44ce22f" class="outline-3">
+<h3 id="org44ce22f"><span class="section-number-3">4.5.</span> mybatis mapper</h3>
+<div class="outline-text-3" id="text-4-5">
+</div>
+<div id="outline-container-orga2f4bae" class="outline-4">
+<h4 id="orga2f4bae"><span class="section-number-4">4.5.1.</span> ArticleMapper.xml</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<div class="org-src-container">
+<pre class="src src-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;
+&lt;mapper namespace="com.example.backend.mapper.ArticleMapper"&gt;
+    &lt;insert id="insertOne" parameterType="Article" useGeneratedKeys="true" keyProperty="id"&gt;
+	INSERT INTO Article(title, markdownContent, htmlContent, summary, categoryId, publishDate, state, editTime)
+	values (#{title},
+		#{markdownContent},
+		#{htmlContent},
+		#{summary},
+		#{categoryId},
+		#{publishDate},
+		#{state},
+		#{editTime})
+    &lt;/insert&gt;
+    &lt;update id="increPageView" parameterType="Long"&gt;
+	UPDATE Article set pageView=pageView+1 WHERE id=#{articleId}
+    &lt;/update&gt;
+    &lt;update id="updateOne" parameterType="Article"&gt;
+	UPDATE article
+	SET
+	    title=#{title},
+	    markdownContent=#{markdownContent},
+	    htmlContent=#{htmlContent},
+	    summary=#{summary},
+	    categoryId=#{categoryId},
+	    editTime=#{editTime}
+	&lt;if test="state==1"&gt;
+	    ,state=1
+	&lt;/if&gt;
+	&lt;if test="publishDate!=null"&gt;
+	    ,publishDate=#{publishDate}
+	&lt;/if&gt;
+	WHERE id=#{id}
+    &lt;/update&gt;
+    &lt;select id="findAllByState" resultType="Article"&gt;
+	SELECT
+	    a.id,
+	    a.`title`,
+	    a.`editTime`,
+	    a.categoryId,
+	    a.`pageView`,
+	    a.`state`,
+	    c.`name`
+	FROM
+	    Article a,
+	    Category c
+	WHERE a.`categoryId`=c.`id`
+	&lt;if test="state!=-1 and state!=-2"&gt;
+	    and a.state=#{state}
+	&lt;/if&gt;
+	&lt;if test="state==-2"&gt;
+	    and a.state=1
+	&lt;/if&gt;
+	&lt;if test="keywords!=null"&gt;
+	    AND title LIKE '%' || #{keywords} || '%'
+	&lt;/if&gt;
+	ORDER BY a.editTime DESC limit #{start},#{count};
+    &lt;/select&gt;
+
+&lt;!--    &lt;select id="getArticleByStateByAdmin" resultType="org.sang.bean.Article"&gt;--&gt;
+&lt;!--        SELECT a.id,a.`title`,a.`editTime`,a.`pageView`,a.`state`,u.`nickname`,c.`cateName`,a.uid FROM article a,user--&gt;
+&lt;!--        u,category c WHERE a.`cid`=c.`id` AND a.`uid`=u.`id` and a.state=1--&gt;
+&lt;!--        &lt;if test="keywords!=null"&gt;--&gt;
+&lt;!--            AND title LIKE concat('%',#{keywords},'%')--&gt;
+&lt;!--        &lt;/if&gt;--&gt;
+&lt;!--        ORDER BY a.editTime DESC limit #{start},#{count};--&gt;
+&lt;!--    &lt;/select&gt;--&gt;
+
+    &lt;select id="findCountByState" resultType="int"&gt;
+	SELECT count(*) FROM Article
+	&lt;where&gt;
+	    &lt;if test="state!=-1"&gt;
+		AND state=#{state}
+	    &lt;/if&gt;
+
+	    &lt;if test="keywords!=null"&gt;
+		AND title LIKE concat('%',#{keywords},'%')
+	    &lt;/if&gt;
+	&lt;/where&gt;
+    &lt;/select&gt;
+
+    &lt;update id="updateAllWithState"&gt;
+	UPDATE Article SET state=#{state} WHERE id IN
+	&lt;foreach collection="articleIds" item="aid" separator="," open="(" close=")"&gt;
+	    #{aid}
+	&lt;/foreach&gt;
+    &lt;/update&gt;
+    &lt;update id="updateOneWithState" &gt;
+	UPDATE Article SET state=#{state} WHERE id = #{articleId}
+    &lt;/update&gt;
+    &lt;delete id="deleteAllWith"&gt;
+	DELETE FROM article WHERE id IN
+	&lt;foreach collection="ids" item="aid" open="(" close=")" separator=","&gt;
+	    #{aid}
+	&lt;/foreach&gt;
+    &lt;/delete&gt;
+
+    &lt;select id="findOne" parameterType="Long" resultMap="BaseResultMap"&gt;
+	SELECT
+	    a.*,
+	    t.`name` as tagName,
+	    t.`id` AS tagId,
+	    c.`name` as categoryName
+	FROM
+	    Article a
+	    LEFT JOIN
+	    `Article-Tags` ats
+	    ON
+	    a.`id`= ats.`articleId`
+	    LEFT JOIN Tag t
+	    ON ats.`tagId`= t.`id`
+	    LEFT JOIN Category c
+	    ON a.`categoryId`= c.`id`
+	WHERE a.id=#{aid}
+    &lt;/select&gt;
+
+    &lt;resultMap id="BaseResultMap" type="Article"&gt;
+	&lt;id column="id" property="id"/&gt;
+	&lt;result column="title" property="title"/&gt;
+	&lt;result column="cid" property="cid"/&gt;
+	&lt;result column="publishDate" property="publishDate"/&gt;
+	&lt;result column="editTime" property="editTime"/&gt;
+	&lt;result column="state" property="state"/&gt;
+	&lt;result column="pageView" property="pageView"/&gt;
+	&lt;result column="markdownContent" property="markdownContent"/&gt;
+	&lt;result column="htmlContent" property="htmlContent"/&gt;
+	&lt;result column="summary" property="summary"/&gt;
+	&lt;result column="categoryId" property="categoryId"/&gt;
+	&lt;collection property="tags" ofType="Tag" column="tagName"&gt;
+	    &lt;id property="id" column="tagId"/&gt;
+	    &lt;result property="name" column="name"/&gt;
+	&lt;/collection&gt;
+    &lt;/resultMap&gt;
+
+&lt;/mapper&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6d059c7" class="outline-4">
+<h4 id="org6d059c7"><span class="section-number-4">4.5.2.</span> CategoryMapper.xml</h4>
+<div class="outline-text-4" id="text-4-5-2">
+<div class="org-src-container">
+<pre class="src src-xml">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;
+&lt;mapper namespace="com.example.backend.mapper.CategoryMapper"&gt;
+    &lt;select id="findAll" resultType="Category"&gt;
+	SELECT * FROM Category
+    &lt;/select&gt;
+
+    &lt;select id="findOne" resultType="Category"&gt;
+	select * from Category where id = #{id}
+    &lt;/select&gt;
+    &lt;delete id="deleteAllWith"&gt;
+	DELETE FROM Category WHERE id IN
+	&lt;foreach collection="ids" separator="," open="(" close=")" item="id"&gt;
+	    #{id}
+	&lt;/foreach&gt;
+    &lt;/delete&gt;
+
+    &lt;delete id="deleteOne" parameterType="long"&gt;
+	delete from Category where id = #{id}
+    &lt;/delete&gt;
+
+    &lt;update id="updateOne" parameterType="Category"&gt;
+	UPDATE Category SET name=#{name} WHERE id=#{id}
+    &lt;/update&gt;
+    &lt;insert id="insertOne" parameterType="Category"&gt;
+	INSERT INTO Category(name) values (#{name})
+    &lt;/insert&gt;
+&lt;/mapper&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Steiner</p>
+<p class="date">Created: 2022-05-19 Thu 19:14</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

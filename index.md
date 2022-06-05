@@ -117,6 +117,20 @@
 <td class="org-left">Julia</td>
 <td class="org-left">微积分</td>
 </tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/mljflux.html">MLJFlux简单使用</a></td>
+<td class="org-left">Julia</td>
+<td class="org-left">MLJFlux</td>
+</tr>
+
+
+<tr>
+<td class="org-left"><a href="./html/julia-regressor.html">Julia Regressor</a></td>
+<td class="org-left">Julia</td>
+<td class="org-left">Julia Regressor</td>
+</tr>
 </tbody>
 </table>
 

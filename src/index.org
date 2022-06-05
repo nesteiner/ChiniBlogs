@@ -21,7 +21,9 @@
 | [[file:./html/parse-logic.html][真值表计算程序]]                        | Julia   | 离散数学 |
 | [[file:./html/symbolics.html][Symbolics.jl 简单使用]]                 | Julia   | 符号计算 |
 | [[file:./html/scrapy-spider.html][Scrapy 简单使用]]                       | Scrapy  | 网络爬虫 |
-| [[file:./html/julia-calculus.html][Julia 微积分简要介绍]]                  | Julia   | 微积分      |
+| [[file:./html/julia-calculus.html][Julia 微积分简要介绍]]                  | Julia   | 微积分   |
+| [[file:./html/mljflux.html][MLJFlux简单使用]]                       | Julia   | MLJFlux  |
+| [[file:./html/julia-regressor.html][Julia Regressor]]                       | Julia   | Julia Regressor |
 
 * Android
 | 文件名                          | 分类    | 标签         |
